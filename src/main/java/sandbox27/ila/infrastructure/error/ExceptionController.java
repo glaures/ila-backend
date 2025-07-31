@@ -5,10 +5,8 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.context.MessageSource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import sandbox27.ila.infrastructure.security.UnauthorizedException;
 
 import java.util.Arrays;
 import java.util.Locale;
@@ -29,7 +27,7 @@ public class ExceptionController {
     public ResponseEntity<ErrorDto> handleServiceException(ServiceException serviceException, Locale locale) {
         String msg;
         try {
-            msg = messageSource.getMessage("" + serviceException.getErrorCode(), serviceException.getArgs(), locale);
+            msg = messageSource.getMessage("error." + serviceException.getErrorCode(), serviceException.getArgs(), locale);
         } catch(Throwable t){
             msg = "[Message zum Code " + serviceException.getErrorCode() + " konnte nicht geladen werden]";
             msg += serviceException.getErrorCode() + "(" + Arrays.toString(serviceException.getArgs()) + ")";
@@ -47,11 +45,13 @@ public class ExceptionController {
         errorHandlingService.handleError(t);
         ErrorDto error = new ErrorDto();
         error.setCode(ErrorCode.InternalServerError);
-        error.setMessage(messageSource.getMessage("" + error.getCode(), null, locale));
+        String message = messageSource.getMessage("" + error.getCode(), null, "internal Error", locale);
+        error.setMessage(message);
         ResponseEntity<ErrorDto> res = new ResponseEntity<ErrorDto>(error, HttpStatus.INTERNAL_SERVER_ERROR);
         return res;
     }
 
+    /**
     @ExceptionHandler({UnauthorizedException.class, AccessDeniedException.class})
     public ResponseEntity<ErrorDto> handeInvalidOrExpiredToken(Locale locale){
         ErrorDto error = new ErrorDto();
@@ -60,5 +60,6 @@ public class ExceptionController {
         ResponseEntity<ErrorDto> res = new ResponseEntity<>(error, HttpStatus.UNAUTHORIZED);
         return res;
     }
+    */
 
 }
