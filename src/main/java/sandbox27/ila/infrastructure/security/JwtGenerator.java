@@ -16,15 +16,12 @@ public class JwtGenerator {
     @Value("${jwt.secret}")
     private String jwtSecret;
 
-    public String createToken(String username, String fullName, String email) {
+    public String createToken(String userId) {
         SecretKey key = Keys.hmacShaKeyFor(Base64.getDecoder().decode(jwtSecret));
 
         return Jwts.builder()
-                .subject(username)
-                .claim("name", fullName)
-                .claim("email", email)
+                .subject(userId)
                 .issuedAt(new Date())
-                .expiration(new Date(System.currentTimeMillis() + 3600_000)) // 1 Stunde
                 .signWith(key, SignatureAlgorithm.HS256)
                 .compact();
     }

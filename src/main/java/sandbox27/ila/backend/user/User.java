@@ -1,8 +1,9 @@
 package sandbox27.ila.backend.user;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.List;
 
 @Entity
 @Builder
@@ -15,11 +16,16 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     String id;
-    @JsonIgnore
-    String password;
-    @Column(unique = true)
     String email;
+    String firstName;
+    String lastName;
+    int grade;
     @Column(unique = true)
-    String name;
+    String gtsId;
+    @ElementCollection(fetch = FetchType.EAGER)
+    @CollectionTable(name = "user_gts_roles", joinColumns = @JoinColumn(name = "user_id"))
+    @Column(name = "gts_role")
+    @Enumerated(EnumType.STRING)
+    List<GTSRole> gtsRoles;
 
 }

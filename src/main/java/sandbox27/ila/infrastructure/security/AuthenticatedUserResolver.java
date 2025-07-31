@@ -2,6 +2,7 @@ package sandbox27.ila.infrastructure.security;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.HttpStatus;
@@ -11,17 +12,16 @@ import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.ModelAndViewContainer;
 import org.springframework.web.server.ResponseStatusException;
+import sandbox27.ila.backend.user.UserRepository;
 
 import java.nio.charset.StandardCharsets;
 
 @Component
+@RequiredArgsConstructor
 public class AuthenticatedUserResolver implements HandlerMethodArgumentResolver {
 
     private final JwtValidator jwtValidator;
-
-    public AuthenticatedUserResolver(JwtValidator jwtValidator) {
-        this.jwtValidator = jwtValidator;
-    }
+    private final UserRepository userRepository;
 
     @Override
     public boolean supportsParameter(MethodParameter parameter) {
@@ -43,10 +43,6 @@ public class AuthenticatedUserResolver implements HandlerMethodArgumentResolver 
 
         Claims claims = jwtValidator.validateJwt(token);
 
-        return new CurrentUser(
-                claims.getSubject(),
-                claims.get("email", String.class),
-                claims.get("role", String.class) // optional
-        );
+        return userRepository.findById(claims.getSubject()).orElse(null);
     }
 }

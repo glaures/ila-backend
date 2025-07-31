@@ -1,0 +1,5604 @@
+[
+  {
+    "gtsId": "jm-5540236884",
+    "firstName": "Joan",
+    "lastName": "Abdo",
+    "email": null,
+    "gtsRoles": [],
+    "grade": 7
+  },
+  {
+    "gtsId": "jm-5540247522",
+    "firstName": "Hasan",
+    "lastName": "Abdulsamd",
+    "email": null,
+    "gtsRoles": [],
+    "grade": 7
+  },
+  {
+    "gtsId": "jm-5540212216",
+    "firstName": "Kim Mia",
+    "lastName": "Ackermann",
+    "email": "kimiackermann@gmx.de",
+    "gtsRoles": [],
+    "grade": 7
+  },
+  {
+    "gtsId": "jm-5540214919",
+    "firstName": "Leon",
+    "lastName": "Adam",
+    "email": "s-adam.leon@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 8
+  },
+  {
+    "gtsId": "jm-5540212325",
+    "firstName": "Valentina",
+    "lastName": "Adriani",
+    "email": "s-adriani.valentina@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 6
+  },
+  {
+    "gtsId": "jm-5540236885",
+    "firstName": "Sebastian Alejandro",
+    "lastName": "Aguas Gonzalez",
+    "email": null,
+    "gtsRoles": [],
+    "grade": 7
+  },
+  {
+    "gtsId": "jm-5540236886",
+    "firstName": "Anfal",
+    "lastName": "Al Neimi",
+    "email": null,
+    "gtsRoles": [],
+    "grade": 7
+  },
+  {
+    "gtsId": "jm-5540210370",
+    "firstName": "Karsten",
+    "lastName": "Alber",
+    "email": "alber@jm.lernsax.de",
+    "gtsRoles": [
+      "admin",
+      "courseInstructor",
+      "schoolAdmin"
+    ],
+    "grade": 0
+  },
+  {
+    "gtsId": "jm-5540212135",
+    "firstName": "Clara",
+    "lastName": "Albrecht",
+    "email": "e-albrecht.clara@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 8
+  },
+  {
+    "gtsId": "jm-5540212188",
+    "firstName": "Frederik",
+    "lastName": "Albrecht",
+    "email": "s-albrecht.frederik@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 8
+  },
+  {
+    "gtsId": "jm-5540212407",
+    "firstName": "Max",
+    "lastName": "Albrecht",
+    "email": "s-albrecht.max@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 6
+  },
+  {
+    "gtsId": "jm-5540212217",
+    "firstName": "Paul",
+    "lastName": "Albrecht",
+    "email": "s-albrecht.paul@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 7
+  },
+  {
+    "gtsId": "jm-5540212055",
+    "firstName": "Carlotta",
+    "lastName": "Altermann",
+    "email": "ca_altermann@icloud.com",
+    "gtsRoles": [],
+    "grade": 9
+  },
+  {
+    "gtsId": "jm-5540212353",
+    "firstName": "Nelly",
+    "lastName": "Althaus",
+    "email": "s-althaus.nelly@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 6
+  },
+  {
+    "gtsId": "jm-5540212136",
+    "firstName": "Leonie",
+    "lastName": "Altmann",
+    "email": "s-altmann.leonie@jm.lernsax.",
+    "gtsRoles": [],
+    "grade": 8
+  },
+  {
+    "gtsId": "jm-5540212519",
+    "firstName": "Arne",
+    "lastName": "Altner",
+    "email": "e-altner.arne@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540210371",
+    "firstName": "Isa",
+    "lastName": "Altner",
+    "email": null,
+    "gtsRoles": [
+      "admin",
+      "courseInstructor"
+    ],
+    "grade": 0
+  },
+  {
+    "gtsId": "jm-5540212520",
+    "firstName": "Pheline",
+    "lastName": "Amaya Loaisiga",
+    "email": "e-amaya.pheline@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540212546",
+    "firstName": "Anton",
+    "lastName": "Andersch",
+    "email": "anton@ugiwinkel.de",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540212408",
+    "firstName": "Carl",
+    "lastName": "Anderson",
+    "email": "s-anderson.carl@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 6
+  },
+  {
+    "gtsId": "jm-5540212379",
+    "firstName": "Dorian",
+    "lastName": "Anding",
+    "email": "s-anding.dorian@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 6
+  },
+  {
+    "gtsId": "jm-5540210372",
+    "firstName": "Doreen",
+    "lastName": "Andriefski",
+    "email": null,
+    "gtsRoles": [
+      "admin",
+      "courseInstructor"
+    ],
+    "grade": 0
+  },
+  {
+    "gtsId": "jm-5540212547",
+    "firstName": "Nino",
+    "lastName": "Armbrust",
+    "email": "e-armbrust.nino@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540212548",
+    "firstName": "Elise Amalia",
+    "lastName": "Arnold",
+    "email": "s-arnold.elise@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540212137",
+    "firstName": "Sophia",
+    "lastName": "Arnold",
+    "email": "s-arnold.sophia@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 8
+  },
+  {
+    "gtsId": "jm-5540212032",
+    "firstName": "Adrian",
+    "lastName": "Aßmann",
+    "email": "adrianassmann14@gmail.com",
+    "gtsRoles": [],
+    "grade": 9
+  },
+  {
+    "gtsId": "jm-5540212354",
+    "firstName": "Karoline",
+    "lastName": "Aue",
+    "email": "s-aue.karoline@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 6
+  },
+  {
+    "gtsId": "jm-5540212380",
+    "firstName": "Robert",
+    "lastName": "Bahr",
+    "email": "s-bahr.robert@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 6
+  },
+  {
+    "gtsId": "jm-5540212409",
+    "firstName": "Frida",
+    "lastName": "Bahsitta",
+    "email": "s-bahsitta.frida@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 6
+  },
+  {
+    "gtsId": "jm-5540236877",
+    "firstName": "Kateryna ",
+    "lastName": "Balandria",
+    "email": "s-balandria.kateryna@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 9
+  },
+  {
+    "gtsId": "jm-5540212410",
+    "firstName": "Janusz",
+    "lastName": "Bankmann",
+    "email": "k.bankmann@posteo.de",
+    "gtsRoles": [],
+    "grade": 6
+  },
+  {
+    "gtsId": "jm-5540212411",
+    "firstName": "Eliah",
+    "lastName": "Barthel",
+    "email": "s-barthel.eliah@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 6
+  },
+  {
+    "gtsId": "jm-5540212381",
+    "firstName": "Nele",
+    "lastName": "Barthel",
+    "email": "aufi1986@gmail.com",
+    "gtsRoles": [],
+    "grade": 6
+  },
+  {
+    "gtsId": "jm-5540212056",
+    "firstName": "Lucien",
+    "lastName": "Baugut",
+    "email": "Wenzel.baugut@gmail.com",
+    "gtsRoles": [],
+    "grade": 9
+  },
+  {
+    "gtsId": "jm-5540247607",
+    "firstName": "Sophia",
+    "lastName": "Baum",
+    "email": null,
+    "gtsRoles": [
+      "admin",
+      "courseInstructor"
+    ],
+    "grade": 0
+  },
+  {
+    "gtsId": "jm-5540212326",
+    "firstName": "Mateo",
+    "lastName": "Bautista Thümmler",
+    "email": "a_thuemmler86@yahoo.de",
+    "gtsRoles": [],
+    "grade": 6
+  },
+  {
+    "gtsId": "jm-5540212161",
+    "firstName": "Emma",
+    "lastName": "Bautze",
+    "email": "s-bautze.emma@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 8
+  },
+  {
+    "gtsId": "jm-5540212521",
+    "firstName": "Mika",
+    "lastName": "Beer",
+    "email": "s-beer.mika@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540212108",
+    "firstName": "Tessa",
+    "lastName": "Beier",
+    "email": "claudiad.beier@web.de",
+    "gtsRoles": [],
+    "grade": 8
+  },
+  {
+    "gtsId": "jm-5540212412",
+    "firstName": "Oskar",
+    "lastName": "Beierlein",
+    "email": "s-beierlein.oskar@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 6
+  },
+  {
+    "gtsId": "jm-5540241457",
+    "firstName": "Houari",
+    "lastName": "Benchaachoua",
+    "email": null,
+    "gtsRoles": [],
+    "grade": 7
+  },
+  {
+    "gtsId": "jm-5540241456",
+    "firstName": "Maamar",
+    "lastName": "Benchaachoua",
+    "email": null,
+    "gtsRoles": [],
+    "grade": 7
+  },
+  {
+    "gtsId": "jm-5540212327",
+    "firstName": "Charlotte",
+    "lastName": "Berger",
+    "email": "s-berger.charlotte@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 6
+  },
+  {
+    "gtsId": "jm-5540212328",
+    "firstName": "Leo",
+    "lastName": "Berger",
+    "email": "s-leo.berger@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 6
+  },
+  {
+    "gtsId": "jm-5540212082",
+    "firstName": "Sophie",
+    "lastName": "Bergmann",
+    "email": "bergmann.sophie@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 9
+  },
+  {
+    "gtsId": "jm-5540212057",
+    "firstName": "Ella",
+    "lastName": "Berndörfler",
+    "email": "marlene.berndoerfler@icloud.comer@icloud.com",
+    "gtsRoles": [],
+    "grade": 9
+  },
+  {
+    "gtsId": "jm-5540212134",
+    "firstName": "Katharina",
+    "lastName": "Bernhard",
+    "email": "s-bernhard-katharina@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540212491",
+    "firstName": "Katharina Klara",
+    "lastName": "Bernhard",
+    "email": "s-bernhard.katharina@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540212138",
+    "firstName": "Sophie",
+    "lastName": "Bernhard",
+    "email": "s-marianne.bernhard@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 8
+  },
+  {
+    "gtsId": "jm-5540212162",
+    "firstName": "Lea",
+    "lastName": "Bernhardt",
+    "email": "s-bernhardt.lea@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 8
+  },
+  {
+    "gtsId": "jm-5540212382",
+    "firstName": "Frieda",
+    "lastName": "Beuchel",
+    "email": "s-beuchel.frieda@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 6
+  },
+  {
+    "gtsId": "jm-5540212058",
+    "firstName": "Marlene",
+    "lastName": "Beuschel",
+    "email": "Marlenebeuschel0@gmail.com",
+    "gtsRoles": [],
+    "grade": 9
+  },
+  {
+    "gtsId": "jm-5540212463",
+    "firstName": "Bettina",
+    "lastName": "Beyer",
+    "email": "susanne.beyer@hotmail.de",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540212549",
+    "firstName": "Raphael",
+    "lastName": "Beyer",
+    "email": "carmen.beyer@gmx.net",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540212059",
+    "firstName": "Anton",
+    "lastName": "Beyreuther",
+    "email": "s-anton.beyreuther@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 9
+  },
+  {
+    "gtsId": "jm-5540212298",
+    "firstName": "Saphira",
+    "lastName": "Biedermann",
+    "email": "s-biedermann.saphira@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 7
+  },
+  {
+    "gtsId": "jm-5540212060",
+    "firstName": "Fiona",
+    "lastName": "Bielig",
+    "email": "s-bielig.fiona@jm.lernsax.deiona@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 9
+  },
+  {
+    "gtsId": "jm-5540212139",
+    "firstName": "Alina",
+    "lastName": "Binger",
+    "email": "nadobi@gmx.de",
+    "gtsRoles": [],
+    "grade": 8
+  },
+  {
+    "gtsId": "jm-5540212492",
+    "firstName": "Pepita",
+    "lastName": "Binger",
+    "email": "e-binger.pepita@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540212522",
+    "firstName": "Bastian",
+    "lastName": "Binngießer",
+    "email": "s-binngiesser.bastian@jm.lernsax.de.lernsax.de",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540212083",
+    "firstName": "Nele",
+    "lastName": "Binngießer",
+    "email": "s-binngiesser.nele@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 9
+  },
+  {
+    "gtsId": "jm-5540212109",
+    "firstName": "Ratmir",
+    "lastName": "Bisinhaliiev",
+    "email": "bisingalievatmir@gmail.com",
+    "gtsRoles": [],
+    "grade": 8
+  },
+  {
+    "gtsId": "jm-5540212244",
+    "firstName": "Fabian",
+    "lastName": "Blankenburgrg",
+    "email": "jessica.blankenburg@gmx.de",
+    "gtsRoles": [],
+    "grade": 7
+  },
+  {
+    "gtsId": "jm-5540212523",
+    "firstName": "Jette",
+    "lastName": "Blankschein",
+    "email": "s-blankschein.jette@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540212355",
+    "firstName": "Theodor",
+    "lastName": "Bock",
+    "email": "s-bock.theodor@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 6
+  },
+  {
+    "gtsId": "jm-5540212189",
+    "firstName": "Hanna",
+    "lastName": "Bockisch",
+    "email": "hanna.bockisch@gmail.com",
+    "gtsRoles": [],
+    "grade": 8
+  },
+  {
+    "gtsId": "jm-5540212574",
+    "firstName": "Elisa",
+    "lastName": "Böhme",
+    "email": "e-boehme.elisa@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540212464",
+    "firstName": "Vincent",
+    "lastName": "Bolze",
+    "email": "s-bolze.vincent@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540212329",
+    "firstName": "Ysabella",
+    "lastName": "Bonillo Velasquez",
+    "email": "S-bonillo.ysabella@jm.de",
+    "gtsRoles": [],
+    "grade": 6
+  },
+  {
+    "gtsId": "jm-5540212110",
+    "firstName": "Max",
+    "lastName": "Bönisch",
+    "email": "cr7max@mail.de",
+    "gtsRoles": [],
+    "grade": 8
+  },
+  {
+    "gtsId": "jm-5540212383",
+    "firstName": "Annelie",
+    "lastName": "Borisch",
+    "email": "daniela.munkelt@gmx.de",
+    "gtsRoles": [],
+    "grade": 6
+  },
+  {
+    "gtsId": "jm-5540212435",
+    "firstName": "Theo",
+    "lastName": "Borisch",
+    "email": "katrinborisch@web.de",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540212271",
+    "firstName": "Ella",
+    "lastName": "Böttcher",
+    "email": "s-boettcher.ella@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 7
+  },
+  {
+    "gtsId": "jm-5540212384",
+    "firstName": "Donna",
+    "lastName": "Brandt",
+    "email": "s-brandt.donna@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 6
+  },
+  {
+    "gtsId": "jm-5540212272",
+    "firstName": "Kalle",
+    "lastName": "Bretscher",
+    "email": "s-bretscher.kalle@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 7
+  },
+  {
+    "gtsId": "jm-5540212033",
+    "firstName": "Moritz",
+    "lastName": "Bretscher",
+    "email": "s-bretscher.moritz@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 9
+  },
+  {
+    "gtsId": "jm-5540212465",
+    "firstName": "Nina",
+    "lastName": "Brömmer",
+    "email": "s-broemmer.nina@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540212466",
+    "firstName": "Ava Amalia",
+    "lastName": "Bröske",
+    "email": "anastasia.broeske@yahoo.de",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540212111",
+    "firstName": "Charlotte",
+    "lastName": "Buchnat",
+    "email": "S-buchnat.Charlotte@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 8
+  },
+  {
+    "gtsId": "jm-5540212467",
+    "firstName": "Marius",
+    "lastName": "Burghila",
+    "email": "e-burghila.marius@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540212493",
+    "firstName": "Se-A",
+    "lastName": "Choi",
+    "email": "sm.choi311@gmail.com",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540212385",
+    "firstName": "Yasmin Elena",
+    "lastName": "Croitoru",
+    "email": null,
+    "gtsRoles": [],
+    "grade": 6
+  },
+  {
+    "gtsId": "jm-5540212356",
+    "firstName": "Anna",
+    "lastName": "Csájbinec",
+    "email": "tetyanacsajbinec@gmail.com",
+    "gtsRoles": [],
+    "grade": 6
+  },
+  {
+    "gtsId": "jm-5540210374",
+    "firstName": "Cindy",
+    "lastName": "Darius",
+    "email": null,
+    "gtsRoles": [
+      "admin",
+      "courseInstructor"
+    ],
+    "grade": 0
+  },
+  {
+    "gtsId": "jm-5540212330",
+    "firstName": "Jonathan",
+    "lastName": "Deckelmann",
+    "email": "jonathandeckelmann@gmail.com",
+    "gtsRoles": [],
+    "grade": 6
+  },
+  {
+    "gtsId": "jm-5540212245",
+    "firstName": "Karsten",
+    "lastName": "Deininger",
+    "email": "burkersrode@web.de",
+    "gtsRoles": [],
+    "grade": 7
+  },
+  {
+    "gtsId": "jm-5540212550",
+    "firstName": "Martha",
+    "lastName": "Deininger",
+    "email": "burkersrode@web.de",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540212061",
+    "firstName": "Robin",
+    "lastName": "Delitzsch",
+    "email": "robin.delitzsch@gmx",
+    "gtsRoles": [],
+    "grade": 9
+  },
+  {
+    "gtsId": "jm-5540212331",
+    "firstName": "Levi",
+    "lastName": "Dey",
+    "email": "s-dey.levi@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 6
+  },
+  {
+    "gtsId": "jm-5540212011",
+    "firstName": "Eric",
+    "lastName": "Diehn",
+    "email": "s-diehn.eric@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 9
+  },
+  {
+    "gtsId": "jm-5540212494",
+    "firstName": "Clara",
+    "lastName": "Dietrich",
+    "email": "s-dietrich.clara@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540212084",
+    "firstName": "Paul",
+    "lastName": "Dietrich",
+    "email": "sandra.denning@web.de",
+    "gtsRoles": [],
+    "grade": 9
+  },
+  {
+    "gtsId": "jm-5540212218",
+    "firstName": "Amelie",
+    "lastName": "Dietz",
+    "email": "dietz-schule@gmx.de",
+    "gtsRoles": [],
+    "grade": 7
+  },
+  {
+    "gtsId": "jm-5540212012",
+    "firstName": "Lara",
+    "lastName": "Dietze",
+    "email": "s-dietze.lara@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 9
+  },
+  {
+    "gtsId": "jm-5540212575",
+    "firstName": "Hanna Martha",
+    "lastName": "Döbrich",
+    "email": "s-doebrich.hanna@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540212436",
+    "firstName": "Ava",
+    "lastName": "Döhnert",
+    "email": "s-doehnert.ava@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540241633",
+    "firstName": "Julius",
+    "lastName": "Domnick",
+    "email": "domnick@jm.lernsax.de",
+    "gtsRoles": [
+      "admin",
+      "courseInstructor"
+    ],
+    "grade": 0
+  },
+  {
+    "gtsId": "jm-5540212140",
+    "firstName": "Emil",
+    "lastName": "Dorausch",
+    "email": "emil@dorausch.netl",
+    "gtsRoles": [],
+    "grade": 8
+  },
+  {
+    "gtsId": "jm-5540212495",
+    "firstName": "Franz",
+    "lastName": "Dorausch",
+    "email": "franz@dorausch.net",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540212551",
+    "firstName": "Adrian Paolo",
+    "lastName": "Dornberg",
+    "email": "s-dornberg.adrian@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540212357",
+    "firstName": "Frida",
+    "lastName": "Dörner",
+    "email": "s-doerner.frida@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 6
+  },
+  {
+    "gtsId": "jm-5540212034",
+    "firstName": "Mena",
+    "lastName": "Dotter",
+    "email": "s-dotter.mena@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 9
+  },
+  {
+    "gtsId": "jm-5540212576",
+    "firstName": "Martha Elisabeth",
+    "lastName": "Dreier",
+    "email": "s-dreier.martha@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540212496",
+    "firstName": "Liss",
+    "lastName": "Dreißigacker",
+    "email": "s-dreissigacker.liss@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540212035",
+    "firstName": "Jannick",
+    "lastName": "Dunsch",
+    "email": "s-dunsch.jannick@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 9
+  },
+  {
+    "gtsId": "jm-5540212386",
+    "firstName": "Lena",
+    "lastName": "Dux",
+    "email": "s.dux-lena@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 6
+  },
+  {
+    "gtsId": "jm-5540212358",
+    "firstName": "Maximilian",
+    "lastName": "Eberle",
+    "email": "s-eberle.maximilian@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 6
+  },
+  {
+    "gtsId": "jm-5540212437",
+    "firstName": "Ella Charlotte",
+    "lastName": "Eck",
+    "email": "Mitesprit@gmx.de",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540212438",
+    "firstName": "Emma",
+    "lastName": "Eck",
+    "email": "mitesprit@gmx.de",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540212439",
+    "firstName": "Felicia",
+    "lastName": "Eichhorn",
+    "email": "s-eichhorn.felicia@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540212246",
+    "firstName": "Jolantha",
+    "lastName": "Eichhorn",
+    "email": "s-eichhorn.jolantha@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 7
+  },
+  {
+    "gtsId": "jm-5540212332",
+    "firstName": "Elisabeth",
+    "lastName": "Eichler",
+    "email": "s-eichler.elisabeth@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 6
+  },
+  {
+    "gtsId": "jm-5540212440",
+    "firstName": "Nico",
+    "lastName": "Eichler",
+    "email": "eichler.nico@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540212333",
+    "firstName": "Ahmed",
+    "lastName": "Elatfawy",
+    "email": "e-elatfawy.ahmed@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 6
+  },
+  {
+    "gtsId": "jm-5540212468",
+    "firstName": "Lotte",
+    "lastName": "Endle",
+    "email": "s-endle.lotte@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540212163",
+    "firstName": "Clara",
+    "lastName": "Engel",
+    "email": "s-engel.clara@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 8
+  },
+  {
+    "gtsId": "jm-5540209162",
+    "firstName": "Johannes",
+    "lastName": "Engel",
+    "email": "engel@jm.lernsax.de",
+    "gtsRoles": [
+      "admin",
+      "courseInstructor",
+      "treasurer"
+    ],
+    "grade": 0
+  },
+  {
+    "gtsId": "jm-5540212524",
+    "firstName": "Jonas Elias",
+    "lastName": "Enzmann",
+    "email": "Jonasenzmann@outlook.de",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540212062",
+    "firstName": "Janus",
+    "lastName": "Eschenhagen",
+    "email": "s-eschenhagen.janus@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 9
+  },
+  {
+    "gtsId": "jm-5540212413",
+    "firstName": "Mona",
+    "lastName": "Eschenhagen",
+    "email": "s-eschenhagen.mona@ps.lernsax.de",
+    "gtsRoles": [],
+    "grade": 6
+  },
+  {
+    "gtsId": "jm-5540212359",
+    "firstName": "Lisann",
+    "lastName": "Feige",
+    "email": "s-feige.lisann@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 6
+  },
+  {
+    "gtsId": "jm-5540212441",
+    "firstName": "Rhys",
+    "lastName": "Felber",
+    "email": null,
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540212219",
+    "firstName": "Adrian",
+    "lastName": "Feltens",
+    "email": "adrianfeltens@gmail.com",
+    "gtsRoles": [],
+    "grade": 7
+  },
+  {
+    "gtsId": "jm-5540212036",
+    "firstName": "Damian",
+    "lastName": "Feltens",
+    "email": "s-feltens.damian@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 9
+  },
+  {
+    "gtsId": "jm-5540212247",
+    "firstName": "Jakob",
+    "lastName": "Fengler",
+    "email": "s-fengler.jakob@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 7
+  },
+  {
+    "gtsId": "jm-5540212469",
+    "firstName": "Alois Jonathan",
+    "lastName": "Fiedler",
+    "email": "aloisjonathan@icloud.com",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540212334",
+    "firstName": "Emilia",
+    "lastName": "Fischer",
+    "email": "s-fischer.emilia@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 6
+  },
+  {
+    "gtsId": "jm-5540212414",
+    "firstName": "Flora",
+    "lastName": "Fischer",
+    "email": "tilo-fischer@gmx.de",
+    "gtsRoles": [],
+    "grade": 6
+  },
+  {
+    "gtsId": "jm-5540212190",
+    "firstName": "Jan",
+    "lastName": "Fischer",
+    "email": "s-fischer.jan@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 8
+  },
+  {
+    "gtsId": "jm-5540212299",
+    "firstName": "Lia",
+    "lastName": "Fischer",
+    "email": null,
+    "gtsRoles": [],
+    "grade": 7
+  },
+  {
+    "gtsId": "jm-5540212387",
+    "firstName": "Pia",
+    "lastName": "Fischer",
+    "email": "s-fischer.pia@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 6
+  },
+  {
+    "gtsId": "jm-5540212552",
+    "firstName": "Sam",
+    "lastName": "Fischer",
+    "email": "e-fischer.sam@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540212191",
+    "firstName": "Tara",
+    "lastName": "Flemmig",
+    "email": "s-flemmig.tara@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 8
+  },
+  {
+    "gtsId": "jm-5540212553",
+    "firstName": "Greta Christina",
+    "lastName": "Flick",
+    "email": "s-flick.greta@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540212141",
+    "firstName": "Tiago",
+    "lastName": "Frank Domingues",
+    "email": "letmdo@gmail.com",
+    "gtsRoles": [],
+    "grade": 8
+  },
+  {
+    "gtsId": "jm-5540212220",
+    "firstName": "Moritz",
+    "lastName": "Franke",
+    "email": "frankemind@gmail.com",
+    "gtsRoles": [],
+    "grade": 7
+  },
+  {
+    "gtsId": "jm-5540212388",
+    "firstName": "Helena",
+    "lastName": "Friebe",
+    "email": "silvia-21@gmx.de",
+    "gtsRoles": [],
+    "grade": 6
+  },
+  {
+    "gtsId": "jm-5540212037",
+    "firstName": "Jannik",
+    "lastName": "Friebe",
+    "email": "silvia-21@gmx.de",
+    "gtsRoles": [],
+    "grade": 9
+  },
+  {
+    "gtsId": "jm-5540212142",
+    "firstName": "Helenene",
+    "lastName": "Friedrich",
+    "email": "s-friedrich.helene@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 8
+  },
+  {
+    "gtsId": "jm-5540212554",
+    "firstName": "Mathilda",
+    "lastName": "Friedrich",
+    "email": "s-friedrich.mathilda@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540212300",
+    "firstName": "Colin",
+    "lastName": "Frischmann",
+    "email": "s-frischmann.colin@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 7
+  },
+  {
+    "gtsId": "jm-5540212301",
+    "firstName": "Judith",
+    "lastName": "Fröhlich",
+    "email": "s-froehlich.judith@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 7
+  },
+  {
+    "gtsId": "jm-5540212221",
+    "firstName": "Greta",
+    "lastName": "Frost",
+    "email": null,
+    "gtsRoles": [],
+    "grade": 7
+  },
+  {
+    "gtsId": "jm-5540212013",
+    "firstName": "Oskar",
+    "lastName": "Funke",
+    "email": "s-funke.oskar@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 9
+  },
+  {
+    "gtsId": "jm-5540212063",
+    "firstName": "Emma",
+    "lastName": "Gaida",
+    "email": "s-gaida.emma@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 9
+  },
+  {
+    "gtsId": "jm-5540210376",
+    "firstName": "Annika",
+    "lastName": "Ganse",
+    "email": null,
+    "gtsRoles": [
+      "admin",
+      "courseInstructor"
+    ],
+    "grade": 0
+  },
+  {
+    "gtsId": "jm-5540212335",
+    "firstName": "Bjarne",
+    "lastName": "Gaumnitz",
+    "email": "s-gaumnitz.bjarne@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 6
+  },
+  {
+    "gtsId": "jm-5540212192",
+    "firstName": "Clara",
+    "lastName": "Gaumnitz",
+    "email": "s-gaumnitz.clara@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 8
+  },
+  {
+    "gtsId": "jm-5540212525",
+    "firstName": "Emil",
+    "lastName": "Gebelt",
+    "email": "s-gebelt.emil@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540212193",
+    "firstName": "Paul",
+    "lastName": "Gebelt",
+    "email": "s-gebelt.paul@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 8
+  },
+  {
+    "gtsId": "jm-5540212336",
+    "firstName": "Levi",
+    "lastName": "Gebhardt",
+    "email": "e-gebhardt.levi@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 6
+  },
+  {
+    "gtsId": "jm-5540212194",
+    "firstName": "Raisa",
+    "lastName": "Gebhardt",
+    "email": "s-gebhardt.raisa@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 8
+  },
+  {
+    "gtsId": "jm-5540212526",
+    "firstName": "Milian",
+    "lastName": "Geißler",
+    "email": "s-geissler.milian@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540212577",
+    "firstName": "Paul",
+    "lastName": "Georgi",
+    "email": "brichter3@yahoo.de",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540212143",
+    "firstName": "Lotta",
+    "lastName": "Gerds",
+    "email": "s-gerds.lotta@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 8
+  },
+  {
+    "gtsId": "jm-5540212442",
+    "firstName": "Rosalie",
+    "lastName": "Gering",
+    "email": "e-gering.rosalie@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540212248",
+    "firstName": "Johannes",
+    "lastName": "Gerlach",
+    "email": "s-gerlach.johannes@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 7
+  },
+  {
+    "gtsId": "jm-5540212389",
+    "firstName": "Marie",
+    "lastName": "Gerlach",
+    "email": "bremde@gmx.de",
+    "gtsRoles": [],
+    "grade": 6
+  },
+  {
+    "gtsId": "jm-5540212497",
+    "firstName": "Emilia Sophie",
+    "lastName": "Gerner",
+    "email": "s-gerner.emilia@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540212164",
+    "firstName": "Mia Luise",
+    "lastName": "Gerner",
+    "email": "MiaLuise.Gerner@web.de",
+    "gtsRoles": [],
+    "grade": 8
+  },
+  {
+    "gtsId": "jm-5540212498",
+    "firstName": "Lena",
+    "lastName": "Giesche",
+    "email": null,
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540212273",
+    "firstName": "Laurence",
+    "lastName": "Glas",
+    "email": "Laurence.glas10@gmail.com",
+    "gtsRoles": [],
+    "grade": 7
+  },
+  {
+    "gtsId": "jm-5540212249",
+    "firstName": "Magdalena",
+    "lastName": "Glöckner",
+    "email": "s-gloeckner.magdalena@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 7
+  },
+  {
+    "gtsId": "jm-5540212443",
+    "firstName": "Max",
+    "lastName": "Glöckner",
+    "email": "privat@rother-grafik.de",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540212112",
+    "firstName": "Sofia",
+    "lastName": "Glöckner",
+    "email": "s-gloeckner.sofia@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 8
+  },
+  {
+    "gtsId": "jm-5540212064",
+    "firstName": "Sofia",
+    "lastName": "Goltoff",
+    "email": "sgoltoff@gmail.com",
+    "gtsRoles": [],
+    "grade": 9
+  },
+  {
+    "gtsId": "jm-5540212555",
+    "firstName": "MiaMi",
+    "lastName": "Göttermann",
+    "email": "s-goettermann.mia@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540212085",
+    "firstName": "Emma",
+    "lastName": "Götze",
+    "email": "goetze.emma@gmx.de",
+    "gtsRoles": [],
+    "grade": 9
+  },
+  {
+    "gtsId": "jm-5540212390",
+    "firstName": "Laila",
+    "lastName": "Gräfrath",
+    "email": "Test@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 6
+  },
+  {
+    "gtsId": "jm-5540212527",
+    "firstName": "Sophia",
+    "lastName": "Grasemann",
+    "email": "sophia.grasemann@gmail.com",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540212113",
+    "firstName": "Senta",
+    "lastName": "Grauer",
+    "email": "s-grauer.senta@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 8
+  },
+  {
+    "gtsId": "jm-5540212415",
+    "firstName": "Gerda",
+    "lastName": "Griebenow",
+    "email": "no.griebenow@ymail.com",
+    "gtsRoles": [],
+    "grade": 6
+  },
+  {
+    "gtsId": "jm-5540212528",
+    "firstName": "Maximilian",
+    "lastName": "Grieger",
+    "email": "anke.grieger@gmx.de",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540212499",
+    "firstName": "Rosalie",
+    "lastName": "Grieger",
+    "email": "anke.grieger@gmx.de",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540212578",
+    "firstName": "Ciara Sophie",
+    "lastName": "Groß",
+    "email": "s-gross.ciara@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540212038",
+    "firstName": "Edgar",
+    "lastName": "Grosse",
+    "email": "s-grosse.edgar@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 9
+  },
+  {
+    "gtsId": "jm-5540212360",
+    "firstName": "Franka",
+    "lastName": "Große",
+    "email": "s-grosse.franka@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 6
+  },
+  {
+    "gtsId": "jm-5540212579",
+    "firstName": "Jette",
+    "lastName": "Großer",
+    "email": "s-grosser.jette@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540212580",
+    "firstName": "Carlo",
+    "lastName": "Gründler",
+    "email": "oliver.gruendler@gmail.com",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540212222",
+    "firstName": "Ettore",
+    "lastName": "Guidi",
+    "email": "tortellini11@hotmail.com",
+    "gtsRoles": [],
+    "grade": 7
+  },
+  {
+    "gtsId": "jm-5540212223",
+    "firstName": "Greta",
+    "lastName": "Günther",
+    "email": "gretakari.guenther@gmail.com",
+    "gtsRoles": [],
+    "grade": 7
+  },
+  {
+    "gtsId": "jm-5540210401",
+    "firstName": "Sarah",
+    "lastName": "Gürtler",
+    "email": null,
+    "gtsRoles": [
+      "admin",
+      "courseInstructor"
+    ],
+    "grade": 0
+  },
+  {
+    "gtsId": "jm-5540212416",
+    "firstName": "Felisa",
+    "lastName": "Güttler",
+    "email": "s-guettler.felisa@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 6
+  },
+  {
+    "gtsId": "jm-5540212065",
+    "firstName": "Florian",
+    "lastName": "Güttler",
+    "email": "s-guettler.florian@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 9
+  },
+  {
+    "gtsId": "jm-5540212417",
+    "firstName": "Anni-Fee",
+    "lastName": "Haase",
+    "email": null,
+    "gtsRoles": [],
+    "grade": 6
+  },
+  {
+    "gtsId": "jm-5540212274",
+    "firstName": "Victoria",
+    "lastName": "Häber",
+    "email": "s-haeber.victoria@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 7
+  },
+  {
+    "gtsId": "jm-5540212470",
+    "firstName": "Ludwig OttoLudwig",
+    "lastName": "Habicht",
+    "email": "ludwighabicht7@gmail.com",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540212086",
+    "firstName": "Greta",
+    "lastName": "Hadlich",
+    "email": "gretahadlich@gmail.com",
+    "gtsRoles": [],
+    "grade": 9
+  },
+  {
+    "gtsId": "jm-5540212195",
+    "firstName": "Lui",
+    "lastName": "Hafkesbrink",
+    "email": "s-hafkesbrink.Lui@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 8
+  },
+  {
+    "gtsId": "jm-5540212014",
+    "firstName": "Moritz",
+    "lastName": "Hahn",
+    "email": null,
+    "gtsRoles": [],
+    "grade": 9
+  },
+  {
+    "gtsId": "jm-5540212391",
+    "firstName": "Julian",
+    "lastName": "Hallier",
+    "email": "s-hallier.julian@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 6
+  },
+  {
+    "gtsId": "jm-5540210402",
+    "firstName": "Philipp",
+    "lastName": "Halling",
+    "email": null,
+    "gtsRoles": [
+      "admin",
+      "courseInstructor"
+    ],
+    "grade": 0
+  },
+  {
+    "gtsId": "jm-5540212114",
+    "firstName": "Josefine",
+    "lastName": "Hannig",
+    "email": "s-hannig.josefine@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 8
+  },
+  {
+    "gtsId": "jm-5540212556",
+    "firstName": "Tim",
+    "lastName": "Hannig",
+    "email": "s-hannig.tim@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540212015",
+    "firstName": "John",
+    "lastName": "Hannover",
+    "email": "s-hannover.john@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 9
+  },
+  {
+    "gtsId": "jm-5540212250",
+    "firstName": "Ben",
+    "lastName": "Hanuschke",
+    "email": "benmatthiashanuschke@gmail.com",
+    "gtsRoles": [],
+    "grade": 7
+  },
+  {
+    "gtsId": "jm-5540210398",
+    "firstName": "Lena",
+    "lastName": "Hassel",
+    "email": "wundes@jm.lernsax.de",
+    "gtsRoles": [
+      "admin",
+      "courseInstructor"
+    ],
+    "grade": 0
+  },
+  {
+    "gtsId": "jm-5540241453",
+    "firstName": "Ahmad",
+    "lastName": "Hassoun",
+    "email": null,
+    "gtsRoles": [],
+    "grade": 7
+  },
+  {
+    "gtsId": "jm-5540212302",
+    "firstName": "Hannah",
+    "lastName": "Hau",
+    "email": "s-hau.hannah@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 7
+  },
+  {
+    "gtsId": "jm-5540212087",
+    "firstName": "Niklas",
+    "lastName": "Häußner",
+    "email": "S-haeussner.niklas@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 9
+  },
+  {
+    "gtsId": "jm-5540212392",
+    "firstName": "Selina",
+    "lastName": "Haven",
+    "email": "michaela.haven@gmx.de",
+    "gtsRoles": [],
+    "grade": 6
+  },
+  {
+    "gtsId": "jm-5540212471",
+    "firstName": "Maja",
+    "lastName": "Heimlich",
+    "email": "e-heimlich.maja@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540212337",
+    "firstName": "Elena",
+    "lastName": "Heine",
+    "email": "s-heine.elena@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 6
+  },
+  {
+    "gtsId": "jm-5540212581",
+    "firstName": "Simon",
+    "lastName": "Heine",
+    "email": "s-heine.simon@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540212361",
+    "firstName": "Emilia",
+    "lastName": "Heinze",
+    "email": "s-heinze.emilia@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 6
+  },
+  {
+    "gtsId": "jm-5540212115",
+    "firstName": "Lillien",
+    "lastName": "Helbing",
+    "email": null,
+    "gtsRoles": [],
+    "grade": 8
+  },
+  {
+    "gtsId": "jm-5540212088",
+    "firstName": "Marina",
+    "lastName": "Hempel",
+    "email": "marinahempel@icloud.com",
+    "gtsRoles": [],
+    "grade": 9
+  },
+  {
+    "gtsId": "jm-5540212529",
+    "firstName": "Jonathan Cornelius",
+    "lastName": "Henn",
+    "email": "paulsimonhenn@web.de",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540212144",
+    "firstName": "Kai",
+    "lastName": "Henneberg",
+    "email": "s-Henneberg.Kai@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 8
+  },
+  {
+    "gtsId": "jm-5540212275",
+    "firstName": "Julia",
+    "lastName": "Henning",
+    "email": "s-henning.julia@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 7
+  },
+  {
+    "gtsId": "jm-5540212145",
+    "firstName": "Lena",
+    "lastName": "Henning",
+    "email": "s-henning.lena@jm.lersax.de",
+    "gtsRoles": [],
+    "grade": 8
+  },
+  {
+    "gtsId": "jm-5540212276",
+    "firstName": "Nils",
+    "lastName": "Hentschel",
+    "email": "S-hentschel.nils@jm.lernsax.de-online.de",
+    "gtsRoles": [],
+    "grade": 7
+  },
+  {
+    "gtsId": "jm-5540212530",
+    "firstName": "Clara Lilo",
+    "lastName": "Hermann",
+    "email": "s-hermann.clara@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540212089",
+    "firstName": "Gabriél",
+    "lastName": "Hernández Maak",
+    "email": "gaboalbertz.2020@gmail.com",
+    "gtsRoles": [],
+    "grade": 9
+  },
+  {
+    "gtsId": "jm-5540212338",
+    "firstName": "Emilia",
+    "lastName": "Hessel",
+    "email": "sebastian.zur@szurro.com",
+    "gtsRoles": [],
+    "grade": 6
+  },
+  {
+    "gtsId": "jm-5540212039",
+    "firstName": "Ben",
+    "lastName": "Hesselbarth",
+    "email": "ben.hesselbarth123@hotmail.com",
+    "gtsRoles": [],
+    "grade": 9
+  },
+  {
+    "gtsId": "jm-5540212040",
+    "firstName": "Eric",
+    "lastName": "Hesselbarth",
+    "email": "eric.hesselbarth123@hotmail.com",
+    "gtsRoles": [],
+    "grade": 9
+  },
+  {
+    "gtsId": "jm-5540212146",
+    "firstName": "Larissa",
+    "lastName": "Hetmank",
+    "email": "s-hetmank.larissa@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 8
+  },
+  {
+    "gtsId": "jm-5540212362",
+    "firstName": "Henri",
+    "lastName": "Hilbert",
+    "email": null,
+    "gtsRoles": [],
+    "grade": 6
+  },
+  {
+    "gtsId": "jm-5540212041",
+    "firstName": "Louis",
+    "lastName": "Hilbert",
+    "email": "s-hilbert.louis@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 9
+  },
+  {
+    "gtsId": "jm-5540212303",
+    "firstName": "Linelle",
+    "lastName": "Hinkelmann",
+    "email": "n.v.s–hinkelmann.marie@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 7
+  },
+  {
+    "gtsId": "jm-5540212196",
+    "firstName": "Ronja",
+    "lastName": "Hippe",
+    "email": "claudiahippe4@gmail.com",
+    "gtsRoles": [],
+    "grade": 8
+  },
+  {
+    "gtsId": "jm-5540212042",
+    "firstName": "Christopher Jano",
+    "lastName": "Hirche",
+    "email": "s-hirche.christopher@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 9
+  },
+  {
+    "gtsId": "jm-5540212418",
+    "firstName": "Joses",
+    "lastName": "Hirsch",
+    "email": "mail.Hirsch@web.de",
+    "gtsRoles": [],
+    "grade": 6
+  },
+  {
+    "gtsId": "jm-5540236878",
+    "firstName": "Alisa ",
+    "lastName": "Hlushehnko",
+    "email": "s-hlushehnko.alisa@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 9
+  },
+  {
+    "gtsId": "jm-5540212224",
+    "firstName": "Apollonia",
+    "lastName": "Hochstein",
+    "email": "lolahochstein@gmail.com",
+    "gtsRoles": [],
+    "grade": 7
+  },
+  {
+    "gtsId": "jm-5540212444",
+    "firstName": "Amélie",
+    "lastName": "Hoffmann",
+    "email": null,
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540212557",
+    "firstName": "Bruno",
+    "lastName": "Hofmann",
+    "email": "s-bruno.hofmann@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540212558",
+    "firstName": "Carla Helene",
+    "lastName": "Hofmann",
+    "email": "familie-hoche-hofmann@gmx.de",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540212304",
+    "firstName": "Elisabeth",
+    "lastName": "Hofmann",
+    "email": "kai.hofmann@web.de",
+    "gtsRoles": [],
+    "grade": 7
+  },
+  {
+    "gtsId": "jm-5540247755",
+    "firstName": "Fritz",
+    "lastName": "Hofmann",
+    "email": null,
+    "gtsRoles": [],
+    "grade": 9
+  },
+  {
+    "gtsId": "jm-5540212043",
+    "firstName": "Jaro",
+    "lastName": "Hofmann",
+    "email": "s-hofmann.jaro@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 9
+  },
+  {
+    "gtsId": "jm-5540212066",
+    "firstName": "Yannis",
+    "lastName": "Hofmann",
+    "email": "yannishofmann@icloud.com",
+    "gtsRoles": [],
+    "grade": 9
+  },
+  {
+    "gtsId": "jm-5540212305",
+    "firstName": "Karla",
+    "lastName": "Hohbein",
+    "email": "s-hohbein.karla@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 7
+  },
+  {
+    "gtsId": "jm-5540212531",
+    "firstName": "Henri",
+    "lastName": "Hohmann",
+    "email": "s-hohmann.henri@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540210377",
+    "firstName": "Clemens",
+    "lastName": "Höhne",
+    "email": null,
+    "gtsRoles": [
+      "courseInstructor"
+    ],
+    "grade": 0
+  },
+  {
+    "gtsId": "jm-5540212116",
+    "firstName": "Frida",
+    "lastName": "Höhne",
+    "email": "s-hoehne.frida@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 8
+  },
+  {
+    "gtsId": "jm-5540212532",
+    "firstName": "Polly",
+    "lastName": "Höhne",
+    "email": "s-hoehne.polly@lernsax.de",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540212419",
+    "firstName": "Matilda",
+    "lastName": "Honsberg",
+    "email": "s-honsberg.matilda@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 6
+  },
+  {
+    "gtsId": "jm-5540212582",
+    "firstName": "Tom Marcel",
+    "lastName": "Horbert",
+    "email": "s-horbert.tom@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540212363",
+    "firstName": "Flip",
+    "lastName": "Hornfeck",
+    "email": "fliphornfeck@gmail.com",
+    "gtsRoles": [],
+    "grade": 6
+  },
+  {
+    "gtsId": "jm-5540212197",
+    "firstName": "Eric",
+    "lastName": "Hotze",
+    "email": "tabea0507@live.de",
+    "gtsRoles": [],
+    "grade": 8
+  },
+  {
+    "gtsId": "jm-5540249003",
+    "firstName": "Josef",
+    "lastName": "Hrushchak",
+    "email": null,
+    "gtsRoles": [],
+    "grade": 8
+  },
+  {
+    "gtsId": "jm-5540212445",
+    "firstName": "Mattis",
+    "lastName": "Hücker",
+    "email": null,
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540212306",
+    "firstName": "Theo",
+    "lastName": "Hücker",
+    "email": "s-huecker.theo@jms.lernsax.de",
+    "gtsRoles": [],
+    "grade": 7
+  },
+  {
+    "gtsId": "jm-5540212446",
+    "firstName": "Clara",
+    "lastName": "Hunger",
+    "email": "s-hunger.clara@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540240984",
+    "firstName": "Mar",
+    "lastName": "Ibarra",
+    "email": "ibarra@jm.lernsax.de",
+    "gtsRoles": [
+      "courseInstructor"
+    ],
+    "grade": 0
+  },
+  {
+    "gtsId": "jm-5540241455",
+    "firstName": "Luceyn",
+    "lastName": "Ibrahim",
+    "email": null,
+    "gtsRoles": [],
+    "grade": 7
+  },
+  {
+    "gtsId": "jm-5540241454",
+    "firstName": "Nihal",
+    "lastName": "Ibrahim",
+    "email": null,
+    "gtsRoles": [],
+    "grade": 7
+  },
+  {
+    "gtsId": "jm-5540212364",
+    "firstName": "Roqaya",
+    "lastName": "Ibrahim",
+    "email": "S-ibrahim.roqaya@jm-lernsax.de",
+    "gtsRoles": [],
+    "grade": 6
+  },
+  {
+    "gtsId": "jm-5540212044",
+    "firstName": "Lucia",
+    "lastName": "Ihring",
+    "email": "s-lucia.ihring@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 9
+  },
+  {
+    "gtsId": "jm-5540212447",
+    "firstName": "Willem James",
+    "lastName": "Irlenbusch",
+    "email": "anikairlenbusch@gmx.de",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540212533",
+    "firstName": "Lukas",
+    "lastName": "Jacob",
+    "email": "s-jacob.lukas@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540212472",
+    "firstName": "Selma Friederike",
+    "lastName": "Jaenicke",
+    "email": null,
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540212473",
+    "firstName": "Marvin",
+    "lastName": "Jakob",
+    "email": "die.jacky.aus.le@googlemail.com",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540212090",
+    "firstName": "Nele",
+    "lastName": "Jansen",
+    "email": "s-jansen.nele@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 9
+  },
+  {
+    "gtsId": "jm-5540215522",
+    "firstName": "Sekretariat",
+    "lastName": "JMS",
+    "email": "sekretariat@jm.lernsax.de",
+    "gtsRoles": [
+      "admin",
+      "schoolAdmin"
+    ],
+    "grade": 0
+  },
+  {
+    "gtsId": "jm-5540212165",
+    "firstName": "Lara",
+    "lastName": "Joithe",
+    "email": "s-joithe.lara@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 8
+  },
+  {
+    "gtsId": "jm-5540212166",
+    "firstName": "Paul",
+    "lastName": "Joithe",
+    "email": "anja.joithe@t-online.de",
+    "gtsRoles": [],
+    "grade": 8
+  },
+  {
+    "gtsId": "jm-5540212167",
+    "firstName": "Johannes",
+    "lastName": "Junglas",
+    "email": "s-junglas.johannes@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 8
+  },
+  {
+    "gtsId": "jm-5540212474",
+    "firstName": "Maximilian Theodor",
+    "lastName": "Junker",
+    "email": "s-junker.maximilian@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540212559",
+    "firstName": "Vincent",
+    "lastName": "Juntke",
+    "email": "s-juntke.vincent@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540210378",
+    "firstName": "Julia",
+    "lastName": "Kahlo",
+    "email": null,
+    "gtsRoles": [
+      "admin",
+      "courseInstructor"
+    ],
+    "grade": 0
+  },
+  {
+    "gtsId": "jm-5540210379",
+    "firstName": "Sandra",
+    "lastName": "Kaldune",
+    "email": null,
+    "gtsRoles": [
+      "admin",
+      "courseInstructor"
+    ],
+    "grade": 0
+  },
+  {
+    "gtsId": "jm-5540212393",
+    "firstName": "Inga",
+    "lastName": "Kammertöns",
+    "email": "i-kammertoens@gmx.de",
+    "gtsRoles": [],
+    "grade": 6
+  },
+  {
+    "gtsId": "jm-5540212277",
+    "firstName": "Niels",
+    "lastName": "Kandler",
+    "email": "s-kandler.niels@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 7
+  },
+  {
+    "gtsId": "jm-5540212016",
+    "firstName": "Helena",
+    "lastName": "Kannemann",
+    "email": "s-kannemann.helena@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 9
+  },
+  {
+    "gtsId": "jm-5540212454",
+    "firstName": "Anton Maximilian",
+    "lastName": "Kaufmann",
+    "email": "s-schoenborn.anton@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540212307",
+    "firstName": "Franz",
+    "lastName": "Kaufmann",
+    "email": "s-kaufmann.franz@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 7
+  },
+  {
+    "gtsId": "jm-5540212308",
+    "firstName": "Anmol",
+    "lastName": "Kaur",
+    "email": "s-kaur.anmol@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 7
+  },
+  {
+    "gtsId": "jm-5540212117",
+    "firstName": "Oliver",
+    "lastName": "Kayser",
+    "email": "LustigeKnete@gmail.com",
+    "gtsRoles": [],
+    "grade": 8
+  },
+  {
+    "gtsId": "jm-5540212365",
+    "firstName": "Lena",
+    "lastName": "Kellig",
+    "email": "s-Kellig.lena@jm.Lernsax.",
+    "gtsRoles": [],
+    "grade": 6
+  },
+  {
+    "gtsId": "jm-5540212147",
+    "firstName": "Merle",
+    "lastName": "Keltsch",
+    "email": null,
+    "gtsRoles": [],
+    "grade": 8
+  },
+  {
+    "gtsId": "jm-5540212091",
+    "firstName": "Viviane",
+    "lastName": "Kempe",
+    "email": "S-kempe.viviane@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 9
+  },
+  {
+    "gtsId": "jm-5540212225",
+    "firstName": "Jakob",
+    "lastName": "Kerner",
+    "email": "s-kerner.jakob@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 7
+  },
+  {
+    "gtsId": "jm-5540212534",
+    "firstName": "Adelina",
+    "lastName": "Kessler",
+    "email": "e-kessler.adelina@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540212226",
+    "firstName": "Martha",
+    "lastName": "Kiehlmann",
+    "email": "eva.kiehlmannn@aol.com",
+    "gtsRoles": [],
+    "grade": 7
+  },
+  {
+    "gtsId": "jm-5540247612",
+    "firstName": "Antonia",
+    "lastName": "Kiethe",
+    "email": null,
+    "gtsRoles": [
+      "admin",
+      "courseInstructor"
+    ],
+    "grade": 0
+  },
+  {
+    "gtsId": "jm-5540236881",
+    "firstName": "Saya",
+    "lastName": "Kinjo",
+    "email": "s-kinjo.saya@jm.lernsax.de",
+    "gtsRoles": [
+      "courseInstructor"
+    ],
+    "grade": 9
+  },
+  {
+    "gtsId": "jm-5540251223",
+    "firstName": "Nira",
+    "lastName": "Kirschstein",
+    "email": null,
+    "gtsRoles": [
+      "courseInstructor"
+    ],
+    "grade": 0
+  },
+  {
+    "gtsId": "jm-5540212278",
+    "firstName": "Lena",
+    "lastName": "Klein",
+    "email": "Antje.88@web.de",
+    "gtsRoles": [],
+    "grade": 7
+  },
+  {
+    "gtsId": "jm-5540212535",
+    "firstName": "Sidney John",
+    "lastName": "Kleist",
+    "email": "kirablack14@gmail.com",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540212309",
+    "firstName": "Leopold",
+    "lastName": "Klimke",
+    "email": "c.klimke2108@gmail.com",
+    "gtsRoles": [],
+    "grade": 7
+  },
+  {
+    "gtsId": "jm-5540240983",
+    "firstName": "Carla",
+    "lastName": "Kluge",
+    "email": "kluge@jm.lernsax.de",
+    "gtsRoles": [
+      "admin",
+      "courseInstructor"
+    ],
+    "grade": 0
+  },
+  {
+    "gtsId": "jm-5540212279",
+    "firstName": "Noah",
+    "lastName": "Kluge",
+    "email": "noah.kluge2205@gmail.commail.com",
+    "gtsRoles": [],
+    "grade": 7
+  },
+  {
+    "gtsId": "jm-5540212168",
+    "firstName": "Bjarne",
+    "lastName": "Knaak",
+    "email": "nannett.knaak@web.de",
+    "gtsRoles": [],
+    "grade": 8
+  },
+  {
+    "gtsId": "jm-5540212500",
+    "firstName": "Mattis",
+    "lastName": "Knaak",
+    "email": "e-knaak.mattis@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540212448",
+    "firstName": "Jannis",
+    "lastName": "Knabe",
+    "email": "kristinknabe@posteo.de",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540212118",
+    "firstName": "Lina",
+    "lastName": "Knabe",
+    "email": "kristinknabe@posteo.de",
+    "gtsRoles": [],
+    "grade": 8
+  },
+  {
+    "gtsId": "jm-5540212560",
+    "firstName": "Henri",
+    "lastName": "Knauf",
+    "email": "e-knauf.henri@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540212475",
+    "firstName": "Jack Louie",
+    "lastName": "Knauschner",
+    "email": null,
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540212339",
+    "firstName": "Hedwig",
+    "lastName": "Kobalz",
+    "email": "s-kobalz.hedwig@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 6
+  },
+  {
+    "gtsId": "jm-5540212280",
+    "firstName": "Marie",
+    "lastName": "Koch",
+    "email": "s-koch.marie@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 7
+  },
+  {
+    "gtsId": "jm-5540212310",
+    "firstName": "Amelie",
+    "lastName": "Kochan",
+    "email": "s-kochan.amelie@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 7
+  },
+  {
+    "gtsId": "jm-5540212420",
+    "firstName": "Samuel",
+    "lastName": "Kolberg",
+    "email": "s-kolberg.samuel@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 6
+  },
+  {
+    "gtsId": "jm-5540212366",
+    "firstName": "Mathilda",
+    "lastName": "Koppo",
+    "email": "mathildakoppo@gmx.de",
+    "gtsRoles": [],
+    "grade": 6
+  },
+  {
+    "gtsId": "jm-5540212583",
+    "firstName": "Maximilian",
+    "lastName": "Körner",
+    "email": "y.jahns@gmx.net",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540212169",
+    "firstName": "Sara",
+    "lastName": "Kossar",
+    "email": "s-kossar.sara@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 8
+  },
+  {
+    "gtsId": "jm-5540212501",
+    "firstName": "Selina",
+    "lastName": "Kossar",
+    "email": "s-kossar.selina@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540210435",
+    "firstName": "Luisa",
+    "lastName": "Kovats",
+    "email": "schulklub@jm.lernsax.de",
+    "gtsRoles": [
+      "courseInstructor"
+    ],
+    "grade": 0
+  },
+  {
+    "gtsId": "jm-5540241082",
+    "firstName": "Faina",
+    "lastName": "Kozyrieva",
+    "email": "kozyrieva@jm.lernsax.de",
+    "gtsRoles": [
+      "courseInstructor"
+    ],
+    "grade": 0
+  },
+  {
+    "gtsId": "jm-5540212092",
+    "firstName": "HannaH",
+    "lastName": "Krakow",
+    "email": "hannahcmkrakow@icloud.com",
+    "gtsRoles": [],
+    "grade": 9
+  },
+  {
+    "gtsId": "jm-5540212561",
+    "firstName": "Mathilda Emilia",
+    "lastName": "Krause",
+    "email": "e-krause.mathilda@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540212045",
+    "firstName": "Nelly",
+    "lastName": "Krauspe",
+    "email": "s-krauspe.nelly@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 9
+  },
+  {
+    "gtsId": "jm-5540210380",
+    "firstName": "Alexander",
+    "lastName": "Krebs",
+    "email": null,
+    "gtsRoles": [
+      "admin",
+      "courseInstructor"
+    ],
+    "grade": 0
+  },
+  {
+    "gtsId": "jm-5540212476",
+    "firstName": "Linus",
+    "lastName": "Krekow",
+    "email": null,
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540247614",
+    "firstName": "Ole",
+    "lastName": "Kretschmer",
+    "email": null,
+    "gtsRoles": [
+      "admin",
+      "courseInstructor"
+    ],
+    "grade": 0
+  },
+  {
+    "gtsId": "jm-5540212119",
+    "firstName": "Benjamin",
+    "lastName": "Krohn",
+    "email": "Benjamin@regentropfen.org",
+    "gtsRoles": [],
+    "grade": 8
+  },
+  {
+    "gtsId": "jm-5540212251",
+    "firstName": "Paulina",
+    "lastName": "Krohn",
+    "email": "Felicitas.Krohn@web.de",
+    "gtsRoles": [],
+    "grade": 7
+  },
+  {
+    "gtsId": "jm-5540212340",
+    "firstName": "Raphael",
+    "lastName": "Kühl",
+    "email": "raphendo1pvp@gmail.com",
+    "gtsRoles": [],
+    "grade": 6
+  },
+  {
+    "gtsId": "jm-5540212394",
+    "firstName": "Elena",
+    "lastName": "Kühn",
+    "email": "Marilyn-bors@gmx.de",
+    "gtsRoles": [],
+    "grade": 6
+  },
+  {
+    "gtsId": "jm-5540212252",
+    "firstName": "Olivia",
+    "lastName": "Kuhn",
+    "email": "dr.julianekuhn@googlemail.com",
+    "gtsRoles": [],
+    "grade": 7
+  },
+  {
+    "gtsId": "jm-5540212120",
+    "firstName": "Lotta",
+    "lastName": "Kuhnert",
+    "email": null,
+    "gtsRoles": [],
+    "grade": 8
+  },
+  {
+    "gtsId": "jm-5540212017",
+    "firstName": "Ronja",
+    "lastName": "Külbel",
+    "email": "s-kuelbel.ronja@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 9
+  },
+  {
+    "gtsId": "jm-5540212395",
+    "firstName": "Antonia",
+    "lastName": "Kundt",
+    "email": "ritakundt@web.de",
+    "gtsRoles": [],
+    "grade": 6
+  },
+  {
+    "gtsId": "jm-5540212396",
+    "firstName": "Bela",
+    "lastName": "Kundt",
+    "email": "rita.kundt@cine-impuls.de",
+    "gtsRoles": [],
+    "grade": 6
+  },
+  {
+    "gtsId": "jm-5540212227",
+    "firstName": "Ronja",
+    "lastName": "Künzel",
+    "email": "Ronja.kuenzel11@gmail.com",
+    "gtsRoles": [],
+    "grade": 7
+  },
+  {
+    "gtsId": "jm-5540236874",
+    "firstName": "Petro",
+    "lastName": "Kuzema",
+    "email": null,
+    "gtsRoles": [],
+    "grade": 8
+  },
+  {
+    "gtsId": "jm-5540212421",
+    "firstName": "Frederik",
+    "lastName": "Lachmann",
+    "email": "s-lachmann.frederik@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 6
+  },
+  {
+    "gtsId": "jm-5540212170",
+    "firstName": "Olivia",
+    "lastName": "Lachmannn",
+    "email": "s-lachmann.olivia@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 8
+  },
+  {
+    "gtsId": "jm-5540212584",
+    "firstName": "Luis",
+    "lastName": "Lamkewitz",
+    "email": "lamkewitz@yahoo.de",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540212449",
+    "firstName": "Charlotte Sophie Margarete",
+    "lastName": "Lange",
+    "email": "S-lange.charlotte@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540212281",
+    "firstName": "Emma",
+    "lastName": "Langhoff",
+    "email": "Anja@flipshirt.de",
+    "gtsRoles": [],
+    "grade": 7
+  },
+  {
+    "gtsId": "jm-5540212422",
+    "firstName": "Lua Malin",
+    "lastName": "Langner",
+    "email": "Lua_Malin.Langner@web.de",
+    "gtsRoles": [],
+    "grade": 6
+  },
+  {
+    "gtsId": "jm-5540251225",
+    "firstName": "Guido",
+    "lastName": "Laures",
+    "email": "guido@laures.de",
+    "gtsRoles": [
+      "admin"
+    ],
+    "grade": 0
+  },
+  {
+    "gtsId": "jm-5540212477",
+    "firstName": "Ole Werner",
+    "lastName": "Lecher",
+    "email": "s-lecher.ole@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540212585",
+    "firstName": "Leni",
+    "lastName": "Leidenfrost",
+    "email": "e-leidenfrost.leni@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540212198",
+    "firstName": "Frida",
+    "lastName": "Leitholdt",
+    "email": "s-leitholdt.frida@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 8
+  },
+  {
+    "gtsId": "jm-5540212311",
+    "firstName": "Neele",
+    "lastName": "Lenke",
+    "email": "Kika_lexy@hotmail.com",
+    "gtsRoles": [],
+    "grade": 7
+  },
+  {
+    "gtsId": "jm-5540212312",
+    "firstName": "Felix",
+    "lastName": "Lenz",
+    "email": "lenz.holzhausen@t-online.de",
+    "gtsRoles": [],
+    "grade": 7
+  },
+  {
+    "gtsId": "jm-5540212228",
+    "firstName": "Nora",
+    "lastName": "Lieber",
+    "email": "s-lieber.nora@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 7
+  },
+  {
+    "gtsId": "jm-5540212282",
+    "firstName": "Edda",
+    "lastName": "Liebers",
+    "email": "s.mikulla@web.de",
+    "gtsRoles": [],
+    "grade": 7
+  },
+  {
+    "gtsId": "jm-5540210406",
+    "firstName": "Marco",
+    "lastName": "Liebers",
+    "email": null,
+    "gtsRoles": [
+      "admin",
+      "courseInstructor"
+    ],
+    "grade": 0
+  },
+  {
+    "gtsId": "jm-5540212423",
+    "firstName": "Greta",
+    "lastName": "Liebke",
+    "email": "s-liebke.greta@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 6
+  },
+  {
+    "gtsId": "jm-5540212450",
+    "firstName": "Ben",
+    "lastName": "Lieder",
+    "email": "stefanieclauss@web.de",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540212562",
+    "firstName": "Ella Marlen",
+    "lastName": "Liedtke",
+    "email": "s-liedtke.ella@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540212067",
+    "firstName": "Jona",
+    "lastName": "Liepold",
+    "email": "s-liepold.jona@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 9
+  },
+  {
+    "gtsId": "jm-5540212367",
+    "firstName": "Finja",
+    "lastName": "Lindner",
+    "email": "kontakt@innenausbau-lindner.de",
+    "gtsRoles": [],
+    "grade": 6
+  },
+  {
+    "gtsId": "jm-5540212424",
+    "firstName": "Frederik",
+    "lastName": "Lochmann",
+    "email": "s-lochmann.frederik@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 6
+  },
+  {
+    "gtsId": "jm-5540212046",
+    "firstName": "Lottka",
+    "lastName": "Lorenz",
+    "email": "s-lorenz.lottka@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 9
+  },
+  {
+    "gtsId": "jm-5540212068",
+    "firstName": "Luise",
+    "lastName": "Lorenz",
+    "email": "s-lorenz.luise@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 9
+  },
+  {
+    "gtsId": "jm-5540212283",
+    "firstName": "Elias",
+    "lastName": "Löwe",
+    "email": "pilz-service@msn.com",
+    "gtsRoles": [],
+    "grade": 7
+  },
+  {
+    "gtsId": "jm-5540212341",
+    "firstName": "Johanna",
+    "lastName": "Luft",
+    "email": "s-luft.johanna@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 6
+  },
+  {
+    "gtsId": "jm-5540212397",
+    "firstName": "Martha",
+    "lastName": "Lühmann",
+    "email": "s-luehmann.martha@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 6
+  },
+  {
+    "gtsId": "jm-5540212018",
+    "firstName": "Georg",
+    "lastName": "Maaß",
+    "email": "s-maass.georg@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 9
+  },
+  {
+    "gtsId": "jm-5540212586",
+    "firstName": "Umiiat",
+    "lastName": "Magomedova",
+    "email": "e-magomedova.umiiat@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540236875",
+    "firstName": "Matvii",
+    "lastName": "Makarov",
+    "email": "n.a.",
+    "gtsRoles": [],
+    "grade": 8
+  },
+  {
+    "gtsId": "jm-5540236887",
+    "firstName": "Mose",
+    "lastName": "Mamaiashvili",
+    "email": null,
+    "gtsRoles": [],
+    "grade": 7
+  },
+  {
+    "gtsId": "jm-5540249002",
+    "firstName": "Emelie",
+    "lastName": "Mantey",
+    "email": "sandra.mantey@gmx.de",
+    "gtsRoles": [],
+    "grade": 8
+  },
+  {
+    "gtsId": "jm-5540212425",
+    "firstName": "Malisa",
+    "lastName": "Markpert",
+    "email": "s-markpert.malisa@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 6
+  },
+  {
+    "gtsId": "jm-5540212069",
+    "firstName": "Melina",
+    "lastName": "Markpert",
+    "email": "melina_markpert@web.de",
+    "gtsRoles": [],
+    "grade": 9
+  },
+  {
+    "gtsId": "jm-5540212121",
+    "firstName": "Anna",
+    "lastName": "Martens",
+    "email": "S-Martens.anna@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 8
+  },
+  {
+    "gtsId": "jm-5540210407",
+    "firstName": "Sarah",
+    "lastName": "Martin",
+    "email": null,
+    "gtsRoles": [
+      "admin",
+      "courseInstructor"
+    ],
+    "grade": 0
+  },
+  {
+    "gtsId": "jm-5540212587",
+    "firstName": "Charlotte Sophie",
+    "lastName": "Marx",
+    "email": "s-marx.charlotte@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540212171",
+    "firstName": "Jonas",
+    "lastName": "Marx",
+    "email": "s-marx.jonas@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 8
+  },
+  {
+    "gtsId": "jm-5540212426",
+    "firstName": "Friedrich",
+    "lastName": "Matthes",
+    "email": "mattheskatja@gmx.de",
+    "gtsRoles": [],
+    "grade": 6
+  },
+  {
+    "gtsId": "jm-5540212502",
+    "firstName": "Lena",
+    "lastName": "Matthes",
+    "email": "s-matthes.lena@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540212070",
+    "firstName": "Lynn",
+    "lastName": "Matthes",
+    "email": "s-matthes.Lynn@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 9
+  },
+  {
+    "gtsId": "jm-5540212253",
+    "firstName": "Pauline",
+    "lastName": "Matthes",
+    "email": "mattheskatja@gmx.de",
+    "gtsRoles": [],
+    "grade": 7
+  },
+  {
+    "gtsId": "jm-5540212398",
+    "firstName": "Lilly",
+    "lastName": "Matych",
+    "email": "s-matych.lilly@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 6
+  },
+  {
+    "gtsId": "jm-5540212199",
+    "firstName": "Lukas",
+    "lastName": "Maxeiner",
+    "email": "s-maxeiner.lukas@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 8
+  },
+  {
+    "gtsId": "jm-5540212200",
+    "firstName": "Hans",
+    "lastName": "Mehlitz",
+    "email": "zschue@gmx.net",
+    "gtsRoles": [],
+    "grade": 8
+  },
+  {
+    "gtsId": "jm-5540247828",
+    "firstName": "Ludwig",
+    "lastName": "Meier",
+    "email": "s-meier.ludwig@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 8
+  },
+  {
+    "gtsId": "jm-5540212588",
+    "firstName": "Pauline",
+    "lastName": "Mell",
+    "email": "mell.corinna@web.de",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540212536",
+    "firstName": "Emely",
+    "lastName": "Melnyk",
+    "email": "e-melnyk.emely@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540247609",
+    "firstName": "Tymur",
+    "lastName": "Melnyk",
+    "email": "melnicmasha@gmail.com",
+    "gtsRoles": [],
+    "grade": 7
+  },
+  {
+    "gtsId": "jm-5540212122",
+    "firstName": "Dora",
+    "lastName": "Melow",
+    "email": "gunnar.melow@gmail.com",
+    "gtsRoles": [],
+    "grade": 8
+  },
+  {
+    "gtsId": "jm-5540212563",
+    "firstName": "Irma",
+    "lastName": "Melow",
+    "email": "s-melow.irma@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540212589",
+    "firstName": "Amon",
+    "lastName": "Melzer",
+    "email": "susannmelzer@yahoo.de",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540212478",
+    "firstName": "Jonathan",
+    "lastName": "Menger",
+    "email": "s-menger.jonathan@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540212093",
+    "firstName": "Elise",
+    "lastName": "Menzel",
+    "email": "s-menzel.elise@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 9
+  },
+  {
+    "gtsId": "jm-5540212172",
+    "firstName": "Simon",
+    "lastName": "Merkelbach",
+    "email": "j.simon.merkelbach@gmail.com",
+    "gtsRoles": [],
+    "grade": 8
+  },
+  {
+    "gtsId": "jm-5540210404",
+    "firstName": "Maria",
+    "lastName": "Mettke",
+    "email": "mettke@jm.lernsax.de",
+    "gtsRoles": [
+      "admin",
+      "courseInstructor"
+    ],
+    "grade": 0
+  },
+  {
+    "gtsId": "jm-5540212123",
+    "firstName": "Louis",
+    "lastName": "Metzkes",
+    "email": "s-metzkes.louis@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 8
+  },
+  {
+    "gtsId": "jm-5540212503",
+    "firstName": "Milène",
+    "lastName": "Meunier",
+    "email": "s-meunier.milene@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540212071",
+    "firstName": "Nina",
+    "lastName": "Meziane",
+    "email": "s-meziane.nina@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 9
+  },
+  {
+    "gtsId": "jm-5540212451",
+    "firstName": "Mariella",
+    "lastName": "Michael",
+    "email": "s-michael.mariella@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540212313",
+    "firstName": "Svea",
+    "lastName": "Michel",
+    "email": "s-michel.svea@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 7
+  },
+  {
+    "gtsId": "jm-5540212094",
+    "firstName": "Francesca",
+    "lastName": "Miedniak",
+    "email": "danimiedniak@googlemail.com",
+    "gtsRoles": [],
+    "grade": 9
+  },
+  {
+    "gtsId": "jm-5540212284",
+    "firstName": "Jakob",
+    "lastName": "Milker",
+    "email": "Jakob.milker@icloud.com",
+    "gtsRoles": [],
+    "grade": 7
+  },
+  {
+    "gtsId": "jm-5540212660",
+    "firstName": "Marius",
+    "lastName": "Mittmann",
+    "email": "Test@jm.lernsax.de",
+    "gtsRoles": [
+      "courseInstructor"
+    ],
+    "grade": 0
+  },
+  {
+    "gtsId": "jm-5540212072",
+    "firstName": "Felia",
+    "lastName": "Möbert",
+    "email": "s-moebert.felia@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 9
+  },
+  {
+    "gtsId": "jm-5540212590",
+    "firstName": "Sevda",
+    "lastName": "Mohammad",
+    "email": null,
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540212591",
+    "firstName": "Mathilda",
+    "lastName": "Mohr",
+    "email": "s-mohr.mathilda@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540212254",
+    "firstName": "Frieda",
+    "lastName": "Möhrstedt",
+    "email": "s-moehrstedt.frieda@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 7
+  },
+  {
+    "gtsId": "jm-5540210381",
+    "firstName": "Christin",
+    "lastName": "Möller",
+    "email": null,
+    "gtsRoles": [
+      "courseInstructor"
+    ],
+    "grade": 0
+  },
+  {
+    "gtsId": "jm-5540212479",
+    "firstName": "Clara",
+    "lastName": "Möller",
+    "email": "Moeller-cl@web.de",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540212173",
+    "firstName": "Noah",
+    "lastName": "Moosdorf",
+    "email": "s-moosdorf.noah@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 8
+  },
+  {
+    "gtsId": "jm-5540212537",
+    "firstName": "Luana",
+    "lastName": "Moschner",
+    "email": "stefan.kern74@web.de",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540212368",
+    "firstName": "Antonia",
+    "lastName": "Mößner",
+    "email": null,
+    "gtsRoles": [],
+    "grade": 6
+  },
+  {
+    "gtsId": "jm-5540212285",
+    "firstName": "Charlotte",
+    "lastName": "Mückenheim",
+    "email": "s-mueckenheim.charlotte@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 7
+  },
+  {
+    "gtsId": "jm-5540212202",
+    "firstName": "Anton",
+    "lastName": "Müller",
+    "email": "s-mueller.anton@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 8
+  },
+  {
+    "gtsId": "jm-5540212174",
+    "firstName": "Erik",
+    "lastName": "Müller",
+    "email": "Mueller.marika@gmx.net",
+    "gtsRoles": [],
+    "grade": 8
+  },
+  {
+    "gtsId": "jm-5540212592",
+    "firstName": "Henry",
+    "lastName": "Müller",
+    "email": "Mueller.marika@gmx.net",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540212203",
+    "firstName": "Jette",
+    "lastName": "Müller",
+    "email": "s-mueller.jette@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 8
+  },
+  {
+    "gtsId": "jm-5540212504",
+    "firstName": "Luisa Christine",
+    "lastName": "Müller",
+    "email": "s-mueller.luisa@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540212175",
+    "firstName": "Luise",
+    "lastName": "Müller",
+    "email": "s-Mueller.Luise@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 8
+  },
+  {
+    "gtsId": "jm-5540212593",
+    "firstName": "Milena Josefine",
+    "lastName": "Müller",
+    "email": "s-mueller.milena@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540212505",
+    "firstName": "Ramón",
+    "lastName": "Müller",
+    "email": "mueller.franziska1987@gmx.de",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540212229",
+    "firstName": "Richard",
+    "lastName": "Müller",
+    "email": "nicole2402@gmx.net",
+    "gtsRoles": [],
+    "grade": 7
+  },
+  {
+    "gtsId": "jm-5540212506",
+    "firstName": "Theresa Ulrike",
+    "lastName": "Müller",
+    "email": "s-mueller.theresa@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540212507",
+    "firstName": "Victoria Solea",
+    "lastName": "Müller",
+    "email": "s-mueller.victoria@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540241368",
+    "firstName": "N.",
+    "lastName": "N.",
+    "email": "nn@jm.lernsax.de",
+    "gtsRoles": [
+      "courseInstructor"
+    ],
+    "grade": 0
+  },
+  {
+    "gtsId": "jm-5540236880",
+    "firstName": "Ninelle",
+    "lastName": "Nagel",
+    "email": "s-nagel.ninelle@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 8
+  },
+  {
+    "gtsId": "jm-5540212480",
+    "firstName": "Ruby Marianne",
+    "lastName": "Narr",
+    "email": "s-narr.ruby@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540247524",
+    "firstName": "Mohammad",
+    "lastName": "Natfaji",
+    "email": null,
+    "gtsRoles": [],
+    "grade": 7
+  },
+  {
+    "gtsId": "jm-5540247523",
+    "firstName": "Yousuf",
+    "lastName": "Natfaji",
+    "email": null,
+    "gtsRoles": [],
+    "grade": 7
+  },
+  {
+    "gtsId": "jm-5540212204",
+    "firstName": "Emilia",
+    "lastName": "Näther",
+    "email": "s-naether.emilia@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 8
+  },
+  {
+    "gtsId": "jm-5540212149",
+    "firstName": "Paul",
+    "lastName": "Näther",
+    "email": "s-naether.paul@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 8
+  },
+  {
+    "gtsId": "jm-5540212481",
+    "firstName": "Lida Rosa",
+    "lastName": "Naumann",
+    "email": "t.naumann1983@web.de",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540212124",
+    "firstName": "Tessa",
+    "lastName": "Naumann",
+    "email": "s-naumann.tessa@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 8
+  },
+  {
+    "gtsId": "jm-5540212482",
+    "firstName": "Tialda Sophie",
+    "lastName": "Naumann",
+    "email": "s-naumann.tialda@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540212150",
+    "firstName": "Wilma",
+    "lastName": "Naumann",
+    "email": "s-naumann.wilma@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 8
+  },
+  {
+    "gtsId": "jm-5540212508",
+    "firstName": "Felix",
+    "lastName": "Nebelung",
+    "email": "s-nebelung.felix@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540212073",
+    "firstName": "Clara",
+    "lastName": "Nennemann",
+    "email": "s-nennemann.clara@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 9
+  },
+  {
+    "gtsId": "jm-5540212286",
+    "firstName": "Stella",
+    "lastName": "Nennemann",
+    "email": "s-nennemann.stella@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 7
+  },
+  {
+    "gtsId": "jm-5540212287",
+    "firstName": "Edgar",
+    "lastName": "Nestler",
+    "email": null,
+    "gtsRoles": [],
+    "grade": 7
+  },
+  {
+    "gtsId": "jm-5540212288",
+    "firstName": "Richard",
+    "lastName": "Neumerkel",
+    "email": "s-neumerkel.richard@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 7
+  },
+  {
+    "gtsId": "jm-5540210382",
+    "firstName": "Katja",
+    "lastName": "Neuner",
+    "email": null,
+    "gtsRoles": [
+      "admin",
+      "courseInstructor"
+    ],
+    "grade": 0
+  },
+  {
+    "gtsId": "jm-5540212427",
+    "firstName": "Jasmeet Kaur",
+    "lastName": "Nguyen",
+    "email": "nguyensukhmeen@gmail.com",
+    "gtsRoles": [],
+    "grade": 6
+  },
+  {
+    "gtsId": "jm-5540210383",
+    "firstName": "Jacqueline",
+    "lastName": "Nickel",
+    "email": null,
+    "gtsRoles": [
+      "admin",
+      "courseInstructor"
+    ],
+    "grade": 0
+  },
+  {
+    "gtsId": "jm-5540212650",
+    "firstName": "Tamino",
+    "lastName": "Nickel",
+    "email": "fsj.nickel@jm.lernsax.de",
+    "gtsRoles": [
+      "admin",
+      "courseInstructor",
+      "schoolAdmin"
+    ],
+    "grade": 0
+  },
+  {
+    "gtsId": "jm-5540212509",
+    "firstName": "Amilia",
+    "lastName": "Nietsch",
+    "email": "s-nietsch.amilia@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540212125",
+    "firstName": "Jan Ole",
+    "lastName": "Niewiadomski",
+    "email": "s-niewiadomski.jan@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 8
+  },
+  {
+    "gtsId": "jm-5540212594",
+    "firstName": "Hannah",
+    "lastName": "Noack",
+    "email": "kinder@mirkonoack.de",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540212019",
+    "firstName": "Luise",
+    "lastName": "Nündel",
+    "email": "s-nuendel.luise@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 9
+  },
+  {
+    "gtsId": "jm-5540212483",
+    "firstName": "Lene",
+    "lastName": "Oberbichler",
+    "email": "s-oberbichler.lene@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540212342",
+    "firstName": "Amar",
+    "lastName": "Okasha",
+    "email": null,
+    "gtsRoles": [],
+    "grade": 6
+  },
+  {
+    "gtsId": "jm-5540236876",
+    "firstName": "Oleksandr",
+    "lastName": "Orel",
+    "email": "s-oleksandr.orel@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 9
+  },
+  {
+    "gtsId": "jm-5540212538",
+    "firstName": "Amos",
+    "lastName": "Ortiz",
+    "email": "somazitro@gmail.com",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540212126",
+    "firstName": "Lynn",
+    "lastName": "Otto",
+    "email": "s-otto.lynn@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 8
+  },
+  {
+    "gtsId": "jm-5540212095",
+    "firstName": "Theodor",
+    "lastName": "Otto",
+    "email": "s-otto.theodor@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 9
+  },
+  {
+    "gtsId": "jm-5540212020",
+    "firstName": "Fedor",
+    "lastName": "Pak",
+    "email": "fdr.009.pak@gmail.com",
+    "gtsRoles": [],
+    "grade": 9
+  },
+  {
+    "gtsId": "jm-5540212047",
+    "firstName": "Jonas",
+    "lastName": "Paschke",
+    "email": "s-paschke.jonas@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 9
+  },
+  {
+    "gtsId": "jm-5540212428",
+    "firstName": "Emil",
+    "lastName": "Paul",
+    "email": "adrian_paul@gmx.net",
+    "gtsRoles": [],
+    "grade": 6
+  },
+  {
+    "gtsId": "jm-5540212564",
+    "firstName": "Ananga",
+    "lastName": "Pekas",
+    "email": "s-pekas.ananga@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540212289",
+    "firstName": "Lua",
+    "lastName": "Perez Pröhl",
+    "email": "s-perez.lua@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 7
+  },
+  {
+    "gtsId": "jm-5540210384",
+    "firstName": "Kristina",
+    "lastName": "Persson",
+    "email": "persson@jm.lernsax.de",
+    "gtsRoles": [
+      "admin",
+      "courseInstructor"
+    ],
+    "grade": 0
+  },
+  {
+    "gtsId": "jm-5540210385",
+    "firstName": "Liessa",
+    "lastName": "Petersen",
+    "email": "petersen@jm.lernsax.de",
+    "gtsRoles": [
+      "admin",
+      "courseInstructor"
+    ],
+    "grade": 0
+  },
+  {
+    "gtsId": "jm-5540212048",
+    "firstName": "Jonathan",
+    "lastName": "Peterson",
+    "email": "s-peterson.jonathan@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 9
+  },
+  {
+    "gtsId": "jm-5540241401",
+    "firstName": "Alina",
+    "lastName": "Petselia",
+    "email": null,
+    "gtsRoles": [],
+    "grade": 7
+  },
+  {
+    "gtsId": "jm-5540212230",
+    "firstName": "Felix",
+    "lastName": "Peuker",
+    "email": "s-peuker.felix@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 7
+  },
+  {
+    "gtsId": "jm-5540212231",
+    "firstName": "Julian",
+    "lastName": "Peuker",
+    "email": "s-peuker.julian@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 7
+  },
+  {
+    "gtsId": "jm-5540212176",
+    "firstName": "Marlene",
+    "lastName": "Pietsch",
+    "email": "s-pietsch.marlene@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 8
+  },
+  {
+    "gtsId": "jm-5540212021",
+    "firstName": "Emil",
+    "lastName": "Piontek",
+    "email": "emil_piontek@web.de",
+    "gtsRoles": [],
+    "grade": 9
+  },
+  {
+    "gtsId": "jm-5540212484",
+    "firstName": "Alexander",
+    "lastName": "Pischke",
+    "email": "e-pischke.alexander@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540240981",
+    "firstName": "Adrian",
+    "lastName": "Platzk",
+    "email": "gta@jm.lernsax.de",
+    "gtsRoles": [
+      "courseInstructor"
+    ],
+    "grade": 0
+  },
+  {
+    "gtsId": "jm-5540212369",
+    "firstName": "Arthur",
+    "lastName": "Poethe",
+    "email": "katjapoethe@freenet.de",
+    "gtsRoles": [],
+    "grade": 6
+  },
+  {
+    "gtsId": "jm-5540212452",
+    "firstName": "Milana",
+    "lastName": "Portnova",
+    "email": "f-portnova.milana-@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540212290",
+    "firstName": "Karl",
+    "lastName": "Prause",
+    "email": "prausemaria@web.de",
+    "gtsRoles": [],
+    "grade": 7
+  },
+  {
+    "gtsId": "jm-5540212127",
+    "firstName": "Leonie",
+    "lastName": "Priemer",
+    "email": "s-priemer.leonie@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 8
+  },
+  {
+    "gtsId": "jm-5540248975",
+    "firstName": "Extern",
+    "lastName": "PTE",
+    "email": null,
+    "gtsRoles": [
+      "courseInstructor"
+    ],
+    "grade": 0
+  },
+  {
+    "gtsId": "jm-5540212539",
+    "firstName": "Juman",
+    "lastName": "Qashi",
+    "email": "s-qashi.juman@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540212151",
+    "firstName": "Nils",
+    "lastName": "Rabe",
+    "email": "s-rabe.nils@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 8
+  },
+  {
+    "gtsId": "jm-5540212453",
+    "firstName": "Viktor",
+    "lastName": "Raddatz",
+    "email": "s-raddatz.viktor@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540241399",
+    "firstName": "Ava",
+    "lastName": "Rajabi",
+    "email": null,
+    "gtsRoles": [],
+    "grade": 7
+  },
+  {
+    "gtsId": "jm-5540212255",
+    "firstName": "Flora",
+    "lastName": "Raschke",
+    "email": "s-raschke.flora@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 7
+  },
+  {
+    "gtsId": "jm-5540212022",
+    "firstName": "Kendra",
+    "lastName": "Raschke",
+    "email": "ke77ra@gmail.com",
+    "gtsRoles": [],
+    "grade": 9
+  },
+  {
+    "gtsId": "jm-5540212256",
+    "firstName": "Vincent",
+    "lastName": "Rasemann",
+    "email": "s-rasemann.vincent@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 7
+  },
+  {
+    "gtsId": "jm-5540212314",
+    "firstName": "Matti",
+    "lastName": "Raßmann",
+    "email": "s-rassmann.matti@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 7
+  },
+  {
+    "gtsId": "jm-5540212232",
+    "firstName": "Emily",
+    "lastName": "Rausch",
+    "email": "s-rausch.emily@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 7
+  },
+  {
+    "gtsId": "jm-5540210386",
+    "firstName": "Reinold",
+    "lastName": "Redenyi",
+    "email": null,
+    "gtsRoles": [
+      "admin",
+      "courseInstructor"
+    ],
+    "grade": 0
+  },
+  {
+    "gtsId": "jm-5540212429",
+    "firstName": "Moritz",
+    "lastName": "Rehm",
+    "email": "s-rehm.moritz@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 6
+  },
+  {
+    "gtsId": "jm-5540212291",
+    "firstName": "Jonas",
+    "lastName": "Reich",
+    "email": "Susann.news@gmx.de",
+    "gtsRoles": [],
+    "grade": 7
+  },
+  {
+    "gtsId": "jm-5540212096",
+    "firstName": "Flynn",
+    "lastName": "Reichardt",
+    "email": "s-reichardt.flynn@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 9
+  },
+  {
+    "gtsId": "jm-5540212233",
+    "firstName": "Emily",
+    "lastName": "Reichel",
+    "email": "s-reichel.emily@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 7
+  },
+  {
+    "gtsId": "jm-5540212343",
+    "firstName": "Moritz",
+    "lastName": "Reichel",
+    "email": "s-reichel.moritz@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 6
+  },
+  {
+    "gtsId": "jm-5540212292",
+    "firstName": "Hannah",
+    "lastName": "Reinicke",
+    "email": "s-reinicke.hannah@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 7
+  },
+  {
+    "gtsId": "jm-5540212399",
+    "firstName": "Kolja",
+    "lastName": "Retznik",
+    "email": "laura.retznik@gmx.de",
+    "gtsRoles": [],
+    "grade": 6
+  },
+  {
+    "gtsId": "jm-5540212315",
+    "firstName": "Henning",
+    "lastName": "Richter",
+    "email": "dianarichterle81@gmail.com",
+    "gtsRoles": [],
+    "grade": 7
+  },
+  {
+    "gtsId": "jm-5540212595",
+    "firstName": "Liesbeth Marlene Resi",
+    "lastName": "Richter",
+    "email": "postalternative@hotmail.de",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540212257",
+    "firstName": "Eda",
+    "lastName": "Riedel",
+    "email": "Is_bel@web.de",
+    "gtsRoles": [],
+    "grade": 7
+  },
+  {
+    "gtsId": "jm-5540212485",
+    "firstName": "Hanna",
+    "lastName": "Riedel",
+    "email": "s-riedel.hanna@jm.de",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540240982",
+    "firstName": "Lara",
+    "lastName": "Rieger",
+    "email": "gta@jm.lernsax.de",
+    "gtsRoles": [
+      "courseInstructor"
+    ],
+    "grade": 0
+  },
+  {
+    "gtsId": "jm-5540212152",
+    "firstName": "Jannes",
+    "lastName": "Rieprecht",
+    "email": "s-rieprecht.jannes@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 8
+  },
+  {
+    "gtsId": "jm-5540212344",
+    "firstName": "Timo",
+    "lastName": "Rieprecht",
+    "email": "s-rieprecht.timo@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 6
+  },
+  {
+    "gtsId": "jm-5540212258",
+    "firstName": "David",
+    "lastName": "Rinn Estanqueiro Rocha",
+    "email": "connirinn@gmail.com",
+    "gtsRoles": [],
+    "grade": 7
+  },
+  {
+    "gtsId": "jm-5540212430",
+    "firstName": "Johannes",
+    "lastName": "Rittmann",
+    "email": "s-rittmann.johannes@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 6
+  },
+  {
+    "gtsId": "jm-5540212234",
+    "firstName": "Matteo",
+    "lastName": "Rohloff",
+    "email": null,
+    "gtsRoles": [],
+    "grade": 7
+  },
+  {
+    "gtsId": "jm-5540249001",
+    "firstName": "Elina",
+    "lastName": "Romeyke",
+    "email": null,
+    "gtsRoles": [],
+    "grade": 9
+  },
+  {
+    "gtsId": "jm-5540212654",
+    "firstName": "Lea",
+    "lastName": "Rosenow",
+    "email": null,
+    "gtsRoles": [
+      "courseInstructor"
+    ],
+    "grade": 0
+  },
+  {
+    "gtsId": "jm-5540212259",
+    "firstName": "Fritzi",
+    "lastName": "Rost",
+    "email": "s-rost.fritzi@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 7
+  },
+  {
+    "gtsId": "jm-5540212205",
+    "firstName": "Florian",
+    "lastName": "Roterberg",
+    "email": "sonne275@hotmail.com",
+    "gtsRoles": [],
+    "grade": 8
+  },
+  {
+    "gtsId": "jm-5540212370",
+    "firstName": "Luca",
+    "lastName": "Saalmann",
+    "email": "saali78@web.de",
+    "gtsRoles": [],
+    "grade": 6
+  },
+  {
+    "gtsId": "jm-5540212097",
+    "firstName": "Pauline",
+    "lastName": "Sacher",
+    "email": "s-sacher.pauline@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 9
+  },
+  {
+    "gtsId": "jm-5540212316",
+    "firstName": "Gustav Florentin",
+    "lastName": "Sachse",
+    "email": "saju76@icloud.com",
+    "gtsRoles": [],
+    "grade": 7
+  },
+  {
+    "gtsId": "jm-5540212177",
+    "firstName": "Clara",
+    "lastName": "Sachtleben",
+    "email": "s-sachtleben.clara@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 8
+  },
+  {
+    "gtsId": "jm-5540210387",
+    "firstName": "Maria Eugenia",
+    "lastName": "Samaniego",
+    "email": "samaniego@jm.lernsax.de",
+    "gtsRoles": [
+      "admin",
+      "courseInstructor"
+    ],
+    "grade": 0
+  },
+  {
+    "gtsId": "jm-5540212510",
+    "firstName": "Clara Luise",
+    "lastName": "Sandmann",
+    "email": "s-sandmann.clara@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540212023",
+    "firstName": "Tara",
+    "lastName": "Sattler",
+    "email": "tara.sattler123@gmail.com",
+    "gtsRoles": [],
+    "grade": 9
+  },
+  {
+    "gtsId": "jm-5540212206",
+    "firstName": "Jonathan",
+    "lastName": "Sauer",
+    "email": "s-sauer.jonathan@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 8
+  },
+  {
+    "gtsId": "jm-5540212345",
+    "firstName": "Clara",
+    "lastName": "Saupe",
+    "email": "s-saupe.clara@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 6
+  },
+  {
+    "gtsId": "jm-5540212431",
+    "firstName": "Lotta",
+    "lastName": "Saupe",
+    "email": "s-saupe.lotta@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 6
+  },
+  {
+    "gtsId": "jm-5540212400",
+    "firstName": "Tilman",
+    "lastName": "Schaal",
+    "email": "Inesmann1@gmx.de",
+    "gtsRoles": [],
+    "grade": 6
+  },
+  {
+    "gtsId": "jm-5540212371",
+    "firstName": "Lenny Malik",
+    "lastName": "Schaffert",
+    "email": "anja.teichmann1981@web.de",
+    "gtsRoles": [],
+    "grade": 6
+  },
+  {
+    "gtsId": "jm-5540212293",
+    "firstName": "Lina",
+    "lastName": "Schellenberg",
+    "email": "s-schellenberg.lina@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 7
+  },
+  {
+    "gtsId": "jm-5540212317",
+    "firstName": "Allegra",
+    "lastName": "Schemmel",
+    "email": null,
+    "gtsRoles": [],
+    "grade": 7
+  },
+  {
+    "gtsId": "jm-5540212540",
+    "firstName": "Emma",
+    "lastName": "Schepper",
+    "email": "josiri@gmx.de",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540212596",
+    "firstName": "Anna",
+    "lastName": "Scheumann",
+    "email": "scheumann1980@gmx.de",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540212235",
+    "firstName": "Tim",
+    "lastName": "Scheumann",
+    "email": "colt2111@gmx.de",
+    "gtsRoles": [],
+    "grade": 7
+  },
+  {
+    "gtsId": "jm-5540212236",
+    "firstName": "Johannes",
+    "lastName": "Schieferdecker",
+    "email": "e-schieferdecker.johannes@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 7
+  },
+  {
+    "gtsId": "jm-5540212486",
+    "firstName": "Neele",
+    "lastName": "Schierhold",
+    "email": "s-schierhold.neele@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540212511",
+    "firstName": "Alma Margarete Lieselotte",
+    "lastName": "Schilling",
+    "email": "e-schilling.alma@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540212153",
+    "firstName": "Matilda",
+    "lastName": "Schlechtiger",
+    "email": "s-schlechtiger.matilda@jm.lernsax.des",
+    "gtsRoles": [],
+    "grade": 8
+  },
+  {
+    "gtsId": "jm-5540212541",
+    "firstName": "Maximilian",
+    "lastName": "Schlechtiger",
+    "email": "s-schlechtiger.maximilian@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540212565",
+    "firstName": "Malika",
+    "lastName": "Schmidt",
+    "email": "s-schmidt.malika@jm.lernsax.des",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540212512",
+    "firstName": "Marietta Clara",
+    "lastName": "Schmidt",
+    "email": "krueger.schmidt@googlemail.com",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540212154",
+    "firstName": "Moritz",
+    "lastName": "Schmidt",
+    "email": null,
+    "gtsRoles": [],
+    "grade": 8
+  },
+  {
+    "gtsId": "jm-5540212566",
+    "firstName": "Nicolas Lion",
+    "lastName": "Schmidt",
+    "email": "s-schmidt.nicolas@jm.lernsax.dernsax.de",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540210405",
+    "firstName": "Svenja",
+    "lastName": "Schmidt",
+    "email": null,
+    "gtsRoles": [
+      "admin",
+      "courseInstructor"
+    ],
+    "grade": 0
+  },
+  {
+    "gtsId": "jm-5540212049",
+    "firstName": "Luna",
+    "lastName": "Schmidt-Renner",
+    "email": "s-schmidt-renner.luna@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 9
+  },
+  {
+    "gtsId": "jm-5540212098",
+    "firstName": "Frieda",
+    "lastName": "Schneider",
+    "email": "s-schneider.frieda@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 9
+  },
+  {
+    "gtsId": "jm-5540212294",
+    "firstName": "Neela",
+    "lastName": "Schneider",
+    "email": "fourschneider@outlook.de",
+    "gtsRoles": [],
+    "grade": 7
+  },
+  {
+    "gtsId": "jm-5540210388",
+    "firstName": "Sophie",
+    "lastName": "Schneider",
+    "email": null,
+    "gtsRoles": [
+      "admin",
+      "courseInstructor"
+    ],
+    "grade": 0
+  },
+  {
+    "gtsId": "jm-5540212318",
+    "firstName": "Tristan",
+    "lastName": "Schneider",
+    "email": "s-schneider.tristan@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 7
+  },
+  {
+    "gtsId": "jm-5540212155",
+    "firstName": "Arian",
+    "lastName": "Schnepel Medina",
+    "email": "s-schnepel.arian@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 8
+  },
+  {
+    "gtsId": "jm-5540212024",
+    "firstName": "Felix",
+    "lastName": "Schniggenfittigtig",
+    "email": "S-Schniggenfittig.Felix@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 9
+  },
+  {
+    "gtsId": "jm-5540212597",
+    "firstName": "Hugo",
+    "lastName": "Schönberger",
+    "email": "s-schoenberger.hugo@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540212237",
+    "firstName": "Mathilde",
+    "lastName": "Schönherr",
+    "email": "s-schoenherr.mathilde@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 7
+  },
+  {
+    "gtsId": "jm-5540210403",
+    "firstName": "Hendrike",
+    "lastName": "Schoppa",
+    "email": null,
+    "gtsRoles": [
+      "admin",
+      "courseInstructor"
+    ],
+    "grade": 0
+  },
+  {
+    "gtsId": "jm-5540212455",
+    "firstName": "Maximilian Peter",
+    "lastName": "Schreier",
+    "email": "s-schreier.maximilian@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540212207",
+    "firstName": "Jonas",
+    "lastName": "Schreiter",
+    "email": "s-schreiter.jonas@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 8
+  },
+  {
+    "gtsId": "jm-5540212128",
+    "firstName": "Augustin",
+    "lastName": "Schröck",
+    "email": "augustin.schroeck@icloud.com",
+    "gtsRoles": [],
+    "grade": 8
+  },
+  {
+    "gtsId": "jm-5540212319",
+    "firstName": "Arne",
+    "lastName": "Schröder",
+    "email": "sandra.schroeder8@icloud.com",
+    "gtsRoles": [],
+    "grade": 7
+  },
+  {
+    "gtsId": "jm-5540212567",
+    "firstName": "Leni Wilhelmine",
+    "lastName": "Schubert",
+    "email": "lenischubert22@gmail.com",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540212346",
+    "firstName": "Paula",
+    "lastName": "Schubert",
+    "email": "susann1182@gmx.de",
+    "gtsRoles": [],
+    "grade": 6
+  },
+  {
+    "gtsId": "jm-5540212238",
+    "firstName": "Glen",
+    "lastName": "Schuchardt",
+    "email": "glen.schuchardt@mailbox.org",
+    "gtsRoles": [],
+    "grade": 7
+  },
+  {
+    "gtsId": "jm-5540212295",
+    "firstName": "Mathilda",
+    "lastName": "Schuler",
+    "email": "s-schuler.mathilda@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 7
+  },
+  {
+    "gtsId": "jm-5540212129",
+    "firstName": "Maira",
+    "lastName": "Schulle",
+    "email": "s-schulle.maira@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 8
+  },
+  {
+    "gtsId": "jm-5540212130",
+    "firstName": "Lotta",
+    "lastName": "Schulz",
+    "email": "s-schulz.lotta@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 8
+  },
+  {
+    "gtsId": "jm-5540212542",
+    "firstName": "Nicky",
+    "lastName": "Schulz",
+    "email": "sanne-schulz@web.de",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540212432",
+    "firstName": "Dominic",
+    "lastName": "Schumann",
+    "email": "s-schumann.dominic@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 6
+  },
+  {
+    "gtsId": "jm-5540212401",
+    "firstName": "Patrick",
+    "lastName": "Schumann",
+    "email": "s-schumann.patrick@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 6
+  },
+  {
+    "gtsId": "jm-5540212487",
+    "firstName": "Erik",
+    "lastName": "Schunke",
+    "email": "s-schunke.erik@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540212208",
+    "firstName": "Marwin",
+    "lastName": "Schunke",
+    "email": "s-schunke.marwin@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 8
+  },
+  {
+    "gtsId": "jm-5540210389",
+    "firstName": "Anja",
+    "lastName": "Schuster",
+    "email": "schuster@jm.lernsax.de",
+    "gtsRoles": [
+      "admin",
+      "courseInstructor",
+      "schoolAdmin"
+    ],
+    "grade": 0
+  },
+  {
+    "gtsId": "jm-5540212372",
+    "firstName": "Natalie",
+    "lastName": "Schuster",
+    "email": "kathrin.schuster@hotmail.com",
+    "gtsRoles": [],
+    "grade": 6
+  },
+  {
+    "gtsId": "jm-5540210390",
+    "firstName": "Christoph",
+    "lastName": "Schüttler",
+    "email": null,
+    "gtsRoles": [
+      "admin",
+      "courseInstructor"
+    ],
+    "grade": 0
+  },
+  {
+    "gtsId": "jm-5540212025",
+    "firstName": "Frieda Sophie Arwen",
+    "lastName": "Schütze",
+    "email": "s-schuetze.frieda@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 9
+  },
+  {
+    "gtsId": "jm-5540212513",
+    "firstName": "Johann",
+    "lastName": "Schwarz",
+    "email": "s-schwarz.johann@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540212026",
+    "firstName": "Johann Paul",
+    "lastName": "Sebastian",
+    "email": "S-Sebastian.Paul@JM.lernsax.de",
+    "gtsRoles": [],
+    "grade": 9
+  },
+  {
+    "gtsId": "jm-5540236882",
+    "firstName": "Alexsandre",
+    "lastName": "Sebiskveradze",
+    "email": null,
+    "gtsRoles": [],
+    "grade": 7
+  },
+  {
+    "gtsId": "jm-5540236883",
+    "firstName": "Nini",
+    "lastName": "Sebiskveradze",
+    "email": null,
+    "gtsRoles": [],
+    "grade": 7
+  },
+  {
+    "gtsId": "jm-5540212209",
+    "firstName": "Emma",
+    "lastName": "Seiler",
+    "email": "s-seiler.emma@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 8
+  },
+  {
+    "gtsId": "jm-5540212099",
+    "firstName": "Martha",
+    "lastName": "Selle",
+    "email": "martha@gudrun-selle.de",
+    "gtsRoles": [],
+    "grade": 9
+  },
+  {
+    "gtsId": "jm-5540212210",
+    "firstName": "Ben",
+    "lastName": "Sennewald",
+    "email": "s-sennewald.ben@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 8
+  },
+  {
+    "gtsId": "jm-5540212074",
+    "firstName": "Marat",
+    "lastName": "Sharafutdinov",
+    "email": null,
+    "gtsRoles": [],
+    "grade": 9
+  },
+  {
+    "gtsId": "jm-5540212100",
+    "firstName": "Romy",
+    "lastName": "Sieber",
+    "email": "s-sieber.romy@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 9
+  },
+  {
+    "gtsId": "jm-5540212075",
+    "firstName": "Erik",
+    "lastName": "Siebert",
+    "email": "mampa.ingubine@gmail.com",
+    "gtsRoles": [],
+    "grade": 9
+  },
+  {
+    "gtsId": "jm-5540212433",
+    "firstName": "Paul",
+    "lastName": "Siebert",
+    "email": "Stephanie_siebert1@gmx.net",
+    "gtsRoles": [],
+    "grade": 6
+  },
+  {
+    "gtsId": "jm-5540212076",
+    "firstName": "Rosalie",
+    "lastName": "Sierra Martinez",
+    "email": "rosalie.sierra10@gmail.com",
+    "gtsRoles": [],
+    "grade": 9
+  },
+  {
+    "gtsId": "jm-5540212456",
+    "firstName": "Magda",
+    "lastName": "Singer",
+    "email": "wockesinger@yahoo.de",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540212101",
+    "firstName": "Navkiran",
+    "lastName": "Singh",
+    "email": "s-singh.navkiran@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 9
+  },
+  {
+    "gtsId": "jm-5540212178",
+    "firstName": "Linus",
+    "lastName": "Six",
+    "email": "s-six.linus@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 8
+  },
+  {
+    "gtsId": "jm-5540212568",
+    "firstName": "Konstantin",
+    "lastName": "Sommer",
+    "email": "s-sommer.konstantin@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540212260",
+    "firstName": "Paul",
+    "lastName": "Sommer",
+    "email": "s-sommer.paul@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 7
+  },
+  {
+    "gtsId": "jm-5540212179",
+    "firstName": "Sanya",
+    "lastName": "Sommer",
+    "email": "s-sommer.sanya@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 8
+  },
+  {
+    "gtsId": "jm-5540212102",
+    "firstName": "Fenja",
+    "lastName": "Sommerfeld",
+    "email": "s-sommerfeld.fenja@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 9
+  },
+  {
+    "gtsId": "jm-5540212514",
+    "firstName": "Reik",
+    "lastName": "Sommerfeld",
+    "email": "s-sommerfeld.reik@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540212320",
+    "firstName": "Jonathan",
+    "lastName": "Sommerweiß",
+    "email": "s-sommerweiss.jonathan@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 7
+  },
+  {
+    "gtsId": "jm-5540212239",
+    "firstName": "Eric",
+    "lastName": "Sonntag",
+    "email": "s-sonntag.eric@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 7
+  },
+  {
+    "gtsId": "jm-5540212131",
+    "firstName": "Isabel",
+    "lastName": "Sonntag",
+    "email": "s-sonntag.isabel@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 8
+  },
+  {
+    "gtsId": "jm-5540212261",
+    "firstName": "Fatim",
+    "lastName": "Soumah",
+    "email": "fatim2709@gmail.com",
+    "gtsRoles": [],
+    "grade": 7
+  },
+  {
+    "gtsId": "jm-5540212262",
+    "firstName": "Ibrahim",
+    "lastName": "Soumah",
+    "email": "fatim2709@gmail.com",
+    "gtsRoles": [],
+    "grade": 7
+  },
+  {
+    "gtsId": "jm-5540212180",
+    "firstName": "Amelie",
+    "lastName": "Spoer",
+    "email": "s-spoer.amelie@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 8
+  },
+  {
+    "gtsId": "jm-5540212321",
+    "firstName": "David",
+    "lastName": "Spross",
+    "email": "david@spross.de",
+    "gtsRoles": [],
+    "grade": 7
+  },
+  {
+    "gtsId": "jm-5540212027",
+    "firstName": "Julius",
+    "lastName": "Spross",
+    "email": "julius@spross.de",
+    "gtsRoles": [],
+    "grade": 9
+  },
+  {
+    "gtsId": "jm-5540212347",
+    "firstName": "Katharina",
+    "lastName": "Sroka",
+    "email": "kristin.vierig@gmx.de",
+    "gtsRoles": [],
+    "grade": 6
+  },
+  {
+    "gtsId": "jm-5540212543",
+    "firstName": "Emilia",
+    "lastName": "Stader",
+    "email": "s-stader.emilia@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540212240",
+    "firstName": "Paul",
+    "lastName": "Städter",
+    "email": "paulstaedter2011@gmail.com",
+    "gtsRoles": [],
+    "grade": 7
+  },
+  {
+    "gtsId": "jm-5540212103",
+    "firstName": "Nils-Erik",
+    "lastName": "Starke",
+    "email": "s-starke.nils-erik@jm.lernsax",
+    "gtsRoles": [],
+    "grade": 9
+  },
+  {
+    "gtsId": "jm-5540212598",
+    "firstName": "Isabella Elena Jette",
+    "lastName": "Stefan",
+    "email": "e-stefan.isabella@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540236879",
+    "firstName": "Mariia ",
+    "lastName": "Stefanchyshena",
+    "email": "s-stefanchyshena.mariia@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 9
+  },
+  {
+    "gtsId": "jm-5540212488",
+    "firstName": "Henrietta Lisbeth",
+    "lastName": "Steinhorst",
+    "email": "e-steinhorst.henrietta@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540212489",
+    "firstName": "Gabriel",
+    "lastName": "Stenzel",
+    "email": "s-stenzel-gabriel@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540212077",
+    "firstName": "Leopold",
+    "lastName": "Stenzel",
+    "email": "S-stenzel.leopold@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 9
+  },
+  {
+    "gtsId": "jm-5540212156",
+    "firstName": "William",
+    "lastName": "Stenzel",
+    "email": "s-stenzel.william@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 8
+  },
+  {
+    "gtsId": "jm-5540212599",
+    "firstName": "Franz",
+    "lastName": "Stiehl",
+    "email": "cathie32@gmx.de",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540212157",
+    "firstName": "Annalena",
+    "lastName": "Stoepel",
+    "email": "stoepelchen@t-online.de",
+    "gtsRoles": [],
+    "grade": 8
+  },
+  {
+    "gtsId": "jm-5540212348",
+    "firstName": "Emilia",
+    "lastName": "Stoepel",
+    "email": "stoepelchen@mein.gmx",
+    "gtsRoles": [],
+    "grade": 6
+  },
+  {
+    "gtsId": "jm-5540210373",
+    "firstName": "Justine",
+    "lastName": "Storim",
+    "email": "storim@jm.lernsax.de",
+    "gtsRoles": [
+      "admin",
+      "courseInstructor"
+    ],
+    "grade": 0
+  },
+  {
+    "gtsId": "jm-5540212181",
+    "firstName": "Joel",
+    "lastName": "Strauch",
+    "email": "s-strauch.joel@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 8
+  },
+  {
+    "gtsId": "jm-5540210391",
+    "firstName": "Elisabeth",
+    "lastName": "Strauß",
+    "email": null,
+    "gtsRoles": [
+      "courseInstructor"
+    ],
+    "grade": 0
+  },
+  {
+    "gtsId": "jm-5540212028",
+    "firstName": "Karl",
+    "lastName": "Strietzel",
+    "email": "s-strietzel.karl@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 9
+  },
+  {
+    "gtsId": "jm-5540212373",
+    "firstName": "Paul",
+    "lastName": "Strietzel",
+    "email": "s-strietzel.paul@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 6
+  },
+  {
+    "gtsId": "jm-5540212544",
+    "firstName": "Elena",
+    "lastName": "Ströer",
+    "email": null,
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540210392",
+    "firstName": "Ronja",
+    "lastName": "Strothmann",
+    "email": null,
+    "gtsRoles": [
+      "courseInstructor"
+    ],
+    "grade": 0
+  },
+  {
+    "gtsId": "jm-5540212263",
+    "firstName": "Greta",
+    "lastName": "Stübe",
+    "email": "s-stuebe.greta@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 7
+  },
+  {
+    "gtsId": "jm-5540212264",
+    "firstName": "Helene",
+    "lastName": "Sturm",
+    "email": "s-sturm.helene@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 7
+  },
+  {
+    "gtsId": "jm-5540212402",
+    "firstName": "Milena",
+    "lastName": "Sureck",
+    "email": "s-sureck.milena@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 6
+  },
+  {
+    "gtsId": "jm-5540212104",
+    "firstName": "Emma",
+    "lastName": "Swoboda",
+    "email": "s-swoboda.emma@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 9
+  },
+  {
+    "gtsId": "jm-5540212322",
+    "firstName": "Franz",
+    "lastName": "Swoboda",
+    "email": "s-swoboda.franz@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 7
+  },
+  {
+    "gtsId": "jm-5540212403",
+    "firstName": "János Marc",
+    "lastName": "Szabó",
+    "email": "s-szabo.janos@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 6
+  },
+  {
+    "gtsId": "jm-5540212211",
+    "firstName": "Marlene",
+    "lastName": "Szepat",
+    "email": "s-szepat.marlene@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 8
+  },
+  {
+    "gtsId": "jm-5540212265",
+    "firstName": "Matilda",
+    "lastName": "Tauscher",
+    "email": "s-tauscher.matilda@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 7
+  },
+  {
+    "gtsId": "jm-5540212515",
+    "firstName": "Ian Noah",
+    "lastName": "Teichmann",
+    "email": "saskia1991.teichmann@web.de",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540247613",
+    "firstName": "Claudia",
+    "lastName": "Telschow",
+    "email": null,
+    "gtsRoles": [
+      "admin",
+      "courseInstructor"
+    ],
+    "grade": 0
+  },
+  {
+    "gtsId": "jm-5540249000",
+    "firstName": "Linda",
+    "lastName": "Theumer",
+    "email": "Silketheumer@gmx.de",
+    "gtsRoles": [],
+    "grade": 8
+  },
+  {
+    "gtsId": "jm-5540212105",
+    "firstName": "Henriette",
+    "lastName": "Thiel",
+    "email": "s-thiel.henriette@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 9
+  },
+  {
+    "gtsId": "jm-5540210393",
+    "firstName": "Franzi",
+    "lastName": "Thomas",
+    "email": "thomas@jm.lernsax.de",
+    "gtsRoles": [
+      "admin",
+      "courseInstructor"
+    ],
+    "grade": 0
+  },
+  {
+    "gtsId": "jm-5540212374",
+    "firstName": "Johanna",
+    "lastName": "Thomas",
+    "email": "t.annett@gmx.net",
+    "gtsRoles": [],
+    "grade": 6
+  },
+  {
+    "gtsId": "jm-5540212241",
+    "firstName": "Jule",
+    "lastName": "Thomßen",
+    "email": "s-thomssen.jule@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 7
+  },
+  {
+    "gtsId": "jm-5540212404",
+    "firstName": "Bastian",
+    "lastName": "Thurm",
+    "email": "s-thurm.bastian@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 6
+  },
+  {
+    "gtsId": "jm-5540212569",
+    "firstName": "Pepe",
+    "lastName": "Tiebe",
+    "email": "s-tiebe.pepe@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540212182",
+    "firstName": "Pit",
+    "lastName": "Tiebe",
+    "email": "pitt.tiebe2010@gmail.com",
+    "gtsRoles": [],
+    "grade": 8
+  },
+  {
+    "gtsId": "jm-5540212405",
+    "firstName": "Paul",
+    "lastName": "Törpe",
+    "email": "Nicole.Toerpe@web.de",
+    "gtsRoles": [],
+    "grade": 6
+  },
+  {
+    "gtsId": "jm-5540212050",
+    "firstName": "Tina-Sophia",
+    "lastName": "Tradler",
+    "email": "s-tradler.tina-sophia@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 9
+  },
+  {
+    "gtsId": "jm-5540212655",
+    "firstName": "Paul",
+    "lastName": "Trettner",
+    "email": null,
+    "gtsRoles": [
+      "courseInstructor"
+    ],
+    "grade": 0
+  },
+  {
+    "gtsId": "jm-5540212516",
+    "firstName": "Julian",
+    "lastName": "Tschöpe",
+    "email": "e-tschoepe.julian@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540212051",
+    "firstName": "Kim",
+    "lastName": "Türschmann",
+    "email": "s-tuerschmann.kim@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 9
+  },
+  {
+    "gtsId": "jm-5540212029",
+    "firstName": "Alisha",
+    "lastName": "Tutmarc",
+    "email": "s-tutmarc.alisha@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 9
+  },
+  {
+    "gtsId": "jm-5540212570",
+    "firstName": "Laura Joy",
+    "lastName": "Tutmarc",
+    "email": "s-tutmarc.laura@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540212158",
+    "firstName": "Juna",
+    "lastName": "Uhlig",
+    "email": "s-uhlig.juna@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 8
+  },
+  {
+    "gtsId": "jm-5540210395",
+    "firstName": "Nadja",
+    "lastName": "Uhlmann",
+    "email": null,
+    "gtsRoles": [
+      "admin",
+      "courseInstructor"
+    ],
+    "grade": 0
+  },
+  {
+    "gtsId": "jm-5540212212",
+    "firstName": "Sina",
+    "lastName": "Unger",
+    "email": "st_ung@gmx.de",
+    "gtsRoles": [],
+    "grade": 8
+  },
+  {
+    "gtsId": "jm-5540212659",
+    "firstName": "Atte",
+    "lastName": "Väisänen",
+    "email": "gta@jm.lernsax.de",
+    "gtsRoles": [
+      "courseInstructor"
+    ],
+    "grade": 0
+  },
+  {
+    "gtsId": "jm-5540212434",
+    "firstName": "Janne Emanuel",
+    "lastName": "Veil",
+    "email": "claudiaberge98@gmail.com",
+    "gtsRoles": [],
+    "grade": 6
+  },
+  {
+    "gtsId": "jm-5540212323",
+    "firstName": "Emma Claribel",
+    "lastName": "Vespermann",
+    "email": "s-vespermann.emma@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 7
+  },
+  {
+    "gtsId": "jm-5540212490",
+    "firstName": "Sophie Marie",
+    "lastName": "Vespermann",
+    "email": "s-vespermann.sophie@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540212406",
+    "firstName": "Edgar",
+    "lastName": "Vogel",
+    "email": "s-vogel.edgar@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 6
+  },
+  {
+    "gtsId": "jm-5540212242",
+    "firstName": "Frida",
+    "lastName": "Vogel",
+    "email": "fridavogel2011@gmail.com",
+    "gtsRoles": [],
+    "grade": 7
+  },
+  {
+    "gtsId": "jm-5540212159",
+    "firstName": "Johanna",
+    "lastName": "Vogel",
+    "email": "s-vogel.johanna@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 8
+  },
+  {
+    "gtsId": "jm-5540212106",
+    "firstName": "Louis",
+    "lastName": "Vogel",
+    "email": "s-vogel.louis@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 9
+  },
+  {
+    "gtsId": "jm-5540210400",
+    "firstName": "Sarah",
+    "lastName": "Vogel",
+    "email": "sa_vogel@web.de",
+    "gtsRoles": [
+      "admin",
+      "courseInstructor"
+    ],
+    "grade": 1
+  },
+  {
+    "gtsId": "jm-5540212078",
+    "firstName": "Tim",
+    "lastName": "Völker",
+    "email": "s-voelker.tim@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 9
+  },
+  {
+    "gtsId": "jm-5540212183",
+    "firstName": "Viktoria",
+    "lastName": "Volkmer",
+    "email": "s-volkmer.viktoria@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 8
+  },
+  {
+    "gtsId": "jm-5540212266",
+    "firstName": "Carl Friedrichic",
+    "lastName": "vom Stein",
+    "email": "sophie.vom.stein@hotmail.de",
+    "gtsRoles": [],
+    "grade": 7
+  },
+  {
+    "gtsId": "jm-5540212349",
+    "firstName": "Theresa",
+    "lastName": "vom Stein",
+    "email": "sophie.vom.stein@hotmail.de.de",
+    "gtsRoles": [],
+    "grade": 6
+  },
+  {
+    "gtsId": "jm-5540212213",
+    "firstName": "Tom",
+    "lastName": "Vulpius",
+    "email": "tomvulpius@gmail.com",
+    "gtsRoles": [],
+    "grade": 8
+  },
+  {
+    "gtsId": "jm-5540212184",
+    "firstName": "Emma",
+    "lastName": "Wadewitz",
+    "email": "s-wadewitz.emma@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 8
+  },
+  {
+    "gtsId": "jm-5540212457",
+    "firstName": "Greta",
+    "lastName": "Wagner",
+    "email": "felix.wagner@fhwg.de",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540212458",
+    "firstName": "Hector",
+    "lastName": "Wagner",
+    "email": "e-wagner.hector@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540212517",
+    "firstName": "Jurek Johannes",
+    "lastName": "Wagner",
+    "email": "s-wagner.jurek@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540212185",
+    "firstName": "Mila",
+    "lastName": "Wagner",
+    "email": "s-wagner.mila@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 8
+  },
+  {
+    "gtsId": "jm-5540212350",
+    "firstName": "Pauline",
+    "lastName": "Walda",
+    "email": "s-walda.pauline@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 6
+  },
+  {
+    "gtsId": "jm-5540212267",
+    "firstName": "Smilla",
+    "lastName": "Walde",
+    "email": "anne.walde@posteo.de",
+    "gtsRoles": [],
+    "grade": 7
+  },
+  {
+    "gtsId": "jm-5540212375",
+    "firstName": "Clara",
+    "lastName": "Walkhoefer",
+    "email": "s-walkhoefer.clara@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 6
+  },
+  {
+    "gtsId": "jm-5540212376",
+    "firstName": "Elise",
+    "lastName": "Wauer",
+    "email": "s-wauer.elise@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 6
+  },
+  {
+    "gtsId": "jm-5540212052",
+    "firstName": "Emilia",
+    "lastName": "Weck",
+    "email": "s-weck.emilia@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 9
+  },
+  {
+    "gtsId": "jm-5540212351",
+    "firstName": "Melina",
+    "lastName": "Weck",
+    "email": "s-weck.melina@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 6
+  },
+  {
+    "gtsId": "jm-5540212107",
+    "firstName": "Carl",
+    "lastName": "Wegener",
+    "email": "sylkeschwartz@gmx.de",
+    "gtsRoles": [],
+    "grade": 9
+  },
+  {
+    "gtsId": "jm-5540212079",
+    "firstName": "Amélie Luise",
+    "lastName": "Wehlmann",
+    "email": null,
+    "gtsRoles": [],
+    "grade": 9
+  },
+  {
+    "gtsId": "jm-5540212160",
+    "firstName": "Helen",
+    "lastName": "Wehr",
+    "email": "e-wehr.helen@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 8
+  },
+  {
+    "gtsId": "jm-5540212377",
+    "firstName": "Julia",
+    "lastName": "Weise",
+    "email": "s-weise.julia@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 6
+  },
+  {
+    "gtsId": "jm-5540212214",
+    "firstName": "Martha",
+    "lastName": "Weise",
+    "email": "s-weise.martha@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 8
+  },
+  {
+    "gtsId": "jm-5540212132",
+    "firstName": "Emma",
+    "lastName": "Weiß",
+    "email": "janagoux@gmail.com",
+    "gtsRoles": [],
+    "grade": 8
+  },
+  {
+    "gtsId": "jm-5540212459",
+    "firstName": "Katalin",
+    "lastName": "Wermes",
+    "email": null,
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540212186",
+    "firstName": "Eric",
+    "lastName": "Werner",
+    "email": "s-werner.eric@jm.lernax.de",
+    "gtsRoles": [],
+    "grade": 8
+  },
+  {
+    "gtsId": "jm-5540210396",
+    "firstName": "Peter",
+    "lastName": "Werner",
+    "email": null,
+    "gtsRoles": [
+      "admin",
+      "courseInstructor"
+    ],
+    "grade": 0
+  },
+  {
+    "gtsId": "jm-5540212518",
+    "firstName": "Tarik",
+    "lastName": "Werner",
+    "email": "e-werner.tarik@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540212296",
+    "firstName": "Meena",
+    "lastName": "Westphal",
+    "email": "s-westphal.meena@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 7
+  },
+  {
+    "gtsId": "jm-5540212080",
+    "firstName": "Henry",
+    "lastName": "Westphalen",
+    "email": "s-westphalen.henry@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 9
+  },
+  {
+    "gtsId": "jm-5540212600",
+    "firstName": "Phil",
+    "lastName": "Westphalen",
+    "email": "s-westphalen.phil@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540212268",
+    "firstName": "Elisa",
+    "lastName": "Weyer",
+    "email": "s-weyer.elisa@jm.lernnsax.de.",
+    "gtsRoles": [],
+    "grade": 7
+  },
+  {
+    "gtsId": "jm-5540212030",
+    "firstName": "Lilli",
+    "lastName": "Weyer",
+    "email": "s-weyer.lilli@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 9
+  },
+  {
+    "gtsId": "jm-5540210397",
+    "firstName": "Maxi",
+    "lastName": "Weyer",
+    "email": null,
+    "gtsRoles": [
+      "admin",
+      "courseInstructor"
+    ],
+    "grade": 0
+  },
+  {
+    "gtsId": "jm-5540212215",
+    "firstName": "Kiara",
+    "lastName": "Widera",
+    "email": null,
+    "gtsRoles": [],
+    "grade": 8
+  },
+  {
+    "gtsId": "jm-5540212545",
+    "firstName": "Charlotte",
+    "lastName": "Wiechert",
+    "email": "s-wiechert.charlotte@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540212571",
+    "firstName": "Anna",
+    "lastName": "Wiegner",
+    "email": "s-wiegner.anna@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540212031",
+    "firstName": "Frida",
+    "lastName": "Witte",
+    "email": "frida.witte0105@gmx.de",
+    "gtsRoles": [],
+    "grade": 9
+  },
+  {
+    "gtsId": "jm-5540212269",
+    "firstName": "Fritz",
+    "lastName": "Witte",
+    "email": "familie@n-witte.de",
+    "gtsRoles": [],
+    "grade": 7
+  },
+  {
+    "gtsId": "jm-5540212460",
+    "firstName": "Eva Jana",
+    "lastName": "Wittek",
+    "email": "s-wittek.eva@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540212053",
+    "firstName": "Felicitas",
+    "lastName": "Woggon",
+    "email": "s-woggon.felicitas@jm.lernsax.des",
+    "gtsRoles": [],
+    "grade": 9
+  },
+  {
+    "gtsId": "jm-5540212270",
+    "firstName": "Annika",
+    "lastName": "Wolf",
+    "email": "s-wolf.annika@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 7
+  },
+  {
+    "gtsId": "jm-5540212461",
+    "firstName": "Marlen",
+    "lastName": "Wolf",
+    "email": "s-wolf.marlen@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540212297",
+    "firstName": "Karl",
+    "lastName": "Wolfram",
+    "email": "kai.wolfram@posteo.de",
+    "gtsRoles": [],
+    "grade": 7
+  },
+  {
+    "gtsId": "jm-5540212352",
+    "firstName": "Kurt",
+    "lastName": "Wolfram",
+    "email": "kaeptnslow@posteo.de",
+    "gtsRoles": [],
+    "grade": 6
+  },
+  {
+    "gtsId": "jm-5540212243",
+    "firstName": "Björn",
+    "lastName": "Worch",
+    "email": "n.schuhmacher@gmx.de",
+    "gtsRoles": [],
+    "grade": 7
+  },
+  {
+    "gtsId": "jm-5540212133",
+    "firstName": "Laura",
+    "lastName": "Wunderlich",
+    "email": null,
+    "gtsRoles": [],
+    "grade": 8
+  },
+  {
+    "gtsId": "jm-5540212187",
+    "firstName": "Paul",
+    "lastName": "Wünsch",
+    "email": null,
+    "gtsRoles": [],
+    "grade": 8
+  },
+  {
+    "gtsId": "jm-5540212054",
+    "firstName": "Nele",
+    "lastName": "Wuthenow",
+    "email": "nele@wuthenow.de",
+    "gtsRoles": [],
+    "grade": 9
+  },
+  {
+    "gtsId": "jm-5540241400",
+    "firstName": "Yehor",
+    "lastName": "Zabolotnyi",
+    "email": null,
+    "gtsRoles": [],
+    "grade": 7
+  },
+  {
+    "gtsId": "jm-5540212601",
+    "firstName": "Ayushmaan",
+    "lastName": "ZagerZager",
+    "email": "s-zager.ayushmaan@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540212378",
+    "firstName": "Youssouph",
+    "lastName": "Zehreis",
+    "email": "s-zehreis.youssouph@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 6
+  },
+  {
+    "gtsId": "jm-5540212324",
+    "firstName": "Vanessa",
+    "lastName": "Zermeno",
+    "email": "s-zermeno.vanessa@jm.de",
+    "gtsRoles": [],
+    "grade": 7
+  },
+  {
+    "gtsId": "jm-5540212462",
+    "firstName": "Mathilda Ingrid",
+    "lastName": "Zimdars",
+    "email": "susanne.zimdars@gmail.com",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540212572",
+    "firstName": "Evelyn Marlies Maria",
+    "lastName": "Zimmer",
+    "email": "s-zimmer.evelyn@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540212081",
+    "firstName": "Leopold",
+    "lastName": "Zimmermann",
+    "email": "Mindofleo1@gmail.com",
+    "gtsRoles": [],
+    "grade": 9
+  },
+  {
+    "gtsId": "jm-5540212573",
+    "firstName": "Aaron",
+    "lastName": "Zschernitz",
+    "email": "s-zschernitz.aaron@jm.lernsax.de",
+    "gtsRoles": [],
+    "grade": 5
+  },
+  {
+    "gtsId": "jm-5540210399",
+    "firstName": "Sabine",
+    "lastName": "Zsilla",
+    "email": null,
+    "gtsRoles": [
+      "courseInstructor"
+    ],
+    "grade": 0
+  }
+]
