@@ -23,7 +23,7 @@ public class JwtFilter extends OncePerRequestFilter {
                                     HttpServletResponse response,
                                     FilterChain filterChain) throws IOException, ServletException {
 
-        if (!request.getRequestURI().startsWith("/auth")) {
+        if (!request.getRequestURI().startsWith("/auth") && !request.getMethod().equals("OPTIONS")) {
             String auth = request.getHeader("Authorization");
             if (auth == null || !auth.startsWith("Bearer ")) {
                 response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Kein Token");

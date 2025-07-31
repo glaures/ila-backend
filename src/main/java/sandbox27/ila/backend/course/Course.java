@@ -31,9 +31,11 @@ public class Course {
     @ElementCollection
     @CollectionTable(name = "course_allowed_grades", joinColumns = @JoinColumn(name = "course_id"))
     @Column(name = "grade")
-    List<Integer> grades  = new ArrayList<>();;
+    List<Integer> grades  = new ArrayList<>();
+    /*
     @ManyToOne
-    User teacher;
+    User courseInstructor;
+     */
     String room;
 
 }

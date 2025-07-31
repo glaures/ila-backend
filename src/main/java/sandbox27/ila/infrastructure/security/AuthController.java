@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
+import sandbox27.ila.backend.user.User;
+import sandbox27.ila.infrastructure.error.ErrorCode;
+import sandbox27.ila.infrastructure.error.ServiceException;
 
 import java.util.Map;
 
@@ -20,6 +23,7 @@ public class AuthController {
 
     private final RestTemplate rest = new RestTemplate();
     private final JwtGenerator jwtGenerator;
+    private final IlaUserMapper userMapper;
 
     @Value("${iserv.client-secret}")
     private String clientSecret;
@@ -29,7 +33,7 @@ public class AuthController {
     private String userInfoUri;
 
     @PostMapping
-    public ResponseEntity<?> exchangeCode(@RequestBody OAuthRequest request) {
+    public ResponseEntity<?> exchangeCode(@RequestBody OAuthRequest request) throws ServiceException {
         // 1. Token anfordern
         MultiValueMap<String, String> tokenRequest = new LinkedMultiValueMap<>();
         tokenRequest.add("grant_type", "authorization_code");
@@ -56,11 +60,10 @@ public class AuthController {
         ResponseEntity<Map> userInfoResponse = rest.exchange(userInfoUri, HttpMethod.GET, userRequest, Map.class);
         Map userInfo = userInfoResponse.getBody();
 
-        String username = (String) userInfo.get("preferred_username");
-        String fullName = (String) userInfo.get("name");
-        String email = (String) userInfo.get("email");
+        User user = userMapper.map(userInfo).
+                orElseThrow(() -> new ServiceException(ErrorCode.UserNotFound));
 
-        String jwt = jwtGenerator.createToken(username, fullName, email);
+        String jwt = jwtGenerator.createToken(user.getId());
 
         return ResponseEntity.ok(Map.of("token", jwt));
 

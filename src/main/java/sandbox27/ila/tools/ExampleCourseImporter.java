@@ -11,6 +11,7 @@ import org.springframework.context.ApplicationStartupAware;
 import org.springframework.context.annotation.Profile;
 import org.springframework.context.event.ContextStartedEvent;
 import org.springframework.context.event.EventListener;
+import org.springframework.core.annotation.Order;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
@@ -19,6 +20,7 @@ import sandbox27.ila.backend.block.BlockRepository;
 import sandbox27.ila.backend.course.*;
 import sandbox27.ila.backend.period.Period;
 import sandbox27.ila.backend.period.PeriodRepository;
+import sandbox27.ila.backend.user.UserRepository;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -32,11 +34,13 @@ import java.util.stream.Collectors;
 @Service
 @Profile("dev")
 @RequiredArgsConstructor
+@Order(5)
 public class ExampleCourseImporter {
 
     final PeriodRepository periodRepository;
     final CourseRepository courseRepository;
     final BlockRepository blockRepository;
+    final UserRepository userRepository;
     final CourseBlockAssignmentRepository courseBlockAssignmentRepository;
     Period periodToImportInto;
 
@@ -64,6 +68,8 @@ public class ExampleCourseImporter {
         course.setName(importedCourse.Kurs);
         course.setPeriod(periodToImportInto);
         course.setDescription(importedCourse.Beschreibung);
+        // course instructor
+
         if (course.getCourseCategories() == null)
             course.setCourseCategories(new HashSet<>());
         Arrays.stream(importedCourse.getKategorien()).forEach(catStr -> course.getCourseCategories().add(CourseCategory.valueOf(catStr)));

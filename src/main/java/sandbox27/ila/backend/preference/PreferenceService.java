@@ -7,7 +7,9 @@ import sandbox27.ila.backend.block.Block;
 import sandbox27.ila.backend.block.BlockRepository;
 import sandbox27.ila.backend.block.BlockService;
 import sandbox27.ila.backend.course.CourseService;
+import sandbox27.ila.backend.user.User;
 import sandbox27.ila.frontend.marshalling.MarshallingConfiguration;
+import sandbox27.ila.infrastructure.security.AuthenticatedUser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +25,8 @@ public class PreferenceService {
     final ModelMapper modelMapper;
 
     @GetMapping("/{blockId}")
-    public PreferencePayload getPreferences(@PathVariable("blockId") Long blockId) {
+    public PreferencePayload getPreferences(@PathVariable("blockId") Long blockId,
+                                            @AuthenticatedUser User authenticatedUser) {
         PreferencePayload payload = new PreferencePayload();
         Block block = blockRepository.getReferenceById(blockId);
         payload.setBlockId(block.getId());
