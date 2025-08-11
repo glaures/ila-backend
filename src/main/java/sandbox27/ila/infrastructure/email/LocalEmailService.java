@@ -11,7 +11,6 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
-import sandbox27.ila.infrastructure.images.CloudinaryService;
 
 import java.io.StringWriter;
 import java.net.URL;
@@ -20,14 +19,13 @@ import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
-@Profile({"dev", "test"})
+@Profile({"development", "test", "dev"})
 public class LocalEmailService implements EmailService {
 
     @Value("${spring.mail.from}")
     String mailFrom;
     final JavaMailSender javaMailSender;
     final Configuration freeMarkerConfiguration;
-    final CloudinaryService cloudinaryService;
 
     public MimeMessage createMimeMessage() {
         return javaMailSender.createMimeMessage();
@@ -59,8 +57,10 @@ public class LocalEmailService implements EmailService {
             messageHelper.addAttachment(fileName, props.getAttachments().get(fileName));
         }
 
+        /*
         String logoImgUrl = cloudinaryService.getImageUrl("logo_png", 120);
         messageHelper.addInline("logo", new URLDataSource(new URL(logoImgUrl)));
+        */
 
         javaMailSender.send(message);
     }
