@@ -179,6 +179,22 @@
   {
     "Wochentag": "Montag",
     "Block": "11:20 - 12:00",
+    "Kurs": "Mittagessen/Hofpause",
+    "Kategorien": [
+      "iLa"
+    ],
+    "Klassen": [
+      "5",
+      "6",
+      "7",
+      "8",
+      "9"
+    ],
+    "Beschreibung": "Auswählen, wo kein Angebot stattfindet."
+  },
+  {
+    "Wochentag": "Montag",
+    "Block": "11:20 - 12:00",
     "Kurs": "PTE Montag",
     "Kategorien": [
       "FuF",
@@ -363,6 +379,22 @@
   {
     "Wochentag": "Montag",
     "Block": "12:00 - 12:40",
+    "Kurs": "Mittagessen/Hofpause",
+    "Kategorien": [
+      "iLa"
+    ],
+    "Klassen": [
+      "5",
+      "6",
+      "7",
+      "8",
+      "9"
+    ],
+    "Beschreibung": "Auswählen, wo kein Angebot stattfindet."
+  },
+  {
+    "Wochentag": "Montag",
+    "Block": "12:00 - 12:40",
     "Kurs": "Streetball",
     "Kategorien": [
       "BuE",
@@ -456,23 +488,6 @@
   {
     "Wochentag": "Dienstag",
     "Block": "11:20 - 12:00",
-    "Kurs": "Fantasiereise",
-    "Kategorien": [
-      "BuE",
-      "iLa"
-    ],
-    "Klassen": [
-      "5",
-      "6",
-      "7",
-      "8",
-      "9"
-    ],
-    "Beschreibung": "In einer entspannten Atmosphäre wollen wir für einen Augenblick dem Alltag entfliehen und uns unsere ganz eigene Welt und Vorstellung von Glück malen. Wir hören gemeinsam Fantasiegeschichten oder schreiben sogar eigene. So kann man den Gedanken einfach mal freien Raum lassen."
-  },
-  {
-    "Wochentag": "Dienstag",
-    "Block": "11:20 - 12:00",
     "Kurs": "Full Body Workout",
     "Kategorien": [
       "BuE",
@@ -529,6 +544,22 @@
       "9"
     ],
     "Beschreibung": "Salsa, Chachacha und mehr"
+  },
+  {
+    "Wochentag": "Dienstag",
+    "Block": "11:20 - 12:00",
+    "Kurs": "Mittagessen/Hofpause",
+    "Kategorien": [
+      "iLa"
+    ],
+    "Klassen": [
+      "5",
+      "6",
+      "7",
+      "8",
+      "9"
+    ],
+    "Beschreibung": "Auswählen, wo kein Angebot stattfindet."
   },
   {
     "Wochentag": "Dienstag",
@@ -689,6 +720,23 @@
   {
     "Wochentag": "Dienstag",
     "Block": "12:00 - 12:40",
+    "Kurs": "Fantasiereise",
+    "Kategorien": [
+      "BuE",
+      "iLa"
+    ],
+    "Klassen": [
+      "5",
+      "6",
+      "7",
+      "8",
+      "9"
+    ],
+    "Beschreibung": "In einer entspannten Atmosphäre wollen wir für einen Augenblick dem Alltag entfliehen und uns unsere ganz eigene Welt und Vorstellung von Glück malen. Wir hören gemeinsam Fantasiegeschichten oder schreiben sogar eigene. So kann man den Gedanken einfach mal freien Raum lassen."
+  },
+  {
+    "Wochentag": "Dienstag",
+    "Block": "12:00 - 12:40",
     "Kurs": "Full Body Workout",
     "Kategorien": [
       "BuE",
@@ -770,6 +818,22 @@
       "9"
     ],
     "Beschreibung": "Du suchst deine mathematischen Grenzen? Vielleicht findest Du sie hier - wir verschieben sie aber auf alle Fälle höher!"
+  },
+  {
+    "Wochentag": "Dienstag",
+    "Block": "12:00 - 12:40",
+    "Kurs": "Mittagessen/Hofpause",
+    "Kategorien": [
+      "iLa"
+    ],
+    "Klassen": [
+      "5",
+      "6",
+      "7",
+      "8",
+      "9"
+    ],
+    "Beschreibung": "Auswählen, wo kein Angebot stattfindet."
   },
   {
     "Wochentag": "Dienstag",
@@ -990,9 +1054,8 @@
   {
     "Wochentag": "Mittwoch",
     "Block": "11:20 - 12:00",
-    "Kurs": "PTE Mittwoch",
+    "Kurs": "Mittagessen/Hofpause",
     "Kategorien": [
-      "FuF",
       "iLa"
     ],
     "Klassen": [
@@ -1002,7 +1065,7 @@
       "8",
       "9"
     ],
-    "Beschreibung": ""
+    "Beschreibung": "Auswählen, wo kein Angebot stattfindet."
   },
   {
     "Wochentag": "Mittwoch",
@@ -1133,6 +1196,22 @@
       "7"
     ],
     "Beschreibung": ""
+  },
+  {
+    "Wochentag": "Mittwoch",
+    "Block": "12:00 - 12:40",
+    "Kurs": "Mittagessen/Hofpause",
+    "Kategorien": [
+      "iLa"
+    ],
+    "Klassen": [
+      "5",
+      "6",
+      "7",
+      "8",
+      "9"
+    ],
+    "Beschreibung": "Auswählen, wo kein Angebot stattfindet."
   },
   {
     "Wochentag": "Donnerstag",
@@ -1315,6 +1394,22 @@
   {
     "Wochentag": "Donnerstag",
     "Block": "11:20 - 12:00",
+    "Kurs": "Mittagessen/Hofpause",
+    "Kategorien": [
+      "iLa"
+    ],
+    "Klassen": [
+      "5",
+      "6",
+      "7",
+      "8",
+      "9"
+    ],
+    "Beschreibung": "Auswählen, wo kein Angebot stattfindet."
+  },
+  {
+    "Wochentag": "Donnerstag",
+    "Block": "11:20 - 12:00",
     "Kurs": "Physik Fördern",
     "Kategorien": [
       "FuF",
@@ -1455,10 +1550,10 @@
       "iLa"
     ],
     "Klassen": [
-      "6",
-      "7"
+      "8",
+      "9"
     ],
-    "Beschreibung": ""
+    "Beschreibung": "Du bekommst Hilfe und zusätzliche Übungen bei Themen, die dir aktuell im Sprachunterricht schwer fallen."
   },
   {
     "Wochentag": "Donnerstag",
@@ -1469,10 +1564,10 @@
       "iLa"
     ],
     "Klassen": [
-      "8",
-      "9"
+      "6",
+      "7"
     ],
-    "Beschreibung": "Du bekommst Hilfe und zusätzliche Übungen bei Themen, die dir aktuell im Sprachunterricht schwer fallen."
+    "Beschreibung": ""
   },
   {
     "Wochentag": "Donnerstag",
@@ -1535,6 +1630,22 @@
       "9"
     ],
     "Beschreibung": ""
+  },
+  {
+    "Wochentag": "Donnerstag",
+    "Block": "12:00 - 12:40",
+    "Kurs": "Mittagessen/Hofpause",
+    "Kategorien": [
+      "iLa"
+    ],
+    "Klassen": [
+      "5",
+      "6",
+      "7",
+      "8",
+      "9"
+    ],
+    "Beschreibung": "Auswählen, wo kein Angebot stattfindet."
   },
   {
     "Wochentag": "Donnerstag",
@@ -1731,6 +1842,22 @@
   {
     "Wochentag": "Freitag",
     "Block": "11:20 - 12:00",
+    "Kurs": "Mittagessen/Hofpause",
+    "Kategorien": [
+      "iLa"
+    ],
+    "Klassen": [
+      "5",
+      "6",
+      "7",
+      "8",
+      "9"
+    ],
+    "Beschreibung": "Auswählen, wo kein Angebot stattfindet."
+  },
+  {
+    "Wochentag": "Freitag",
+    "Block": "11:20 - 12:00",
     "Kurs": "Modern Dance",
     "Kategorien": [
       "BuE",
@@ -1742,23 +1869,6 @@
       "9"
     ],
     "Beschreibung": "Tauche ein in die Welt des Modern Dance. Der Kurs bietet dir die perfekte Gelegenheit, deine Leidenschaft für Tanz zu entfalten und gleichzeitig deine Fitness zu steigern - alle Level willkommen."
-  },
-  {
-    "Wochentag": "Freitag",
-    "Block": "11:20 - 12:00",
-    "Kurs": "PTE Freitag",
-    "Kategorien": [
-      "FuF",
-      "iLa"
-    ],
-    "Klassen": [
-      "5",
-      "6",
-      "7",
-      "8",
-      "9"
-    ],
-    "Beschreibung": ""
   },
   {
     "Wochentag": "Freitag",
@@ -1884,6 +1994,22 @@
       "9"
     ],
     "Beschreibung": "Bedarf, um Grundlagen (auch aus vorangegangenen Schuljahren) aufzugreifen. Dann bist du hier richtig.\nKeine HA-Betreuung!"
+  },
+  {
+    "Wochentag": "Freitag",
+    "Block": "12:00 - 12:40",
+    "Kurs": "Mittagessen/Hofpause",
+    "Kategorien": [
+      "iLa"
+    ],
+    "Klassen": [
+      "5",
+      "6",
+      "7",
+      "8",
+      "9"
+    ],
+    "Beschreibung": "Auswählen, wo kein Angebot stattfindet."
   },
   {
     "Wochentag": "Freitag",

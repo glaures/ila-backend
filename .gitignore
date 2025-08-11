@@ -32,5 +32,6 @@ build/
 ### VS Code ###
 .vscode/
 /src/main/resources/application-dev.properties
+/src/main/resources/application-production.properties
 /docs/UserExport.xlsx
 /docs/~$UserExport.xlsx

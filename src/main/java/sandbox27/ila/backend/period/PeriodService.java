@@ -61,8 +61,8 @@ public class PeriodService {
         throw new ServiceException(ErrorCode.NotImplemented);
     }
 
-    // @Todo: implement
+    @GetMapping("/current")
     public Period getCurrentPeriod() {
-        return periodRepository.findAll().getFirst();
+        return periodRepository.findById(1l).get();
     }
 }

@@ -13,6 +13,8 @@ import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.ModelAndViewContainer;
 import org.springframework.web.server.ResponseStatusException;
 import sandbox27.ila.backend.user.UserRepository;
+import sandbox27.ila.infrastructure.error.ErrorCode;
+import sandbox27.ila.infrastructure.error.ServiceException;
 
 import java.nio.charset.StandardCharsets;
 

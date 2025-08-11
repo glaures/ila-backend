@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.time.DayOfWeek;
+import java.time.Period;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,9 +19,11 @@ public interface CourseRepository extends JpaRepository<Course, Long> {
 
     @Query("select cba.course from CourseBlockAssignment cba " +
             "where cba.block.dayOfWeek=:dayOfWeek " +
-            "and cba.period.id=:periodId " +
+            "and cba.block.period.id=:periodId " +
             "order by cba.block.startTime asc")
     List<Course> findAllByPeriod_IdAndDayOfWeek(long periodId, DayOfWeek dayOfWeek);
+
+    List<Course> findAllByPeriod(Period period);
 
     @Query("select cba.course from CourseBlockAssignment cba " +
             "where cba.block.id=:blockId")
