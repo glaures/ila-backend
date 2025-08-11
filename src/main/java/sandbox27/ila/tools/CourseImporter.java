@@ -2,18 +2,13 @@ package sandbox27.ila.tools;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import jakarta.annotation.PostConstruct;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.ApplicationStartupAware;
 import org.springframework.context.annotation.Profile;
-import org.springframework.context.event.ContextStartedEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.core.annotation.Order;
 import org.springframework.core.io.ClassPathResource;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import sandbox27.ila.backend.block.Block;
 import sandbox27.ila.backend.block.BlockRepository;
@@ -35,7 +30,9 @@ import java.util.stream.Collectors;
 @Profile("dev")
 @RequiredArgsConstructor
 @Order(5)
-public class ExampleCourseImporter {
+public class CourseImporter {
+
+    public static final String PERIOD = "1. Halbjahr 2025/26";
 
     final PeriodRepository periodRepository;
     final CourseRepository courseRepository;
@@ -52,10 +49,9 @@ public class ExampleCourseImporter {
 
     @Transactional
     public void runImport() throws IOException {
-        final String examplePeriod = "2025/2";
-        periodToImportInto = periodRepository.findByName(examplePeriod).orElseGet(() -> periodRepository.save(
+        periodToImportInto = periodRepository.findByName(PERIOD).orElseGet(() -> periodRepository.save(
                 Period.builder()
-                        .name(examplePeriod)
+                        .name(PERIOD)
                         .build()));
         periodRepository.save(periodToImportInto);
         List<ImportedCourseDto> importedCourses = importFromFile();
@@ -65,9 +61,9 @@ public class ExampleCourseImporter {
     @Transactional
     public void storeImportedCourse(ImportedCourseDto importedCourse) {
         Course course = courseRepository.findByName(importedCourse.Kurs).orElse(new Course());
-        course.setName(importedCourse.Kurs);
+        course.setName(importedCourse.Kurs.trim());
         course.setPeriod(periodToImportInto);
-        course.setDescription(importedCourse.Beschreibung);
+        course.setDescription(importedCourse.Beschreibung.replace("'", ""));
         // course instructor
 
         if (course.getCourseCategories() == null)
@@ -90,9 +86,8 @@ public class ExampleCourseImporter {
                         .endTime(ende)
                         .build());
         blockRepository.save(block);
-        CourseBlockAssignment courseBlockAssignment = courseBlockAssignmentRepository.findByPeriodAndBlockAndCourse(periodToImportInto, block, course).orElse(
+        CourseBlockAssignment courseBlockAssignment = courseBlockAssignmentRepository.findByBlockAndCourse(block, course).orElse(
                 CourseBlockAssignment.builder()
-                        .period(periodToImportInto)
                         .block(block)
                         .course(course)
                         .build()
@@ -104,7 +99,9 @@ public class ExampleCourseImporter {
         ObjectMapper objectMapper = new ObjectMapper();
         InputStream inputStream = new ClassPathResource("kursangebote.json").getInputStream();
         return objectMapper.readValue(inputStream, new TypeReference<List<ImportedCourseDto>>() {
-        });
+                }).stream()
+                .filter(c -> c.Kurs != null && (!c.Kurs.contains("Hofpause") && !c.Kurs.contains("Mittagessen")))
+                .collect(Collectors.toList());
     }
 
 }

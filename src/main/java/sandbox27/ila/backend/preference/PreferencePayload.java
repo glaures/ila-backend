@@ -16,6 +16,6 @@ public class PreferencePayload extends BlockDto {
     long blockId;
     boolean pauseSelected;
     List<CourseDto> courses;
-    List<Long> preferences;
+    BlockPreferencesDto preferences;
 
 }

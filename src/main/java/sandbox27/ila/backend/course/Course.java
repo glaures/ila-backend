@@ -37,5 +37,7 @@ public class Course {
     User courseInstructor;
      */
     String room;
+    int minAttendees;
+    int maxAttendees;
 
 }

@@ -15,8 +15,9 @@ public class CourseService {
     final CourseRepository courseRepository;
 
     @GetMapping
-    public List<CourseDto> findAllCoursesForBlock(Long blockId) {
+    public List<CourseDto> findAllCoursesForBlock(Long blockId, int grade) {
         return courseRepository.findAllByBlock_Id(blockId).stream()
+                .filter(course -> course.getGrades().contains(grade))
                 .map(c -> CourseDto.builder()
                         .id(c.getId())
                         .name(c.getName())
