@@ -19,7 +19,6 @@ import java.io.InputStream;
 import java.util.List;
 
 @Service
-@Profile("dev")
 @RequiredArgsConstructor
 @Order(2)
 public class UserImporter {

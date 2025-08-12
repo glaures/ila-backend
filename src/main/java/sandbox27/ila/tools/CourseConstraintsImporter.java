@@ -21,7 +21,6 @@ import java.io.InputStream;
 import java.util.*;
 
 @Service
-@Profile("dev")
 @RequiredArgsConstructor
 @Order(6)
 public class CourseConstraintsImporter {

@@ -27,9 +27,8 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
-@Profile("dev")
 @RequiredArgsConstructor
-@Order(5)
+@Order(1)
 public class CourseImporter {
 
     public static final String PERIOD = "1. Halbjahr 2025/26";
