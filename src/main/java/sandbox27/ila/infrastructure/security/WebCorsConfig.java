@@ -19,8 +19,8 @@ public class WebCorsConfig {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**") // alle Pfade
-                        .allowedOrigins(origin) // dein Nuxt-Frontend
-                        .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
+                        .allowedOriginPatterns(origin, "http://localhost:3000")
+                        .allowedMethods("GET","POST","PUT","PATCH","DELETE","OPTIONS")
                         .allowedHeaders("*") // oder spezifisch: "Authorization", "Content-Type", ...
                         .exposedHeaders("*") // falls du Token oder andere Header zurückgeben willst
                         .allowCredentials(true); // erlaubt Cookies & Auth-Header
