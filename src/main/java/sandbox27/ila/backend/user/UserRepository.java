@@ -9,8 +9,6 @@ import java.util.Optional;
 
 public interface UserRepository extends JpaRepository<User, String> {
 
-    Optional<User> findByGtsId(String gtsId);
-
     List<User> findByEmail(String email);
 
     @Query("SELECT u FROM User u WHERE CONCAT(u.firstName, ' ', u.lastName) = :fullName")

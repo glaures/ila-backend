@@ -22,6 +22,7 @@ import java.util.*;
 
 @Service
 @RequiredArgsConstructor
+@Profile("prod")
 @Order(6)
 public class CourseConstraintsImporter {
 
