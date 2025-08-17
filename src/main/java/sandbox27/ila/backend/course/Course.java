@@ -20,6 +20,7 @@ public class Course {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     long id;
+    String courseId;
     @ManyToOne
     Period period;
     String name;
@@ -37,7 +38,8 @@ public class Course {
     User courseInstructor;
      */
     String room;
-    int minAttendees;
+    int minAttendees = 0;
     int maxAttendees;
+    String instructor;
 
 }

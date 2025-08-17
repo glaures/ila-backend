@@ -21,4 +21,9 @@ public class ImportedCourseDto {
     String[] Klassen;
     @JsonProperty("Beschreibung")
     String Beschreibung;
+    @JsonProperty("KursId")
+    String KursId;
+    int maxAttendees;
+    @JsonProperty("Nachname")
+    String Nachname;
 }
