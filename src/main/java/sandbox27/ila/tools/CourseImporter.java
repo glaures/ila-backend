@@ -28,7 +28,6 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-@Profile("prod")
 @Order(2)
 public class CourseImporter {
 
@@ -62,10 +61,11 @@ public class CourseImporter {
     public void storeImportedCourse(ImportedCourseDto importedCourse) {
         Course course = courseRepository.findByName(importedCourse.Kurs).orElse(new Course());
         course.setName(importedCourse.Kurs.trim());
+        course.setCourseId(importedCourse.KursId.trim());
         course.setPeriod(periodToImportInto);
         course.setDescription(importedCourse.Beschreibung.replace("'", ""));
-        // course instructor
-
+        course.setInstructor(importedCourse.Nachname.trim());
+        course.setMaxAttendees(importedCourse.maxAttendees);
         if (course.getCourseCategories() == null)
             course.setCourseCategories(new HashSet<>());
         Arrays.stream(importedCourse.getKategorien()).forEach(catStr -> course.getCourseCategories().add(CourseCategory.valueOf(catStr)));
