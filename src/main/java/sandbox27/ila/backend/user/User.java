@@ -2,6 +2,7 @@ package sandbox27.ila.backend.user;
 
 import jakarta.persistence.*;
 import lombok.*;
+import sandbox27.ila.infrastructure.security.SecUser;
 
 import java.util.List;
 
@@ -11,21 +12,22 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class User {
+public class User implements SecUser {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    String id;
+    String userName;
     String email;
     String firstName;
     String lastName;
     int grade;
-    @Column(unique = true)
-    String gtsId;
     @ElementCollection(fetch = FetchType.EAGER)
-    @CollectionTable(name = "user_gts_roles", joinColumns = @JoinColumn(name = "user_id"))
-    @Column(name = "gts_role")
+    @CollectionTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"))
+    @Column(name = "role")
     @Enumerated(EnumType.STRING)
-    List<GTSRole> gtsRoles;
+    List<Role> roles;
 
+    @Override
+    public String getId() {
+        return userName;
+    }
 }

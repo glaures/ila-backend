@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
+import sandbox27.ila.backend.user.IlaUserMapper;
 import sandbox27.ila.backend.user.User;
 import sandbox27.ila.infrastructure.error.ErrorCode;
 import sandbox27.ila.infrastructure.error.ServiceException;
@@ -23,7 +24,7 @@ public class AuthController {
 
     private final RestTemplate rest = new RestTemplate();
     private final JwtGenerator jwtGenerator;
-    private final IlaUserMapper userMapper;
+    final SecToLocalUserMapper userMapper;
 
     @Value("${iserv.client-secret}")
     private String clientSecret;
@@ -60,8 +61,8 @@ public class AuthController {
         ResponseEntity<Map> userInfoResponse = rest.exchange(userInfoUri, HttpMethod.GET, userRequest, Map.class);
         Map userInfo = userInfoResponse.getBody();
 
-        User user = userMapper.map(userInfo).
-                orElseThrow(() -> new ServiceException(ErrorCode.UserNotFound));
+        SecUser user = userMapper.map(userInfo).
+                orElseThrow(() -> new ServiceException(ErrorCode.UserNotFound, userInfo.get("name")));
 
         String jwt = jwtGenerator.createToken(user.getId());
 
