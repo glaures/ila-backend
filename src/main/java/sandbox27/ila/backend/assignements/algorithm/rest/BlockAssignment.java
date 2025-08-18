@@ -1,4 +1,4 @@
-package sandbox27.ila.backend.assignements.rest;
+package sandbox27.ila.backend.assignements.algorithm.rest;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

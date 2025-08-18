@@ -1,0 +1,542 @@
+[
+  {
+    "courseId": "0022",
+    "userInternalId": "be91828a-0257-46c0-808d-17225dddc0dc"
+  },
+  {
+    "courseId": "0022",
+    "userInternalId": "a5fa4127-cf0f-4b0c-af31-61d331560be5"
+  },
+  {
+    "courseId": "0009",
+    "userInternalId": "a5fa4127-cf0f-4b0c-af31-61d331560be5"
+  },
+  {
+    "courseId": "0091",
+    "userInternalId": "0c2a4960-2c81-4fbc-87a5-30192c14f269"
+  },
+  {
+    "courseId": "0009",
+    "userInternalId": "45fa56ec-12fc-4e77-965e-a39807e137bb"
+  },
+  {
+    "courseId": "0065",
+    "userInternalId": "e2a66bbf-0919-403c-9ff5-eb7a55291041"
+  },
+  {
+    "courseId": "0065",
+    "userInternalId": "36dd0671-1de0-4ab7-8709-531700384a48"
+  },
+  {
+    "courseId": "0040",
+    "userInternalId": "2c8d4145-f84b-4a6c-93d9-213b9981dffa"
+  },
+  {
+    "courseId": "0042",
+    "userInternalId": "516d9791-f7f7-4a31-a65f-ac220509237f"
+  },
+  {
+    "courseId": "0062",
+    "userInternalId": "ed0522f2-eb58-4f7f-9e5a-f53017ecc69f"
+  },
+  {
+    "courseId": "0022",
+    "userInternalId": "1364eb16-8e64-4d5c-8b96-1be600b1e041"
+  },
+  {
+    "courseId": "0097",
+    "userInternalId": "1364eb16-8e64-4d5c-8b96-1be600b1e041"
+  },
+  {
+    "courseId": "0009",
+    "userInternalId": "1364eb16-8e64-4d5c-8b96-1be600b1e041"
+  },
+  {
+    "courseId": "0027",
+    "userInternalId": "61310914-5be6-4e7b-82eb-b74151f979f8"
+  },
+  {
+    "courseId": "0065",
+    "userInternalId": "defb3386-8016-4aef-a0dc-3614e740caeb"
+  },
+  {
+    "courseId": "0027",
+    "userInternalId": "a3cb4380-9b33-4b1a-b477-8f58a7886aa9"
+  },
+  {
+    "courseId": "0027",
+    "userInternalId": "5d492d97-2e5a-45f4-ba97-4f41b9cffc0d"
+  },
+  {
+    "courseId": "0065",
+    "userInternalId": "3c739ba3-6627-4521-ac38-caf71406f850"
+  },
+  {
+    "courseId": "0042",
+    "userInternalId": "50487d66-5fa5-453f-95ba-ab91c002ccd9"
+  },
+  {
+    "courseId": "0009",
+    "userInternalId": "3c739ba3-6627-4521-ac38-caf71406f850"
+  },
+  {
+    "courseId": "0091",
+    "userInternalId": "331a918c-1a6f-4d39-af11-bde4d9caab25"
+  },
+  {
+    "courseId": "0063",
+    "userInternalId": "398d2126-2580-4db9-8f3f-2fb162ee517f"
+  },
+  {
+    "courseId": "0027",
+    "userInternalId": "81a9101a-6ff4-461f-93af-4c7f2ccfdbea"
+  },
+  {
+    "courseId": "0081",
+    "userInternalId": "543d84af-d616-4081-b1a2-00333640525c"
+  },
+  {
+    "courseId": "0022",
+    "userInternalId": "ed2bafce-e4ec-404a-95ab-77f0b10034d9"
+  },
+  {
+    "courseId": "0027",
+    "userInternalId": "84c7f6e4-0738-4130-899b-32dfe1affc78"
+  },
+  {
+    "courseId": "0010",
+    "userInternalId": "8891e93e-8441-4d9d-af7b-9ec4f880c3c8"
+  },
+  {
+    "courseId": "0081",
+    "userInternalId": "8891e93e-8441-4d9d-af7b-9ec4f880c3c8"
+  },
+  {
+    "courseId": "0091",
+    "userInternalId": "20eb36e8-f56a-49f8-b63f-56beb9dd91c8"
+  },
+  {
+    "courseId": "0065",
+    "userInternalId": "55fc4fb5-60ab-4121-8b70-1fec9e96cbfd"
+  },
+  {
+    "courseId": "0090",
+    "userInternalId": "f34701ca-a9b2-4e68-b10d-f85d2329f373"
+  },
+  {
+    "courseId": "0040",
+    "userInternalId": "0fbb0282-f929-4e92-9101-89e27bcc4671"
+  },
+  {
+    "courseId": "0027",
+    "userInternalId": "f34701ca-a9b2-4e68-b10d-f85d2329f373"
+  },
+  {
+    "courseId": "0027",
+    "userInternalId": "1891dbc8-ed2e-410c-9d8a-a543efd7b271"
+  },
+  {
+    "courseId": "0009",
+    "userInternalId": "441cacaa-c408-4eb4-be01-d1c25e03d217"
+  },
+  {
+    "courseId": "0027",
+    "userInternalId": "8320d2ab-257e-45cd-b9bc-9dda55ebc33f"
+  },
+  {
+    "courseId": "0011",
+    "userInternalId": "36774fb3-ca0e-4065-a46d-76068ef228e8"
+  },
+  {
+    "courseId": "0091",
+    "userInternalId": "420085da-4520-4c0d-8886-513ee34d77b4"
+  },
+  {
+    "courseId": "0022",
+    "userInternalId": "78422780-a750-409f-8919-8e96cc4e8b38"
+  },
+  {
+    "courseId": "0012",
+    "userInternalId": "fcc6f0d2-c5a2-4185-ab2b-12c85fcae5cd"
+  },
+  {
+    "courseId": "0027",
+    "userInternalId": "3c717e4b-fe03-4c8e-89b3-902089da0e4b"
+  },
+  {
+    "courseId": "0089",
+    "userInternalId": "5bd7da0a-15bf-4c22-95c5-4c4dfb4a31cf"
+  },
+  {
+    "courseId": "0009",
+    "userInternalId": "081092ee-1dd8-4ffc-a7bc-f50756f2881f"
+  },
+  {
+    "courseId": "0096",
+    "userInternalId": "86d2b9f8-7e77-4c5c-8c67-a52a4b13a40a"
+  },
+  {
+    "courseId": "0022",
+    "userInternalId": "946e6f23-ced5-4528-95f2-f4b807c8ce58"
+  },
+  {
+    "courseId": "0042",
+    "userInternalId": "a8ada1a8-a385-42d7-b852-8d79c3d55cba"
+  },
+  {
+    "courseId": "0040",
+    "userInternalId": "551749ed-761d-4283-8a29-f261657ae39b"
+  },
+  {
+    "courseId": "0022",
+    "userInternalId": "48885d54-b6ab-458c-9112-11c05e89759d"
+  },
+  {
+    "courseId": "0061",
+    "userInternalId": "b3ca3ee3-2c7d-44ab-9055-283e1fd5ecc5"
+  },
+  {
+    "courseId": "0039",
+    "userInternalId": "8f44f18a-66f3-4449-9363-ec956b9e69f8"
+  },
+  {
+    "courseId": "0040",
+    "userInternalId": "fbafe0e7-af8f-4ce4-b2b8-9667fe508592"
+  },
+  {
+    "courseId": "0040",
+    "userInternalId": "a4a3de4b-4190-46e9-91be-3f155a4a66c7"
+  },
+  {
+    "courseId": "0011",
+    "userInternalId": "fc6cd223-ecdd-487d-800a-3e98b5a2a2b0"
+  },
+  {
+    "courseId": "0022",
+    "userInternalId": "4087145a-e96b-4c8d-aaa1-64cfebf75d7b"
+  },
+  {
+    "courseId": "0061",
+    "userInternalId": "4087145a-e96b-4c8d-aaa1-64cfebf75d7b"
+  },
+  {
+    "courseId": "0090",
+    "userInternalId": "306ef829-360f-4560-a760-5d2114f6c177"
+  },
+  {
+    "courseId": "0022",
+    "userInternalId": "85648d26-1371-46c2-9514-6f809a0515f4"
+  },
+  {
+    "courseId": "0009",
+    "userInternalId": "85648d26-1371-46c2-9514-6f809a0515f4"
+  },
+  {
+    "courseId": "0022",
+    "userInternalId": "9fcd8bf9-e9b4-491b-ad9e-5abe06099469"
+  },
+  {
+    "courseId": "0040",
+    "userInternalId": "51b89b61-2020-41ac-a212-2b9055581602"
+  },
+  {
+    "courseId": "0064",
+    "userInternalId": "849a1875-fbce-4436-9ee9-95016fc5f501"
+  },
+  {
+    "courseId": "0022",
+    "userInternalId": "e6e7b8b3-4852-4d4b-9958-dc39dca1f306"
+  },
+  {
+    "courseId": "0042",
+    "userInternalId": "f92a51eb-82d4-45e4-a809-65cb59032d38"
+  },
+  {
+    "courseId": "0098",
+    "userInternalId": "e197e223-9ffe-4c28-a77f-55225293637c"
+  },
+  {
+    "courseId": "0053",
+    "userInternalId": "c85ec639-d8d4-4957-9952-568125533cb8"
+  },
+  {
+    "courseId": "0040",
+    "userInternalId": "715fa7a9-20ea-427e-92a1-e459070ce841"
+  },
+  {
+    "courseId": "0040",
+    "userInternalId": "56d3ae8a-c62f-49e5-9b3d-85d82969b9e6"
+  },
+  {
+    "courseId": "0042",
+    "userInternalId": "16be183a-376d-4e5c-bac8-ae5d1e5a05e1"
+  },
+  {
+    "courseId": "0027",
+    "userInternalId": "d6f660ca-48c9-46c1-8158-c071e73ab77f"
+  },
+  {
+    "courseId": "0094",
+    "userInternalId": "6cf45fd5-4e89-4d5e-907a-9a0bbc141bb2"
+  },
+  {
+    "courseId": "0009",
+    "userInternalId": "b5e8a4ad-e9da-44b2-a280-4691606be9f7"
+  },
+  {
+    "courseId": "0065",
+    "userInternalId": "f5564a80-0642-4d62-ba96-8580d1d9aced"
+  },
+  {
+    "courseId": "0081",
+    "userInternalId": "24088612-3cd3-40fc-95c5-fe0648d21454"
+  },
+  {
+    "courseId": "0091",
+    "userInternalId": "6ce765bd-4ed7-41af-9c6e-c4d597cca6c0"
+  },
+  {
+    "courseId": "0040",
+    "userInternalId": "b549f932-b0ee-46f6-bb70-11266be7a872"
+  },
+  {
+    "courseId": "0009",
+    "userInternalId": "583d4068-3f31-4385-b540-09fb16d5cfc8"
+  },
+  {
+    "courseId": "0027",
+    "userInternalId": "cfffbff5-6695-44d1-bc56-69aeba4055d7"
+  },
+  {
+    "courseId": "0063",
+    "userInternalId": "6d1be0a9-12bb-4b18-b294-261a0b195e2b"
+  },
+  {
+    "courseId": "0040",
+    "userInternalId": "80ea4fad-acfc-4519-922d-60b097af9433"
+  },
+  {
+    "courseId": "0038",
+    "userInternalId": "80ea4fad-acfc-4519-922d-60b097af9433"
+  },
+  {
+    "courseId": "0040",
+    "userInternalId": "9c943b7a-5e10-4b30-952f-63313ab47740"
+  },
+  {
+    "courseId": "0064",
+    "userInternalId": "683daace-2333-4c97-b2d4-9d8deb09d0aa"
+  },
+  {
+    "courseId": "0022",
+    "userInternalId": "71d39cfb-bdb6-4307-b058-13d9fd0a35a9"
+  },
+  {
+    "courseId": "0040",
+    "userInternalId": "83e4234b-2ee5-40ae-ba90-8124da021e36"
+  },
+  {
+    "courseId": "0010",
+    "userInternalId": "4f03b48f-9421-4ecd-be44-833d0f9b3395"
+  },
+  {
+    "courseId": "0081",
+    "userInternalId": "4f03b48f-9421-4ecd-be44-833d0f9b3395"
+  },
+  {
+    "courseId": "0060",
+    "userInternalId": "90c63dfd-2795-4c3b-9cd6-3dc4383a8b08"
+  },
+  {
+    "courseId": "0065",
+    "userInternalId": "1fd94228-81bb-4a08-a6f5-8ddbe9e21557"
+  },
+  {
+    "courseId": "0062",
+    "userInternalId": "644cb8fa-926f-49e3-81b3-cde6aedacf56"
+  },
+  {
+    "courseId": "0022",
+    "userInternalId": "f07f116c-f78d-4fe8-8a5f-b449afac285f"
+  },
+  {
+    "courseId": "0040",
+    "userInternalId": "01215816-631b-4fd0-8217-cc56b09e8af6"
+  },
+  {
+    "courseId": "0027",
+    "userInternalId": "5d6ac3e3-e2eb-496c-8698-ccad49d0a8fd"
+  },
+  {
+    "courseId": "0027",
+    "userInternalId": "0b4582e8-9ba3-40a4-a64a-406f708e5323"
+  },
+  {
+    "courseId": "0027",
+    "userInternalId": "91fc2a83-6cfb-4d6f-bd79-85f8ec194e02"
+  },
+  {
+    "courseId": "0089",
+    "userInternalId": "b7823704-7e53-4eb7-b74f-34239af07ddf"
+  },
+  {
+    "courseId": "0098",
+    "userInternalId": "a43f8700-f2bc-4705-a660-4959756ae165"
+  },
+  {
+    "courseId": "0042",
+    "userInternalId": "a43f8700-f2bc-4705-a660-4959756ae165"
+  },
+  {
+    "courseId": "0009",
+    "userInternalId": "ec2c3117-8bcf-449b-9100-41fd79839015"
+  },
+  {
+    "courseId": "0022",
+    "userInternalId": "cec53c44-261d-4999-aeff-0a82d5ee1931"
+  },
+  {
+    "courseId": "0022",
+    "userInternalId": "8ce31039-f35b-49f4-be97-dbea2966d66a"
+  },
+  {
+    "courseId": "0027",
+    "userInternalId": "24ef6015-1ec7-43d2-ab0c-2fe57934e006"
+  },
+  {
+    "courseId": "0053",
+    "userInternalId": "5592c890-0116-465c-81ae-d344651317cf"
+  },
+  {
+    "courseId": "0081",
+    "userInternalId": "b76a72a3-ac46-4653-9538-1615e40479c3"
+  },
+  {
+    "courseId": "0091",
+    "userInternalId": "8cada848-4649-4107-a23e-613f1e324989"
+  },
+  {
+    "courseId": "0065",
+    "userInternalId": "72351d17-3e23-41eb-9bda-c696215b68e0"
+  },
+  {
+    "courseId": "0053",
+    "userInternalId": "8b253be3-e038-481f-b78a-7dc6eb3a955b"
+  },
+  {
+    "courseId": "0022",
+    "userInternalId": "8b253be3-e038-481f-b78a-7dc6eb3a955b"
+  },
+  {
+    "courseId": "0040",
+    "userInternalId": "d9d597b7-6d0b-4a3d-bd63-1703486510ee"
+  },
+  {
+    "courseId": "0063",
+    "userInternalId": "d872868d-a9ad-484c-b851-6f6c751e246f"
+  },
+  {
+    "courseId": "0009",
+    "userInternalId": "301949af-f5e8-4e97-8256-6caf7c9b9d9e"
+  },
+  {
+    "courseId": "0038",
+    "userInternalId": "301949af-f5e8-4e97-8256-6caf7c9b9d9e"
+  },
+  {
+    "courseId": "0022",
+    "userInternalId": "ee834965-4cb1-4664-a487-128126753be5"
+  },
+  {
+    "courseId": "0012",
+    "userInternalId": "8f00f073-97a6-429a-856e-f7e2e6699319"
+  },
+  {
+    "courseId": "0060",
+    "userInternalId": "929ae012-de61-4682-b4cd-8ae2aba90f84"
+  },
+  {
+    "courseId": "0009",
+    "userInternalId": "076dc25b-3b74-46ba-80ce-0cd3cb0bd527"
+  },
+  {
+    "courseId": "0097",
+    "userInternalId": "076dc25b-3b74-46ba-80ce-0cd3cb0bd527"
+  },
+  {
+    "courseId": "0009",
+    "userInternalId": "a83dc09c-3c3e-4870-ab7b-8fc0fee575c0"
+  },
+  {
+    "courseId": "0027",
+    "userInternalId": "88a060c5-5ac8-4599-9fc0-2f506f832be9"
+  },
+  {
+    "courseId": "0040",
+    "userInternalId": "cdfeb437-9b1d-42eb-943e-17d6930633f6"
+  },
+  {
+    "courseId": "0022",
+    "userInternalId": "7c7cc8df-d47d-4b5e-9c1f-499406ab7344"
+  },
+  {
+    "courseId": "0009",
+    "userInternalId": "7c7cc8df-d47d-4b5e-9c1f-499406ab7344"
+  },
+  {
+    "courseId": "0094",
+    "userInternalId": "fe44b695-cf8f-49b2-8a5f-573a7c45b1ba"
+  },
+  {
+    "courseId": "0081",
+    "userInternalId": "2a44dfc1-7a4a-42ad-99af-4122320645d6"
+  },
+  {
+    "courseId": "0068",
+    "userInternalId": "0fbb0282-f929-4e92-9101-89e27bcc4671"
+  },
+  {
+    "courseId": "0068",
+    "userInternalId": "c1383120-e130-44f5-bfb0-ce786af1546d"
+  },
+  {
+    "courseId": "0068",
+    "userInternalId": "b549f932-b0ee-46f6-bb70-11266be7a872"
+  },
+  {
+    "courseId": "0068",
+    "userInternalId": "36926752-ff66-4c2f-860e-5bd0a534f80d"
+  },
+  {
+    "courseId": "0068",
+    "userInternalId": "2b8b6dfd-9dbd-4fdd-be78-b800f2e92479"
+  },
+  {
+    "courseId": "0068",
+    "userInternalId": "5696ea61-c274-48d9-8b27-cf27a12165bd"
+  },
+  {
+    "courseId": "0068",
+    "userInternalId": "91fc2a83-6cfb-4d6f-bd79-85f8ec194e02"
+  },
+  {
+    "courseId": "0068",
+    "userInternalId": "42b35e8a-2760-4f4b-b695-8aa63ff85890"
+  },
+  {
+    "courseId": "0068",
+    "userInternalId": "6684b467-35a0-4afa-91ae-14fc616ac87e"
+  },
+  {
+    "courseId": "0068",
+    "userInternalId": "75491e5a-62b1-42d8-879f-6c90b6ccdf1c"
+  },
+  {
+    "courseId": "0068",
+    "userInternalId": "6657de5a-97d1-4b19-98ad-1b4ac977fde0"
+  },
+  {
+    "courseId": "0068",
+    "userInternalId": "c7fcea99-df72-4914-b39a-13d765e34379"
+  }
+]

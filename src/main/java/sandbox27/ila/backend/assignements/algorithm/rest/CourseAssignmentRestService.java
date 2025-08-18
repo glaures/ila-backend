@@ -1,8 +1,8 @@
-package sandbox27.ila.backend.assignements.rest;
+package sandbox27.ila.backend.assignements.algorithm.rest;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-import sandbox27.ila.backend.assignements.*;
+import sandbox27.ila.backend.assignements.algorithm.*;
 import sandbox27.ila.backend.block.Block;
 import sandbox27.ila.backend.block.BlockRepository;
 import sandbox27.ila.backend.course.Course;

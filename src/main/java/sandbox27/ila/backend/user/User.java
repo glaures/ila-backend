@@ -16,6 +16,7 @@ public class User implements SecUser {
 
     @Id
     String userName;
+    String internalId;
     String email;
     String firstName;
     String lastName;

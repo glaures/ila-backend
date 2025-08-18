@@ -10,4 +10,6 @@ import java.util.Optional;
 public interface PeriodRepository extends JpaRepository<Period, Long> {
 
     Optional<Period> findByName(String name);
+
+    Optional<Period> findByCurrent(boolean b);
 }
