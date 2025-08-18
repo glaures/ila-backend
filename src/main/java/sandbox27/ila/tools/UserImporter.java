@@ -5,9 +5,6 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import org.springframework.boot.context.event.ApplicationReadyEvent;
-import org.springframework.context.event.EventListener;
-import org.springframework.core.annotation.Order;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 import sandbox27.ila.backend.user.User;
@@ -15,20 +12,14 @@ import sandbox27.ila.backend.user.UserRepository;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.time.Period;
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-@Order(1)
 public class UserImporter {
 
     private final UserRepository userRepository;
-
-    @EventListener(ApplicationReadyEvent.class)
-    @Transactional
-    public void onApplicationReady() throws IOException {
-        runImport();
-    }
 
     @Transactional
     public void runImport() throws IOException {

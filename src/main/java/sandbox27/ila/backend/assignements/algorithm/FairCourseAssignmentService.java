@@ -1,4 +1,4 @@
-package sandbox27.ila.backend.assignements;
+package sandbox27.ila.backend.assignements.algorithm;
 // Modellklassen und Vergabeservice mit Statistik und fairem Zweitdurchlauf
 
 import java.util.*;

@@ -63,6 +63,6 @@ public class PeriodService {
 
     @GetMapping("/current")
     public Period getCurrentPeriod() {
-        return periodRepository.findById(1l).get();
+        return periodRepository.findByCurrent(true).get();
     }
 }

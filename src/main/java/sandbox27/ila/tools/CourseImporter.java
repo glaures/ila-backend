@@ -4,10 +4,6 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import org.springframework.boot.context.event.ApplicationReadyEvent;
-import org.springframework.context.annotation.Profile;
-import org.springframework.context.event.EventListener;
-import org.springframework.core.annotation.Order;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 import sandbox27.ila.backend.block.Block;
@@ -15,7 +11,6 @@ import sandbox27.ila.backend.block.BlockRepository;
 import sandbox27.ila.backend.course.*;
 import sandbox27.ila.backend.period.Period;
 import sandbox27.ila.backend.period.PeriodRepository;
-import sandbox27.ila.backend.user.UserRepository;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -23,36 +18,25 @@ import java.time.DayOfWeek;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.TemporalAccessor;
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Locale;
 import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-@Order(2)
 public class CourseImporter {
-
-    public static final String PERIOD = "1. Halbjahr 2025/26";
 
     final PeriodRepository periodRepository;
     final CourseRepository courseRepository;
     final BlockRepository blockRepository;
-    final UserRepository userRepository;
     final CourseBlockAssignmentRepository courseBlockAssignmentRepository;
     Period periodToImportInto;
 
-    @EventListener(ApplicationReadyEvent.class)
     @Transactional
-    public void onApplicationReady() throws IOException {
-        runImport();
-    }
-
-    @Transactional
-    public void runImport() throws IOException {
-        periodToImportInto = periodRepository.findByName(PERIOD).orElseGet(() -> periodRepository.save(
-                Period.builder()
-                        .name(PERIOD)
-                        .build()));
-        periodRepository.save(periodToImportInto);
+    public void runImport(Period periodToImportInto) throws IOException {
+        this.periodToImportInto = periodToImportInto;
         List<ImportedCourseDto> importedCourses = importFromFile();
         importedCourses.forEach(this::storeImportedCourse);
     }

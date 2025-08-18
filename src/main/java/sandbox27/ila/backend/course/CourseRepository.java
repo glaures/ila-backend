@@ -28,4 +28,6 @@ public interface CourseRepository extends JpaRepository<Course, Long> {
     @Query("select cba.course from CourseBlockAssignment cba " +
             "where cba.block.id=:blockId")
     List<Course> findAllByBlock_Id(Long blockId);
+
+    Optional<Course> findByCourseId(String s);
 }

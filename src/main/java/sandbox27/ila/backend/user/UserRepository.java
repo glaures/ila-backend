@@ -14,4 +14,5 @@ public interface UserRepository extends JpaRepository<User, String> {
     @Query("SELECT u FROM User u WHERE CONCAT(u.firstName, ' ', u.lastName) = :fullName")
     Optional<User> findByFullName(@Param("fullName") String fullName);
 
+    Optional<User> findByInternalId(String s);
 }

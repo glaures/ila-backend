@@ -23,6 +23,7 @@ public class Period {
     LocalDate startDate;
     LocalDate endDate;
     boolean visible;
+    boolean current;
     @CreationTimestamp
     private LocalDateTime createdAt;
 }
