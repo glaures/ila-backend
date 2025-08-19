@@ -21,4 +21,6 @@ public interface CourseBlockAssignmentRepository extends JpaRepository<CourseBlo
 
     List<CourseBlockAssignment> findAllByCourse(Course course);
 
+    List<CourseBlockAssignment> findAllByBlock(Block block);
+
 }
