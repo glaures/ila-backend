@@ -32,7 +32,7 @@ public class ImportRunner {
                 Period.builder()
                         .name(PERIOD)
                         .startDate(LocalDate.of(2025, 8, 21))
-                        .endDate(LocalDate.of(2025, 8, 28))
+                        .endDate(LocalDate.of(2025, 8, 23))
                         .current(true)
                         .visible(true)
                         .build()));

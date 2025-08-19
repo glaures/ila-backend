@@ -12,8 +12,11 @@ import sandbox27.ila.backend.course.Course;
 import sandbox27.ila.backend.course.CourseRepository;
 import sandbox27.ila.backend.course.CourseService;
 import sandbox27.ila.backend.user.User;
+import sandbox27.ila.infrastructure.error.ErrorCode;
+import sandbox27.ila.infrastructure.error.ServiceException;
 import sandbox27.ila.infrastructure.security.AuthenticatedUser;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -50,6 +53,10 @@ public class PreferenceService {
             @RequestBody BlockPreferencesDto dto,
             @AuthenticatedUser User user) {
         Block block = blockRepository.findById(blockId).orElseThrow();
+        if (block.getPeriod().getStartDate().isAfter(LocalDate.now())
+                || block.getPeriod().getEndDate().isBefore(LocalDate.now())) {
+            throw new ServiceException(ErrorCode.PeriodNotStartedYet);
+        }
         preferenceRepository.deleteByUserAndBlock(user, block);
         for (int i = 0; i < dto.getPreferences().size(); i++) {
             Long courseId = dto.getPreferences().get(i);
