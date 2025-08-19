@@ -2,6 +2,7 @@ package sandbox27.ila.backend.assignements;
 
 import jakarta.persistence.*;
 import lombok.*;
+import sandbox27.ila.backend.block.Block;
 import sandbox27.ila.backend.course.Course;
 import sandbox27.ila.backend.user.User;
 
@@ -21,5 +22,8 @@ public class CourseUserAssignment {
 
     @ManyToOne(optional = false)
     private User user;
+
+    @ManyToOne(optional = false)
+    private Block block;
 
 }

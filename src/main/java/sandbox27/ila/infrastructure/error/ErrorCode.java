@@ -7,6 +7,7 @@ public enum ErrorCode {
     Unauthorized,
     AccessDenied,
     SignInFailed,
+    PeriodNotStartedYet,
     NotImplemented
 
 }
