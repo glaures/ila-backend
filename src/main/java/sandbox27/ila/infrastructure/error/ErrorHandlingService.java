@@ -1,29 +1,26 @@
 package sandbox27.ila.infrastructure.error;
 
-import jakarta.mail.internet.MimeMessage;
+import lombok.RequiredArgsConstructor;
 import org.apache.juli.logging.Log;
 import org.apache.juli.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
-import sandbox27.ila.infrastructure.email.EmailService;
+import sandbox27.ila.infrastructure.email.ReliableMailService;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Map;
 
 @Service
+@RequiredArgsConstructor
 public class ErrorHandlingService {
 
     Log log = LogFactory.getLog(ErrorHandlingService.class);
     @Value("${spring.mail.admin}")
     String mailTo;
-    private final EmailService emailService;
-
-    public ErrorHandlingService(EmailService emailService) {
-        this.emailService = emailService;
-    }
+    private final ReliableMailService emailService;
 
     public void handleWarning(String s) {
         System.out.println("WARNING" + s);
@@ -39,25 +36,25 @@ public class ErrorHandlingService {
         notifyAdmin(msg, t);
     }
 
-    private void notifyAdmin(String msg, Throwable... t){
+    private void notifyAdmin(String msg, Throwable... t) {
         try {
-            MimeMessage m = emailService.createMimeMessage();
-            MimeMessageHelper message = new MimeMessageHelper(m, true);
-            message.setTo(mailTo);
             StringBuilder buf = new StringBuilder();
             StringWriter sw = new StringWriter();
+            String subject;
             if (t.length > 0) {
-                message.setSubject("Fehler: " + msg + "\n" + t[0].getMessage());
+                subject = "Fehler: " + msg + "\n" + t[0].getMessage();
                 t[0].printStackTrace(new PrintWriter(sw));
             } else {
-                message.setSubject("Meldung vom Server");
-                sw.write(msg);
+                subject = "Meldung vom Server";
             }
+            sw.write(msg);
             buf.append(LocalDateTime.now().format(DateTimeFormatter.ISO_DATE_TIME)).append("\n\n");
             buf.append(sw.getBuffer().toString());
             sw.close();
-            message.setText(buf.toString(), true);
-            emailService.send(m);
+            emailService.sendConfirmationAsync(mailTo,
+                    subject,
+                    "error",
+                    Map.of("error", buf.toString()));
         } catch (Throwable t2) {
             if (t.length > 0)
                 t[0].printStackTrace();
