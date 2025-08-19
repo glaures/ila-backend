@@ -37,7 +37,7 @@ public class PlaceholderCheck {
                         .description("Dieser Kurs dient dazu, für diesen Block einen Platzhalter zu wählen, der dann erst in der Folge mit einem noch zu erstellenden Kurs ersetzt wird.")
                         .maxAttendees(9999)
                         .courseCategories(Set.of(CourseCategory.iLa))
-                        .grades(List.of(5, 6, 7, 8, 9, 10, 11, 12))
+                        .grades(Set.of(5, 6, 7, 8, 9, 10, 11, 12))
                         .placeholder(true)
                         .build();
                 courseRepository.save(placeHolderCourse);

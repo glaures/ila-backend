@@ -6,6 +6,7 @@ import sandbox27.ila.backend.period.Period;
 import sandbox27.ila.backend.user.User;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -32,7 +33,7 @@ public class Course {
     @ElementCollection
     @CollectionTable(name = "course_allowed_grades", joinColumns = @JoinColumn(name = "course_id"))
     @Column(name = "grade")
-    List<Integer> grades  = new ArrayList<>();
+    Set<Integer> grades  = new HashSet<>();
     /*
     @ManyToOne
     User courseInstructor;
