@@ -43,7 +43,7 @@ public class CourseImporter {
 
     @Transactional
     public void storeImportedCourse(ImportedCourseDto importedCourse) {
-        Course course = courseRepository.findByName(importedCourse.Kurs).orElse(new Course());
+        Course course = courseRepository.findByCourseId(importedCourse.KursId).orElse(new Course());
         course.setName(importedCourse.Kurs.trim());
         course.setCourseId(importedCourse.KursId.trim());
         course.setPeriod(periodToImportInto);
