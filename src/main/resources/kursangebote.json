@@ -1,7 +1,7 @@
 [
   {
     "Wochentag": "Montag",
-    "Block": "12:00 - 12:40",
+    "Block": "11:20 - 12:00",
     "Kurs": "Brettspielclub",
     "KursId": "0111",
     "Kategorien": [
@@ -17,9 +17,9 @@
     "Nachname": "Abicht"
   },
   {
-    "Wochentag": "Dienstag",
+    "Wochentag": "Montag",
     "Block": "12:00 - 12:40",
-    "Kurs": "Grüne Hände",
+    "Kurs": "Mandala malen",
     "KursId": "0117",
     "Kategorien": [
       "KuP"
@@ -706,7 +706,7 @@
   {
     "Wochentag": "Donnerstag",
     "Block": "12:00 - 12:40",
-    "Kurs": "Philosophisches Café",
+    "Kurs": "Entspannung",
     "KursId": "0114",
     "Kategorien": [
       "KuP"
@@ -719,7 +719,7 @@
       "9",
       "10"
     ],
-    "Beschreibung": "",
+    "Beschreibung": "Methoden zur Stressregulation und Entspannung im Alltag",
     "maxAttendees": 24,
     "Nachname": "Kerl"
   },
@@ -1811,7 +1811,7 @@
     "Nachname": "Trettner"
   },
   {
-    "Wochentag": "Donnerstag",
+    "Wochentag": "Montag",
     "Block": "11:20 - 12:00",
     "Kurs": "Comic/Manga zeichen",
     "KursId": "0116",
