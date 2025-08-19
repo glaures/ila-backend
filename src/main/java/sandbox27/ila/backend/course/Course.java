@@ -41,5 +41,6 @@ public class Course {
     int minAttendees = 0;
     int maxAttendees;
     String instructor;
+    boolean placeholder = false;
 
 }

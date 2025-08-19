@@ -22,6 +22,7 @@ public class ImportRunner {
     final CourseImporter courseImporter;
     final CourseUserAssignmentImporter courseUserAssignmentImporter;
     final PeriodRepository periodRepository;
+    final PlaceholderCheck placeholderCheck;
 
     public static final String PERIOD = "1. Quartal 25/26";
 
@@ -44,6 +45,9 @@ public class ImportRunner {
         log.info("Starting course assignment import");
         courseUserAssignmentImporter.runImport();
         log.info("All imports complete");
+        // prüfen, ob jeder Block der aktuellen Phase Platzhalter hat
+        placeholderCheck.ensurePlaceholdersInEveryBlockOfCurrentPeriod();
+        log.info("Placeholders in every block");
     }
 
 
