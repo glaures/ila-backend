@@ -1,0 +1,87 @@
+[
+  {
+    "firstName": "Ananga",
+    "lastName": "Pekas",
+    "courseId": "0021"
+  },
+  {
+    "firstName": "Annalena",
+    "lastName": "Stoepel",
+    "courseId": "0022"
+  },
+  {
+    "firstName": "Flora",
+    "lastName": "Fischer",
+    "courseId": "0021"
+  },
+  {
+    "firstName": "Helen",
+    "lastName": "Wehr",
+    "courseId": "0022"
+  },
+  {
+    "firstName": "Jannis",
+    "lastName": "Knabe",
+    "courseId": "0021"
+  },
+  {
+    "firstName": "Johanna",
+    "lastName": "Vogel",
+    "courseId": "0022"
+  },
+  {
+    "firstName": "Karoline ",
+    "lastName": "Aue",
+    "courseId": "0021"
+  },
+  {
+    "firstName": "Larissa",
+    "lastName": "Hetmank",
+    "courseId": "0022"
+  },
+  {
+    "firstName": "Laura",
+    "lastName": "Wunderlich",
+    "courseId": "0022"
+  },
+  {
+    "firstName": "Leonie",
+    "lastName": "Priemer",
+    "courseId": "0022"
+  },
+  {
+    "firstName": "Mathilde",
+    "lastName": "Schönherr",
+    "courseId": "0022"
+  },
+  {
+    "firstName": "Milene",
+    "lastName": "Meunier",
+    "courseId": "0021"
+  },
+  {
+    "firstName": "Paul ",
+    "lastName": "Näther",
+    "courseId": "0022"
+  },
+  {
+    "firstName": "Pauline",
+    "lastName": "Matthes",
+    "courseId": "0022"
+  },
+  {
+    "firstName": "Senta",
+    "lastName": "Grauer",
+    "courseId": "0022"
+  },
+  {
+    "firstName": "Tessa",
+    "lastName": "Naumann",
+    "courseId": "0022"
+  },
+  {
+    "firstName": "Wilma",
+    "lastName": "Naumann",
+    "courseId": "0022"
+  }
+]
