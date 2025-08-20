@@ -32,7 +32,8 @@ public class PreferencesStatusService {
             List<String> categories,
             boolean isCourseSelectionComplete,
             boolean isCategoryDistributionOk,
-            boolean readyToSubmit) {
+            boolean readyToSubmit,
+            List<String> advices) {
     }
 
     final PeriodRepository periodRepository;
@@ -44,16 +45,25 @@ public class PreferencesStatusService {
     public PreferencesStatus getPreferencesStatus(@AuthenticatedUser User user) throws ServiceException {
         Period currentPeriod = periodRepository.findByCurrent(true).orElseThrow(() -> new ServiceException(ErrorCode.PeriodNotStartedYet));
         List<String> selectedCategories = getSelectedCategories(user, currentPeriod);
+        double blocksDefined = getBlocksDefined(currentPeriod, user);
         long distinctCount = selectedCategories.stream()
                 .distinct()
                 .count();
         boolean courseSelectionComplete = selectedCategories.size() == 3;
         boolean categoryDistributionOk = distinctCount >= 2;
+        List<String> advices = new ArrayList<>();
+        if(blocksDefined < 1.0)
+            advices.add("Bearbeite alle " + blockRepository.findAllByPeriod_id(currentPeriod.getId()).size() + " Blöcke");
+        if(!courseSelectionComplete)
+            advices.add("Belege genau 3 Blöcke");
+        if(!categoryDistributionOk)
+            advices.add("Setze mindestens 2 verschiedenen Kategorien auf Platz 1");
         return new PreferencesStatus(getBlocksDefined(currentPeriod, user),
                 selectedCategories,
                 courseSelectionComplete,
                 categoryDistributionOk,
-                courseSelectionComplete && categoryDistributionOk
+                courseSelectionComplete && categoryDistributionOk,
+                advices
         );
     }
 
