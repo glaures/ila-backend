@@ -62,7 +62,7 @@ public class PreferencesStatusService {
                 selectedCategories,
                 courseSelectionComplete,
                 categoryDistributionOk,
-                courseSelectionComplete && categoryDistributionOk,
+                courseSelectionComplete && categoryDistributionOk && blocksDefined == 1.0,
                 advices
         );
     }
