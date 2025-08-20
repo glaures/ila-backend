@@ -48,7 +48,7 @@ public class PreferenceService {
 
     @PostMapping("/{blockId}")
     @Transactional
-    public ResponseEntity<Void> savePreferences(
+    public PreferencePayload savePreferences(
             @PathVariable Long blockId,
             @RequestBody BlockPreferencesDto dto,
             @AuthenticatedUser User user) {
@@ -69,6 +69,6 @@ public class PreferenceService {
                     .build();
             preferenceRepository.save(pref);
         }
-        return ResponseEntity.ok().build();
+        return getPreferences(blockId, user);
     }
 }
