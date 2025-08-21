@@ -8,6 +8,7 @@ public enum ErrorCode {
     AccessDenied,
     SignInFailed,
     PeriodNotStartedYet,
+    PeriodNotEditable,
     NotImplemented
 
 }

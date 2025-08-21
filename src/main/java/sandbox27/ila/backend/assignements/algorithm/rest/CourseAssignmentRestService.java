@@ -103,7 +103,7 @@ public class CourseAssignmentRestService {
 
     private List<BlockPreference> generateStudentPreferences(long periodId) {
         List<BlockPreference> blockPreferences = new ArrayList<>();
-        List<Block> allBlocks = blockRepository.findAllByPeriod_id(periodId);
+        List<Block> allBlocks = blockRepository.findAllByPeriod_idOrderByDayOfWeekAscStartTimeAsc(periodId);
         List<User> allUsers = userRepository.findAll();
         for (User user : allUsers) {
             for (Block block : allBlocks) {

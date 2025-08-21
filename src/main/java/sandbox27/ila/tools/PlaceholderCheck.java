@@ -25,7 +25,7 @@ public class PlaceholderCheck {
     @Transactional
     public void ensurePlaceholdersInEveryBlockOfCurrentPeriod(){
         Period currentPeriod = periodRepository.findByCurrent(true).orElseThrow();
-        List<Block> blocksOfPeriod = blockRepository.findAllByPeriod_id(currentPeriod.getId());
+        List<Block> blocksOfPeriod = blockRepository.findAllByPeriod_idOrderByDayOfWeekAscStartTimeAsc(currentPeriod.getId());
         for(Block block : blocksOfPeriod){
             Optional<CourseBlockAssignment> courseBlockAssignmentOptional = courseBlockAssignmentRepository.findAllByBlock(block).stream()
                     .filter(courseBlockAssignment -> courseBlockAssignment.getCourse().isPlaceholder())
