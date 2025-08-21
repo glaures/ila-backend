@@ -17,6 +17,5 @@ public interface BlockRepository extends JpaRepository<Block, Long> {
     @OrderBy("startTime asc")
     List<Block> findByPeriod_IdAndDayOfWeek(long periodId, DayOfWeek dayOfWeek);
 
-    @OrderBy("dayOfWeek asc, startTime asc")
-    List<Block> findAllByPeriod_id(long periodId);
+    List<Block> findAllByPeriod_idOrderByDayOfWeekAscStartTimeAsc(long periodId);
 }

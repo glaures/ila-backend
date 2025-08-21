@@ -2,19 +2,20 @@ package sandbox27.ila.backend.preference;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 import sandbox27.ila.backend.assignements.CourseUserAssignmentRepository;
 import sandbox27.ila.backend.block.Block;
 import sandbox27.ila.backend.block.BlockRepository;
 import sandbox27.ila.backend.period.Period;
 import sandbox27.ila.backend.period.PeriodRepository;
 import sandbox27.ila.backend.user.User;
+import sandbox27.ila.frontend.marshalling.LocalDateSerializer;
 import sandbox27.ila.infrastructure.error.ErrorCode;
 import sandbox27.ila.infrastructure.error.ServiceException;
 import sandbox27.ila.infrastructure.security.AuthenticatedUser;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -33,6 +34,7 @@ public class PreferencesStatusService {
             boolean isCourseSelectionComplete,
             boolean isCategoryDistributionOk,
             boolean readyToSubmit,
+            boolean submitted,
             List<String> advices) {
     }
 
@@ -40,6 +42,7 @@ public class PreferencesStatusService {
     final PreferenceRepository preferenceRepository;
     final BlockRepository blockRepository;
     final CourseUserAssignmentRepository courseUserAssignmentRepository;
+    final PeriodUserPreferencesSubmitStatusRepository periodUserPreferencesSubmitStatusRepository;
 
     @GetMapping
     public PreferencesStatus getPreferencesStatus(@AuthenticatedUser User user) throws ServiceException {
@@ -52,23 +55,43 @@ public class PreferencesStatusService {
         boolean courseSelectionComplete = selectedCategories.size() == 3;
         boolean categoryDistributionOk = distinctCount >= 2;
         List<String> advices = new ArrayList<>();
-        if(blocksDefined < 1.0)
-            advices.add("Bearbeite alle " + blockRepository.findAllByPeriod_id(currentPeriod.getId()).size() + " Blöcke");
-        if(!courseSelectionComplete)
+        if (blocksDefined < 1.0)
+            advices.add("Bearbeite alle " + blockRepository.findAllByPeriod_idOrderByDayOfWeekAscStartTimeAsc(currentPeriod.getId()).size() + " Blöcke");
+        if (!courseSelectionComplete)
             advices.add("Belege genau 3 Blöcke");
-        if(!categoryDistributionOk)
+        if (!categoryDistributionOk)
             advices.add("Setze mindestens 2 verschiedenen Kategorien auf Platz 1");
+        PeriodUserPreferencesSubmitStatus submitStatus = periodUserPreferencesSubmitStatusRepository.findByUserAndPeriod(user, currentPeriod).orElse(PeriodUserPreferencesSubmitStatus.builder().submitted(false).build());
         return new PreferencesStatus(getBlocksDefined(currentPeriod, user),
                 selectedCategories,
                 courseSelectionComplete,
                 categoryDistributionOk,
                 courseSelectionComplete && categoryDistributionOk && blocksDefined == 1.0,
+                submitStatus.isSubmitted(),
                 advices
         );
     }
 
+    @PostMapping
+    public ResponseEntity<Void> submitPreferences(@AuthenticatedUser User user) throws ServiceException {
+        Period currentPeriod = periodRepository.findByCurrent(true).get();
+        if (currentPeriod.getEndDate().isBefore(LocalDate.now()) || currentPeriod.getStartDate().isAfter(LocalDate.now()))
+            throw new ServiceException(ErrorCode.PeriodNotEditable);
+        PeriodUserPreferencesSubmitStatus currentStatus = periodUserPreferencesSubmitStatusRepository
+                .findByUserAndPeriod(user, currentPeriod)
+                .orElse(PeriodUserPreferencesSubmitStatus.builder()
+                        .user(user)
+                        .period(currentPeriod)
+                        .submitted(true)
+                        .build());
+        currentStatus.setSubmitted(true);
+        periodUserPreferencesSubmitStatusRepository.save(currentStatus);
+        return ResponseEntity.ok().build();
+    }
+
+
     private double getBlocksDefined(Period period, User user) {
-        double totalBlocks = blockRepository.findAllByPeriod_id(period.getId()).size();
+        double totalBlocks = blockRepository.findAllByPeriod_idOrderByDayOfWeekAscStartTimeAsc(period.getId()).size();
         final Set<Block> definedBlocks = new HashSet<>();
         // fixed assignment
         courseUserAssignmentRepository.findByUserAndBlock_Period(user, period)
@@ -82,6 +105,7 @@ public class PreferencesStatusService {
                 });
         return definedBlocks.size() / totalBlocks;
     }
+
 
     private List<String> getSelectedCategories(User user, Period period) {
         List<String> selectedCategories = new ArrayList<>();
