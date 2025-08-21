@@ -1,0 +1,552 @@
+[
+  {
+    "courseId": "0049",
+    "firstName": "Katharina Klara",
+    "lastName": "Bernhard"
+  },
+  {
+    "courseId": "0049",
+    "firstName": "Pepita",
+    "lastName": "Binger"
+  },
+  {
+    "courseId": "0049",
+    "firstName": "Se-A",
+    "lastName": "Choi"
+  },
+  {
+    "courseId": "0049",
+    "firstName": "Clara",
+    "lastName": "Dietrich"
+  },
+  {
+    "courseId": "0049",
+    "firstName": "Franz Johann Carl",
+    "lastName": "Dorausch"
+  },
+  {
+    "courseId": "0049",
+    "firstName": "Liss",
+    "lastName": "Dreißigacker"
+  },
+  {
+    "courseId": "0049",
+    "firstName": "Emilia Sophie",
+    "lastName": "Gerner"
+  },
+  {
+    "courseId": "0049",
+    "firstName": "Rosalie",
+    "lastName": "Grieger"
+  },
+  {
+    "courseId": "0049",
+    "firstName": "Mattis",
+    "lastName": "Knaak"
+  },
+  {
+    "courseId": "0049",
+    "firstName": "Selina",
+    "lastName": "Kossar"
+  },
+  {
+    "courseId": "0049",
+    "firstName": "Lena Chiara",
+    "lastName": "Matthes"
+  },
+  {
+    "courseId": "0049",
+    "firstName": "Milène",
+    "lastName": "Meunier"
+  },
+  {
+    "courseId": "0049",
+    "firstName": "Luisa Christine",
+    "lastName": "Müller"
+  },
+  {
+    "courseId": "0049",
+    "firstName": "Ramón",
+    "lastName": "Müller"
+  },
+  {
+    "courseId": "0049",
+    "firstName": "Theresa Ulrike",
+    "lastName": "Müller"
+  },
+  {
+    "courseId": "0049",
+    "firstName": "Victoria Solea",
+    "lastName": "Müller"
+  },
+  {
+    "courseId": "0049",
+    "firstName": "Felix",
+    "lastName": "Nebelung"
+  },
+  {
+    "courseId": "0049",
+    "firstName": "Amilia",
+    "lastName": "Nietsch"
+  },
+  {
+    "courseId": "0049",
+    "firstName": "Clara Luise",
+    "lastName": "Sandmann"
+  },
+  {
+    "courseId": "0049",
+    "firstName": "Alma Margarete Lieselotte",
+    "lastName": "Schilling"
+  },
+  {
+    "courseId": "0049",
+    "firstName": "Marietta Clara",
+    "lastName": "Schmidt"
+  },
+  {
+    "courseId": "0049",
+    "firstName": "Johann",
+    "lastName": "Schwarz"
+  },
+  {
+    "courseId": "0049",
+    "firstName": "Reik",
+    "lastName": "Sommerfeld"
+  },
+  {
+    "courseId": "0049",
+    "firstName": "Ian Noah",
+    "lastName": "Teichmann"
+  },
+  {
+    "courseId": "0049",
+    "firstName": "Julian",
+    "lastName": "Tschöpe"
+  },
+  {
+    "courseId": "0049",
+    "firstName": "Jurek Johannes",
+    "lastName": "Wagner"
+  },
+  {
+    "courseId": "0049",
+    "firstName": "Tarik",
+    "lastName": "Werner"
+  },
+  {
+    "courseId": "0050",
+    "firstName": "Anton",
+    "lastName": "Andersch"
+  },
+  {
+    "courseId": "0050",
+    "firstName": "Elise Amalia",
+    "lastName": "Arnold"
+  },
+  {
+    "courseId": "0050",
+    "firstName": "Raphael",
+    "lastName": "Beyer"
+  },
+  {
+    "courseId": "0050",
+    "firstName": "Martha",
+    "lastName": "Deininger"
+  },
+  {
+    "courseId": "0050",
+    "firstName": "Adrian Paolo",
+    "lastName": "Dornberg"
+  },
+  {
+    "courseId": "0050",
+    "firstName": "Sam",
+    "lastName": "Fischer"
+  },
+  {
+    "courseId": "0050",
+    "firstName": "Greta Christina",
+    "lastName": "Flick"
+  },
+  {
+    "courseId": "0050",
+    "firstName": "Mathilda",
+    "lastName": "Friedrich"
+  },
+  {
+    "courseId": "0050",
+    "firstName": "Mia",
+    "lastName": "Göttermann"
+  },
+  {
+    "courseId": "0050",
+    "firstName": "Tim",
+    "lastName": "Hannig"
+  },
+  {
+    "courseId": "0050",
+    "firstName": "Bruno",
+    "lastName": "Hofmann"
+  },
+  {
+    "courseId": "0050",
+    "firstName": "Carla Helene",
+    "lastName": "Hofmann"
+  },
+  {
+    "courseId": "0050",
+    "firstName": "Vincent",
+    "lastName": "Juntke"
+  },
+  {
+    "courseId": "0050",
+    "firstName": "Henri",
+    "lastName": "Knauf"
+  },
+  {
+    "courseId": "0050",
+    "firstName": "Mathilda Emilia",
+    "lastName": "Krause"
+  },
+  {
+    "courseId": "0050",
+    "firstName": "Ella Marlen",
+    "lastName": "Liedtke"
+  },
+  {
+    "courseId": "0050",
+    "firstName": "Irma",
+    "lastName": "Melow"
+  },
+  {
+    "courseId": "0050",
+    "firstName": "Ananga",
+    "lastName": "Pekas"
+  },
+  {
+    "courseId": "0050",
+    "firstName": "Malika",
+    "lastName": "Schmidt"
+  },
+  {
+    "courseId": "0050",
+    "firstName": "Nicolas Lion",
+    "lastName": "Schmidt"
+  },
+  {
+    "courseId": "0050",
+    "firstName": "Leni Wilhelmine",
+    "lastName": "Schubert"
+  },
+  {
+    "courseId": "0050",
+    "firstName": "Konstantin",
+    "lastName": "Sommer"
+  },
+  {
+    "courseId": "0050",
+    "firstName": "Pepe",
+    "lastName": "Tiebe"
+  },
+  {
+    "courseId": "0050",
+    "firstName": "Laura Joy",
+    "lastName": "Tutmarc"
+  },
+  {
+    "courseId": "0050",
+    "firstName": "Anna",
+    "lastName": "Wiegner"
+  },
+  {
+    "courseId": "0050",
+    "firstName": "Evelyn Marlies Maria",
+    "lastName": "Zimmer"
+  },
+  {
+    "courseId": "0050",
+    "firstName": "Aaron",
+    "lastName": "Zschernitz"
+  },
+  {
+    "courseId": "0101",
+    "firstName": "Theo",
+    "lastName": "Borisch"
+  },
+  {
+    "courseId": "0101",
+    "firstName": "Ava",
+    "lastName": "Döhnert"
+  },
+  {
+    "courseId": "0101",
+    "firstName": "Ella Charlotte",
+    "lastName": "Eck"
+  },
+  {
+    "courseId": "0101",
+    "firstName": "Emma Marlene",
+    "lastName": "Eck"
+  },
+  {
+    "courseId": "0101",
+    "firstName": "Nico",
+    "lastName": "Eichler"
+  },
+  {
+    "courseId": "0101",
+    "firstName": "Rhys",
+    "lastName": "Felber"
+  },
+  {
+    "courseId": "0101",
+    "firstName": "Rosalie",
+    "lastName": "Gering"
+  },
+  {
+    "courseId": "0101",
+    "firstName": "Max",
+    "lastName": "Glöckner"
+  },
+  {
+    "courseId": "0101",
+    "firstName": "Amélie",
+    "lastName": "Hoffmann"
+  },
+  {
+    "courseId": "0101",
+    "firstName": "Mattis",
+    "lastName": "Hücker"
+  },
+  {
+    "courseId": "0101",
+    "firstName": "Clara",
+    "lastName": "Hunger"
+  },
+  {
+    "courseId": "0101",
+    "firstName": "Willem James",
+    "lastName": "Irlenbusch"
+  },
+  {
+    "courseId": "0101",
+    "firstName": "Anton Maximilian",
+    "lastName": "Kaufmann"
+  },
+  {
+    "courseId": "0101",
+    "firstName": "Jannis",
+    "lastName": "Knabe"
+  },
+  {
+    "courseId": "0101",
+    "firstName": "Charlotte Sophie Margarete",
+    "lastName": "Lange"
+  },
+  {
+    "courseId": "0101",
+    "firstName": "Ben",
+    "lastName": "Lieder"
+  },
+  {
+    "courseId": "0101",
+    "firstName": "Mariella",
+    "lastName": "Michael"
+  },
+  {
+    "courseId": "0101",
+    "firstName": "Jasmeet Kaur",
+    "lastName": "Nguyen"
+  },
+  {
+    "courseId": "0101",
+    "firstName": "Milana",
+    "lastName": "Portnova"
+  },
+  {
+    "courseId": "0101",
+    "firstName": "Viktor",
+    "lastName": "Raddatz"
+  },
+  {
+    "courseId": "0101",
+    "firstName": "Maximilian Peter",
+    "lastName": "Schreier"
+  },
+  {
+    "courseId": "0101",
+    "firstName": "Magda",
+    "lastName": "Singer"
+  },
+  {
+    "courseId": "0101",
+    "firstName": "Greta",
+    "lastName": "Wagner"
+  },
+  {
+    "courseId": "0101",
+    "firstName": "Hector",
+    "lastName": "Wagner"
+  },
+  {
+    "courseId": "0101",
+    "firstName": "Katalin",
+    "lastName": "Wermes"
+  },
+  {
+    "courseId": "0101",
+    "firstName": "Eva Jana",
+    "lastName": "Wittek"
+  },
+  {
+    "courseId": "0101",
+    "firstName": "Marlen",
+    "lastName": "Wolf"
+  },
+  {
+    "courseId": "0101",
+    "firstName": "Mathilda Ingrid",
+    "lastName": "Zimdars"
+  },
+  {
+    "courseId": "0102",
+    "firstName": "Nino",
+    "lastName": "Armbrust"
+  },
+  {
+    "courseId": "0102",
+    "firstName": "Elisa",
+    "lastName": "Böhme"
+  },
+  {
+    "courseId": "0102",
+    "firstName": "Hanna Martha",
+    "lastName": "Döbrich"
+  },
+  {
+    "courseId": "0102",
+    "firstName": "Martha Elisabeth",
+    "lastName": "Dreier"
+  },
+  {
+    "courseId": "0102",
+    "firstName": "Paul",
+    "lastName": "Georgi"
+  },
+  {
+    "courseId": "0102",
+    "firstName": "Ciara Sophie",
+    "lastName": "Groß"
+  },
+  {
+    "courseId": "0102",
+    "firstName": "Jette",
+    "lastName": "Großer"
+  },
+  {
+    "courseId": "0102",
+    "firstName": "Carlo",
+    "lastName": "Gründler"
+  },
+  {
+    "courseId": "0102",
+    "firstName": "Simon",
+    "lastName": "Heine"
+  },
+  {
+    "courseId": "0102",
+    "firstName": "Tom Marcel",
+    "lastName": "Horbert"
+  },
+  {
+    "courseId": "0102",
+    "firstName": "Maximilian",
+    "lastName": "Körner"
+  },
+  {
+    "courseId": "0102",
+    "firstName": "Luis",
+    "lastName": "Lamkewitz"
+  },
+  {
+    "courseId": "0102",
+    "firstName": "Leni",
+    "lastName": "Leidenfrost"
+  },
+  {
+    "courseId": "0102",
+    "firstName": "Umiiat",
+    "lastName": "Magomedova"
+  },
+  {
+    "courseId": "0102",
+    "firstName": "Charlotte Sophie",
+    "lastName": "Marx"
+  },
+  {
+    "courseId": "0102",
+    "firstName": "Pauline",
+    "lastName": "Mell"
+  },
+  {
+    "courseId": "0102",
+    "firstName": "Amon Magnus",
+    "lastName": "Melzer"
+  },
+  {
+    "courseId": "0102",
+    "firstName": "Sevda",
+    "lastName": "Mohammad"
+  },
+  {
+    "courseId": "0102",
+    "firstName": "Mathilda",
+    "lastName": "Mohr"
+  },
+  {
+    "courseId": "0102",
+    "firstName": "Henry",
+    "lastName": "Müller"
+  },
+  {
+    "courseId": "0102",
+    "firstName": "Milena Josefine",
+    "lastName": "Müller"
+  },
+  {
+    "courseId": "0102",
+    "firstName": "Hannah",
+    "lastName": "Noack"
+  },
+  {
+    "courseId": "0102",
+    "firstName": "Liesbeth Marlene Resi",
+    "lastName": "Richter"
+  },
+  {
+    "courseId": "0102",
+    "firstName": "Anna",
+    "lastName": "Scheumann"
+  },
+  {
+    "courseId": "0102",
+    "firstName": "Hugo",
+    "lastName": "Schönberger"
+  },
+  {
+    "courseId": "0102",
+    "firstName": "Franz",
+    "lastName": "Stiehl"
+  },
+  {
+    "courseId": "0102",
+    "firstName": "Phil",
+    "lastName": "Westphalen"
+  },
+  {
+    "courseId": "0102",
+    "firstName": "Ayushmaan",
+    "lastName": "Zager"
+  }
+]
