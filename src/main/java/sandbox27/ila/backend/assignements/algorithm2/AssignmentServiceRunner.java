@@ -46,7 +46,7 @@ public class AssignmentServiceRunner {
     @Transactional
     public List<CourseUserAssignmentDTO> runAssignments() throws Exception {
         Period currentPeriod = periodRepository.findByCurrent(true).get();
-        List<User> users = userRepository.findAll();
+        List<User> users = userRepository.findAll().stream().filter(u -> u.getGrade() > 0 && !"testschueler".equals(u.getUserName())).toList();
         List<Block> blocks = blockRepository.findAllByPeriod_idOrderByDayOfWeekAscStartTimeAsc(currentPeriod.getId());
         List<Course> courses = courseRepository.findAllByPeriod(currentPeriod);
         List<CourseBlockAssignment> courseBlockAssignments = courseBlockAssignmentRepository.findAllByPeriodId(currentPeriod.getId());
