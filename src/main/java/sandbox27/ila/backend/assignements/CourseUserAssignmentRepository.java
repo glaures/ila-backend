@@ -21,4 +21,6 @@ public interface CourseUserAssignmentRepository extends JpaRepository<CourseUser
     List<CourseUserAssignment> findByCourse_Period(Period currentPeriod);
 
     List<CourseUserAssignment> findByCourse_id(Long courseId);
+
+    int deleteAllByPreset(boolean b);
 }
