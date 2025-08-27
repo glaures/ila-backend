@@ -120,13 +120,13 @@ public class AssignmentAlgorithmService {
         for (PrefWork pw : new ArrayList<>(workPrefs)) {
             if (!isPausePref(pw)) continue;
             final String ubKey = userBlockKey(pw.userName, pw.blockId);
-            if (assignedUserBlock.contains(ubKey)) continue;
+            // if (assignedUserBlock.contains(ubKey)) continue;
 
             CourseUserAssignmentDTO pause = new CourseUserAssignmentDTO(
                     pw.userName, null, PAUSE_COURSE_NAME, pw.blockId, false, true, 0
             );
             result.add(pause);
-            assignedUserBlock.add(ubKey);
+            // assignedUserBlock.add(ubKey);
             winningPrefKeys.add(pw.key());
             pruneUserBlockPrefs(workPrefs, pw.userName, pw.blockId);
         }
@@ -309,7 +309,7 @@ public class AssignmentAlgorithmService {
                         CourseDTO picked = null;
                         int bestRest = -1;
                         for (CourseDTO c : blockCourses) {
-                            if (!isAllowedForGrade(c, userGrade)) continue; // <<< NEU: Grade-Check
+                            if (!isAllowedForGrade(c, userGrade) || isPlaceholder(c)) continue; // <<< NEU: Grade-Check
                             final int cap = c.getMaxAttendees() > 0 ? c.getMaxAttendees() : Integer.MAX_VALUE;
                             final int occ = occupancyByCourse.getOrDefault(c.getId(), 0);
                             final int rest = cap == Integer.MAX_VALUE ? Integer.MAX_VALUE : Math.max(0, cap - occ);

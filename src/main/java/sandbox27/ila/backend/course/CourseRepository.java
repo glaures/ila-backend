@@ -30,4 +30,6 @@ public interface CourseRepository extends JpaRepository<Course, Long> {
     List<Course> findAllByBlock_Id(Long blockId);
 
     Optional<Course> findByCourseId(String s);
+
+    Course getReferenceByCourseId(String courseId);
 }
