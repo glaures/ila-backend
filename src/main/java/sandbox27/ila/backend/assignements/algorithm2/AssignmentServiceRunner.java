@@ -54,6 +54,7 @@ public class AssignmentServiceRunner {
         List<Preference> preferences = preferenceRepository.findAllByBlock_Period(currentPeriod);
         AssignmentInputDTO input = assignmentInputMapperService.buildInput(users, blocks, courses, courseBlockAssignments, preferences, predefinedAssignments);
         input = validateAndFixThreeBlocks(input);
+        System.out.println("***** SEED ****" + AssignmentAlgorithmService.RANDOM_SEED);
         return assignmentAlgorithmServiceV2.assignCourses(input);
     }
 
