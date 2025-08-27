@@ -9,28 +9,31 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 /**
- * AssignmentAlgorithmServiceV13Fix
+ * AssignmentAlgorithmServiceV15
  *
- * Wie V13, aber mit Fix:
- *  - In allen Streams/Lambdas wird currentRank NICHT direkt verwendet.
- *    Stattdessen: final int rankF = currentRank; und rankF in den Prädikaten nutzen.
+ * Änderungen ggü. V14:
+ *  - Schritt 6 (Auffüllen auf genau 3 Kurse) berücksichtigt jetzt die Klassenstufe:
+ *    Ein Kurs wird nur gewählt, wenn der/die Schüler:in in course.allowedGrades enthalten ist
+ *    (falls Liste leer/null: keine Einschränkung).
  *
  * Schrittfolge:
- *  1) Vorbelegte Kurse → block sperren
- *  2) Pausen (prefIndex < 0 oder courseId=="PAUSE") → block sperren
- *  3) Placeholder-Kurse mit prefIndex==0 GARANTIERT zuteilen → block sperren; übrige Placeholder-Prefs entfernen
- *  4) Rangweise Zuteilung r=0,1,2,...:
- *     - Für jeden Block (in Wochenreihenfolge) Kandidaten mit currentRank==r zufällig durchgehen und zuteilen
- *     - Pro Zuteilung: block-pruning (alle Prefs dieses (user,block) entfernen)
- *     - Nach Abschluss ALLER Blöcke für Rang r: Demote übrige Prefs (currentRank==r) der in r zugeteilten Nutzer um +1
+ *  0) validateAndFixThreeBlocks(...) auf Input anwenden
+ *  1) Vorbelegte Kurse → Block sperren
+ *  2) Pausen (prefIndex < 0 oder courseId=="PAUSE") → Block sperren
+ *  3) Placeholder-Kurse mit prefIndex==0 GARANTIERT zuteilen → Block sperren; übrige Placeholder-Prefs entfernen
+ *  4) Rangweise Zuteilung r=0,1,2,... (BLOCKWEISE, zufällig):
+ *     - Kandidaten je Block (currentRank==r) zufällig zuteilen (mit Kapazität)
+ *     - je Zuteilung: hartes Block-Pruning
+ *     - NACH der Rangrunde: Demote übrige Prefs (currentRank==r) der in r erfolgreichen Nutzer um +1
  *  5) Nicht zugeteilte Präferenzen loggen
- *  6) Auffüllen auf genau 3 Kurs-Belegungen/Schüler (tagesweise, erster Block bevorzugt, max. 1 Kurs/Tag; Pause zählt nicht)
+ *  6) Auffüllen auf GENAU 3 Kurse/Schüler (pro Tag max. 1 Kurs; Pause zählt nicht; erster Block bevorzugt)
+ *     - **NEU:** nur Kurse, die zur Klassenstufe passen (allowedGrades)
  *  7) Abschluss-Checks & Statistiken
  *
  * CourseUserAssignmentDTO.preferenceIndex:
  *  - predefined & pause: 0
  *  - placeholder Rang 0: 0
- *  - normale Vergabe: originalRank der Präferenz
+ *  - normale Vergabe: ORIGINAL-rank der Präferenz (nicht currentRank!)
  *  - Auffüllen (ohne Präferenz): 999
  */
 @Slf4j
@@ -41,12 +44,19 @@ public class AssignmentAlgorithmService {
     public static final String PAUSE_COURSE_NAME = "__PAUSE__";
     public static final String PAUSE_COURSE_ID_MARKER = "PAUSE"; // optionaler Marker
 
-    private static final String RANDOM_SEED = "jmoosdorf";
+    /** String-Seed für deterministische Zufälligkeit. */
+    public static final long RANDOM_SEED = 96533564564456123L;
 
+    /** Zielanzahl an Kurs-Belegungen pro Schüler über die Woche. */
     private static final int TARGET_COURSE_ASSIGNMENTS_PER_STUDENT = 3;
+
+    /** Marker-Index für Auto-Fill-Zuweisungen (Schritt 6). */
     private static final int PREF_INDEX_AUTO_FILL = 999;
 
-    public List<CourseUserAssignmentDTO> assignCourses(final AssignmentInputDTO input) {
+    public List<CourseUserAssignmentDTO> assignCourses(final AssignmentInputDTO inputRaw) {
+        // 0) Validieren + ggf. fixen (arbeitet in-place am DTO)
+        final AssignmentInputDTO input = validateAndFixThreeBlocks(inputRaw);
+
         final List<CourseUserAssignmentDTO> result = new ArrayList<>();
 
         // --- Stammdaten & Indizes ---
@@ -87,6 +97,7 @@ public class AssignmentAlgorithmService {
 
         // === (1) Vorbelegte Zuweisungen ===
         for (CourseUserAssignmentDTO a : safeList(input.getPredefinedAssignments())) {
+            if (a == null) continue;
             final String ubKey = userBlockKey(a.getUserName(), a.getBlockId());
             if (assignedUserBlock.add(ubKey)) {
                 // normiere preferenceIndex = 0
@@ -154,7 +165,7 @@ public class AssignmentAlgorithmService {
         int currentRank = 0;
 
         while (true) {
-            final int rankF = currentRank; // <<<<<<<<<<<<<< wichtig für Streams
+            final int rankF = currentRank; // für Lambdas/Streams
 
             // Gibt es noch jemanden auf diesem Rang?
             boolean anyAtRank = activePrefs.stream()
@@ -179,7 +190,7 @@ public class AssignmentAlgorithmService {
             for (Long blockId : blockIdsInOrder) {
                 final List<PrefWork> candidates = activePrefs.stream()
                         .filter(pw -> pw.blockId.equals(blockId))
-                        .filter(pw -> pw.currentRank == rankF) // <<<<<<<< rankF statt currentRank
+                        .filter(pw -> pw.currentRank == rankF)
                         .filter(pw -> !winningPrefKeys.contains(pw.key()))
                         .filter(pw -> !assignedUserBlock.contains(userBlockKey(pw.userName, pw.blockId)))
                         .collect(Collectors.toCollection(ArrayList::new));
@@ -199,6 +210,7 @@ public class AssignmentAlgorithmService {
                     final int cap = course.getMaxAttendees() > 0 ? course.getMaxAttendees() : Integer.MAX_VALUE;
                     if (occ >= cap) continue;
 
+                    // Zuweisen (preferenceIndex = ORIGINAL-rank)
                     CourseUserAssignmentDTO assignment = new CourseUserAssignmentDTO(
                             pw.userName, pw.courseId, course.getName(), pw.blockId, false, false, pw.originalRank
                     );
@@ -247,10 +259,11 @@ public class AssignmentAlgorithmService {
             log.info("Alle relevanten Präferenzen erhielten eine Zuweisung (inkl. PAUSE/Vorbelegungen).");
         }
 
-        // === (6) Auffüllen auf GENAU 3 Kurse/Schüler (tagesweise, erster Block bevorzugt) ===
+        // === (6) Auffüllen auf GENAU 3 Kurse/Schüler (tagesweise, erster Block bevorzugt) – MIT GRADE CHECK ===
+
+        // Indexe: Tage je Block, Kursbelegungen je User&Tag
         final Map<String, Set<String>> courseDaysByUser = new HashMap<>();
         final Map<String, Integer> courseCountByUser = new HashMap<>();
-
         for (CourseUserAssignmentDTO a : result) {
             if (a.isPause()) continue;
             final BlockDTO b = blockById.get(a.getBlockId());
@@ -258,6 +271,10 @@ public class AssignmentAlgorithmService {
             courseDaysByUser.computeIfAbsent(a.getUserName(), k -> new HashSet<>()).add(b.getDayOfWeek());
             courseCountByUser.merge(a.getUserName(), 1, Integer::sum);
         }
+
+        // Nutzer → Klassenstufe
+        final Map<String, String> gradeByUser = safeList(input.getUsers()).stream()
+                .collect(Collectors.toMap(UserDTO::getUserName, UserDTO::getGrade, (a, b) -> a, LinkedHashMap::new));
 
         final Set<String> allUsers = safeList(input.getUsers()).stream()
                 .map(UserDTO::getUserName)
@@ -271,6 +288,7 @@ public class AssignmentAlgorithmService {
 
         for (String userName : allUsers) {
             int currentCourseCount = courseCountByUser.getOrDefault(userName, 0);
+            final String userGrade = normalize(gradeByUser.get(userName));
 
             while (currentCourseCount < TARGET_COURSE_ASSIGNMENTS_PER_STUDENT) {
                 boolean assignedSomething = false;
@@ -281,14 +299,17 @@ public class AssignmentAlgorithmService {
                     final List<BlockDTO> blocksOfDay = blocksByDay.getOrDefault(day, Collections.emptyList());
                     if (blocksOfDay.isEmpty()) continue;
 
+                    // Blöcke sind bereits in Tagesreihenfolge (erster Block bevorzugt)
                     for (BlockDTO targetBlock : blocksOfDay) {
                         final String ubKey = userBlockKey(userName, targetBlock.getId());
                         if (assignedUserBlock.contains(ubKey)) continue; // schon Pause/Kurs in diesem Block
 
+                        // Greedy: Kurs mit größter Restkapazität, der zur Klassenstufe passt
                         final List<CourseDTO> blockCourses = coursesByBlock.getOrDefault(targetBlock.getId(), Collections.emptyList());
                         CourseDTO picked = null;
                         int bestRest = -1;
                         for (CourseDTO c : blockCourses) {
+                            if (!isAllowedForGrade(c, userGrade)) continue; // <<< NEU: Grade-Check
                             final int cap = c.getMaxAttendees() > 0 ? c.getMaxAttendees() : Integer.MAX_VALUE;
                             final int occ = occupancyByCourse.getOrDefault(c.getId(), 0);
                             final int rest = cap == Integer.MAX_VALUE ? Integer.MAX_VALUE : Math.max(0, cap - occ);
@@ -316,7 +337,7 @@ public class AssignmentAlgorithmService {
                 }
 
                 if (!assignedSomething) {
-                    log.warn("Auffüllen nicht vollständig möglich für {} – hat {} / {} Kurs-Belegungen.",
+                    log.warn("Auffüllen nicht vollständig möglich für {} – hat {} / {} Kurs-Belegungen (ggf. wegen allowedGrades).",
                             userName, currentCourseCount, TARGET_COURSE_ASSIGNMENTS_PER_STUDENT);
                     break;
                 }
@@ -346,10 +367,117 @@ public class AssignmentAlgorithmService {
         return result;
     }
 
-    // ------------------ Helpers ------------------
+    // ------------------ Öffentliche Helper ------------------
+
+    /** Public, damit auch außerhalb nutzbar (deterministische Zufälligkeit über String-Seed). */
+    public static Random rng() {
+        return new Random(RANDOM_SEED);
+    }
+
+    /** Public, generische Null-Absicherung: niemals null zurückgeben. */
+    public static <T> List<T> safeList(List<T> in) {
+        return in == null ? Collections.emptyList() : in;
+    }
+
+    // ------------------ Validator / Fixer ------------------
+
+    public AssignmentInputDTO validateAndFixThreeBlocks(final AssignmentInputDTO input) {
+        if (input == null) return null;
+
+        final Random rnd = rng();
+        final List<PreferenceDTO> prefs = new ArrayList<>(safeList(input.getPreferences()));
+
+        // Vorbelegte KURS-Blöcke pro User (Pausen ignorieren)
+        final Map<String, Set<Long>> predefBlocksByUser = new HashMap<>();
+        for (CourseUserAssignmentDTO a : safeList(input.getPredefinedAssignments())) {
+            if (a == null) continue;
+            if (a.isPause()) continue;
+            if (a.getCourseId() == null) continue;
+            predefBlocksByUser.computeIfAbsent(a.getUserName(), k -> new LinkedHashSet<>()).add(a.getBlockId());
+        }
+
+        // Präferenz-Blöcke pro User (nur KURS-Präferenzen, Pausen ignorieren)
+        final Map<String, Set<Long>> prefBlocksByUser = new HashMap<>();
+        for (PreferenceDTO p : prefs) {
+            if (p == null) continue;
+            if (isPausePreference(p)) continue;
+            prefBlocksByUser.computeIfAbsent(p.getUserName(), k -> new LinkedHashSet<>()).add(p.getBlockId());
+        }
+
+        // Alle relevanten User (aus Users, Prefs, Vorbelegungen)
+        final Set<String> allUsers = new LinkedHashSet<>();
+        for (UserDTO u : safeList(input.getUsers())) allUsers.add(u.getUserName());
+        allUsers.addAll(predefBlocksByUser.keySet());
+        allUsers.addAll(prefBlocksByUser.keySet());
+
+        for (String user : allUsers) {
+            final Set<Long> predef = new LinkedHashSet<>(predefBlocksByUser.getOrDefault(user, Collections.emptySet()));
+            final Set<Long> pref   = new LinkedHashSet<>(prefBlocksByUser.getOrDefault(user, Collections.emptySet()));
+
+            final Set<Long> combined = new LinkedHashSet<>(predef);
+            combined.addAll(pref);
+
+            final int size = combined.size();
+            if (size == 3) continue;
+
+            if (size < 3) {
+                log.warn("validateAndFixThreeBlocks: {} hat nur {} Blöcke (vorbelegt={}, prefs={}) – keine automatische Ergänzung.",
+                        user, size, predef.size(), pref.size());
+                continue;
+            }
+
+            // size > 3: reduzieren
+            final int toRemove = size - 3;
+
+            // Nur Präferenz-Blöcke dürfen entfernt werden (Vorbelegungen sind fix)
+            final List<Long> removablePrefBlocks = new ArrayList<>(pref);
+            removablePrefBlocks.removeAll(predef); // schütze vorbelegte Blöcke
+
+            if (predef.size() > 3) {
+                // Vorbelegungen belegen schon >3 Blöcke – kann hier nicht fixen
+                log.warn("validateAndFixThreeBlocks: {} hat bereits {} vorbelegte Kurs-Blöcke (>3). Präferenzen werden nicht verändert.",
+                        user, predef.size());
+                continue;
+            }
+
+            if (removablePrefBlocks.isEmpty()) {
+                continue; // nichts zu entfernen
+            }
+
+            Collections.shuffle(removablePrefBlocks, rnd);
+            final List<Long> blocksToDrop = removablePrefBlocks.subList(0, Math.min(toRemove, removablePrefBlocks.size()));
+
+            // Entferne alle Präferenzen des Users in diesen Blöcken
+            int before = prefs.size();
+            prefs.removeIf(p -> user.equals(p.getUserName()) && blocksToDrop.contains(p.getBlockId()));
+            int removed = before - prefs.size();
+
+            log.info("validateAndFixThreeBlocks: {} hatte {} Blöcke, entferne {} Präferenz-Block/Blöcke {} ({} Präferenzen gelöscht), jetzt 3.",
+                    user, size, blocksToDrop.size(), blocksToDrop, removed);
+        }
+
+        // Schreibe gefixte Präferenzen zurück
+        try {
+            input.setPreferences(prefs);
+        } catch (Exception e) {
+            log.warn("validateAndFixThreeBlocks: Konnte Preferences nicht zurückschreiben (kein Setter?). Änderungen nur lokal wirksam.");
+        }
+
+        return input;
+    }
+
+    // ------------------ Private Helpers ------------------
 
     private static boolean isPausePref(PrefWork pw) {
-        return pw.originalRank < 0 || PAUSE_COURSE_ID_MARKER.equalsIgnoreCase(pw.courseId);
+        return pw.originalRank < 0 || (pw.courseId != null && PAUSE_COURSE_ID_MARKER.equalsIgnoreCase(pw.courseId));
+    }
+
+    /** Kurs-Pause-Präferenz? (negativer Index ODER courseId == 'PAUSE') */
+    private static boolean isPausePreference(PreferenceDTO p) {
+        if (p == null) return false;
+        if (p.getPreferenceIndex() < 0) return true;
+        final String cid = p.getCourseId();
+        return cid != null && PAUSE_COURSE_ID_MARKER.equalsIgnoreCase(cid);
     }
 
     private static boolean belongsToBlock(CourseDTO c, Long blockId) {
@@ -368,10 +496,22 @@ public class AssignmentAlgorithmService {
         }
     }
 
-    public static Random rng() {
-        // stabiler long-Seed aus String, ohne Checked Exceptions
-        long seed = RANDOM_SEED == null ? System.nanoTime() : RANDOM_SEED.hashCode();
-        return new Random(seed);
+    /** true, wenn der Kurs für die gegebene Klassenstufe erlaubt ist (allowedGrades leer/null ⇒ offen). */
+    private static boolean isAllowedForGrade(CourseDTO c, String userGradeNorm) {
+        Set<String> allowed = c.getAllowedGrades();
+        if (allowed == null || allowed.isEmpty()) return true;    // keine Einschränkung
+        if (userGradeNorm == null || userGradeNorm.isEmpty()) {
+            // Keine bekannte Klassenstufe → nur Kurse ohne Einschränkung wären erlaubt; hier: restriktiv
+            return false;
+        }
+        for (String g : allowed) {
+            if (userGradeNorm.equals(normalize(g))) return true;
+        }
+        return false;
+    }
+
+    private static String normalize(String s) {
+        return s == null ? null : s.trim().toUpperCase(Locale.ROOT);
     }
 
     private static String userBlockKey(String userName, Long blockId) {
@@ -392,14 +532,15 @@ public class AssignmentAlgorithmService {
         }
     }
 
-    public static <T> List<T> safeList(List<T> in) {
-        return in == null ? Collections.emptyList() : in;
-    }
-
+    /** Entfernt ALLE Prefs eines (user, block) aus der Liste (z. B. nach Vorbelegung oder Pause). */
     private static void pruneUserBlockPrefs(List<PrefWork> list, String userName, Long blockId) {
         list.removeIf(pw -> pw.userName.equals(userName) && Objects.equals(pw.blockId, blockId));
     }
 
+    /**
+     * Entfernt ALLE Prefs eines (user, block) außer der mit keepKey aus der Liste.
+     * Nutze diese Variante, wenn gerade eine Präferenz aus diesem Block zugeteilt wurde.
+     */
     private static void pruneUserBlockPrefs(List<PrefWork> list, String userName, Long blockId, String keepKey) {
         list.removeIf(pw -> pw.userName.equals(userName)
                 && Objects.equals(pw.blockId, blockId)

@@ -51,6 +51,7 @@ public class AssignmentInputMapperService {
                     Set<String> grades = c.getGrades().stream()
                             .map(String::valueOf)
                             .collect(Collectors.toSet());
+                    dto.setAllowedGrades(grades);
                     dto.setBlockId(coursesBlockIds.get(c.getCourseId()));
                     return dto;
                 })
