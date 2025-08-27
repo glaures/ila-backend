@@ -3,9 +3,9 @@ package sandbox27.ila.backend.course;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
+import sandbox27.ila.backend.period.Period;
 
 import java.time.DayOfWeek;
-import java.time.Period;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,7 +26,7 @@ public interface CourseRepository extends JpaRepository<Course, Long> {
     List<Course> findAllByPeriod(Period period);
 
     @Query("select cba.course from CourseBlockAssignment cba " +
-            "where cba.block.id=:blockId")
+            "where cba.block.id=:blockId order by cba.course.courseId")
     List<Course> findAllByBlock_Id(Long blockId);
 
     Optional<Course> findByCourseId(String s);

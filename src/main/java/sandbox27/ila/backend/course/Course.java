@@ -34,10 +34,6 @@ public class Course {
     @CollectionTable(name = "course_allowed_grades", joinColumns = @JoinColumn(name = "course_id"))
     @Column(name = "grade")
     Set<Integer> grades  = new HashSet<>();
-    /*
-    @ManyToOne
-    User courseInstructor;
-     */
     String room;
     int minAttendees = 0;
     int maxAttendees;

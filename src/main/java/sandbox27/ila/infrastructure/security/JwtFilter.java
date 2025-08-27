@@ -27,6 +27,8 @@ public class JwtFilter extends OncePerRequestFilter {
                 && !request.getMethod().equals("OPTIONS")
                 && !request.getRequestURI().equals("/test-basis")
                 && !request.getRequestURI().startsWith("/blocks")
+                && !request.getRequestURI().startsWith("/courses")
+                && !request.getRequestURI().startsWith("/assignments")
                 && !request.getRequestURI().startsWith("/periods")
         ) {
             String auth = request.getHeader("Authorization");

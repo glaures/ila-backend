@@ -3,6 +3,7 @@ package sandbox27.ila.backend.assignements.algorithm.rest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import sandbox27.ila.backend.assignements.algorithm.*;
+import sandbox27.ila.backend.assignements.algorithm2.FairCourseAssignmentService;
 import sandbox27.ila.backend.block.Block;
 import sandbox27.ila.backend.block.BlockRepository;
 import sandbox27.ila.backend.course.Course;
@@ -43,8 +44,8 @@ public class CourseAssignmentRestService {
         BlockAssignmentRequest blockAssignmentRequest = new BlockAssignmentRequest();
         blockAssignmentRequest.setBlockCourses(generateCourseDefinitions(periodId));
         blockAssignmentRequest.setBlockPreferences(generateStudentPreferences(periodId));
-        AssignmentResult assignmentResult = courseAssignmentService.assign(blockAssignmentRequest);
-        return transformAssignmentResultIntoPayload(assignmentResult);
+        // AssignmentResult assignmentResult = courseAssignmentService.assignCourses(blockAssignmentRequest);
+        return null;//transformAssignmentResultIntoPayload(assignmentResult);
     }
 
     private AssignmentOverviewResponse transformAssignmentResultIntoPayload(AssignmentResult assignmentResult) {

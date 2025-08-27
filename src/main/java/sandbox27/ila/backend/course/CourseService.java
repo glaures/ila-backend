@@ -8,21 +8,26 @@ import java.time.DayOfWeek;
 import java.util.List;
 import java.util.Optional;
 
-@Service
+@RestController
 @RequiredArgsConstructor
+@RequestMapping("/courses")
 public class CourseService {
 
     final CourseRepository courseRepository;
 
     @GetMapping
-    public List<CourseDto> findAllCoursesForBlock(Long blockId, int grade) {
+    public List<CourseDto> findAllCoursesForBlock(@RequestParam(name = "block-id") Long blockId,
+                                                  @RequestParam(required = false, defaultValue = "0") int grade) {
         return courseRepository.findAllByBlock_Id(blockId).stream()
-                .filter(course -> course.getGrades().contains(grade))
+                .filter(course -> grade == 0 || course.getGrades().contains(grade))
                 .map(c -> CourseDto.builder()
                         .id(c.getId())
                         .name(c.getName())
                         .description(c.description)
                         .courseCategories(c.getCourseCategories())
+                        .maxAttendees(c.getMaxAttendees())
+                        .room(c.getRoom())
+                        .instructor(c.getInstructor())
                         .build())
                 .toList();
     }
