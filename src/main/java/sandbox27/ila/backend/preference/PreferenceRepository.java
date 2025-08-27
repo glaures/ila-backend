@@ -14,6 +14,8 @@ import java.util.List;
 @Repository
 public interface PreferenceRepository extends JpaRepository<Preference, Long> {
 
+    List<Preference> findAllByBlock_Period(Period period);
+
     List<Preference> findByUserAndBlockOrderByPreferenceIndex(User user, Block block);
 
     void deleteByUserAndBlock(User user, Block block);

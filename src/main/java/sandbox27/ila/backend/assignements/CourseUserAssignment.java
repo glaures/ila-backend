@@ -26,4 +26,6 @@ public class CourseUserAssignment {
     @ManyToOne(optional = false)
     private Block block;
 
+    private boolean preset = false;
+
 }

@@ -26,12 +26,14 @@ public class PlaceholderCheck {
     public void ensurePlaceholdersInEveryBlockOfCurrentPeriod(){
         Period currentPeriod = periodRepository.findByCurrent(true).orElseThrow();
         List<Block> blocksOfPeriod = blockRepository.findAllByPeriod_idOrderByDayOfWeekAscStartTimeAsc(currentPeriod.getId());
+        int courseId = 9999;
         for(Block block : blocksOfPeriod){
             Optional<CourseBlockAssignment> courseBlockAssignmentOptional = courseBlockAssignmentRepository.findAllByBlock(block).stream()
                     .filter(courseBlockAssignment -> courseBlockAssignment.getCourse().isPlaceholder())
                     .findFirst();
             if(courseBlockAssignmentOptional.isEmpty()){
                 Course placeHolderCourse = Course.builder()
+                        .courseId(String.valueOf(courseId--))
                         .period(currentPeriod)
                         .name("Platzhalter-Kurs")
                         .description("Dieser Kurs dient dazu, für diesen Block einen Platzhalter zu wählen, der dann erst in der Folge mit einem noch zu erstellenden Kurs ersetzt wird.")

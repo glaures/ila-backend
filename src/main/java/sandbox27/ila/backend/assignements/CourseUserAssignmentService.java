@@ -1,19 +1,18 @@
 package sandbox27.ila.backend.assignements;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import sandbox27.ila.backend.assignements.algorithm2.dtos.UserDTO;
 import sandbox27.ila.backend.course.CourseDto;
 import sandbox27.ila.backend.user.User;
+import sandbox27.ila.backend.user.UserDto;
 import sandbox27.ila.infrastructure.security.AuthenticatedUser;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @Service
@@ -33,5 +32,16 @@ public class CourseUserAssignmentService {
                     return new CourseUserAssignmentResponse(new CourseUserAssignmentDto(courseUserAssignment, courseDto));
                 })
                 .orElseGet(CourseUserAssignmentResponse::new);
+    }
+
+    @GetMapping
+    public List<CourseUserAssignmentDto> getCourseUserAssignment(@RequestParam("course-id") Long courseId) {
+        List<CourseUserAssignment> assignments = courseUserAssignmentRepository.findByCourse_id(courseId);
+        return assignments
+                .stream()
+                .map(a -> {
+                    return new CourseUserAssignmentDto(a, modelMapper.map(a.getCourse(), CourseDto.class));
+                })
+                .toList();
     }
 }

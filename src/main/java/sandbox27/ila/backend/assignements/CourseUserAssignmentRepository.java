@@ -18,4 +18,7 @@ public interface CourseUserAssignmentRepository extends JpaRepository<CourseUser
 
     List<CourseUserAssignment> findByUserAndBlock_Period(User user, Period period);
 
+    List<CourseUserAssignment> findByCourse_Period(Period currentPeriod);
+
+    List<CourseUserAssignment> findByCourse_id(Long courseId);
 }

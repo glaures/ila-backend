@@ -13,10 +13,12 @@ import java.util.Set;
 public class CourseDto {
 
     long id;
+    String courseId;
     String name;
     String description;
     Set<CourseCategory> courseCategories;
+    int maxAttendees;
     String room;
-    User teacher;
+    String instructor;
 
 };
