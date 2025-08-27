@@ -1,0 +1,574 @@
+[
+  {
+    "courseId": "0111",
+    "instructor": "Abicht"
+  },
+  {
+    "courseId": "0117",
+    "instructor": "Abicht"
+  },
+  {
+    "courseId": "0001",
+    "instructor": "Alber",
+    "room": "Bibliothek (optional - kann auch ausweichen)"
+  },
+  {
+    "courseId": "0002",
+    "instructor": "Altner",
+    "room": "335"
+  },
+  {
+    "courseId": "0003",
+    "instructor": "Andriefski",
+    "room": "TH"
+  },
+  {
+    "courseId": "0004",
+    "instructor": "Becker"
+  },
+  {
+    "courseId": "0005",
+    "instructor": "Becker",
+    "room": "№ 01.327 Der Raum bietet Platz für 10 Personen und ist für den Kurs geeignet."
+  },
+  {
+    "courseId": "0006",
+    "instructor": "Becker",
+    "room": "№ 01.327 Der Raum bietet Platz für 10 Personen und ist für den Kurs geeignet."
+  },
+  {
+    "courseId": "0007",
+    "instructor": "Biewendt",
+    "room": "Klassenraum 5a"
+  },
+  {
+    "courseId": "0008",
+    "instructor": "Darius",
+    "room": "Inforaum (214/216)"
+  },
+  {
+    "courseId": "0009",
+    "instructor": "Darius",
+    "room": "318"
+  },
+  {
+    "courseId": "0010",
+    "instructor": "Engel",
+    "room": "Ebene des JG 6"
+  },
+  {
+    "courseId": "0011",
+    "instructor": "Engel",
+    "room": "Ebene des JG 6"
+  },
+  {
+    "courseId": "0012",
+    "instructor": "Engel",
+    "room": "Ebene des JG 6"
+  },
+  {
+    "courseId": "0013",
+    "instructor": "Ganse",
+    "room": "R131"
+  },
+  {
+    "courseId": "0014",
+    "instructor": "Ganse",
+    "room": "131"
+  },
+  {
+    "courseId": "0015",
+    "instructor": "GTA",
+    "room": "TH"
+  },
+  {
+    "courseId": "0016",
+    "instructor": "GTA",
+    "room": "TH"
+  },
+  {
+    "courseId": "0017",
+    "instructor": "GTA",
+    "room": "Bistro"
+  },
+  {
+    "courseId": "0018",
+    "instructor": "GTA",
+    "room": "Bistro"
+  },
+  {
+    "courseId": "0019",
+    "instructor": "GTA",
+    "room": "TH"
+  },
+  {
+    "courseId": "0020",
+    "instructor": "GTA",
+    "room": "TH"
+  },
+  {
+    "courseId": "0021",
+    "instructor": "GTA",
+    "room": "Aula"
+  },
+  {
+    "courseId": "0022",
+    "instructor": "GTA",
+    "room": "Aula"
+  },
+  {
+    "courseId": "0023",
+    "instructor": "GTA",
+    "room": "Werken Raum"
+  },
+  {
+    "courseId": "0109",
+    "instructor": "Gündel",
+    "room": "Kunstraum"
+  },
+  {
+    "courseId": "0115",
+    "instructor": "Gündel"
+  },
+  {
+    "courseId": "0024",
+    "instructor": "Gürtler",
+    "room": "225"
+  },
+  {
+    "courseId": "0025",
+    "instructor": "Gürtler",
+    "room": "Ein ruhiger Teil der Sporthalle oder ein anderer Raum in dem Yoga-Matten ausgelegt werden können (z.B.Aula)"
+  },
+  {
+    "courseId": "0026",
+    "instructor": "Halling",
+    "room": "TH unten"
+  },
+  {
+    "courseId": "0027",
+    "instructor": "Halling",
+    "room": 201
+  },
+  {
+    "courseId": "0028",
+    "instructor": "Hassel",
+    "room": "231"
+  },
+  {
+    "courseId": "0029",
+    "instructor": "Hassel",
+    "room": "231"
+  },
+  {
+    "courseId": "0030",
+    "instructor": "Hoffmann",
+    "room": "Schulbibliothek"
+  },
+  {
+    "courseId": "0033",
+    "instructor": "Jödicke",
+    "room": "TH"
+  },
+  {
+    "courseId": "0034",
+    "instructor": "Kahlo",
+    "room": "Klassenraum 5c"
+  },
+  {
+    "courseId": "0035",
+    "instructor": "Kahlo",
+    "room": "417 oder Aula, je nach Teilnehmerzahl"
+  },
+  {
+    "courseId": "0123",
+    "instructor": "Kahlo",
+    "room": 417
+  },
+  {
+    "courseId": "0037",
+    "instructor": "Kaldune",
+    "room": "201"
+  },
+  {
+    "courseId": "0108",
+    "instructor": "Kerl",
+    "room": "TH"
+  },
+  {
+    "courseId": "0114",
+    "instructor": "Kerl"
+  },
+  {
+    "courseId": "0038",
+    "instructor": "Kiethe",
+    "room": "227"
+  },
+  {
+    "courseId": "0039",
+    "instructor": "Kiethe",
+    "room": "227"
+  },
+  {
+    "courseId": "0040",
+    "instructor": "Kiethe",
+    "room": "Der Raum von Maria S. (siehe ihre Anmeldung)"
+  },
+  {
+    "courseId": "0041",
+    "instructor": "Krebs",
+    "room": "201 (oder anderer Raum in Nähe des Schulclubs)"
+  },
+  {
+    "courseId": "0042",
+    "instructor": "Krebs",
+    "room": "216"
+  },
+  {
+    "courseId": "0043",
+    "instructor": "Kretschmer",
+    "room": "TH unten"
+  },
+  {
+    "courseId": "0044",
+    "instructor": "Kretschmer",
+    "room": "TH"
+  },
+  {
+    "courseId": "0045",
+    "instructor": "Lehmann",
+    "room": "TH"
+  },
+  {
+    "courseId": "0046",
+    "instructor": "Lehmann",
+    "room": "TH"
+  },
+  {
+    "courseId": "0047",
+    "instructor": "Lichner",
+    "room": "Kunstraum"
+  },
+  {
+    "courseId": "0048",
+    "instructor": "Lichner",
+    "room": "Kunstraum"
+  },
+  {
+    "courseId": "0049",
+    "instructor": "Liebers",
+    "room": 211
+  },
+  {
+    "courseId": "0050",
+    "instructor": "Liebers",
+    "room": "208"
+  },
+  {
+    "courseId": "0107",
+    "instructor": "Maaß",
+    "room": "TH"
+  },
+  {
+    "courseId": "0113",
+    "instructor": "Maaß",
+    "room": "TH"
+  },
+  {
+    "courseId": "0051",
+    "instructor": "Martin",
+    "room": "326"
+  },
+  {
+    "courseId": "0052",
+    "instructor": "Martin",
+    "room": "326"
+  },
+  {
+    "courseId": "0053",
+    "instructor": "Mettke",
+    "room": "227"
+  },
+  {
+    "courseId": "0054",
+    "instructor": "Mettke",
+    "room": "227"
+  },
+  {
+    "courseId": "0055",
+    "instructor": "Neumann",
+    "room": "egal"
+  },
+  {
+    "courseId": "0057",
+    "instructor": "Neuner",
+    "room": "317 oder 315"
+  },
+  {
+    "courseId": "0058",
+    "instructor": "Neuner",
+    "room": "317 oder 315"
+  },
+  {
+    "courseId": "0059",
+    "instructor": "Nickel",
+    "room": "127"
+  },
+  {
+    "courseId": "0060",
+    "instructor": "Pannecke",
+    "room": "/"
+  },
+  {
+    "courseId": "0061",
+    "instructor": "Pannecke",
+    "room": "/"
+  },
+  {
+    "courseId": "0062",
+    "instructor": "Pannecke",
+    "room": "/"
+  },
+  {
+    "courseId": "0063",
+    "instructor": "Pannecke",
+    "room": "/"
+  },
+  {
+    "courseId": "0064",
+    "instructor": "Pannecke",
+    "room": "/"
+  },
+  {
+    "courseId": "0065",
+    "instructor": "Persson",
+    "room": "Bistro"
+  },
+  {
+    "courseId": "0066",
+    "instructor": "Persson",
+    "room": "301 (?)"
+  },
+  {
+    "courseId": "0067",
+    "instructor": "Petersen",
+    "room": "114"
+  },
+  {
+    "courseId": "0068",
+    "instructor": "Petersen",
+    "room": "114"
+  },
+  {
+    "courseId": "0069",
+    "instructor": "Petersen",
+    "room": "R114"
+  },
+  {
+    "courseId": "0070",
+    "instructor": "Pohl",
+    "room": "TH unten"
+  },
+  {
+    "courseId": "0072",
+    "instructor": "Pohl",
+    "room": "normaler Klassenraum"
+  },
+  {
+    "courseId": "0073",
+    "instructor": "Redenyi",
+    "room": "TH"
+  },
+  {
+    "courseId": "0074",
+    "instructor": "Redenyi",
+    "room": "TH"
+  },
+  {
+    "courseId": "0106",
+    "instructor": "Rosenow",
+    "room": "TH"
+  },
+  {
+    "courseId": "0112",
+    "instructor": "Rosenow"
+  },
+  {
+    "courseId": "0075",
+    "instructor": "Ruge",
+    "room": "Klassenzimmer 5b"
+  },
+  {
+    "courseId": "0076",
+    "instructor": "Samaniego",
+    "room": "323"
+  },
+  {
+    "courseId": "0078",
+    "instructor": "Schmidt",
+    "room": "Egal"
+  },
+  {
+    "courseId": "0079",
+    "instructor": "Schmidt",
+    "room": "Egal"
+  },
+  {
+    "courseId": "0080",
+    "instructor": "Schmidt",
+    "room": "224"
+  },
+  {
+    "courseId": "0081",
+    "instructor": "Schmidt",
+    "room": "417"
+  },
+  {
+    "courseId": "0118",
+    "instructor": "Schmidt",
+    "room": "Möglichst ohne Bestuhlung"
+  },
+  {
+    "courseId": "0082",
+    "instructor": "Schneider",
+    "room": "TH"
+  },
+  {
+    "courseId": "0083",
+    "instructor": "Schneider",
+    "room": "draußen"
+  },
+  {
+    "courseId": "0084",
+    "instructor": "Schönert",
+    "room": "Klassenraum"
+  },
+  {
+    "courseId": "0085",
+    "instructor": "Schönert",
+    "room": "größerer Klassenraum (wenn möglich), damit nicht so viel umgeräumt werden muss"
+  },
+  {
+    "courseId": "0124",
+    "instructor": "Schönert",
+    "room": 327
+  },
+  {
+    "courseId": "0087",
+    "instructor": "Schuster",
+    "room": "TH"
+  },
+  {
+    "courseId": "0088",
+    "instructor": "Schuster",
+    "room": "TH"
+  },
+  {
+    "courseId": "0121",
+    "instructor": "Schuster",
+    "room": 109
+  },
+  {
+    "courseId": "0089",
+    "instructor": "Schüttler",
+    "room": "2 Räume mit Interaktiven Tafeln, die nebeneinander / gegenüber liegen"
+  },
+  {
+    "courseId": "0090",
+    "instructor": "Schüttler",
+    "room": "2 Räume mit Interaktiven Tafeln, die nebeneinander / gegenüber liegen"
+  },
+  {
+    "courseId": "0091",
+    "instructor": "Schüttler",
+    "room": "1 Etage, nah beim Lehrerzimmer"
+  },
+  {
+    "courseId": "0092",
+    "instructor": "Schwarze",
+    "room": "TH"
+  },
+  {
+    "courseId": "0093",
+    "instructor": "Telschow",
+    "room": "124"
+  },
+  {
+    "courseId": "0094",
+    "instructor": "Thomas",
+    "room": "TH"
+  },
+  {
+    "courseId": "0095",
+    "instructor": "Thomas",
+    "room": "Kunstraum"
+  },
+  {
+    "courseId": "0096",
+    "instructor": "Thomas",
+    "room": "TH"
+  },
+  {
+    "courseId": "0110",
+    "instructor": "Trettner"
+  },
+  {
+    "courseId": "0116",
+    "instructor": "Trettner"
+  },
+  {
+    "courseId": "0097",
+    "instructor": "Uhlmann",
+    "room": "130"
+  },
+  {
+    "courseId": "0098",
+    "instructor": "Uhlmann",
+    "room": "130"
+  },
+  {
+    "courseId": "0099",
+    "instructor": "Vogel",
+    "room": "130"
+  },
+  {
+    "courseId": "0100",
+    "instructor": "Vogel",
+    "room": "130"
+  },
+  {
+    "courseId": "0122",
+    "instructor": "Vogel",
+    "room": "130"
+  },
+  {
+    "courseId": "0101",
+    "instructor": "Werner",
+    "room": "211"
+  },
+  {
+    "courseId": "0102",
+    "instructor": "Werner",
+    "room": "211"
+  },
+  {
+    "courseId": "0103",
+    "instructor": "Weyer",
+    "room": 216
+  },
+  {
+    "courseId": "0104",
+    "instructor": "Weyer",
+    "room": "408"
+  },
+  {
+    "courseId": "0105",
+    "instructor": "Zsilla",
+    "room": "315 oder 317"
+  },
+  {
+    "courseId": "0120",
+    "instructor": NaN,
+    "room": "130, 131"
+  }
+]
