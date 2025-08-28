@@ -2,7 +2,6 @@ package sandbox27.ila.backend.assignements;
 
 import lombok.*;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -13,7 +12,7 @@ import java.util.List;
 @AllArgsConstructor
 public class Feedback {
 
-    List<String> infos = Collections.emptyList();
+    List<String> info = Collections.emptyList();
     List<String> warnings = Collections.emptyList();
     List<String> errors = Collections.emptyList();
 }

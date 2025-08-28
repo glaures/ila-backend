@@ -6,14 +6,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
-import sandbox27.ila.backend.assignementprocess.AssignmentAlgorithmService;
-import sandbox27.ila.backend.assignementprocess.dtos.CourseUserAssignmentDTO;
 import sandbox27.ila.backend.block.Block;
 import sandbox27.ila.backend.course.Course;
 import sandbox27.ila.backend.course.CourseBlockAssignmentRepository;
 import sandbox27.ila.backend.course.CourseDto;
 import sandbox27.ila.backend.course.CourseRepository;
-import sandbox27.ila.backend.period.Period;
 import sandbox27.ila.backend.user.Role;
 import sandbox27.ila.backend.user.User;
 import sandbox27.ila.backend.user.UserRepository;
@@ -90,7 +87,7 @@ public class CourseUserAssignmentService {
                 .build();
         courseUserAssignmentRepository.save(courseUserAssignment);
         return Feedback.builder()
-                .infos(List.of("Zuweisung gespeichert."))
+                .info(List.of("Zuweisung gespeichert."))
                 .build();
     }
 
@@ -104,7 +101,7 @@ public class CourseUserAssignmentService {
                 .orElseThrow(() -> new ServiceException(ErrorCode.NotFound));
         courseUserAssignmentRepository.delete(assignment);
         return Feedback.builder()
-                .infos(List.of("Die Kurszuordnung wurde entfernt"))
+                .info(List.of("Die Kurszuordnung wurde entfernt"))
                 .build();
     }
 
