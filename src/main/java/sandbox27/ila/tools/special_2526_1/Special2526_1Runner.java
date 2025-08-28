@@ -30,9 +30,9 @@ public class Special2526_1Runner {
         log.info("Starting Physik 6. Klasse");
         sixGradePhysicsImporter.runImport();
         log.info("Specials finished");
-         */
         roomAndInstructorImporter.runImport();
         log.info("roomAndInstructorImporter finished");
+         */
     }
 
 

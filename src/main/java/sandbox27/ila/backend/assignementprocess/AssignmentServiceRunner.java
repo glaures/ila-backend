@@ -1,15 +1,19 @@
-package sandbox27.ila.backend.assignements.algorithm2;
+package sandbox27.ila.backend.assignementprocess;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import sandbox27.ila.backend.assignements.CourseUserAssignment;
 import sandbox27.ila.backend.assignements.CourseUserAssignmentRepository;
-import sandbox27.ila.backend.assignements.algorithm2.dtos.AssignmentInputDTO;
-import sandbox27.ila.backend.assignements.algorithm2.dtos.CourseUserAssignmentDTO;
-import sandbox27.ila.backend.assignements.algorithm2.dtos.PreferenceDTO;
-import sandbox27.ila.backend.assignements.algorithm2.dtos.UserDTO;
+import sandbox27.ila.backend.assignementprocess.dtos.AssignmentInputDTO;
+import sandbox27.ila.backend.assignementprocess.dtos.CourseUserAssignmentDTO;
+import sandbox27.ila.backend.assignementprocess.dtos.PreferenceDTO;
+import sandbox27.ila.backend.assignementprocess.dtos.UserDTO;
 import sandbox27.ila.backend.block.Block;
 import sandbox27.ila.backend.block.BlockRepository;
 import sandbox27.ila.backend.course.Course;
@@ -22,17 +26,19 @@ import sandbox27.ila.backend.preference.Preference;
 import sandbox27.ila.backend.preference.PreferenceRepository;
 import sandbox27.ila.backend.user.User;
 import sandbox27.ila.backend.user.UserRepository;
+import sandbox27.ila.infrastructure.error.ErrorCode;
+import sandbox27.ila.infrastructure.error.ServiceException;
 
 import java.util.*;
 
-import static sandbox27.ila.backend.assignements.algorithm2.AssignmentAlgorithmService.safeList;
+import static sandbox27.ila.backend.assignementprocess.AssignmentAlgorithmService.safeList;
 
 @Service
 @RequiredArgsConstructor
 @Slf4j
 public class AssignmentServiceRunner {
 
-    final sandbox27.ila.backend.assignements.algorithm2.AssignmentAlgorithmService assignmentAlgorithmServiceV2;
+    final AssignmentAlgorithmService assignmentAlgorithmServiceV2;
     final AssignmentInputMapperService assignmentInputMapperService;
     final PeriodRepository periodRepository;
     final UserRepository userRepository;
@@ -42,10 +48,9 @@ public class AssignmentServiceRunner {
     final PreferenceRepository preferenceRepository;
     final CourseUserAssignmentRepository courseUserAssignmentRepository;
 
-    // @EventListener(ApplicationReadyEvent.class)
-    @Transactional
-    public List<CourseUserAssignmentDTO> runAssignments() throws Exception {
-        Period currentPeriod = periodRepository.findByCurrent(true).get();
+    public List<CourseUserAssignmentDTO> runAssignmentProcess(long periodId) throws ServiceException {
+        Period currentPeriod = periodRepository.findById(periodId)
+                .orElseThrow(() -> new ServiceException(ErrorCode.NotFound));
         List<User> users = userRepository.findAll().stream().filter(u -> u.getGrade() > 0 && !"testschueler".equals(u.getUserName())).toList();
         List<Block> blocks = blockRepository.findAllByPeriod_idOrderByDayOfWeekAscStartTimeAsc(currentPeriod.getId());
         List<Course> courses = courseRepository.findAllByPeriod(currentPeriod);

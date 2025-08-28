@@ -1,4 +1,4 @@
-package sandbox27.ila.backend.assignements.algorithm2.dtos;
+package sandbox27.ila.backend.assignementprocess.dtos;
 
 import lombok.Data;
 
