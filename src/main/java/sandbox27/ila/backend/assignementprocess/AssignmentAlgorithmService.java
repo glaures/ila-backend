@@ -1,9 +1,9 @@
-package sandbox27.ila.backend.assignements.algorithm2;
+package sandbox27.ila.backend.assignementprocess;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import sandbox27.ila.backend.assignements.algorithm2.dtos.*;
+import sandbox27.ila.backend.assignementprocess.dtos.*;
 
 import java.util.*;
 import java.util.stream.Collectors;

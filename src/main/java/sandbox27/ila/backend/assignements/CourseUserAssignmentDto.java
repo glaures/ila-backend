@@ -11,6 +11,7 @@ import sandbox27.ila.backend.course.CourseDto;
 @AllArgsConstructor
 public class CourseUserAssignmentDto {
 
+    long id;
     long courseId;
     CourseDto course;
     String userUserName;
@@ -18,6 +19,7 @@ public class CourseUserAssignmentDto {
     String lastName;
 
     public CourseUserAssignmentDto(CourseUserAssignment courseUserAssignment, CourseDto course) {
+        this.id = courseUserAssignment.getId();
         this.courseId = courseUserAssignment.getCourse().getId();
         this.course = course;
         this.userUserName = courseUserAssignment.getUser().getUserName();

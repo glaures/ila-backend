@@ -1,10 +1,10 @@
-package sandbox27.ila.backend.assignements.algorithm2;
+package sandbox27.ila.backend.assignementprocess;
 
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+import sandbox27.ila.backend.assignementprocess.dtos.*;
 import sandbox27.ila.backend.assignements.CourseUserAssignment;
-import sandbox27.ila.backend.assignements.algorithm2.dtos.*;
 import sandbox27.ila.backend.block.Block;
 import sandbox27.ila.backend.course.Course;
 import sandbox27.ila.backend.course.CourseBlockAssignment;
