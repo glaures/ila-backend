@@ -126,8 +126,8 @@ public class PreferenceService {
             List<TopPreference> topPreferenceList = new ArrayList<>();
             if (assignment == null) {
                 List<Preference> preferences = preferenceRepository.findByUserAndBlockOrderByPreferenceIndex(user, block);
-                if(!preferences.isEmpty() && preferences.getFirst().getPreferenceIndex() != -1) {
-                    for(int i = 0; i < Math.min(preferences.size(),3); i++) {
+                if (!preferences.isEmpty() && preferences.getFirst().getPreferenceIndex() != -1) {
+                    for (int i = 0; i < Math.min(preferences.size(), 3); i++) {
                         Preference preference = preferences.get(i);
                         CourseCategory preferenceCourseCategory = preference.getCourse().getCourseCategories().stream().findFirst().orElse(CourseCategory.iLa);
                         topPreferenceList.add(new TopPreference(
@@ -139,20 +139,22 @@ public class PreferenceService {
                     }
                 }
             }
-            result.add(new BlockPreference(
-                    block.getId(),
-                    block.getDayOfWeek(),
-                    block.getStartTime(),
-                    block.getEndTime(),
-                    currentPeriod.getId(),
-                    assignment != null ? "ASSIGNED" : "OPEN",
-                    assignment != null ? new AssignedCourse(assignment.getId(),
-                            assignment.getCourse().getName(),
-                            assignment.getCourse().getRoom(),
-                            assignment.getCourse().getInstructor(),
-                            assignmentCourseCategory) : null,
-                    topPreferenceList
-            ));
+            if (assignment != null || !currentPeriod.isClosed()) {
+                result.add(new BlockPreference(
+                        block.getId(),
+                        block.getDayOfWeek(),
+                        block.getStartTime(),
+                        block.getEndTime(),
+                        currentPeriod.getId(),
+                        assignment != null ? "ASSIGNED" : "OPEN",
+                        assignment != null ? new AssignedCourse(assignment.getId(),
+                                assignment.getCourse().getName(),
+                                assignment.getCourse().getRoom(),
+                                assignment.getCourse().getInstructor(),
+                                assignmentCourseCategory) : null,
+                        topPreferenceList
+                ));
+            }
         }
         return result;
     }
