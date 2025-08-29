@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
 import sandbox27.ila.backend.period.ExtendedPeriodDto;
 import sandbox27.ila.backend.period.Period;
+import sandbox27.ila.backend.period.PeriodDto;
 import sandbox27.ila.backend.period.PeriodService;
 import sandbox27.ila.infrastructure.error.ErrorCode;
 import sandbox27.ila.infrastructure.error.ServiceException;
@@ -56,7 +57,7 @@ public class BlockService {
     }
 
     public Block getFirstBlockInCurrentPeriod() {
-        Period period = periodService.getCurrentPeriod();
+        PeriodDto period = periodService.getCurrentPeriod();
         return blockRepository.findByPeriod_IdAndDayOfWeek(period.getId(), DayOfWeek.MONDAY).getFirst();
     }
 }

@@ -62,7 +62,7 @@ public class PeriodService {
     }
 
     @GetMapping("/current")
-    public Period getCurrentPeriod() {
-        return periodRepository.findByCurrent(true).get();
+    public PeriodDto getCurrentPeriod() {
+        return modelMapper.map(periodRepository.findByCurrent(true).get(), PeriodDto.class);
     }
 }

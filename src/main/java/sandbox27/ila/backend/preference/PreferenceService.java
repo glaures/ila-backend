@@ -87,6 +87,8 @@ public class PreferenceService {
     record AssignedCourse(
             long id,
             String name,
+            String room,
+            String instructor,
             CourseCategory category
     ) {
     }
@@ -144,7 +146,11 @@ public class PreferenceService {
                     block.getEndTime(),
                     currentPeriod.getId(),
                     assignment != null ? "ASSIGNED" : "OPEN",
-                    assignment != null ? new AssignedCourse(assignment.getId(), assignment.getCourse().getName(), assignmentCourseCategory) : null,
+                    assignment != null ? new AssignedCourse(assignment.getId(),
+                            assignment.getCourse().getName(),
+                            assignment.getCourse().getRoom(),
+                            assignment.getCourse().getInstructor(),
+                            assignmentCourseCategory) : null,
                     topPreferenceList
             ));
         }
