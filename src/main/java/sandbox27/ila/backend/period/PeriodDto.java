@@ -25,7 +25,7 @@ public class PeriodDto {
     boolean visible;
     boolean current;
 
-    public boolean getClosed(){
+    public boolean isClosed(){
         return LocalDate.now().isAfter(endDate);
     }
 

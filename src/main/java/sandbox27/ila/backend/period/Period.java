@@ -26,4 +26,9 @@ public class Period {
     boolean current;
     @CreationTimestamp
     private LocalDateTime createdAt;
+
+    public boolean isClosed(){
+        return LocalDate.now().isAfter(endDate);
+    }
+
 }
