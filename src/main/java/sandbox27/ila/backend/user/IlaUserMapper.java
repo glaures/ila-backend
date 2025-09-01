@@ -31,10 +31,12 @@ public class IlaUserMapper implements SecToLocalUserMapper {
                             .firstName("Admin")
                             .lastName("User")
                             .build());
-            adminUser.getRoles().add(Role.ADMIN);
+            if (!adminUser.getRoles().contains(Role.ADMIN))
+                adminUser.getRoles().add(Role.ADMIN);
             userRepository.save(adminUser);
             return Optional.of(adminUser);
-        };
+        }
+        ;
         return userOpt.isPresent()
                 ? Optional.of(userOpt.get())
                 : Optional.empty();
