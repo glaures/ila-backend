@@ -17,19 +17,22 @@ import java.util.Optional;
 public class IlaUserMapper implements SecToLocalUserMapper {
 
     final UserRepository userRepository;
-    @Value("${ila.admin.user-name}")
-    String adminUserName;
+    @Value("${ila.admin.user-names}")
+    List<String> adminUserNames;
 
     @Transactional
     public Optional<SecUser> map(Map userInfoAttributes) {
         String iServId = (String) userInfoAttributes.get("preferred_username");
         Optional<User> userOpt = userRepository.findById(iServId);
-        if (adminUserName.equals(iServId)) {
+        if (adminUserNames.contains(iServId)) {
+            final String firstName = (String) userInfoAttributes.get("given_name");
+            final String lastName = (String) userInfoAttributes.get("family_name");
             User adminUser = userOpt.orElseGet(() ->
                     // create user account for admin
                     User.builder()
-                            .firstName("Admin")
-                            .lastName("User")
+                            .userName(iServId)
+                            .firstName(firstName != null ? firstName : "")
+                            .lastName(lastName != null ? lastName : "")
                             .build());
             if (!adminUser.getRoles().contains(Role.ADMIN))
                 adminUser.getRoles().add(Role.ADMIN);

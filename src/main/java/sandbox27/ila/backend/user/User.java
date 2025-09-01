@@ -5,6 +5,7 @@ import lombok.*;
 import sandbox27.ila.infrastructure.security.SecUser;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Entity
 @Builder
@@ -30,5 +31,10 @@ public class User implements SecUser {
     @Override
     public String getId() {
         return userName;
+    }
+
+    @Override
+    public List<String> getSecRoles() {
+        return this.roles.stream().map(Role::getName).collect(Collectors.toList());
     }
 }
