@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import sandbox27.ila.infrastructure.security.SecUser;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -26,7 +27,7 @@ public class User implements SecUser {
     @CollectionTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"))
     @Column(name = "role")
     @Enumerated(EnumType.STRING)
-    List<Role> roles;
+    List<Role> roles = new ArrayList<>();
 
     @Override
     public String getId() {
