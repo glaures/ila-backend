@@ -27,13 +27,14 @@ public class IlaUserMapper implements SecToLocalUserMapper {
         if (adminUserNames.contains(iServId)) {
             final String firstName = (String) userInfoAttributes.get("given_name");
             final String lastName = (String) userInfoAttributes.get("family_name");
-            User adminUser = userOpt.orElseGet(() ->
-                    // create user account for admin
-                    User.builder()
-                            .userName(iServId)
-                            .firstName(firstName != null ? firstName : "")
-                            .lastName(lastName != null ? lastName : "")
-                            .build());
+            User adminUser = userOpt.orElseGet(() -> {
+                // create user account for admin
+                User res = new User();
+                res.setUserName(iServId);
+                res.setFirstName(firstName != null ? firstName : "");
+                res.setLastName(lastName != null ? lastName : "");
+                return res;
+            });
             if (!adminUser.getRoles().contains(Role.ADMIN))
                 adminUser.getRoles().add(Role.ADMIN);
             userRepository.save(adminUser);
