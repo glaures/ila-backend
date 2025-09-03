@@ -9,6 +9,7 @@ public enum ErrorCode {
     SignInFailed,
     PeriodNotStartedYet,
     PeriodNotEditable,
-    NotImplemented
+    NotImplemented,
+    FieldRequired
 
 }

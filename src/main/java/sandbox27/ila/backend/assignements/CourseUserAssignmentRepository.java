@@ -54,5 +54,7 @@ public interface CourseUserAssignmentRepository extends JpaRepository<CourseUser
             @Param("periodId") Long periodId,   // null = „alle Perioden“
             @Param("minCount") long minCount    // z.B. 3
     );
+
+    void deleteByCourse(Course course);
 }
 

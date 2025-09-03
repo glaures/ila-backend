@@ -6,15 +6,19 @@ import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
+import sandbox27.ila.backend.course.CourseBlockAssignment;
+import sandbox27.ila.backend.course.CourseBlockAssignmentRepository;
 import sandbox27.ila.backend.period.ExtendedPeriodDto;
 import sandbox27.ila.backend.period.Period;
 import sandbox27.ila.backend.period.PeriodDto;
 import sandbox27.ila.backend.period.PeriodService;
 import sandbox27.ila.infrastructure.error.ErrorCode;
+import sandbox27.ila.infrastructure.error.ErrorHandlingService;
 import sandbox27.ila.infrastructure.error.ServiceException;
 
 import java.time.DayOfWeek;
 import java.util.List;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @RestController
@@ -23,21 +27,27 @@ import java.util.List;
 public class BlockService {
 
     final BlockRepository blockRepository;
+    final CourseBlockAssignmentRepository courseBlockAssignmentRepository;
     final PeriodService periodService;
+    final ErrorHandlingService errorHandlingService;
     private final ModelMapper modelMapper;
-
-    public List<BlockDto> getAllBlocksOfWorkDay(Long periodId, DayOfWeek dayOfWeek) {
-        return blockRepository.findByPeriod_IdAndDayOfWeek(periodId, dayOfWeek)
-                .stream()
-                .map(b -> modelMapper.map(b, BlockDto.class))
-                .toList();
-    }
 
     @GetMapping
     public List<BlockDto> getAllBlocks() {
         return blockRepository.findAll(Sort.by("dayOfWeek", "startTime"))
-                .stream().map(block -> modelMapper.map(block, BlockDto.class))
+                .stream()
+                .map(block -> modelMapper.map(block, BlockDto.class))
                 .toList();
+    }
+
+    public Optional<BlockDto> getBlockByCourseId(long courseId) {
+        List<CourseBlockAssignment> courseBlockAssignments = courseBlockAssignmentRepository.findAllByCourse_Id(courseId);
+        // assuming only one assignment for now
+        if (courseBlockAssignments.size() > 1)
+            errorHandlingService.handleWarning(courseId + " Kurs hat mehr als einen Block assigned. Nehme den ersten.");
+        return courseBlockAssignments.isEmpty()
+                ? Optional.empty()
+                : Optional.of(modelMapper.map(courseBlockAssignments.get(0).getBlock(), BlockDto.class));
     }
 
     @PutMapping("/{id}")
@@ -56,8 +66,4 @@ public class BlockService {
         return modelMapper.map(block, BlockDto.class);
     }
 
-    public Block getFirstBlockInCurrentPeriod() {
-        PeriodDto period = periodService.getCurrentPeriod();
-        return blockRepository.findByPeriod_IdAndDayOfWeek(period.getId(), DayOfWeek.MONDAY).getFirst();
-    }
 }
