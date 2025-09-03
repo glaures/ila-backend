@@ -29,7 +29,7 @@ public class Course {
     String description;
     @ElementCollection
     @Enumerated(EnumType.STRING)
-    Set<CourseCategory> courseCategories;
+    Set<CourseCategory> courseCategories = new HashSet<>();
     @ElementCollection
     @CollectionTable(name = "course_allowed_grades", joinColumns = @JoinColumn(name = "course_id"))
     @Column(name = "grade")

@@ -12,7 +12,6 @@ import sandbox27.ila.backend.user.UserRepository;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.time.Period;
 import java.util.List;
 
 @Service
@@ -27,18 +26,6 @@ public class UserImporter {
         InputStream inputStream = new ClassPathResource("users.json").getInputStream();
         List<User> users = mapper.readValue(inputStream, new TypeReference<>() {
         });
-
-        // testuser
-        /*
-        User testUser = new User();
-        testUser.setEmail("testschueler@jmoosdorf.de");
-        testUser.setFirstName("Test");
-        testUser.setLastName("Schüler");
-        testUser.setGrade(8);
-        testUser.setGtsRoles(List.of(Role.student));
-        testUser.setGtsId("jm--1");
-        users.add(testUser);
-         */
 
         int inserted = 0;
         for (User user : users) {

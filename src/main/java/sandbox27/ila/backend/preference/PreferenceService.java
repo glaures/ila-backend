@@ -3,7 +3,6 @@ package sandbox27.ila.backend.preference;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import sandbox27.ila.backend.assignements.CourseUserAssignment;
 import sandbox27.ila.backend.assignements.CourseUserAssignmentRepository;
@@ -23,11 +22,9 @@ import sandbox27.ila.infrastructure.security.AuthenticatedUser;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/preferences")
@@ -50,7 +47,7 @@ public class PreferenceService {
         PreferencePayload payload = new PreferencePayload();
         Block block = blockRepository.getReferenceById(blockId);
         payload.setBlockId(block.getId());
-        payload.setCourses(courseService.findAllCoursesForBlock(block.getId(), grade));
+        payload.setCourses(courseService.getCourses(block.getId(), grade));
         List<Preference> preferences = preferenceRepository.findByUserAndBlockOrderByPreferenceIndex(authenticatedUser, block);
         BlockPreferencesDto blockPreferencesDto = new BlockPreferencesDto(preferences);
         payload.setPreferences(blockPreferencesDto);

@@ -16,11 +16,16 @@ public interface CourseBlockAssignmentRepository extends JpaRepository<CourseBlo
 
     Optional<CourseBlockAssignment> findByBlockAndCourse(Block block, Course course);
 
+    Optional<CourseBlockAssignment> findByCourse(Course course);
+
     @Query("select cba from CourseBlockAssignment cba where cba.block.period.id=:periodId")
     List<CourseBlockAssignment> findAllByPeriodId(Long periodId);
 
     List<CourseBlockAssignment> findAllByCourse(Course course);
 
+    List<CourseBlockAssignment> findAllByCourse_Id(long id);
+
     List<CourseBlockAssignment> findAllByBlock(Block block);
 
+    void deleteByCourse(Course course);
 }

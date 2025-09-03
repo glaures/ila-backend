@@ -4,7 +4,6 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Sort;
-import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
 import sandbox27.ila.backend.course.CourseRepository;
 import sandbox27.ila.infrastructure.error.ErrorCode;
@@ -36,6 +35,7 @@ public class PeriodService {
 
     @PostMapping
     public ExtendedPeriodDto createPeriod(@RequestBody PeriodDto periodDto) {
+        validatePeriod(periodDto);
         Period period = modelMapper.map(periodDto, Period.class);
         period.id = null;
         periodRepository.save(period);
@@ -48,9 +48,14 @@ public class PeriodService {
     public ExtendedPeriodDto updatePeriod(
             @PathVariable("id") Long id,
             @RequestBody ExtendedPeriodDto extendedPeriodDto) {
+        validatePeriod(extendedPeriodDto);
         Period period = periodRepository.findById(id).orElseThrow(() -> new ServiceException(ErrorCode.NotFound));
         modelMapper.map(extendedPeriodDto, period);
         periodRepository.saveAndFlush(period);
+        if (period.isCurrent())
+            periodRepository.findAll().stream()
+                    .filter(p -> p.isCurrent() && !p.getId().equals(period.id))
+                    .forEach(p -> p.setCurrent(false));
         ExtendedPeriodDto result = modelMapper.map(period, ExtendedPeriodDto.class);
         result.setCourseCount(courseRepository.countByPeriod_Id(period.id));
         return result;
@@ -65,4 +70,15 @@ public class PeriodService {
     public PeriodDto getCurrentPeriod() {
         return modelMapper.map(periodRepository.findByCurrent(true).get(), PeriodDto.class);
     }
+
+    private void validatePeriod(PeriodDto period) throws ServiceException {
+        if(period.getStartDate() == null) {
+            throw new ServiceException(ErrorCode.FieldRequired, "Startdatum");
+        }
+        if(period.getEndDate() == null) {
+            throw new ServiceException(ErrorCode.FieldRequired, "Startdatum");
+        }
+    }
+
+
 }

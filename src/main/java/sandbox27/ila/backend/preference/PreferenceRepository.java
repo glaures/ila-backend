@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import sandbox27.ila.backend.block.Block;
+import sandbox27.ila.backend.course.Course;
 import sandbox27.ila.backend.period.Period;
 import sandbox27.ila.backend.user.User;
 
@@ -26,4 +27,6 @@ public interface PreferenceRepository extends JpaRepository<Preference, Long> {
     List<Preference> findPreferencesByUserAndBlockOrderByPreferenceIndex(User user, Block block);
 
     List<Preference> findByUserAndBlock_Period(User user, Period period);
+
+    void deleteByCourse(Course course);
 }
