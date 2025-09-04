@@ -10,6 +10,7 @@ public enum ErrorCode {
     PeriodNotStartedYet,
     PeriodNotEditable,
     NotImplemented,
-    FieldRequired
+    FieldRequired,
+    RoleRequired
 
 }
