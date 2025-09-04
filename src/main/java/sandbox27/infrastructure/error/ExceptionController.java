@@ -1,4 +1,4 @@
-package sandbox27.ila.infrastructure.error;
+package sandbox27.infrastructure.error;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

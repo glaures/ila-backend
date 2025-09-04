@@ -1,13 +1,8 @@
 package sandbox27.ila.backend.assignementprocess;
 
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 import sandbox27.ila.backend.assignements.CourseUserAssignment;
 import sandbox27.ila.backend.assignements.CourseUserAssignmentRepository;
 import sandbox27.ila.backend.assignementprocess.dtos.AssignmentInputDTO;
@@ -26,8 +21,8 @@ import sandbox27.ila.backend.preference.Preference;
 import sandbox27.ila.backend.preference.PreferenceRepository;
 import sandbox27.ila.backend.user.User;
 import sandbox27.ila.backend.user.UserRepository;
-import sandbox27.ila.infrastructure.error.ErrorCode;
-import sandbox27.ila.infrastructure.error.ServiceException;
+import sandbox27.infrastructure.error.ErrorCode;
+import sandbox27.infrastructure.error.ServiceException;
 
 import java.util.*;
 

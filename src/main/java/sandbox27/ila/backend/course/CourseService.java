@@ -10,8 +10,8 @@ import sandbox27.ila.backend.block.BlockRepository;
 import sandbox27.ila.backend.block.BlockService;
 import sandbox27.ila.backend.period.PeriodRepository;
 import sandbox27.ila.backend.preference.PreferenceRepository;
-import sandbox27.ila.infrastructure.error.ErrorCode;
-import sandbox27.ila.infrastructure.error.ServiceException;
+import sandbox27.infrastructure.error.ErrorCode;
+import sandbox27.infrastructure.error.ServiceException;
 
 import java.util.List;
 

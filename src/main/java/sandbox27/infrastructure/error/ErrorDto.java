@@ -1,4 +1,4 @@
-package sandbox27.ila.infrastructure.error;
+package sandbox27.infrastructure.error;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

@@ -14,9 +14,9 @@ import sandbox27.ila.backend.course.CourseRepository;
 import sandbox27.ila.backend.user.Role;
 import sandbox27.ila.backend.user.User;
 import sandbox27.ila.backend.user.UserRepository;
-import sandbox27.ila.infrastructure.error.ErrorCode;
-import sandbox27.ila.infrastructure.error.ServiceException;
-import sandbox27.ila.infrastructure.security.AuthenticatedUser;
+import sandbox27.infrastructure.error.ErrorCode;
+import sandbox27.infrastructure.error.ServiceException;
+import sandbox27.infrastructure.security.AuthenticatedUser;
 
 import java.util.Collections;
 import java.util.List;

@@ -1,11 +1,10 @@
-package sandbox27.ila.infrastructure.security;
+package sandbox27.infrastructure.security;
 
 import io.jsonwebtoken.JwtException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
@@ -25,11 +24,6 @@ public class JwtFilter extends OncePerRequestFilter {
 
         if (!request.getRequestURI().startsWith("/auth")
                 && !request.getMethod().equals("OPTIONS")
-                && !request.getRequestURI().equals("/test-basis")
-                && !request.getRequestURI().startsWith("/blocks")
-                && !request.getRequestURI().startsWith("/courses")
-                && !request.getRequestURI().startsWith("/assignments")
-                && !request.getRequestURI().startsWith("/periods")
         ) {
             String auth = request.getHeader("Authorization");
             if (auth == null || !auth.startsWith("Bearer ")) {

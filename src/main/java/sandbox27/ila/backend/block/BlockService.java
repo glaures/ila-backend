@@ -4,19 +4,14 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Sort;
-import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
 import sandbox27.ila.backend.course.CourseBlockAssignment;
 import sandbox27.ila.backend.course.CourseBlockAssignmentRepository;
-import sandbox27.ila.backend.period.ExtendedPeriodDto;
-import sandbox27.ila.backend.period.Period;
-import sandbox27.ila.backend.period.PeriodDto;
 import sandbox27.ila.backend.period.PeriodService;
-import sandbox27.ila.infrastructure.error.ErrorCode;
-import sandbox27.ila.infrastructure.error.ErrorHandlingService;
-import sandbox27.ila.infrastructure.error.ServiceException;
+import sandbox27.infrastructure.error.ErrorCode;
+import sandbox27.infrastructure.error.ErrorHandlingService;
+import sandbox27.infrastructure.error.ServiceException;
 
-import java.time.DayOfWeek;
 import java.util.List;
 import java.util.Optional;
 

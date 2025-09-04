@@ -1,11 +1,11 @@
-package sandbox27.ila.infrastructure.error;
+package sandbox27.infrastructure.error;
 
 import lombok.RequiredArgsConstructor;
 import org.apache.juli.logging.Log;
 import org.apache.juli.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import sandbox27.ila.infrastructure.email.ReliableMailService;
+import sandbox27.infrastructure.email.ReliableMailService;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;

@@ -3,23 +3,35 @@ package sandbox27.ila.backend.user;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
-import sandbox27.ila.infrastructure.error.ErrorCode;
-import sandbox27.ila.infrastructure.security.SecToLocalUserMapper;
-import sandbox27.ila.infrastructure.security.SecUser;
+import org.springframework.stereotype.Service;
+import sandbox27.infrastructure.security.SecUser;
+import sandbox27.infrastructure.security.UserManagement;
 
+import java.nio.file.attribute.UserPrincipal;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-@Component
+@Service
 @RequiredArgsConstructor
-public class IlaUserMapper implements SecToLocalUserMapper {
+public class UserManagementImpl implements UserManagement {
 
     final UserRepository userRepository;
     @Value("${ila.admin.user-names}")
     List<String> adminUserNames;
 
+    @Override
+    public Optional<?> findUserByPrincipal(String principal) {
+        return userRepository.findById(principal);
+    }
+
+    @Override
+    public boolean hasRole(String principal, String roleName) {
+        Optional<User> userOpt = userRepository.findById(principal);
+        return userOpt.isPresent() && userOpt.get().hasRole(roleName);
+    }
+
+    @Override
     @Transactional
     public Optional<SecUser> map(Map userInfoAttributes) {
         String iServId = (String) userInfoAttributes.get("preferred_username");
@@ -45,4 +57,5 @@ public class IlaUserMapper implements SecToLocalUserMapper {
                 ? Optional.of(userOpt.get())
                 : Optional.empty();
     }
+
 }

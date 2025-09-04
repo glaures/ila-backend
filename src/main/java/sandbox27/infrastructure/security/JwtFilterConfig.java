@@ -1,4 +1,4 @@
-package sandbox27.ila.infrastructure.security;
+package sandbox27.infrastructure.security;
 
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;

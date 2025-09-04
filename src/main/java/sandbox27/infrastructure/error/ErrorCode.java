@@ -1,4 +1,4 @@
-package sandbox27.ila.infrastructure.error;
+package sandbox27.infrastructure.error;
 
 public enum ErrorCode {
     InternalServerError,

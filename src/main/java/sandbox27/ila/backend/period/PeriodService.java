@@ -6,8 +6,12 @@ import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.*;
 import sandbox27.ila.backend.course.CourseRepository;
-import sandbox27.ila.infrastructure.error.ErrorCode;
-import sandbox27.ila.infrastructure.error.ServiceException;
+import sandbox27.ila.backend.user.Role;
+import sandbox27.ila.backend.user.User;
+import sandbox27.infrastructure.error.ErrorCode;
+import sandbox27.infrastructure.error.ServiceException;
+import sandbox27.infrastructure.security.AuthenticatedUser;
+import sandbox27.infrastructure.security.RequiredRole;
 
 import java.util.List;
 
@@ -33,8 +37,15 @@ public class PeriodService {
                 .toList();
     }
 
+    @GetMapping("/current")
+    public PeriodDto getCurrentPeriod() {
+        return modelMapper.map(periodRepository.findByCurrent(true).get(), PeriodDto.class);
+    }
+
+    @RequiredRole(Role.ADMIN_ROLE_NAME)
     @PostMapping
-    public ExtendedPeriodDto createPeriod(@RequestBody PeriodDto periodDto) {
+    public ExtendedPeriodDto createPeriod(@RequestBody PeriodDto periodDto,
+                                          @AuthenticatedUser User user) {
         validatePeriod(periodDto);
         Period period = modelMapper.map(periodDto, Period.class);
         period.id = null;
@@ -44,6 +55,7 @@ public class PeriodService {
         return result;
     }
 
+    @RequiredRole(Role.ADMIN_ROLE_NAME)
     @PutMapping("/{id}")
     public ExtendedPeriodDto updatePeriod(
             @PathVariable("id") Long id,
@@ -61,14 +73,10 @@ public class PeriodService {
         return result;
     }
 
+    @RequiredRole(Role.ADMIN_ROLE_NAME)
     @DeleteMapping("/{id}")
     public void deletePeriod(@PathVariable("id") Long id) {
         throw new ServiceException(ErrorCode.NotImplemented);
-    }
-
-    @GetMapping("/current")
-    public PeriodDto getCurrentPeriod() {
-        return modelMapper.map(periodRepository.findByCurrent(true).get(), PeriodDto.class);
     }
 
     private void validatePeriod(PeriodDto period) throws ServiceException {

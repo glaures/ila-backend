@@ -2,7 +2,7 @@ package sandbox27.ila.backend.user;
 
 import jakarta.persistence.*;
 import lombok.*;
-import sandbox27.ila.infrastructure.security.SecUser;
+import sandbox27.infrastructure.security.SecUser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,6 +32,11 @@ public class User implements SecUser {
     @Override
     public String getId() {
         return userName;
+    }
+
+    @Transient
+    public boolean hasRole(String roleName) {
+        return roles.stream().anyMatch(r -> r.getName().equals(roleName));
     }
 
     @Override
