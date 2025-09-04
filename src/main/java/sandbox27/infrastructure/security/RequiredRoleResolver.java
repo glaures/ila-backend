@@ -12,6 +12,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
+import sandbox27.infrastructure.error.ErrorCode;
+import sandbox27.infrastructure.error.ServiceException;
 
 import java.lang.reflect.Method;
 import java.util.Optional;
@@ -35,7 +37,7 @@ public class RequiredRoleResolver {
             Optional<String> principal = getPrincipalFromRequest();
             String role = annotation.value();
             if (principal.isEmpty() || !userManagement.hasRole(principal.get(), role)) {
-                throw new ForbiddenException("Role '" + role + "' required.");
+                throw new ServiceException(ErrorCode.RoleRequired, role);
             }
         }
         return pjp.proceed();

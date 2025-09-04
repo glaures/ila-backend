@@ -36,8 +36,7 @@ public class ExceptionController {
         ErrorDto error = new ErrorDto();
         error.setCode(serviceException.getErrorCode());
         error.setMessage(msg);
-        ResponseEntity<ErrorDto> res = new ResponseEntity<ErrorDto>(error, HttpStatus.BAD_REQUEST);
-        return res;
+        return new ResponseEntity<ErrorDto>(error, error.getHttpStatus());
     }
 
     @ExceptionHandler(Throwable.class)
@@ -47,19 +46,7 @@ public class ExceptionController {
         error.setCode(ErrorCode.InternalServerError);
         String message = messageSource.getMessage("" + error.getCode(), null, "internal Error", locale);
         error.setMessage(message);
-        ResponseEntity<ErrorDto> res = new ResponseEntity<ErrorDto>(error, HttpStatus.INTERNAL_SERVER_ERROR);
-        return res;
+        return new ResponseEntity<ErrorDto>(error, HttpStatus.INTERNAL_SERVER_ERROR);
     }
-
-    /**
-    @ExceptionHandler({UnauthorizedException.class, AccessDeniedException.class})
-    public ResponseEntity<ErrorDto> handeInvalidOrExpiredToken(Locale locale){
-        ErrorDto error = new ErrorDto();
-        error.setCode(ErrorCode.Unauthorized);
-        error.setMessage(messageSource.getMessage(ErrorCode.Unauthorized.name(), null, locale));
-        ResponseEntity<ErrorDto> res = new ResponseEntity<>(error, HttpStatus.UNAUTHORIZED);
-        return res;
-    }
-    */
 
 }
