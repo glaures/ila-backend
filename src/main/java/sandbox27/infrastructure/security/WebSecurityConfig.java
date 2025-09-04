@@ -1,4 +1,4 @@
-package sandbox27.ila.infrastructure.security;
+package sandbox27.infrastructure.security;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;

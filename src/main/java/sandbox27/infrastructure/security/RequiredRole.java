@@ -1,10 +1,12 @@
-package sandbox27.ila.infrastructure.security;
+package sandbox27.infrastructure.security;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-@Target(ElementType.PARAMETER)
+@Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface AuthenticatedUser {}
+public @interface RequiredRole {
+    String value();
+}

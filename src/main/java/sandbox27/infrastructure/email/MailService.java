@@ -1,4 +1,4 @@
-package sandbox27.ila.infrastructure.email;
+package sandbox27.infrastructure.email;
 
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;

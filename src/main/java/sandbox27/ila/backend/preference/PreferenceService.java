@@ -16,9 +16,9 @@ import sandbox27.ila.backend.course.CourseService;
 import sandbox27.ila.backend.period.Period;
 import sandbox27.ila.backend.period.PeriodRepository;
 import sandbox27.ila.backend.user.User;
-import sandbox27.ila.infrastructure.error.ErrorCode;
-import sandbox27.ila.infrastructure.error.ServiceException;
-import sandbox27.ila.infrastructure.security.AuthenticatedUser;
+import sandbox27.infrastructure.error.ErrorCode;
+import sandbox27.infrastructure.error.ServiceException;
+import sandbox27.infrastructure.security.AuthenticatedUser;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;

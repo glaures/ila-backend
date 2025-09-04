@@ -12,8 +12,8 @@ import sandbox27.ila.backend.course.CourseRepository;
 import sandbox27.ila.backend.period.Period;
 import sandbox27.ila.backend.period.PeriodRepository;
 import sandbox27.ila.backend.user.UserRepository;
-import sandbox27.ila.infrastructure.error.ErrorCode;
-import sandbox27.ila.infrastructure.error.ServiceException;
+import sandbox27.infrastructure.error.ErrorCode;
+import sandbox27.infrastructure.error.ServiceException;
 
 import java.util.List;
 

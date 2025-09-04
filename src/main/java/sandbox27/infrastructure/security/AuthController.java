@@ -1,4 +1,4 @@
-package sandbox27.ila.infrastructure.security;
+package sandbox27.infrastructure.security;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -10,10 +10,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
-import sandbox27.ila.backend.user.IlaUserMapper;
-import sandbox27.ila.backend.user.User;
-import sandbox27.ila.infrastructure.error.ErrorCode;
-import sandbox27.ila.infrastructure.error.ServiceException;
+import sandbox27.infrastructure.error.ErrorCode;
+import sandbox27.infrastructure.error.ServiceException;
 
 import java.util.Map;
 
@@ -24,21 +22,24 @@ public class AuthController {
 
     private final RestTemplate rest = new RestTemplate();
     private final JwtGenerator jwtGenerator;
-    final SecToLocalUserMapper userMapper;
+    final UserManagement userMapper;
 
-    @Value("${iserv.client-secret}")
+    @Value("${sandbox27.infrastructure.security.client-secret}")
     private String clientSecret;
-    @Value("${iserv.token-uri}")
+    @Value("${sandbox27.infrastructure.security.client-id}")
+    private String clientId;
+    @Value("${sandbox27.infrastructure.security.token-uri}")
     private String tokenUri;
-    @Value("${iserv.user-info-uri}")
+    @Value("${sandbox27.infrastructure.security.user-info-uri}")
     private String userInfoUri;
+
+    public record OAuthRequest(String code, String redirectUri) {}
 
     @PostMapping
     public ResponseEntity<?> exchangeCode(@RequestBody OAuthRequest request) throws ServiceException {
         // 1. Token anfordern
         MultiValueMap<String, String> tokenRequest = new LinkedMultiValueMap<>();
         tokenRequest.add("grant_type", "authorization_code");
-        String clientId = "17_65m4l0ih9v8c84cwgsk08osc8s8o8cwsowo4k0s80gwoow448k";
         tokenRequest.add("client_id", clientId);
         tokenRequest.add("client_secret", clientSecret);
         tokenRequest.add("redirect_uri", request.redirectUri());

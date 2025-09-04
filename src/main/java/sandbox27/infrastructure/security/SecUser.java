@@ -1,4 +1,4 @@
-package sandbox27.ila.infrastructure.security;
+package sandbox27.infrastructure.security;
 
 import java.util.List;
 
