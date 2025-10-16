@@ -22,7 +22,6 @@ public class PeriodDto {
     LocalDate startDate;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd.MM.yyyy")
     LocalDate endDate;
-    boolean visible;
     boolean current;
 
     public boolean isClosed(){

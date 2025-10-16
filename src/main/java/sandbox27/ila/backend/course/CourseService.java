@@ -2,7 +2,6 @@ package sandbox27.ila.backend.course;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import org.modelmapper.ModelMapper;
 import org.springframework.web.bind.annotation.*;
 import sandbox27.ila.backend.assignements.CourseUserAssignmentRepository;
 import sandbox27.ila.backend.block.Block;
@@ -10,8 +9,10 @@ import sandbox27.ila.backend.block.BlockRepository;
 import sandbox27.ila.backend.block.BlockService;
 import sandbox27.ila.backend.period.PeriodRepository;
 import sandbox27.ila.backend.preference.PreferenceRepository;
+import sandbox27.ila.backend.user.Role;
 import sandbox27.infrastructure.error.ErrorCode;
 import sandbox27.infrastructure.error.ServiceException;
+import sandbox27.infrastructure.security.RequiredRole;
 
 import java.util.List;
 
@@ -23,7 +24,6 @@ public class CourseService {
 
     final CourseRepository courseRepository;
     final BlockService blockService;
-    final ModelMapper modelMapper;
     private final CourseBlockAssignmentRepository courseBlockAssignmentRepository;
     private final BlockRepository blockRepository;
     private final PeriodRepository periodRepository;
@@ -32,8 +32,13 @@ public class CourseService {
 
     @GetMapping
     public List<CourseDto> getCourses(@RequestParam(name = "block-id", required = false) Long blockId,
-                                      @RequestParam(required = false, defaultValue = "0") int grade) {
-        if (blockId == null)
+                                      @RequestParam(required = false, defaultValue = "0") int grade,
+                                      @RequestParam(value = "period-id", required = false) Long periodId) {
+        if (periodId != null) {
+            return courseRepository.findAllByPeriod_Id(periodId).stream()
+                    .map(this::map)
+                    .toList();
+        } else if (blockId == null)
             return courseRepository.findAll().stream()
                     .map(this::map)
                     .toList();
@@ -50,14 +55,16 @@ public class CourseService {
                 .orElseThrow(() -> new ServiceException(ErrorCode.NotFound)));
     }
 
+    @RequiredRole(Role.ADMIN_ROLE_NAME)
     @PostMapping
     public CourseDto createCourse(@RequestBody CourseDto courseDto) {
         Course course = new Course();
         map(courseDto, course);
-        course.setPeriod(periodRepository.findByCurrent(true).get());
+        course.setPeriod(periodRepository.findById(courseDto.getPeriodId()).orElseThrow(() -> new ServiceException(ErrorCode.NotFound)));
         return map(courseRepository.save(course));
     }
 
+    @RequiredRole(Role.ADMIN_ROLE_NAME)
     @PutMapping("/{id}")
     public CourseDto updateCourse(@PathVariable Long id, @RequestBody CourseDto courseDto) throws ServiceException {
         Course course = courseRepository.findById(id).orElseThrow(() -> new ServiceException(ErrorCode.NotFound));
@@ -65,6 +72,7 @@ public class CourseService {
         return map(course);
     }
 
+    @RequiredRole(Role.ADMIN_ROLE_NAME)
     @DeleteMapping("/{id}")
     public void deleteCourse(@PathVariable Long id) throws ServiceException {
         Course course = courseRepository.findById(id).orElseThrow(() -> new ServiceException(ErrorCode.NotFound));

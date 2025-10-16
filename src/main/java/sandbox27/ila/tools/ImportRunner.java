@@ -37,7 +37,6 @@ public class ImportRunner {
                         .startDate(LocalDate.of(2025, 8, 21))
                         .endDate(LocalDate.of(2025, 8, 23))
                         .current(true)
-                        .visible(true)
                         .build()));
         periodRepository.save(periodToImportInto);
         log.info("Starting user import");

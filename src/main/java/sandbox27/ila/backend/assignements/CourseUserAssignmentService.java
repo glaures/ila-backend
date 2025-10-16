@@ -17,13 +17,13 @@ import sandbox27.ila.backend.user.UserRepository;
 import sandbox27.infrastructure.error.ErrorCode;
 import sandbox27.infrastructure.error.ServiceException;
 import sandbox27.infrastructure.security.AuthenticatedUser;
+import sandbox27.infrastructure.security.RequiredRole;
 
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
 @RestController
-@Service
 @Slf4j
 @RequestMapping("/assignments")
 @RequiredArgsConstructor
@@ -36,6 +36,7 @@ public class CourseUserAssignmentService {
     final CourseBlockAssignmentRepository courseBlockAssignmentRepository;
 
     @GetMapping("/{blockId}")
+    @Transactional
     public CourseUserAssignmentResponse getCourseUserAssignment(@PathVariable("blockId") Long blockId,
                                                                 @AuthenticatedUser User authenticatedUser) {
         Optional<CourseUserAssignment> assignmentOptional = courseUserAssignmentRepository.findByUserAndBlock_Id(authenticatedUser, blockId);
@@ -47,13 +48,15 @@ public class CourseUserAssignmentService {
     }
 
     @GetMapping
+    @Transactional
     public List<CourseUserAssignmentDto> getCourseUserAssignment(@RequestParam(value = "course-id", required = false) Long courseId,
-                                                                 @RequestParam(value = "user-name", required = false) String userName) {
+                                                                 @RequestParam(value = "user-name", required = false) String userName,
+                                                                 @RequestParam(value = "period-id", required = false) Long periodId) {
         List<CourseUserAssignment> assignments = Collections.emptyList();
         if (courseId != null) {
             assignments = courseUserAssignmentRepository.findByCourse_id(courseId);
         } else if (userName != null) {
-            assignments = courseUserAssignmentRepository.findByUser_userName(userName);
+            assignments = courseUserAssignmentRepository.findByUser_userNameAndCourse_Period_Id(userName, periodId);
         }
         return assignments
                 .stream()
@@ -69,6 +72,8 @@ public class CourseUserAssignmentService {
     ) {
     }
 
+    @RequiredRole(Role.ADMIN_ROLE_NAME)
+    @Transactional
     @PostMapping
     public Feedback assignCourseToUser(@RequestBody CourseUserAssignmentPayload courseUserAssignmentPayload,
                                        @AuthenticatedUser User authenticatedUser) throws ServiceException {
@@ -91,6 +96,7 @@ public class CourseUserAssignmentService {
                 .build();
     }
 
+    @RequiredRole(Role.ADMIN_ROLE_NAME)
     @Transactional
     @DeleteMapping("/{assignmentId}")
     public Feedback deleteAssignment(@PathVariable("assignmentId") Long assignmentId,

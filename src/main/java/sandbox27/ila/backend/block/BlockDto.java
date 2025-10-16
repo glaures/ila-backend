@@ -21,5 +21,4 @@ public class BlockDto {
     private LocalTime startTime;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm")
     private LocalTime endTime;
-    private Boolean applyToAllDays;
 }
