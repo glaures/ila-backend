@@ -27,5 +27,6 @@ public class CourseDto {
     String instructor;
     BlockDto block;
     Long blockId;
+    Long periodId;
 
 };

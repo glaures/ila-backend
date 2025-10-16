@@ -22,7 +22,6 @@ public class Period {
     String name;
     LocalDate startDate;
     LocalDate endDate;
-    boolean visible;
     boolean current;
     @CreationTimestamp
     private LocalDateTime createdAt;

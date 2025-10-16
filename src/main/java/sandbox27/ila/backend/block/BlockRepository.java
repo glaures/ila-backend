@@ -12,6 +12,7 @@ import java.util.Optional;
 
 @Repository
 public interface BlockRepository extends JpaRepository<Block, Long> {
+
     Optional<Block> findByPeriodAndDayOfWeekAndStartTimeAndEndTime(Period period, DayOfWeek dayOfWeek, LocalTime startTime, LocalTime endTime);
 
     @OrderBy("startTime asc")

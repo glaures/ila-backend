@@ -56,5 +56,7 @@ public interface CourseUserAssignmentRepository extends JpaRepository<CourseUser
     );
 
     void deleteByCourse(Course course);
+
+    List<CourseUserAssignment> findByUser_userNameAndCourse_Period_Id(String userName, Long periodId);
 }
 

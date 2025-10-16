@@ -47,7 +47,7 @@ public class PreferenceService {
         PreferencePayload payload = new PreferencePayload();
         Block block = blockRepository.getReferenceById(blockId);
         payload.setBlockId(block.getId());
-        payload.setCourses(courseService.getCourses(block.getId(), grade));
+        payload.setCourses(courseService.getCourses(block.getId(), grade, block.getPeriod().getId()));
         List<Preference> preferences = preferenceRepository.findByUserAndBlockOrderByPreferenceIndex(authenticatedUser, block);
         BlockPreferencesDto blockPreferencesDto = new BlockPreferencesDto(preferences);
         payload.setPreferences(blockPreferencesDto);

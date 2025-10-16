@@ -12,6 +12,7 @@ import sandbox27.ila.backend.user.User;
 import sandbox27.infrastructure.error.ErrorCode;
 import sandbox27.infrastructure.error.ServiceException;
 import sandbox27.infrastructure.security.AuthenticatedUser;
+import sandbox27.infrastructure.security.RequiredRole;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -24,11 +25,9 @@ public class ProblemsService {
     final PeriodRepository periodRepository;
     final CourseUserAssignmentRepository courseUserAssignmentRepository;
 
+    @RequiredRole(Role.ADMIN_ROLE_NAME)
     @GetMapping
-    public List<ProblemDto> getAllProblems(@AuthenticatedUser User user) throws ServiceException {
-        if (!user.getRoles().contains(Role.ADMIN)) {
-            throw new ServiceException(ErrorCode.AccessDenied);
-        }
+    public List<ProblemDto> getAllProblems() throws ServiceException {
         Period period = periodRepository.findByCurrent(true).orElseThrow(() -> new ServiceException(ErrorCode.PeriodNotStartedYet));
         // alle Schüler mit weniger als 3 zugewiesenen Kursen
         return courseUserAssignmentRepository.findStudentsWithLessThanInPeriod(Role.STUDENT, period.getId(), 3)
