@@ -17,4 +17,6 @@ public interface UserRepository extends JpaRepository<User, String> {
     Optional<User> findByInternalId(String s);
 
     Optional<User> findByFirstNameAndLastName(String firstName, String lastName);
+
+    Optional<User> findUserByInternalId(String internalId);
 }

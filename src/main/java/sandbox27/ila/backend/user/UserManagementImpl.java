@@ -20,6 +20,15 @@ public class UserManagementImpl implements UserManagement {
     @Value("${ila.admin.user-names}")
     List<String> adminUserNames;
 
+    @Transactional
+    public User createUser(Map<String, String> userInfoAttributes){
+        final String firstName = (String) userInfoAttributes.get("given_name");
+        final String lastName = (String) userInfoAttributes.get("family_name");
+        final String email = (String) userInfoAttributes.get("email");
+        final String uuid = (String) userInfoAttributes.get("sub");
+        return null;
+    }
+
     @Override
     public Optional<?> findUserByPrincipal(String principal) {
         return userRepository.findById(principal);

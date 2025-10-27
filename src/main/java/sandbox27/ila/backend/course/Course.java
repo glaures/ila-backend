@@ -3,6 +3,7 @@ package sandbox27.ila.backend.course;
 import jakarta.persistence.*;
 import lombok.*;
 import sandbox27.ila.backend.period.Period;
+import sandbox27.ila.backend.user.Gender;
 import sandbox27.ila.backend.user.User;
 
 import java.util.ArrayList;
@@ -34,10 +35,15 @@ public class Course {
     @CollectionTable(name = "course_allowed_grades", joinColumns = @JoinColumn(name = "course_id"))
     @Column(name = "grade")
     Set<Integer> grades  = new HashSet<>();
+    @ElementCollection
+    @CollectionTable(name = "course_excluded_genders", joinColumns = @JoinColumn(name = "course_id"))
+    @Enumerated(EnumType.STRING)
+    Set<Gender> excludedGenders = new HashSet<>();
     String room;
     int minAttendees = 0;
     int maxAttendees;
     String instructor;
+    boolean manualAssignmentOnly = false;
     boolean placeholder = false;
 
 }

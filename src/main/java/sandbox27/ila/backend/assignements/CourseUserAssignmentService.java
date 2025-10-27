@@ -4,9 +4,9 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
-import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
 import sandbox27.ila.backend.block.Block;
+import sandbox27.ila.backend.block.BlockDto;
 import sandbox27.ila.backend.course.Course;
 import sandbox27.ila.backend.course.CourseBlockAssignmentRepository;
 import sandbox27.ila.backend.course.CourseDto;
@@ -22,6 +22,8 @@ import sandbox27.infrastructure.security.RequiredRole;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @RestController
 @Slf4j
@@ -42,7 +44,8 @@ public class CourseUserAssignmentService {
         Optional<CourseUserAssignment> assignmentOptional = courseUserAssignmentRepository.findByUserAndBlock_Id(authenticatedUser, blockId);
         return assignmentOptional.map(courseUserAssignment -> {
                     CourseDto courseDto = modelMapper.map(courseUserAssignment.getCourse(), CourseDto.class);
-                    return new CourseUserAssignmentResponse(new CourseUserAssignmentDto(courseUserAssignment, courseDto));
+                    BlockDto blockDto = modelMapper.map(courseUserAssignment.getBlock(), BlockDto.class);
+                    return new CourseUserAssignmentResponse(new CourseUserAssignmentDto(courseUserAssignment, courseDto, blockDto));
                 })
                 .orElseGet(CourseUserAssignmentResponse::new);
     }
@@ -54,14 +57,16 @@ public class CourseUserAssignmentService {
                                                                  @RequestParam(value = "period-id", required = false) Long periodId) {
         List<CourseUserAssignment> assignments = Collections.emptyList();
         if (courseId != null) {
-            assignments = courseUserAssignmentRepository.findByCourse_id(courseId);
+            assignments = courseUserAssignmentRepository.findByCourse_idOrderByUser_LastName(courseId);
         } else if (userName != null) {
+            if(periodId == null)
+                throw new ServiceException(ErrorCode.FieldRequired, "Phase");
             assignments = courseUserAssignmentRepository.findByUser_userNameAndCourse_Period_Id(userName, periodId);
         }
         return assignments
                 .stream()
                 .map(a -> {
-                    return new CourseUserAssignmentDto(a, modelMapper.map(a.getCourse(), CourseDto.class));
+                    return new CourseUserAssignmentDto(a, modelMapper.map(a.getCourse(), CourseDto.class), modelMapper.map(a.getBlock(), BlockDto.class));
                 })
                 .toList();
     }
@@ -75,16 +80,12 @@ public class CourseUserAssignmentService {
     @RequiredRole(Role.ADMIN_ROLE_NAME)
     @Transactional
     @PostMapping
-    public Feedback assignCourseToUser(@RequestBody CourseUserAssignmentPayload courseUserAssignmentPayload,
-                                       @AuthenticatedUser User authenticatedUser) throws ServiceException {
-        if (!authenticatedUser.getRoles().contains(Role.ADMIN))
-            throw new ServiceException(ErrorCode.AccessDenied);
+    public Feedback assignCourseToUser(@RequestBody CourseUserAssignmentPayload courseUserAssignmentPayload) throws ServiceException {
         User user = userRepository.findById(courseUserAssignmentPayload.userName)
                 .orElseThrow(() -> new ServiceException(ErrorCode.UserNotFound));
         Course course = courseRepository.findByCourseId(courseUserAssignmentPayload.courseId)
                 .orElseThrow(() -> new ServiceException(ErrorCode.NotFound));
         Block block = courseBlockAssignmentRepository.findAllByCourse(course).getFirst().getBlock();
-        ;
         CourseUserAssignment courseUserAssignment = CourseUserAssignment.builder()
                 .user(user)
                 .course(course)
@@ -94,6 +95,30 @@ public class CourseUserAssignmentService {
         return Feedback.builder()
                 .info(List.of("Zuweisung gespeichert."))
                 .build();
+    }
+
+
+    @RequiredRole(Role.ADMIN_ROLE_NAME)
+    @Transactional
+    @PostMapping("/copy-assignments")
+    public Feedback copyAssignments(@RequestParam("source-course-id") Long sourceCourseId,
+                                     @RequestParam("destination-course-id") Long destinationCourseId) throws ServiceException {
+        Course sourceCourse = courseRepository.getReferenceById(sourceCourseId);
+        Course destinationCourse = courseRepository.getReferenceById(destinationCourseId);
+        List<CourseUserAssignment> allAssignments = courseUserAssignmentRepository.findByCourse_idOrderByUser_LastName(sourceCourseId);
+        Set<User> alreadyAssignedUsers = courseUserAssignmentRepository.findByCourse_idOrderByUser_LastName(destinationCourseId)
+                .stream()
+                .map(CourseUserAssignment::getUser)
+                .collect(Collectors.toSet());
+        int assignmentCount = 0;
+        for(CourseUserAssignment assignment : allAssignments){
+            if(!alreadyAssignedUsers.contains(assignment.getUser())){
+                CourseUserAssignmentPayload p = new CourseUserAssignmentPayload(assignment.getUser().getUserName(), destinationCourse.getCourseId());
+                assignCourseToUser(p);
+                assignmentCount ++;
+            }
+        }
+            return new Feedback(List.of(assignmentCount + " Teilnehmer hinzugefügt."), Collections.emptyList(), Collections.emptyList());
     }
 
     @RequiredRole(Role.ADMIN_ROLE_NAME)

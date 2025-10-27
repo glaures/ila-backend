@@ -22,12 +22,15 @@ public class User implements SecUser {
     String email;
     String firstName;
     String lastName;
+    @Enumerated(EnumType.STRING)
+    Gender gender;
     int grade;
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"))
     @Column(name = "role")
     @Enumerated(EnumType.STRING)
     List<Role> roles = new ArrayList<>();
+    boolean ilaMember;
 
     @Override
     public String getId() {

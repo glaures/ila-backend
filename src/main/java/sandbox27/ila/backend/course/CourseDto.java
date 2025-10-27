@@ -2,6 +2,7 @@ package sandbox27.ila.backend.course;
 
 import lombok.*;
 import sandbox27.ila.backend.block.BlockDto;
+import sandbox27.ila.backend.user.Gender;
 import sandbox27.ila.backend.user.User;
 
 import java.util.HashSet;
@@ -28,5 +29,7 @@ public class CourseDto {
     BlockDto block;
     Long blockId;
     Long periodId;
+    boolean manualAssignmentOnly;
+    Set<Gender> excludedGenders = new HashSet<>();
 
 };

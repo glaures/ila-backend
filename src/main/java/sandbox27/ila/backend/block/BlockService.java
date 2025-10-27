@@ -27,7 +27,6 @@ public class BlockService {
 
     final BlockRepository blockRepository;
     final CourseBlockAssignmentRepository courseBlockAssignmentRepository;
-    final PeriodService periodService;
     final ErrorHandlingService errorHandlingService;
     private final ModelMapper modelMapper;
     private final PeriodRepository periodRepository;

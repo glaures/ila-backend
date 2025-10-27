@@ -13,5 +13,5 @@ public class UserDto {
     String firstName;
     String lastName;
     int grade;
-
+    Gender gender;
 }
