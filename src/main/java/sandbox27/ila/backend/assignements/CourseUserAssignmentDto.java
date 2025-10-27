@@ -1,6 +1,7 @@
 package sandbox27.ila.backend.assignements;
 
 import lombok.*;
+import sandbox27.ila.backend.block.BlockDto;
 import sandbox27.ila.backend.course.Course;
 import sandbox27.ila.backend.course.CourseDto;
 
@@ -18,10 +19,11 @@ public class CourseUserAssignmentDto {
     String firstName;
     String lastName;
 
-    public CourseUserAssignmentDto(CourseUserAssignment courseUserAssignment, CourseDto course) {
+    public CourseUserAssignmentDto(CourseUserAssignment courseUserAssignment, CourseDto course, BlockDto block) {
         this.id = courseUserAssignment.getId();
         this.courseId = courseUserAssignment.getCourse().getId();
         this.course = course;
+        this.course.setBlock(block);
         this.userUserName = courseUserAssignment.getUser().getUserName();
         this.firstName = courseUserAssignment.getUser().getFirstName();
         this.lastName = courseUserAssignment.getUser().getLastName();

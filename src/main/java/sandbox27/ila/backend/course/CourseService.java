@@ -15,6 +15,7 @@ import sandbox27.infrastructure.error.ServiceException;
 import sandbox27.infrastructure.security.RequiredRole;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @Transactional
@@ -37,7 +38,7 @@ public class CourseService {
         if (periodId != null) {
             return courseRepository.findAllByPeriod_Id(periodId).stream()
                     .map(this::map)
-                    .toList();
+                    .collect(Collectors.toList());
         } else if (blockId == null)
             return courseRepository.findAll().stream()
                     .map(this::map)
@@ -96,6 +97,8 @@ public class CourseService {
                 .instructor(c.getInstructor())
                 .grades(c.getGrades())
                 .placeholder(c.placeholder)
+                .excludedGenders(c.excludedGenders)
+                .manualAssignmentOnly(c.isManualAssignmentOnly())
                 .build();
         res.setBlock(blockService.getBlockByCourseId(res.getId()).orElse(null));
         return res;
@@ -115,8 +118,10 @@ public class CourseService {
         course.getGrades().addAll(courseDto.grades);
         course.setPlaceholder(courseDto.placeholder);
         course.setRoom(courseDto.room);
+        course.getExcludedGenders().clear();
+        course.getExcludedGenders().addAll(courseDto.excludedGenders);
+        course.setManualAssignmentOnly(courseDto.manualAssignmentOnly);
         courseRepository.save(course);
-        // Block Zuweisung fehlt noch
         if (courseDto.getBlockId() != null) {
             List<CourseBlockAssignment> courseBlockAssignments = courseBlockAssignmentRepository.findAllByCourse(course);
             courseBlockAssignmentRepository.deleteAll(courseBlockAssignments);

@@ -2,6 +2,7 @@ package sandbox27.infrastructure.security;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.ApplicationContext;
 import org.springframework.http.*;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
@@ -23,6 +24,7 @@ public class AuthController {
     private final RestTemplate rest = new RestTemplate();
     private final JwtGenerator jwtGenerator;
     final UserManagement userMapper;
+    final ApplicationContext applicationContext;
 
     @Value("${sandbox27.infrastructure.security.client-secret}")
     private String clientSecret;
@@ -65,8 +67,9 @@ public class AuthController {
         SecUser user = userMapper.map(userInfo).
                 orElseThrow(() -> new ServiceException(ErrorCode.UserNotFound, userInfo.get("name")));
 
-        String jwt = jwtGenerator.createToken(user.getId());
+        applicationContext.publishEvent(new AuthenticationEvent(user));
 
+        String jwt = jwtGenerator.createToken(user.getId());
         return ResponseEntity.ok(Map.of("token", jwt, "username", userInfo.get("name"), "roles", user.getSecRoles()));
 
     }

@@ -1,5 +1,6 @@
 package sandbox27.ila.backend.assignements;
 
+import jakarta.persistence.OrderBy;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -23,7 +24,7 @@ public interface CourseUserAssignmentRepository extends JpaRepository<CourseUser
 
     List<CourseUserAssignment> findByCourse_Period(Period currentPeriod);
 
-    List<CourseUserAssignment> findByCourse_id(Long courseId);
+    List<CourseUserAssignment> findByCourse_idOrderByUser_LastName(Long courseId);
 
     int deleteAllByPreset(boolean b);
 
