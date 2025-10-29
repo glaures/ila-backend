@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 import sandbox27.infrastructure.security.SecUser;
 import sandbox27.infrastructure.security.UserManagement;
 
-import java.nio.file.attribute.UserPrincipal;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -21,12 +20,14 @@ public class UserManagementImpl implements UserManagement {
     List<String> adminUserNames;
 
     @Transactional
-    public User createUser(Map<String, String> userInfoAttributes){
-        final String firstName = (String) userInfoAttributes.get("given_name");
-        final String lastName = (String) userInfoAttributes.get("family_name");
-        final String email = (String) userInfoAttributes.get("email");
-        final String uuid = (String) userInfoAttributes.get("sub");
-        return null;
+    public User createUser(String username, String firstName, String lastName, String internalId) {
+        User user = User.builder()
+                .userName(username)
+                .firstName(firstName)
+                .lastName(lastName)
+                .internalId(internalId)
+                .build();
+        return userRepository.save(user);
     }
 
     @Override

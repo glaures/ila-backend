@@ -26,4 +26,6 @@ public class ImportedCourseDto {
     int maxAttendees;
     @JsonProperty("Nachname")
     String Nachname;
+    @JsonProperty("Raum")
+    String Raum;
 }
