@@ -50,6 +50,7 @@ public class CourseImporter {
         course.setDescription(importedCourse.Beschreibung.replace("'", ""));
         course.setInstructor(importedCourse.Nachname.trim());
         course.setMaxAttendees(importedCourse.maxAttendees);
+        course.setRoom(importedCourse.Raum.trim());
         if (course.getCourseCategories() == null)
             course.setCourseCategories(new HashSet<>());
         Arrays.stream(importedCourse.getKategorien()).forEach(catStr -> course.getCourseCategories().add(CourseCategory.valueOf(catStr)));
