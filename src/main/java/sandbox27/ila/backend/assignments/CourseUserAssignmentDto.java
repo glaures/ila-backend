@@ -1,8 +1,7 @@
-package sandbox27.ila.backend.assignements;
+package sandbox27.ila.backend.assignments;
 
 import lombok.*;
 import sandbox27.ila.backend.block.BlockDto;
-import sandbox27.ila.backend.course.Course;
 import sandbox27.ila.backend.course.CourseDto;
 
 @Setter

@@ -4,8 +4,8 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.web.bind.annotation.*;
-import sandbox27.ila.backend.assignements.CourseUserAssignment;
-import sandbox27.ila.backend.assignements.CourseUserAssignmentRepository;
+import sandbox27.ila.backend.assignments.CourseUserAssignment;
+import sandbox27.ila.backend.assignments.CourseUserAssignmentRepository;
 import sandbox27.ila.backend.block.Block;
 import sandbox27.ila.backend.block.BlockRepository;
 import sandbox27.ila.backend.block.BlockService;
@@ -45,13 +45,11 @@ public class PreferenceService {
                                             @AuthenticatedUser User authenticatedUser) {
         int grade = authenticatedUser.getGrade();
         PreferencePayload payload = new PreferencePayload();
-        Block block = blockRepository.getReferenceById(blockId);
-        payload.setBlockId(block.getId());
-        payload.setCourses(courseService.getCourses(block.getId(), grade, block.getPeriod().getId()));
-        List<Preference> preferences = preferenceRepository.findByUserAndBlockOrderByPreferenceIndex(authenticatedUser, block);
-        BlockPreferencesDto blockPreferencesDto = new BlockPreferencesDto(preferences);
-        payload.setPreferences(blockPreferencesDto);
-        payload.setPauseSelected(blockPreferencesDto.isPauseSelected());
+        payload.setBlockId(blockId);
+        List<Long> preferencedCourseIds = preferenceRepository.findByUserAndBlock_IdOrderByPreferenceIndex(authenticatedUser, blockId)
+                        .stream().map(p -> p.getCourse().getId())
+                        .toList();
+        payload.setPreferencedCourseIds(preferencedCourseIds);
         return payload;
     }
 
@@ -59,22 +57,22 @@ public class PreferenceService {
     @Transactional
     public PreferencePayload savePreferences(
             @PathVariable Long blockId,
-            @RequestBody BlockPreferencesDto dto,
+            @RequestBody PreferencePayload preferencePayload,
             @AuthenticatedUser User user) {
+        List<Long> preferencedCourseIds = preferencePayload.getPreferencedCourseIds();
         Block block = blockRepository.findById(blockId).orElseThrow();
         if (block.getPeriod().getStartDate().isAfter(LocalDate.now())
                 || block.getPeriod().getEndDate().isBefore(LocalDate.now())) {
             throw new ServiceException(ErrorCode.PeriodNotStartedYet);
         }
         preferenceRepository.deleteByUserAndBlock(user, block);
-        for (int i = 0; i < dto.getPreferences().size(); i++) {
-            Long courseId = dto.getPreferences().get(i);
+        for (Long courseId : preferencedCourseIds) {
             Course course = courseRepository.findById(courseId).orElseThrow();
             Preference pref = Preference.builder()
                     .user(user)
                     .block(block)
                     .course(course)
-                    .preferenceIndex(dto.isPauseSelected() ? -1 : i)
+                    .preferenceIndex(preferencedCourseIds.indexOf(courseId))
                     .build();
             preferenceRepository.save(pref);
         }
@@ -122,7 +120,7 @@ public class PreferenceService {
                     assignment.getCourse().getCourseCategories().stream().findFirst().orElse(CourseCategory.iLa);
             List<TopPreference> topPreferenceList = new ArrayList<>();
             if (assignment == null) {
-                List<Preference> preferences = preferenceRepository.findByUserAndBlockOrderByPreferenceIndex(user, block);
+                List<Preference> preferences = preferenceRepository.findByUserAndBlock_IdOrderByPreferenceIndex(user, block.getId());
                 if (!preferences.isEmpty() && preferences.getFirst().getPreferenceIndex() != -1) {
                     for (int i = 0; i < Math.min(preferences.size(), 3); i++) {
                         Preference preference = preferences.get(i);

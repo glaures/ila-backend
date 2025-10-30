@@ -1,6 +1,5 @@
-package sandbox27.ila.backend.assignements;
+package sandbox27.ila.backend.assignments;
 
-import jakarta.persistence.OrderBy;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -31,7 +30,7 @@ public interface CourseUserAssignmentRepository extends JpaRepository<CourseUser
     List<CourseUserAssignment> findByUser_userName(String userName);
 
     @Query("""
-            select new sandbox27.ila.backend.assignements.StudentAssignmentSummary(
+            select new sandbox27.ila.backend.assignments.StudentAssignmentSummary(
                           u.userName,
                           (select count(a) from CourseUserAssignment a
                              where a.user = u

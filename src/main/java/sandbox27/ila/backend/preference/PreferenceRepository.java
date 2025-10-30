@@ -17,7 +17,7 @@ public interface PreferenceRepository extends JpaRepository<Preference, Long> {
 
     List<Preference> findAllByBlock_Period(Period period);
 
-    List<Preference> findByUserAndBlockOrderByPreferenceIndex(User user, Block block);
+    List<Preference> findByUserAndBlock_IdOrderByPreferenceIndex(User user, Long blockId);
 
     void deleteByUserAndBlock(User user, Block block);
 

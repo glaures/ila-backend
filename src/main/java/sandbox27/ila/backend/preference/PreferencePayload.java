@@ -11,11 +11,9 @@ import java.util.List;
 @NoArgsConstructor
 @Getter
 @Setter
-public class PreferencePayload extends BlockDto {
+public class PreferencePayload {
 
     long blockId;
-    boolean pauseSelected;
-    List<CourseDto> courses;
-    BlockPreferencesDto preferences;
+    private List<Long> preferencedCourseIds;
 
 }

@@ -4,7 +4,7 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import sandbox27.ila.backend.assignements.CourseUserAssignmentRepository;
+import sandbox27.ila.backend.assignments.CourseUserAssignmentRepository;
 import sandbox27.ila.backend.block.Block;
 import sandbox27.ila.backend.block.BlockRepository;
 import sandbox27.ila.backend.period.Period;
@@ -45,21 +45,24 @@ public class PreferencesStatusService {
 
     @GetMapping
     public PreferencesStatus getPreferencesStatus(@AuthenticatedUser User user) throws ServiceException {
+        final int minDifferentCategories = 3;
         Period currentPeriod = periodRepository.findByCurrent(true).orElseThrow(() -> new ServiceException(ErrorCode.PeriodNotStartedYet));
         List<String> selectedCategories = getSelectedCategories(user, currentPeriod);
         double blocksDefined = getBlocksDefined(currentPeriod, user);
         long distinctCount = selectedCategories.stream()
                 .distinct()
                 .count();
-        boolean courseSelectionComplete = selectedCategories.size() == 3;
-        boolean categoryDistributionOk = distinctCount >= 2;
+        boolean courseSelectionComplete = true;//selectedCategories.size() == 3;
+        boolean categoryDistributionOk = distinctCount >= minDifferentCategories;
         List<String> advices = new ArrayList<>();
         if (blocksDefined < 1.0)
             advices.add("Bearbeite alle " + blockRepository.findAllByPeriod_idOrderByDayOfWeekAscStartTimeAsc(currentPeriod.getId()).size() + " Blöcke");
+        /*
         if (!courseSelectionComplete)
             advices.add("Belege genau 3 Blöcke");
+         */
         if (!categoryDistributionOk)
-            advices.add("Setze mindestens 2 verschiedenen Kategorien auf Platz 1");
+            advices.add("Setze mindestens " + minDifferentCategories + " verschiedenen Kategorien auf Platz 1");
         PeriodUserPreferencesSubmitStatus submitStatus = periodUserPreferencesSubmitStatusRepository.findByUserAndPeriod(user, currentPeriod).orElse(PeriodUserPreferencesSubmitStatus.builder().submitted(false).build());
         return new PreferencesStatus(getBlocksDefined(currentPeriod, user),
                 selectedCategories,
