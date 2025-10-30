@@ -5,14 +5,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import sandbox27.ila.backend.assignements.CourseUserAssignmentRepository;
+import sandbox27.ila.backend.assignments.CourseUserAssignmentRepository;
 import sandbox27.ila.backend.period.Period;
 import sandbox27.ila.backend.period.PeriodRepository;
 import sandbox27.ila.backend.user.Role;
-import sandbox27.ila.backend.user.User;
 import sandbox27.infrastructure.error.ErrorCode;
 import sandbox27.infrastructure.error.ServiceException;
-import sandbox27.infrastructure.security.AuthenticatedUser;
 import sandbox27.infrastructure.security.RequiredRole;
 
 import java.util.List;

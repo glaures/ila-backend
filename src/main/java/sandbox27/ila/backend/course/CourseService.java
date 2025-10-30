@@ -3,15 +3,18 @@ package sandbox27.ila.backend.course;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-import sandbox27.ila.backend.assignements.CourseUserAssignmentRepository;
+import sandbox27.ila.backend.assignments.CourseUserAssignmentRepository;
 import sandbox27.ila.backend.block.Block;
 import sandbox27.ila.backend.block.BlockRepository;
 import sandbox27.ila.backend.block.BlockService;
 import sandbox27.ila.backend.period.PeriodRepository;
 import sandbox27.ila.backend.preference.PreferenceRepository;
+import sandbox27.ila.backend.user.Gender;
 import sandbox27.ila.backend.user.Role;
+import sandbox27.ila.backend.user.User;
 import sandbox27.infrastructure.error.ErrorCode;
 import sandbox27.infrastructure.error.ServiceException;
+import sandbox27.infrastructure.security.AuthenticatedUser;
 import sandbox27.infrastructure.security.RequiredRole;
 
 import java.util.List;
@@ -33,21 +36,24 @@ public class CourseService {
 
     @GetMapping
     public List<CourseDto> getCourses(@RequestParam(name = "block-id", required = false) Long blockId,
-                                      @RequestParam(required = false, defaultValue = "0") int grade,
-                                      @RequestParam(value = "period-id", required = false) Long periodId) {
-        if (periodId != null) {
+                                      @RequestParam(value = "period-id", required = false) Long periodId,
+                                      @AuthenticatedUser User user) {
+        if (periodId != null && blockId == null) {
             return courseRepository.findAllByPeriod_Id(periodId).stream()
                     .map(this::map)
                     .collect(Collectors.toList());
-        } else if (blockId == null)
-            return courseRepository.findAll().stream()
-                    .map(this::map)
-                    .toList();
-        else
-            return courseRepository.findAllByBlock_Id(blockId).stream()
-                    .filter(course -> grade == 0 || course.getGrades().contains(grade))
-                    .map(this::map)
-                    .toList();
+        } else {
+            List<Course> allCoursesInBlock = courseRepository.findAllByBlock_Id(blockId);
+            if (!user.getRoles().contains(Role.ADMIN))
+                return allCoursesInBlock.stream()
+                        .filter(course -> !course.manualAssignmentOnly
+                                && course.getGrades().contains(user.getGrade())
+                                && !course.getExcludedGenders().contains(user.getGender()))
+                        .map(this::map)
+                        .toList();
+            else
+                return allCoursesInBlock.stream().map(this::map).toList();
+        }
     }
 
     @GetMapping("/{courseId}")

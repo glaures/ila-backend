@@ -1,4 +1,4 @@
-package sandbox27.ila.backend.assignements;
+package sandbox27.ila.backend.assignments;
 
 public record StudentAssignmentSummary(
         String userName,
