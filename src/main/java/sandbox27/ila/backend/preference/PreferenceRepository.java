@@ -1,6 +1,7 @@
 package sandbox27.ila.backend.preference;
 
 import jakarta.persistence.OrderBy;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -29,4 +30,22 @@ public interface PreferenceRepository extends JpaRepository<Preference, Long> {
     List<Preference> findByUserAndBlock_Period(User user, Period period);
 
     void deleteByCourse(Course course);
+
+    @Query("SELECT COUNT(DISTINCT p.user) FROM Preference p WHERE p.block.period = :period")
+    long countDistinctUsersByPeriod(@Param("period") Period period);
+
+    @Query("SELECT p.course, COUNT(p) as cnt FROM Preference p " +
+            "WHERE p.preferenceIndex = 0 AND p.course.period = :period " +
+            "GROUP BY p.course " +
+            "ORDER BY COUNT(p) DESC")
+    List<Object[]> findTopCoursesByFirstPreferenceAndPeriod(@Param("period") Period period,
+                                                            Pageable pageable);
+    @Query("SELECT p.course, COUNT(p) as cnt FROM Preference p " +
+            "WHERE p.preferenceIndex = 0 AND p.course.period = :period AND p.block.id=:blockId " +
+            "GROUP BY p.course " +
+            "ORDER BY COUNT(p) DESC")
+    List<Object[]> findTopCoursesByFirstPreferenceAndPeriodAndBlock(@Param("period") Period period,
+                                                            @Param("blockId") Long blockId,
+                                                            Pageable pageable);
+
 }

@@ -11,4 +11,6 @@ import java.util.Optional;
 public interface PeriodUserPreferencesSubmitStatusRepository extends JpaRepository<PeriodUserPreferencesSubmitStatus, Long> {
 
     Optional<PeriodUserPreferencesSubmitStatus> findByUserAndPeriod(User user, Period period);
+
+    long countByPeriodAndSubmitted(Period period, boolean submitted);
 }
