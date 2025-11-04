@@ -19,4 +19,7 @@ public interface UserRepository extends JpaRepository<User, String> {
     Optional<User> findByFirstNameAndLastName(String firstName, String lastName);
 
     Optional<User> findUserByInternalId(String internalId);
+
+    @Query("SELECT COUNT(u) FROM User u JOIN u.roles r WHERE r = :role")
+    long countByRole(@Param("role") Role role);
 }
