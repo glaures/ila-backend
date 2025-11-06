@@ -19,6 +19,7 @@ import sandbox27.infrastructure.error.ServiceException;
 import sandbox27.infrastructure.security.AuthenticatedUser;
 import sandbox27.infrastructure.security.RequiredRole;
 
+import java.time.LocalDate;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -90,6 +91,7 @@ public class CourseUserAssignmentService {
                 .user(user)
                 .course(course)
                 .block(block)
+                .preset(block.getPeriod().getEndDate().isAfter(LocalDate.now()))
                 .build();
         courseUserAssignmentRepository.save(courseUserAssignment);
         return Feedback.builder()
