@@ -208,8 +208,9 @@ public class CourseAssignmentService {
     }
 
     private void trySwap(User student1, User student2, AssignmentState state) {
-        List<StudentAssignment> assignments1 = state.getAssignments(student1);
-        List<StudentAssignment> assignments2 = state.getAssignments(student2);
+        // Create copies to avoid ConcurrentModificationException
+        List<StudentAssignment> assignments1 = new ArrayList<>(state.getAssignments(student1));
+        List<StudentAssignment> assignments2 = new ArrayList<>(state.getAssignments(student2));
 
         for (StudentAssignment a1 : assignments1) {
             for (StudentAssignment a2 : assignments2) {

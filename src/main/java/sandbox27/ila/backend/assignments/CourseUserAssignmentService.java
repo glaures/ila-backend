@@ -105,7 +105,6 @@ public class CourseUserAssignmentService {
     @PostMapping("/copy-assignments")
     public Feedback copyAssignments(@RequestParam("source-course-id") Long sourceCourseId,
                                      @RequestParam("destination-course-id") Long destinationCourseId) throws ServiceException {
-        Course sourceCourse = courseRepository.getReferenceById(sourceCourseId);
         Course destinationCourse = courseRepository.getReferenceById(destinationCourseId);
         List<CourseUserAssignment> allAssignments = courseUserAssignmentRepository.findByCourse_idOrderByUser_LastName(sourceCourseId);
         Set<User> alreadyAssignedUsers = courseUserAssignmentRepository.findByCourse_idOrderByUser_LastName(destinationCourseId)
