@@ -1,6 +1,7 @@
 package sandbox27.infrastructure.error;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import org.apache.juli.logging.Log;
 import org.apache.juli.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -15,15 +16,14 @@ import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
+@Log4j2
 public class ErrorHandlingService {
 
-    Log log = LogFactory.getLog(ErrorHandlingService.class);
-    @Value("${spring.mail.admin}")
-    String mailTo;
+    private final ErrorConfiguration errorConfiguration;
     private final ReliableMailService emailService;
 
     public void handleWarning(String s) {
-        System.out.println("WARNING" + s);
+        log.warn(s);
         notifyAdmin("WARNING:" + s);
     }
 
@@ -51,15 +51,14 @@ public class ErrorHandlingService {
             buf.append(LocalDateTime.now().format(DateTimeFormatter.ISO_DATE_TIME)).append("\n\n");
             buf.append(sw.getBuffer().toString());
             sw.close();
-            emailService.sendConfirmationAsync(mailTo,
+            emailService.sendConfirmationAsync(errorConfiguration.getMailTo(),
                     subject,
                     "error",
                     Map.of("error", buf.toString()));
         } catch (Throwable t2) {
             if (t.length > 0)
-                t[0].printStackTrace();
-            t2.printStackTrace();
-            return;
+                log.error(t[0]);
+            log.error(t2);
         }
     }
 
