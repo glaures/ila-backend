@@ -17,6 +17,7 @@ public class MailProperties {
     @ToString.Exclude
     private String password;
     private String from;
+    private String fromDisplay;
     private String to;
 
 }
