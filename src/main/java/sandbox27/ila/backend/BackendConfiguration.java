@@ -12,8 +12,8 @@ import java.util.concurrent.Executor;
 @EnableScheduling
 public class BackendConfiguration {
 
-    @Bean(name = "taskExecutor")
-    public Executor taskExecutor() {
+    @Bean(name = "applicationTaskExecutor")
+    public Executor applicationTaskExecutor() {
         ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
         executor.setCorePoolSize(2);
         executor.setMaxPoolSize(5);
