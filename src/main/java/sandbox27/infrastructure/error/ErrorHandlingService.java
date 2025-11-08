@@ -5,7 +5,10 @@ import lombok.extern.log4j.Log4j2;
 import org.apache.juli.logging.Log;
 import org.apache.juli.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.event.TransactionPhase;
+import org.springframework.transaction.event.TransactionalEventListener;
 import sandbox27.infrastructure.email.ReliableMailService;
 
 import java.io.PrintWriter;
@@ -21,6 +24,16 @@ public class ErrorHandlingService {
 
     private final ErrorConfiguration errorConfiguration;
     private final ReliableMailService emailService;
+
+    @TransactionalEventListener(phase = TransactionPhase.AFTER_COMPLETION, fallbackExecution = true)
+    @Async
+    public void handleError(ErrorEvent errorEvent) {
+        String internalMsg = errorEvent.message();
+        if (errorEvent.user() != null) {
+            internalMsg = "[" + errorEvent.user().getId() + "]" + internalMsg;
+        }
+        handleError(errorEvent.t(), internalMsg);
+    }
 
     public void handleWarning(String s) {
         log.warn(s);
