@@ -17,6 +17,7 @@ public class CourseUserAssignmentDto {
     String userUserName;
     String firstName;
     String lastName;
+    int grade;
 
     public CourseUserAssignmentDto(CourseUserAssignment courseUserAssignment, CourseDto course, BlockDto block) {
         this.id = courseUserAssignment.getId();
@@ -26,5 +27,6 @@ public class CourseUserAssignmentDto {
         this.userUserName = courseUserAssignment.getUser().getUserName();
         this.firstName = courseUserAssignment.getUser().getFirstName();
         this.lastName = courseUserAssignment.getUser().getLastName();
+        this.grade = courseUserAssignment.getUser().getGrade();
     }
 }
