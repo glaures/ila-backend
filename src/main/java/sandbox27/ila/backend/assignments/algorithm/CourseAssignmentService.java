@@ -37,14 +37,20 @@ public class CourseAssignmentService {
     private final PreferenceRepository preferenceRepository;
     private final CourseUserAssignmentRepository courseUserAssignmentRepository;
     private final UserBlockExclusionService userBlockExclusionService;
+    private final AssignmentResultRepository assignmentResultRepository;
 
     private static final int COURSES_PER_STUDENT = 3;
     private static final int MIN_CATEGORIES = 2;
     private static final int MAX_ITERATIONS = 50;
     private static final int SWAP_ATTEMPTS = 1000;
 
+    List<AssignmentResult> getAllAssignmentResultsForPeriod(long periodId) {
+        return assignmentResultRepository.findByPeriod_IdOrderByExecutedAtDesc(periodId);
+    }
+
     @Transactional
     public AssignmentResult assignCourses(Long periodId) {
+        long startTime = System.currentTimeMillis();
         log.info("Starting course assignment for period {}", periodId);
 
         Period period = periodRepository.findById(periodId)
@@ -102,10 +108,16 @@ public class CourseAssignmentService {
 
         // Generate statistics
         AssignmentResult result = generateStatistics(state);
-        log.info("Assignment completed: {} students assigned, avg priority: {}",
-                result.getAssignedStudents(), result.getAveragePriority());
 
-        return result;
+        // Calculate execution duration
+        long executionDuration = System.currentTimeMillis() - startTime;
+        result.setExecutionDurationMs(executionDuration);
+        result.setPeriod(period);
+
+        log.info("Assignment completed: {} students assigned, avg priority: {}, duration: {}ms",
+                result.getAssignedStudents(), result.getAveragePriority(), executionDuration);
+
+        return assignmentResultRepository.save(result);
     }
 
     private void greedyAssignmentWithFairness(AssignmentState state) {
@@ -316,9 +328,10 @@ public class CourseAssignmentService {
 
         for (User student : state.students) {
             for (StudentAssignment assignment : state.getAssignments(student)) {
-                int priority = assignment.priority;
-                priorityDistribution.merge(priority, 1L, Long::sum);
-                totalPriority += priority;
+                // Convert 0-based priority to 1-based for statistics display
+                int displayPriority = assignment.priority + 1;
+                priorityDistribution.merge(displayPriority, 1L, Long::sum);
+                totalPriority += displayPriority;
                 totalAssignments++;
             }
         }
@@ -326,9 +339,10 @@ public class CourseAssignmentService {
         double averagePriority = totalAssignments > 0 ? totalPriority / totalAssignments : 0;
 
         // Calculate fairness metrics
+        // Convert 0-based fairness scores to 1-based for statistics display
         List<Double> fairnessScores = state.students.stream()
                 .filter(s -> state.getAssignmentCount(s) == COURSES_PER_STUDENT)
-                .map(state::getFairnessScore)
+                .map(s -> state.getFairnessScore(s) + 1.0) // Convert to 1-based
                 .collect(Collectors.toList());
 
         double avgFairnessScore = fairnessScores.stream()
@@ -360,6 +374,10 @@ public class CourseAssignmentService {
                 .sum();
 
         return Math.sqrt(sumSquaredDiff / values.size());
+    }
+
+    public void deleteAssignmentResult(Long assignmentResultId) {
+        assignmentResultRepository.deleteById(assignmentResultId);
     }
 
     // Inner classes

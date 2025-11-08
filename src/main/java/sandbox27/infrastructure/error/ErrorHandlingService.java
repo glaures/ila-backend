@@ -10,12 +10,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.event.TransactionPhase;
 import org.springframework.transaction.event.TransactionalEventListener;
 import sandbox27.infrastructure.email.ReliableMailService;
+import sandbox27.infrastructure.security.jwt.AuthenticatedUserResolver;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Map;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -24,15 +26,12 @@ public class ErrorHandlingService {
 
     private final ErrorConfiguration errorConfiguration;
     private final ReliableMailService emailService;
+    private final AuthenticatedUserResolver authenticatedUserResolver;
 
     @TransactionalEventListener(phase = TransactionPhase.AFTER_COMPLETION, fallbackExecution = true)
     @Async
     public void handleError(ErrorEvent errorEvent) {
-        String internalMsg = errorEvent.message();
-        if (errorEvent.user() != null) {
-            internalMsg = "[" + errorEvent.user().getId() + "]" + internalMsg;
-        }
-        handleError(errorEvent.t(), internalMsg);
+        handleError(errorEvent.t(), errorEvent.message());
     }
 
     public void handleWarning(String s) {
@@ -59,6 +58,10 @@ public class ErrorHandlingService {
                 t[0].printStackTrace(new PrintWriter(sw));
             } else {
                 subject = "Meldung vom Server";
+            }
+            final Optional<String> webInfo = authenticatedUserResolver.resolveWebInformationIfPossible();
+            if(webInfo.isPresent()) {
+                msg = webInfo.get() + "\n" + msg;
             }
             sw.write(msg);
             buf.append(LocalDateTime.now().format(DateTimeFormatter.ISO_DATE_TIME)).append("\n\n");
