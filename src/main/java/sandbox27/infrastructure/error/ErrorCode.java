@@ -11,6 +11,8 @@ public enum ErrorCode {
     PeriodNotEditable,
     NotImplemented,
     FieldRequired,
-    RoleRequired
+    RoleRequired,
+    UserAlreadyExists,
+    InvalidRole
 
 }

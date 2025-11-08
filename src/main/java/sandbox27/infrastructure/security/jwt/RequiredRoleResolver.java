@@ -1,4 +1,4 @@
-package sandbox27.infrastructure.security;
+package sandbox27.infrastructure.security.jwt;
 
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
@@ -14,6 +14,8 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import sandbox27.infrastructure.error.ErrorCode;
 import sandbox27.infrastructure.error.ServiceException;
+import sandbox27.infrastructure.security.RequiredRole;
+import sandbox27.infrastructure.security.UserManagement;
 
 import java.lang.reflect.Method;
 import java.util.Optional;

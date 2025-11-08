@@ -1,10 +1,11 @@
-package sandbox27.infrastructure.security;
+package sandbox27.infrastructure.security.jwt;
 
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+import sandbox27.infrastructure.security.UserManagement;
 
 import javax.crypto.SecretKey;
 import java.util.Base64;

@@ -1,13 +1,6 @@
 package sandbox27.infrastructure.email;
 
 import jakarta.mail.MessagingException;
-import org.springframework.beans.BeansException;
-import org.springframework.boot.context.event.ApplicationReadyEvent;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.ApplicationContextAware;
-import org.springframework.context.ApplicationStartupAware;
-import org.springframework.context.event.EventListener;
-import org.springframework.core.metrics.ApplicationStartup;
 import org.springframework.retry.annotation.Backoff;
 import org.springframework.retry.annotation.Retryable;
 import org.springframework.scheduling.annotation.Async;
