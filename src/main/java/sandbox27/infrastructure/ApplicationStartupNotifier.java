@@ -34,7 +34,7 @@ public class ApplicationStartupNotifier {
                         applicationName + " Startup Notification",
                         generateStartupInformation());
             } catch (Throwable t) {
-                log.error("Could not sent startup notification." , t);
+                log.error("Could not sent startup notification to {}", mailProperties.getTo(), t);
             }
         }
     }
