@@ -1,4 +1,4 @@
-package sandbox27.infrastructure.security;
+package sandbox27.infrastructure.security.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -13,13 +13,15 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 import sandbox27.infrastructure.error.ErrorCode;
 import sandbox27.infrastructure.error.ServiceException;
+import sandbox27.infrastructure.security.*;
+import sandbox27.infrastructure.security.jwt.JwtGenerator;
 
 import java.util.Map;
 
 @RestController
 @RequestMapping("/auth")
 @RequiredArgsConstructor
-public class AuthController {
+public class ExternalAuthController {
 
     private final RestTemplate rest = new RestTemplate();
     private final JwtGenerator jwtGenerator;
@@ -63,6 +65,7 @@ public class AuthController {
 
         ResponseEntity<Map> userInfoResponse = rest.exchange(userInfoUri, HttpMethod.GET, userRequest, Map.class);
         Map userInfo = userInfoResponse.getBody();
+        userInfo.put(AuthenticationType.USER_INFO_AUTH_TYPE_KEY, AuthenticationType.external);
 
         SecUser user = userMapper.map(userInfo).
                 orElseThrow(() -> new ServiceException(ErrorCode.UserNotFound, userInfo.get("name")));

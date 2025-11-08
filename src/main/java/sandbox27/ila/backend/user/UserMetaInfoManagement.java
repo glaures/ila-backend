@@ -12,10 +12,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
-import sandbox27.infrastructure.security.UserManagement;
 
 import java.util.List;
-import java.util.Optional;
 
 @Slf4j
 @Service
@@ -34,7 +32,7 @@ public class UserMetaInfoManagement {
     private static final String ISERV_API_BASE_URL = "https://idm.jmoosdorf.de/iserv/idm/api/v1";
 
     final UserRepository userRepository;
-    final UserManagementImpl userManagement;
+    final UserManagementService userManagement;
 
     @Transactional
     public void syncUsers() {
@@ -68,7 +66,10 @@ public class UserMetaInfoManagement {
                                     iservUser.user,
                                     iservUser.firstname,
                                     iservUser.lastname,
-                                    iservUser.importId
+                                    iservUser.user + "@jmoosdorf.de",
+                                    iservUser.importId,
+                                    instructors ? Role.ADMIN_ROLE_NAME : Role.STUDENT_ROLE_NAME,
+                                    false // kein interner Nutzer, sondern von IServ verwaltet
                             );
                         });
 
@@ -102,6 +103,12 @@ public class UserMetaInfoManagement {
                     log.debug("Updating internal ID for user {}: {} -> {}",
                             user.getUserName(), user.getInternalId(), iservUser.importId());
                     user.setInternalId(iservUser.importId());
+                    updated = true;
+                }
+
+                // Update ilaMember
+                if (!instructors && !user.isIlaMember()) {
+                    user.setIlaMember(true);
                     updated = true;
                 }
 

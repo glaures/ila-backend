@@ -29,6 +29,7 @@ public class ImportRunner {
     @EventListener(ApplicationReadyEvent.class)
     @Transactional
     public void onApplicationReady() throws IOException {
+        /*
         Period periodToImportInto = periodRepository.findByName(PERIOD).orElseGet(() -> periodRepository.save(
                 Period.builder()
                         .name(PERIOD)
@@ -46,6 +47,8 @@ public class ImportRunner {
         // prüfen, ob jeder Block der aktuellen Phase Platzhalter hat
         // placeholderCheck.ensurePlaceholdersInEveryBlockOfCurrentPeriod();
         // log.info("Placeholders in every block");
+
+         */
     }
 
 

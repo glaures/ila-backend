@@ -1,4 +1,4 @@
-package sandbox27.infrastructure.security;
+package sandbox27.infrastructure.security.jwt;
 
 import io.jsonwebtoken.JwtException;
 import jakarta.servlet.FilterChain;
@@ -23,6 +23,7 @@ public class JwtFilter extends OncePerRequestFilter {
                                     FilterChain filterChain) throws IOException, ServletException {
 
         if (!request.getRequestURI().startsWith("/auth")
+                && !request.getRequestURI().startsWith("/login")
                 && !request.getMethod().equals("OPTIONS")
         ) {
             String auth = request.getHeader("Authorization");

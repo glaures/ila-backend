@@ -17,6 +17,7 @@ import sandbox27.ila.backend.preference.Preference;
 import sandbox27.ila.backend.preference.PreferenceRepository;
 import sandbox27.ila.backend.user.User;
 import sandbox27.ila.backend.user.UserRepository;
+import sandbox27.ila.backend.exclusion.UserBlockExclusionService;
 import sandbox27.infrastructure.error.ErrorCode;
 import sandbox27.infrastructure.error.ServiceException;
 
@@ -35,6 +36,7 @@ public class CourseAssignmentService {
     private final BlockRepository blockRepository;
     private final PreferenceRepository preferenceRepository;
     private final CourseUserAssignmentRepository courseUserAssignmentRepository;
+    private final UserBlockExclusionService userBlockExclusionService;
 
     private static final int COURSES_PER_STUDENT = 3;
     private static final int MIN_CATEGORIES = 2;
@@ -65,6 +67,16 @@ public class CourseAssignmentService {
                 .stream()
                 .collect(Collectors.groupingBy(p -> p.getUser().getUserName()));
 
+        // Load user block exclusions
+        Map<String, Set<Long>> userBlockExclusions = new HashMap<>();
+        for (User student : students) {
+            Set<Long> excludedBlocks = userBlockExclusionService.getExcludedBlockIds(student.getUserName(), periodId);
+            if (!excludedBlocks.isEmpty()) {
+                userBlockExclusions.put(student.getUserName(), excludedBlocks);
+            }
+        }
+        log.info("Loaded {} user block exclusions", userBlockExclusions.size());
+
         // Clear existing assignments that are not preset
         List<CourseUserAssignment> existingAssignments = courseUserAssignmentRepository
                 .findByCourse_Period(period);
@@ -74,7 +86,7 @@ public class CourseAssignmentService {
         courseUserAssignmentRepository.deleteAll(toDelete);
 
         // Initialize assignment state
-        AssignmentState state = new AssignmentState(students, courses, blocks, userPreferences);
+        AssignmentState state = new AssignmentState(students, courses, blocks, userPreferences, userBlockExclusions);
 
         // Phase 1: Greedy assignment with fairness
         log.info("Phase 1: Greedy assignment with fairness balancing");
@@ -146,6 +158,11 @@ public class CourseAssignmentService {
     }
 
     private boolean isValidAssignment(User student, Block block, Course course, AssignmentState state) {
+        // Check if user is excluded from this block
+        if (state.isBlockExcludedForUser(student, block)) {
+            return false;
+        }
+
         // Check if course is full
         if (state.getCourseAttendees(course, block) >= course.getMaxAttendees()) {
             return false;
@@ -378,13 +395,16 @@ public class CourseAssignmentService {
         final Map<String, List<Preference>> userPreferences;
         final Map<String, List<StudentAssignment>> assignments;
         final Map<String, Integer> courseAttendees; // "courseId-blockId" -> count
+        final Map<String, Set<Long>> userBlockExclusions; // userName -> excluded block IDs
 
         AssignmentState(List<User> students, List<Course> courses, List<Block> blocks,
-                        Map<String, List<Preference>> userPreferences) {
+                        Map<String, List<Preference>> userPreferences,
+                        Map<String, Set<Long>> userBlockExclusions) {
             this.students = students;
             this.courses = courses;
             this.blocks = blocks;
             this.userPreferences = userPreferences;
+            this.userBlockExclusions = userBlockExclusions;
             this.assignments = new HashMap<>();
             this.courseAttendees = new HashMap<>();
         }
@@ -451,8 +471,10 @@ public class CourseAssignmentService {
 
         List<Block> getAvailableBlocks(User student) {
             Set<DayOfWeek> assignedDays = getAssignedDays(student);
+            Set<Long> excludedBlocks = userBlockExclusions.getOrDefault(student.getUserName(), Collections.emptySet());
             return blocks.stream()
                     .filter(b -> !assignedDays.contains(b.getDayOfWeek()))
+                    .filter(b -> !excludedBlocks.contains(b.getId()))
                     .collect(Collectors.toList());
         }
 
@@ -470,6 +492,11 @@ public class CourseAssignmentService {
                     .findFirst()
                     .map(Preference::getPreferenceIndex)
                     .orElse(Integer.MAX_VALUE);
+        }
+
+        boolean isBlockExcludedForUser(User student, Block block) {
+            Set<Long> excludedBlocks = userBlockExclusions.get(student.getUserName());
+            return excludedBlocks != null && excludedBlocks.contains(block.getId());
         }
     }
 }

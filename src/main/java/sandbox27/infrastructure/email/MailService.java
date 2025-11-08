@@ -2,6 +2,8 @@ package sandbox27.infrastructure.email;
 
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
+import lombok.RequiredArgsConstructor;
+import org.springframework.context.MessageSource;
 import org.springframework.lang.Nullable;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -16,14 +18,12 @@ import java.util.Locale;
 import java.util.Map;
 
 @Service
+@RequiredArgsConstructor
 public class MailService {
-    private final JavaMailSender mailSender;
-    private final TemplateEngine thymeleaf; // falls Templates genutzt werden
 
-    public MailService(JavaMailSender mailSender, TemplateEngine thymeleaf) {
-        this.mailSender = mailSender;
-        this.thymeleaf = thymeleaf;
-    }
+    private final JavaMailSender mailSender;
+    private final TemplateEngine thymeleaf;
+    private final MessageSource messageSource;
 
     public void sendSimple(String to, String subject, String text) {
         SimpleMailMessage msg = new SimpleMailMessage();
@@ -33,12 +33,12 @@ public class MailService {
         mailSender.send(msg);
     }
 
-    public void sendHtml(String to, String subject, String templateName, Map<String, Object> model,
+    public void sendHtml(String to, @Nullable String subject, String templateName, Map<String, Object> model,
                          @Nullable File attachment) throws MessagingException {
         MimeMessage mime = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(mime, true, StandardCharsets.UTF_8.name());
         helper.setTo(to);
-        helper.setSubject(subject);
+        helper.setSubject(subject != null ? subject : messageSource.getMessage("mail." + templateName + ".subject", null, Locale.GERMAN));
 
         Context ctx = new Context(Locale.GERMAN);
         model.forEach(ctx::setVariable);

@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="de">
+<body>
+<p>
+    Hallo <span th:text="${firstName}">Vorname</span>,<br/>
+    <br/>
+    Herzlich Willkommen im iLA-System.<br/>
+    Es wurde für Dich ein:e Nutzer:in mit den folgenden Daten angelegt:
+</p>
+<ul>
+    <li>Login: <span th:text="${login}">Login</span></li>
+    <li>Password: <span th:text="${password}">Passwort</span></li>
+</ul>
+<p>Mit diesen Daten kannst Du Dich unter <span th:text="${ilaUrl}">URL</span>
+    unter Verwendung des internen Logins anmelden.
+</p>
+<p>
+    Herzliche Grüße,<br/>
+    Das ILA Orga Team
+</p>
+</body>
+</html>

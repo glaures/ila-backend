@@ -17,7 +17,9 @@ import java.util.stream.Collectors;
 public class User implements SecUser {
 
     @Id
+    // @Column(length = 191)
     String userName;
+    String passwordHash;
     String internalId;
     String email;
     String firstName;
@@ -25,12 +27,14 @@ public class User implements SecUser {
     @Enumerated(EnumType.STRING)
     Gender gender;
     int grade;
+    @Builder.Default
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"))
     @Column(name = "role")
     @Enumerated(EnumType.STRING)
     List<Role> roles = new ArrayList<>();
     boolean ilaMember;
+    boolean internal = false;
 
     @Override
     public String getId() {

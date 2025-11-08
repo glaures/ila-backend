@@ -1,4 +1,4 @@
-package sandbox27.infrastructure.security;
+package sandbox27.infrastructure.security.jwt;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
