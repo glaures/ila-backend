@@ -29,9 +29,13 @@ public class ApplicationStartupNotifier {
             log.info("Mail service started.");
             log.info("Mail service configuration:");
             log.info(mailProperties.toString());
-            mailService.sendSimple(mailProperties.getTo(),
-                    applicationName + " Startup Notification",
-                    generateStartupInformation());
+            try {
+                mailService.sendSimple(mailProperties.getTo(),
+                        applicationName + " Startup Notification",
+                        generateStartupInformation());
+            } catch (Throwable t) {
+                log.error("Could not sent startup notification." , t);
+            }
         }
     }
 
