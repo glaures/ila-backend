@@ -24,9 +24,11 @@ public class MailService {
     private final JavaMailSender mailSender;
     private final TemplateEngine thymeleaf;
     private final MessageSource messageSource;
+    private final MailProperties mailProperties;
 
     public void sendSimple(String to, String subject, String text) {
         SimpleMailMessage msg = new SimpleMailMessage();
+        msg.setFrom(mailProperties.getFrom());
         msg.setTo(to);
         msg.setSubject(subject);
         msg.setText(text);
@@ -38,6 +40,7 @@ public class MailService {
         MimeMessage mime = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(mime, true, StandardCharsets.UTF_8.name());
         helper.setTo(to);
+        helper.setFrom(mailProperties.getFrom());
         helper.setSubject(subject != null ? subject : messageSource.getMessage("mail." + templateName + ".subject", null, Locale.GERMAN));
 
         Context ctx = new Context(Locale.GERMAN);
