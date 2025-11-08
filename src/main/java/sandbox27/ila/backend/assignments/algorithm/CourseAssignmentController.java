@@ -8,15 +8,23 @@ import sandbox27.ila.backend.user.Role;
 import sandbox27.infrastructure.security.RequiredRole;
 import sandbox27.infrastructure.error.ServiceException;
 
+import java.util.List;
+
 @RestController
-@RequestMapping("/periods")
+@RequestMapping("/periods/{periodId}/assign-courses")
 @RequiredArgsConstructor
 @Slf4j
 public class CourseAssignmentController {
 
     private final CourseAssignmentService courseAssignmentService;
 
-    @PostMapping("/{periodId}/assign-courses")
+    @GetMapping("/history")
+    @RequiredRole(Role.ADMIN_ROLE_NAME)
+    public List<AssignmentResult> getAllAssignmentResults(@PathVariable Long periodId) {
+        return courseAssignmentService.getAllAssignmentResultsForPeriod(periodId);
+    }
+
+    @PostMapping
     @RequiredRole(Role.ADMIN_ROLE_NAME)
     public ResponseEntity<AssignmentResult> assignCourses(@PathVariable Long periodId) {
         try {
@@ -31,5 +39,10 @@ public class CourseAssignmentController {
             log.error("Unexpected error during course assignment", e);
             throw e; // Let the global exception handler deal with it
         }
+    }
+
+    @DeleteMapping("/history/{assignmentResultId}")
+    public void delteAssignmentResult(@PathVariable("assignmentResultId") Long assignmentResultId) {
+        courseAssignmentService.deleteAssignmentResult(assignmentResultId);
     }
 }

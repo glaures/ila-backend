@@ -25,28 +25,28 @@ public class ExceptionController {
     final ApplicationEventPublisher applicationEventPublisher;
 
     @ExceptionHandler({ServiceException.class})
-    public ResponseEntity<ErrorDto> handleServiceException(ServiceException serviceException, Locale locale, @AuthenticatedUser SecUser authenticatedUser) {
+    public ResponseEntity<ErrorDto> handleServiceException(ServiceException serviceException, Locale locale) {
         String msg;
         try {
             msg = messageSource.getMessage("error." + serviceException.getErrorCode(), serviceException.getArgs(), locale);
-        } catch(Throwable t){
+        } catch (Throwable t) {
             msg = "[Message zum Code " + serviceException.getErrorCode() + " konnte nicht geladen werden]";
             msg += serviceException.getErrorCode() + "(" + Arrays.toString(serviceException.getArgs()) + ")";
         }
         ErrorDto error = new ErrorDto();
         error.setCode(serviceException.getErrorCode());
         error.setMessage(msg);
-        applicationEventPublisher.publishEvent(new ErrorEvent(serviceException, msg, authenticatedUser));
+        applicationEventPublisher.publishEvent(new ErrorEvent(serviceException, msg));
         return new ResponseEntity<ErrorDto>(error, error.getHttpStatus());
     }
 
     @ExceptionHandler(Throwable.class)
-    public ResponseEntity<ErrorDto> handleServiceException(Throwable t, Locale locale, @AuthenticatedUser SecUser authenticatedUser) {
+    public ResponseEntity<ErrorDto> handleServiceException(Throwable t, Locale locale) {
         ErrorDto error = new ErrorDto();
         error.setCode(ErrorCode.InternalServerError);
         String message = messageSource.getMessage("" + error.getCode(), null, "internal Error", locale);
         error.setMessage(message);
-        applicationEventPublisher.publishEvent(new ErrorEvent(t, message, authenticatedUser));
+        applicationEventPublisher.publishEvent(new ErrorEvent(t, message));
         return new ResponseEntity<ErrorDto>(error, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
