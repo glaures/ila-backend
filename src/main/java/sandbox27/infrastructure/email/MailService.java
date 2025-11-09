@@ -37,8 +37,6 @@ public class MailService {
 
     public void sendHtml(String to, @Nullable String subject, String templateName, Map<String, Object> model,
                          @Nullable File attachment) throws MessagingException {
-        if(!(to.contains("viviane") && to.contains("kempe")))
-            return;
         MimeMessage mime = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(mime, true, StandardCharsets.UTF_8.name());
         helper.setTo(to);
