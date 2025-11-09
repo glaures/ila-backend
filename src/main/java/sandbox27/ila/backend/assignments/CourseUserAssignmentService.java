@@ -4,6 +4,7 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.web.bind.annotation.*;
 import sandbox27.ila.backend.block.Block;
 import sandbox27.ila.backend.block.BlockDto;
@@ -136,6 +137,5 @@ public class CourseUserAssignmentService {
                 .info(List.of("Die Kurszuordnung wurde entfernt"))
                 .build();
     }
-
 
 }

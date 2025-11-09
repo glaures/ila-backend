@@ -28,6 +28,8 @@ public class UserMetaInfoManagement {
     String ilaMembersGroupId;
     @Value("${iserv.groups.ila_instructors.id}")
     String ilaInstructorsGroupId;
+    @Value("${ila.test.user-names}")
+    List<String> excludedUserNames;
 
     private static final String ISERV_API_BASE_URL = "https://idm.jmoosdorf.de/iserv/idm/api/v1";
 
@@ -74,51 +76,72 @@ public class UserMetaInfoManagement {
                         });
 
                 boolean updated = false;
-
-                // Update ila role
-                Role role = instructors ? Role.COURSE_INSTRUCTOR : Role.STUDENT;
-                if (!user.getRoles().contains(role)) {
-                    user.getRoles().add(role);
-                    updated = true;
-                }
-
-                // Update first name
-                if (!iservUser.firstname().equals(user.getFirstName())) {
-                    log.debug("Updating first name for user {}: {} -> {}",
-                            user.getUserName(), user.getFirstName(), iservUser.firstname());
-                    user.setFirstName(iservUser.firstname());
-                    updated = true;
-                }
-
-                // Update last name
-                if (!iservUser.lastname().equals(user.getLastName())) {
-                    log.debug("Updating last name for user {}: {} -> {}",
-                            user.getUserName(), user.getLastName(), iservUser.lastname());
-                    user.setLastName(iservUser.lastname());
-                    updated = true;
-                }
-
-                // Update internal ID
-                if (iservUser.importId() != null && !iservUser.importId().equals(user.getInternalId())) {
-                    log.debug("Updating internal ID for user {}: {} -> {}",
-                            user.getUserName(), user.getInternalId(), iservUser.importId());
-                    user.setInternalId(iservUser.importId());
-                    updated = true;
-                }
-
-                // Update ilaMember
-                if (!instructors && !user.isIlaMember()) {
-                    user.setIlaMember(true);
-                    updated = true;
-                }
-
                 // Extract and update grade from auxInfo
-                Integer grade = extractGradeFromAuxInfo(iservUser.auxInfo());
-                if (grade != null && !grade.equals(user.getGrade())) {
-                    log.debug("Updating grade for user {}: {} -> {}",
-                            user.getUserName(), user.getGrade(), grade);
-                    user.setGrade(grade);
-                    updated = true;
+                final Integer grade = extractGradeFromAuxInfo(iservUser.auxInfo());
+
+                // First check, if user should is instructor or ilaMember
+                if (!instructors) {
+                    if (grade == null || grade == 0
+                            || excludedUserNames.contains(user.getUserName())) {
+                        if (user.isIlaMember() || !user.getRoles().isEmpty() || user.getGrade() > 0) {
+                            log.info("Excluding user {}",
+                                    user.getUserName());
+                            // Schüler wurde in IServ gelöscht
+                            user.setIlaMember(false);
+                            user.setGrade(0);
+                            user.getRoles().clear();
+                            updated = true;
+                        }
+                    } else if (!user.isIlaMember()) {
+                        log.info("Adding user {} to iLAMembers",
+                                user.getUserName());
+                        user.setIlaMember(true);
+                        updated = true;
+                    }
+                }
+
+                // only check for other changes if user is valid
+                if (instructors || user.isIlaMember()) {
+
+                    // Update ila role
+                    Role role = instructors ? Role.COURSE_INSTRUCTOR : Role.STUDENT;
+                    if (!user.getRoles().contains(role)) {
+                        log.info("Updating roles for user {}",
+                                user.getUserName());
+                        user.getRoles().add(role);
+                        updated = true;
+                    }
+
+                    if (grade != null && grade > 0 && !grade.equals(user.getGrade())) {
+                        log.info("Updating grade for user {}: {} -> {}",
+                                user.getUserName(), user.getGrade(), grade);
+                        user.setGrade(grade);
+                        updated = true;
+                    }
+
+                    // Update first name
+                    if (!iservUser.firstname().equals(user.getFirstName())) {
+                        log.info("Updating first name for user {}: {} -> {}",
+                                user.getUserName(), user.getFirstName(), iservUser.firstname());
+                        user.setFirstName(iservUser.firstname());
+                        updated = true;
+                    }
+
+                    // Update last name
+                    if (!iservUser.lastname().equals(user.getLastName())) {
+                        log.info("Updating last name for user {}: {} -> {}",
+                                user.getUserName(), user.getLastName(), iservUser.lastname());
+                        user.setLastName(iservUser.lastname());
+                        updated = true;
+                    }
+
+                    // Update internal ID
+                    if (iservUser.importId() != null && !iservUser.importId().equals(user.getInternalId())) {
+                        log.info("Updating internal ID for user {}: {} -> {}",
+                                user.getUserName(), user.getInternalId(), iservUser.importId());
+                        user.setInternalId(iservUser.importId());
+                        updated = true;
+                    }
                 }
 
                 if (updated) {

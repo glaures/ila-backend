@@ -34,6 +34,11 @@ public class UserManagementService implements UserManagement {
     List<String> adminUserNames;
 
     @Transactional
+    public List<User> getAllStudents(){
+        return userRepository.findAllByRole(Role.STUDENT);
+    }
+
+    @Transactional
     public User createUser(String username, String firstName, String lastName, String email, @Nullable String internalId, String initialRole, boolean internal) {
         if (!Role.isValidRole(initialRole)) {
             throw new ServiceException(ErrorCode.InvalidRole, initialRole);

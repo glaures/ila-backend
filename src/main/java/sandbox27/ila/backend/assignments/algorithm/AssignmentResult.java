@@ -36,6 +36,8 @@ public class AssignmentResult {
 
     private double averagePriority;
 
+    private boolean finalized = false;
+
     @ElementCollection
     @CollectionTable(
             name = "assignment_result_priority_distribution",
