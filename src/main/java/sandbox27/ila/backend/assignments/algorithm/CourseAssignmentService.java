@@ -87,6 +87,12 @@ public class CourseAssignmentService {
         // Clear existing assignments that are not preset
         List<CourseUserAssignment> existingAssignments = courseUserAssignmentRepository
                 .findByCourse_Period(period);
+
+        // Separate preset and non-preset assignments
+        List<CourseUserAssignment> presetAssignments = existingAssignments.stream()
+                .filter(CourseUserAssignment::isPreset)
+                .collect(Collectors.toList());
+
         List<CourseUserAssignment> toDelete = existingAssignments.stream()
                 .filter(a -> !a.isPreset())
                 .collect(Collectors.toList());
@@ -94,6 +100,14 @@ public class CourseAssignmentService {
 
         // Initialize assignment state
         AssignmentState state = new AssignmentState(students, courses, blocks, userPreferences, userBlockExclusions);
+
+        // Load preset assignments into state
+        log.info("Loading {} preset assignments into state", presetAssignments.size());
+        for (CourseUserAssignment preset : presetAssignments) {
+            User student = preset.getUser();
+            // Priority -1 indicates a preset assignment (not from preferences)
+            state.assign(student, preset.getBlock(), preset.getCourse(), -1);
+        }
 
         // Phase 1: Greedy assignment with fairness
         log.info("Phase 1: Greedy assignment with fairness balancing");
@@ -126,7 +140,7 @@ public class CourseAssignmentService {
     }
 
     private void greedyAssignmentWithFairness(AssignmentState state) {
-        Random random = new Random();
+        Random random = new Random(System.currentTimeMillis());
 
         for (int iteration = 0; iteration < MAX_ITERATIONS; iteration++) {
             // Sort students by current fairness score (worst first)
@@ -391,6 +405,11 @@ public class CourseAssignmentService {
 
         for (User student : state.students) {
             for (StudentAssignment assignment : state.getAssignments(student)) {
+                // Skip preset assignments (priority -1), as they already exist in the database
+                if (assignment.priority == -1) {
+                    continue;
+                }
+
                 CourseUserAssignment cua = CourseUserAssignment.builder()
                         .user(student)
                         .course(assignment.course)
@@ -405,39 +424,43 @@ public class CourseAssignmentService {
     }
 
     private AssignmentResult generateStatistics(AssignmentState state, int studentsWithoutPreferences) {
-        // Only count students who had preferences (assignments with priority != 999)
-        List<User> studentsWithPreferences = state.students.stream()
-                .filter(s -> state.getAssignments(s).stream()
-                        .anyMatch(a -> a.priority != 999))
-                .collect(Collectors.toList());
+        // ===== 1. ALLGEMEINE ZUWEISUNGSSTATISTIK (alle Schüler, alle Assignments) =====
+        int totalStudents = state.students.size();
 
-        int totalStudents = studentsWithPreferences.size();
-        int assignedStudents = (int) studentsWithPreferences.stream()
-                .filter(s -> state.getAssignments(s).stream()
-                        .filter(a -> a.priority != 999)
-                        .count() == COURSES_PER_STUDENT)
+        // Schüler mit genau 3 Kursen (egal ob preset, mit Präferenz oder ohne)
+        int assignedStudents = (int) state.students.stream()
+                .filter(s -> state.getAssignmentCount(s) == COURSES_PER_STUDENT)
                 .count();
 
-        int partiallyAssigned = (int) studentsWithPreferences.stream()
+        // Schüler mit 1-2 Kursen
+        int partiallyAssigned = (int) state.students.stream()
                 .filter(s -> {
-                    long count = state.getAssignments(s).stream()
-                            .filter(a -> a.priority != 999)
-                            .count();
+                    int count = state.getAssignmentCount(s);
                     return count > 0 && count < COURSES_PER_STUDENT;
                 })
                 .count();
 
-        int unassigned = totalStudents - assignedStudents - partiallyAssigned;
+        // Schüler ohne Kurse
+        int unassigned = (int) state.students.stream()
+                .filter(s -> state.getAssignmentCount(s) == 0)
+                .count();
+
+        // ===== 2. PRÄFERENZ-BEZOGENE STATISTIK (nur Schüler mit Präferenzen) =====
+        // Finde alle Schüler, die mindestens eine preference-basierte Assignment haben (priority 0-998)
+        List<User> studentsWithPreferences = state.students.stream()
+                .filter(s -> state.getAssignments(s).stream()
+                        .anyMatch(a -> a.priority >= 0 && a.priority < 999))
+                .collect(Collectors.toList());
 
         Map<Integer, Long> priorityDistribution = new HashMap<>();
         double totalPriority = 0;
         int totalAssignments = 0;
 
-        // Only count assignments with real preferences (priority != 999)
+        // Zähle nur preference-basierte Assignments (priority 0-998)
         for (User student : studentsWithPreferences) {
             for (StudentAssignment assignment : state.getAssignments(student)) {
-                if (assignment.priority == 999) {
-                    continue; // Skip assignments without preferences
+                if (assignment.priority < 0 || assignment.priority >= 999) {
+                    continue; // Skip preset and "without preferences" assignments
                 }
                 // Convert 0-based priority to 1-based for statistics display
                 int displayPriority = assignment.priority + 1;
@@ -449,16 +472,16 @@ public class CourseAssignmentService {
 
         double averagePriority = totalAssignments > 0 ? totalPriority / totalAssignments : 0;
 
-        // Calculate fairness metrics (only for students with complete assignments and preferences)
-        // Convert 0-based fairness scores to 1-based for statistics display
+        // Fairness: Nur für Schüler mit genau 3 preference-basierten Assignments berechnen
+        // (Schüler mit preset oder "ohne Präferenz"-Kursen werden bei Fairness nicht betrachtet)
         List<Double> fairnessScores = studentsWithPreferences.stream()
                 .filter(s -> state.getAssignments(s).stream()
-                        .filter(a -> a.priority != 999)
+                        .filter(a -> a.priority >= 0 && a.priority < 999)
                         .count() == COURSES_PER_STUDENT)
                 .map(s -> {
                     // Calculate fairness score only from preference-based assignments
                     double score = state.getAssignments(s).stream()
-                            .filter(a -> a.priority != 999)
+                            .filter(a -> a.priority >= 0 && a.priority < 999)
                             .mapToInt(a -> a.priority)
                             .average()
                             .orElse(0);
@@ -496,10 +519,6 @@ public class CourseAssignmentService {
                 .sum();
 
         return Math.sqrt(sumSquaredDiff / values.size());
-    }
-
-    public void deleteAssignmentResult(Long assignmentResultId) {
-        assignmentResultRepository.deleteById(assignmentResultId);
     }
 
     // Inner classes

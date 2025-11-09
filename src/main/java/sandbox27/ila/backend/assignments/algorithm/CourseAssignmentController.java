@@ -41,8 +41,4 @@ public class CourseAssignmentController {
         }
     }
 
-    @DeleteMapping("/history/{assignmentResultId}")
-    public void delteAssignmentResult(@PathVariable("assignmentResultId") Long assignmentResultId) {
-        courseAssignmentService.deleteAssignmentResult(assignmentResultId);
-    }
 }

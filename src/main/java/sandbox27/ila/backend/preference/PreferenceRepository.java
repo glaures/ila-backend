@@ -8,10 +8,12 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import sandbox27.ila.backend.block.Block;
 import sandbox27.ila.backend.course.Course;
+import sandbox27.ila.backend.course.CourseService;
 import sandbox27.ila.backend.period.Period;
 import sandbox27.ila.backend.user.User;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface PreferenceRepository extends JpaRepository<Preference, Long> {
@@ -48,4 +50,5 @@ public interface PreferenceRepository extends JpaRepository<Preference, Long> {
                                                             @Param("blockId") Long blockId,
                                                             Pageable pageable);
 
+    Optional<Preference> findByUserAndBlock_IdAndCourse_Id(User user, long id, long id1);
 }

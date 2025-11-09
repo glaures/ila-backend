@@ -8,7 +8,6 @@ import sandbox27.ila.backend.course.CourseBlockAssignment;
 import sandbox27.ila.backend.course.CourseBlockAssignmentRepository;
 import sandbox27.ila.backend.period.Period;
 import sandbox27.ila.backend.period.PeriodRepository;
-import sandbox27.ila.backend.period.PeriodService;
 import sandbox27.ila.backend.user.Role;
 import sandbox27.infrastructure.error.ErrorCode;
 import sandbox27.infrastructure.error.ErrorHandlingService;
