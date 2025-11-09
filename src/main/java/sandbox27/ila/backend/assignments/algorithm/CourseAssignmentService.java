@@ -172,7 +172,10 @@ public class CourseAssignmentService {
 
     private Assignment findBestAssignment(User student, AssignmentState state) {
         List<Block> availableBlocks = state.getAvailableBlocks(student);
+        Assignment bestAssignment = null;
+        int bestPriority = Integer.MAX_VALUE;
 
+        // Iterate through ALL available blocks to find the best possible assignment
         for (Block block : availableBlocks) {
             List<Preference> prefs = state.getPreferences(student, block);
 
@@ -180,12 +183,21 @@ public class CourseAssignmentService {
                 Course course = pref.getCourse();
 
                 if (isValidAssignment(student, block, course, state)) {
-                    return new Assignment(block, course, pref.getPreferenceIndex());
+                    // Check if this is better than our current best
+                    if (pref.getPreferenceIndex() < bestPriority) {
+                        bestPriority = pref.getPreferenceIndex();
+                        bestAssignment = new Assignment(block, course, pref.getPreferenceIndex());
+
+                        // If we found a first preference (0), we can't do better
+                        if (bestPriority == 0) {
+                            return bestAssignment;
+                        }
+                    }
                 }
             }
         }
 
-        return null;
+        return bestAssignment;
     }
 
     private boolean isValidAssignment(User student, Block block, Course course, AssignmentState state) {

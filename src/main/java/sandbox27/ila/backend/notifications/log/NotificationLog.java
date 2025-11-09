@@ -28,9 +28,9 @@ public class NotificationLog {
     private LocalDateTime sentAt;
 
     public NotificationLog(String recipient, String topic) {
-        this.recipient = recipient;
-        this.topic = topic;
-        this.sentAt = LocalDateTime.now();
+        setRecipient(recipient);
+        setTopic(topic);
+        setSentAt(LocalDateTime.now());
     }
 
 }

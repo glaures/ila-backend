@@ -28,12 +28,6 @@ public class ErrorHandlingService {
     private final ReliableMailService emailService;
     private final AuthenticatedUserResolver authenticatedUserResolver;
 
-    @TransactionalEventListener(phase = TransactionPhase.AFTER_COMPLETION, fallbackExecution = true)
-    @Async
-    public void handleError(ErrorEvent errorEvent) {
-        handleError(errorEvent.t(), errorEvent.message());
-    }
-
     public void handleWarning(String s) {
         log.warn(s);
         notifyAdmin("WARNING:" + s);
