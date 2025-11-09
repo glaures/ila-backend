@@ -371,6 +371,16 @@ public class CourseAssignmentService {
         // Use the same validation as regular assignments, but skip category check
         // since we're just trying to fill up their schedule
 
+        // Check if course is manual assignment only
+        if (course.isManualAssignmentOnly()) {
+            return false;
+        }
+
+        // Check if course is placeholder
+        if (course.isPlaceholder()) {
+            return false;
+        }
+
         // Check if user is excluded from this block
         if (state.isBlockExcludedForUser(student, block)) {
             return false;
