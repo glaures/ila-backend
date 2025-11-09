@@ -36,7 +36,7 @@ public class ExceptionController {
         ErrorDto error = new ErrorDto();
         error.setCode(serviceException.getErrorCode());
         error.setMessage(msg);
-        applicationEventPublisher.publishEvent(new ErrorEvent(serviceException, msg));
+        errorHandlingService.handleError(serviceException);
         return new ResponseEntity<ErrorDto>(error, error.getHttpStatus());
     }
 
@@ -46,7 +46,7 @@ public class ExceptionController {
         error.setCode(ErrorCode.InternalServerError);
         String message = messageSource.getMessage("" + error.getCode(), null, "internal Error", locale);
         error.setMessage(message);
-        applicationEventPublisher.publishEvent(new ErrorEvent(t, message));
+        errorHandlingService.handleError(t);
         return new ResponseEntity<ErrorDto>(error, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
