@@ -13,6 +13,7 @@ public enum ErrorCode {
     FieldRequired,
     RoleRequired,
     UserAlreadyExists,
-    InvalidRole
+    InvalidRole,
+    InvalidIServCode
 
 }

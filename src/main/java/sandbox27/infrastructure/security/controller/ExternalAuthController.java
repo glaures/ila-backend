@@ -10,8 +10,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 import sandbox27.infrastructure.error.ErrorCode;
+import sandbox27.infrastructure.error.ErrorHandlingService;
 import sandbox27.infrastructure.error.ServiceException;
 import sandbox27.infrastructure.security.*;
 import sandbox27.infrastructure.security.jwt.JwtGenerator;
@@ -27,6 +29,7 @@ public class ExternalAuthController {
     private final JwtGenerator jwtGenerator;
     final UserManagement userMapper;
     final ApplicationContext applicationContext;
+    final ErrorHandlingService errorHandlingService;
 
     @Value("${sandbox27.infrastructure.security.client-secret}")
     private String clientSecret;
@@ -37,28 +40,37 @@ public class ExternalAuthController {
     @Value("${sandbox27.infrastructure.security.user-info-uri}")
     private String userInfoUri;
 
-    public record OAuthRequest(String code, String redirectUri) {}
+    public record OAuthRequest(String code, String redirectUri) {
+    }
 
     @PostMapping
     public ResponseEntity<?> exchangeCode(@RequestBody OAuthRequest request) throws ServiceException {
-        // 1. Token anfordern
-        MultiValueMap<String, String> tokenRequest = new LinkedMultiValueMap<>();
-        tokenRequest.add("grant_type", "authorization_code");
-        tokenRequest.add("client_id", clientId);
-        tokenRequest.add("client_secret", clientSecret);
-        tokenRequest.add("redirect_uri", request.redirectUri());
-        tokenRequest.add("code", request.code());
+        final String code = request.code();
 
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+        if (code == null)
+            errorHandlingService.handleWarning("IServ redirect code war leer");
 
-        HttpEntity<?> httpEntity = new HttpEntity<>(tokenRequest, headers);
+        // Token bei IServ anfordern
+        String accessToken = null;
+        try {
+            MultiValueMap<String, String> tokenRequest = new LinkedMultiValueMap<>();
+            tokenRequest.add("grant_type", "authorization_code");
+            tokenRequest.add("client_id", clientId);
+            tokenRequest.add("client_secret", clientSecret);
+            tokenRequest.add("redirect_uri", request.redirectUri());
+            tokenRequest.add("code", request.code());
 
-        ResponseEntity<Map> tokenResponse = rest.postForEntity(tokenUri, httpEntity, Map.class);
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
 
-        String accessToken = (String) tokenResponse.getBody().get("access_token");
+            HttpEntity<?> httpEntity = new HttpEntity<>(tokenRequest, headers);
+            ResponseEntity<Map> tokenResponse = rest.postForEntity(tokenUri, httpEntity, Map.class);
+            accessToken = (String) tokenResponse.getBody().get("access_token");
+        } catch (HttpClientErrorException e) {
+            throw new ServiceException(ErrorCode.InvalidIServCode);
+        }
 
-        // 2. Userinfo abrufen
+        // Userinfo abrufen
         HttpHeaders userHeaders = new HttpHeaders();
         userHeaders.setBearerAuth(accessToken);
         HttpEntity<?> userRequest = new HttpEntity<>(userHeaders);
