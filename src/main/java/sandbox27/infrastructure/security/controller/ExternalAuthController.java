@@ -85,7 +85,7 @@ public class ExternalAuthController {
         applicationContext.publishEvent(new AuthenticationEvent(user));
 
         String jwt = jwtGenerator.createToken(user.getId());
-        return ResponseEntity.ok(Map.of("token", jwt, "username", userInfo.get("name"), "roles", user.getSecRoles()));
+        return ResponseEntity.ok(Map.of("token", jwt, "username", userInfo.get("preferred_username"), "roles", user.getSecRoles()));
 
     }
 }

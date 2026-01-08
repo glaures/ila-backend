@@ -26,4 +26,4 @@ public enum Role {
         return Arrays.stream(Role.values())
                 .anyMatch(e -> e.name().equals(value));
     }
-    }
+}
