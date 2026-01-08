@@ -40,7 +40,7 @@ public class InternalAuthController implements ApplicationContextAware {
 
     @PostMapping
     public ResponseEntity<?> authenticateInternal(@RequestBody Credentials credentials) {
-        Map userInfo = new HashMap();
+        Map<String, Object> userInfo = new HashMap();
         userInfo.put(AuthenticationType.USER_INFO_AUTH_TYPE_KEY, AuthenticationType.internal);
         userInfo.put(INTERNAL_AUTH_USERNAME_KEY, credentials.username);
         userInfo.put(INTERNAL_AUTH_PASSWORD_KEY, credentials.password);
@@ -49,6 +49,9 @@ public class InternalAuthController implements ApplicationContextAware {
 
         applicationContext.publishEvent(new AuthenticationEvent(user));
         String jwt = jwtGenerator.createToken(user.getId());
-        return ResponseEntity.ok(Map.of("token", jwt, "username", credentials.username, "roles", user.getSecRoles()));
+        userInfo.remove(INTERNAL_AUTH_PASSWORD_KEY);
+        userInfo.put("preferred_username", userInfo.get(INTERNAL_AUTH_USERNAME_KEY));
+        userInfo.put("name", userInfo.get(INTERNAL_AUTH_USERNAME_KEY));
+        return ResponseEntity.ok(Map.of("token", jwt, "user", userInfo, "roles", user.getSecRoles()));
     }
 }

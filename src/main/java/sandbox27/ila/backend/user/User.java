@@ -48,6 +48,6 @@ public class User implements SecUser {
 
     @Override
     public List<String> getSecRoles() {
-        return this.roles.stream().map(Role::getName).collect(Collectors.toList());
+        return this.roles.stream().map(Role::name).collect(Collectors.toList());
     }
 }
