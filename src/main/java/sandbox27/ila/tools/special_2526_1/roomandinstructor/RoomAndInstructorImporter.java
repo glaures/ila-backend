@@ -9,6 +9,8 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
 import sandbox27.ila.backend.course.Course;
 import sandbox27.ila.backend.course.CourseRepository;
+import sandbox27.ila.backend.user.User;
+import sandbox27.ila.backend.user.UserRepository;
 import sandbox27.ila.tools.special_2526_1.theater.TheaterBelegung;
 
 import java.io.IOException;
@@ -24,6 +26,7 @@ public class RoomAndInstructorImporter {
     public record RoomAndInstructor(String courseId, String room, String instructor) {}
 
     final CourseRepository courseRepository;
+    final UserRepository userRepository;
 
     @Transactional
     public void runImport() throws IOException {
@@ -34,7 +37,12 @@ public class RoomAndInstructorImporter {
                 if(courseOptional.isPresent()) {
                     Course course = courseOptional.get();
                     course.setRoom(rnI.room);
-                    course.setInstructor(rnI.instructor);
+                    Optional<User> userOpt = userRepository.findByLastName(rnI.instructor);
+                    if(userOpt.isPresent()) {
+                        course.setInstructor(userOpt.get());
+                    } else {
+                        System.err.println("Instructor not found: " + rnI.instructor);
+                    }
                     courseRepository.save(course);
                 }
             } catch (Throwable e) {

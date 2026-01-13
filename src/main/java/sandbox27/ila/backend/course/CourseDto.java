@@ -4,6 +4,7 @@ import lombok.*;
 import sandbox27.ila.backend.block.BlockDto;
 import sandbox27.ila.backend.user.Gender;
 import sandbox27.ila.backend.user.User;
+import sandbox27.ila.backend.user.UserDto;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -25,7 +26,7 @@ public class CourseDto {
     Set<Integer> grades = new HashSet<>();
     boolean placeholder;
     String room;
-    String instructor;
+    UserDto instructor;
     BlockDto block;
     Long blockId;
     Long periodId;

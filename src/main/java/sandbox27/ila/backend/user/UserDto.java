@@ -1,12 +1,12 @@
 package sandbox27.ila.backend.user;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.List;
 
-@Data
+@Setter
+@Getter
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserDto {
@@ -19,4 +19,22 @@ public class UserDto {
     Gender gender;
     boolean ilaMember;
     List<String> roles;
+
+    public static UserDto map(User user) {
+        // Null-safe: return null if user is null
+        if (user == null) {
+            return null;
+        }
+
+        return UserDto.builder()
+                .userName(user.getUserName())
+                .firstName(user.getFirstName())
+                .lastName(user.getLastName())
+                .email(user.getEmail())
+                .grade(user.getGrade())
+                .gender(user.getGender())
+                .roles(user.getRoles().stream().map(Enum::name).toList())
+                .ilaMember(user.isIlaMember())
+                .build();
+    }
 }

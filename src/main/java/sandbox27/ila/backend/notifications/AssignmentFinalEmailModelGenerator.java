@@ -57,7 +57,7 @@ public class AssignmentFinalEmailModelGenerator {
                     return new CourseAssignmentEmailDto(
                             course.getName(),
                             course.getDescription(),
-                            course.getInstructor(),
+                            course.getInstructor() != null ? course.getInstructor().getLastName() : "?",
                             course.getRoom(),
                             block.getDayOfWeek(),
                             block.getStartTime(),

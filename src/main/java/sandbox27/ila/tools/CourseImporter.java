@@ -48,7 +48,7 @@ public class CourseImporter {
         course.setCourseId(importedCourse.KursId.trim());
         course.setPeriod(periodToImportInto);
         course.setDescription(importedCourse.Beschreibung.replace("'", ""));
-        course.setInstructor(importedCourse.Nachname.trim());
+        // course.setInstructor(importedCourse.Nachname.trim());
         course.setMaxAttendees(importedCourse.maxAttendees);
         course.setRoom(importedCourse.Raum.trim());
         if (course.getCourseCategories() == null)
