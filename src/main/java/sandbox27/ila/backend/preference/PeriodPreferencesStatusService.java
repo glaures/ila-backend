@@ -65,7 +65,7 @@ public class PeriodPreferencesStatusService {
                     Course course = (Course) objArr[0];
                     long firstPreferenceCount = (Long) objArr[1];
                     int utilization = (int) (((float) firstPreferenceCount / (float) course.getMaxAttendees()) * 100);
-                    return new CoursePopularity(course.getId(), course.getCourseId(), course.getName(), course.getInstructor(), firstPreferenceCount, course.getMaxAttendees(), utilization);
+                    return new CoursePopularity(course.getId(), course.getCourseId(), course.getName(), course.getInstructor() != null ? course.getInstructor().getLastName() : "", firstPreferenceCount, course.getMaxAttendees(), utilization);
                 }
         ).toList();
         return new PreferenceStatusResponse(periodId, period.getName(), studentCount, studentCount - studentsWithPreferences - studentsSubmitted, studentsWithPreferences, studentsSubmitted, popularCourses);

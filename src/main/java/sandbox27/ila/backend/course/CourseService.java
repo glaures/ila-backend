@@ -9,9 +9,7 @@ import sandbox27.ila.backend.block.BlockRepository;
 import sandbox27.ila.backend.block.BlockService;
 import sandbox27.ila.backend.period.PeriodRepository;
 import sandbox27.ila.backend.preference.PreferenceRepository;
-import sandbox27.ila.backend.user.Gender;
-import sandbox27.ila.backend.user.Role;
-import sandbox27.ila.backend.user.User;
+import sandbox27.ila.backend.user.*;
 import sandbox27.infrastructure.error.ErrorCode;
 import sandbox27.infrastructure.error.ServiceException;
 import sandbox27.infrastructure.security.AuthenticatedUser;
@@ -33,6 +31,8 @@ public class CourseService {
     private final PeriodRepository periodRepository;
     private final CourseUserAssignmentRepository courseUserAssignmentRepository;
     private final PreferenceRepository preferenceRepository;
+    private final UserManagementService userManagementService;
+    private final UserRepository userRepository;
 
     @GetMapping
     public List<CourseDto> getCourses(@RequestParam(name = "block-id", required = false) Long blockId,
@@ -100,7 +100,7 @@ public class CourseService {
                 .maxAttendees(c.getMaxAttendees())
                 .minAttendees(c.getMinAttendees())
                 .room(c.getRoom())
-                .instructor(c.getInstructor())
+                .instructor(UserDto.map(c.getInstructor()))
                 .grades(c.getGrades())
                 .placeholder(c.placeholder)
                 .excludedGenders(c.excludedGenders)
@@ -115,7 +115,14 @@ public class CourseService {
         course.setDescription(courseDto.description);
         course.setName(courseDto.name);
         course.setDescription(courseDto.description);
-        course.setInstructor(courseDto.instructor);
+
+        // Handle instructor - can be null
+        if (courseDto.instructor != null && courseDto.instructor.getUserName() != null) {
+            course.setInstructor(userRepository.findById(courseDto.instructor.getUserName()).orElse(null));
+        } else {
+            course.setInstructor(null);
+        }
+
         course.getCourseCategories().clear();
         course.getCourseCategories().addAll(courseDto.courseCategories);
         course.setMaxAttendees(courseDto.getMaxAttendees());

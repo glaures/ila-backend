@@ -34,4 +34,6 @@ public interface UserRepository extends JpaRepository<User, String> {
 
     @Query("SELECT DISTINCT u.grade FROM User u where u.grade>0")
     List<Integer> findAllDistinctGrades();
+
+    Optional<User> findByLastName(String instructor);
 }

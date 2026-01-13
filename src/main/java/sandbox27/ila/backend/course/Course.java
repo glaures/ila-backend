@@ -6,9 +6,7 @@ import sandbox27.ila.backend.period.Period;
 import sandbox27.ila.backend.user.Gender;
 import sandbox27.ila.backend.user.User;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -42,7 +40,12 @@ public class Course {
     String room;
     int minAttendees = 0;
     int maxAttendees;
-    String instructor;
+
+    // CHANGED: From String to User reference
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "instructor_user_name")
+    User instructor;
+
     boolean manualAssignmentOnly = false;
     boolean placeholder = false;
 

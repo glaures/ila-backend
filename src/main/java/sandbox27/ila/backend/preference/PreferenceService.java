@@ -145,7 +145,7 @@ public class PreferenceService {
                         assignment != null ? new AssignedCourse(assignment.getId(),
                                 assignment.getCourse().getName(),
                                 assignment.getCourse().getRoom(),
-                                assignment.getCourse().getInstructor(),
+                                assignment.getCourse().getInstructor() != null ? assignment.getCourse().getInstructor().getLastName() : "?",
                                 assignmentCourseCategory) : null,
                         topPreferenceList
                 ));
