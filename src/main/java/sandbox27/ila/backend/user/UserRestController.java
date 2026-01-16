@@ -55,5 +55,12 @@ public class UserRestController {
         return modelMapper.map(user, UserDto.class);
     }
 
+    final record PasswordResetPayload(String email) {};
+
+    @PostMapping("/password-reset")
+    public void resetPassword(@RequestBody PasswordResetPayload payload) {
+        userManagementService.resetPassword(payload.email);
+    }
+
 
 }

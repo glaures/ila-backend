@@ -10,6 +10,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Service;
 import sandbox27.ila.backend.user.events.UserCreatedEvent;
+import sandbox27.ila.backend.user.events.UserPasswordResetEvent;
 import sandbox27.infrastructure.error.ErrorCode;
 import sandbox27.infrastructure.error.ServiceException;
 import sandbox27.infrastructure.security.AuthenticationType;
@@ -92,6 +93,8 @@ public class UserManagementService implements UserManagement {
             case AuthenticationType.internal -> {
                 final String username = (String) userInfoAttributes.get(InternalAuthController.INTERNAL_AUTH_USERNAME_KEY);
                 userOpt = userRepository.findById(username);
+                if(userOpt.isEmpty())
+                    userOpt = userRepository.findByEmail(username).stream().findFirst();
             }
             case AuthenticationType.external -> {
                 String iServId = (String) userInfoAttributes.get("preferred_username");
@@ -121,5 +124,19 @@ public class UserManagementService implements UserManagement {
 
     public List<Integer> getAllUserGrades() {
         return userRepository.findAllDistinctGrades();
+    }
+
+    @Transactional
+    public User resetPassword(String email) {
+        User user = userRepository.findByEmail(email)
+                .stream().findFirst()
+                .orElseThrow(() -> new ServiceException(ErrorCode.UserNotFound));
+        if(!user.isInternal())
+            throw new ServiceException(ErrorCode.UserNotInternal);
+        final String randomPassword = PasswordUtils.generateRandomPassword();
+        user.setPasswordHash(PasswordUtils.hashPassword(randomPassword));
+        userRepository.save(user);
+        eventPublisher.publishEvent(new UserPasswordResetEvent(user.getUserName(), user.getFirstName(), user.getEmail(), randomPassword));
+        return user;
     }
 }

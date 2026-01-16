@@ -15,6 +15,7 @@ import sandbox27.ila.backend.period.PeriodService;
 import sandbox27.ila.backend.user.User;
 import sandbox27.ila.backend.user.UserManagementService;
 import sandbox27.ila.backend.user.events.UserCreatedEvent;
+import sandbox27.ila.backend.user.events.UserPasswordResetEvent;
 import sandbox27.infrastructure.email.MailService;
 import sandbox27.infrastructure.error.ErrorHandlingService;
 
@@ -49,6 +50,25 @@ public class NotificationManager {
             mailService.sendHtml(userCreatedEvent.email(),
                     null,
                     "user-welcome",
+                    model,
+                    null);
+        } catch (Throwable throwable) {
+            errorHandlingService.handleError(throwable);
+        }
+    }
+
+    @Async
+    @TransactionalEventListener(phase = TransactionPhase.AFTER_COMPLETION)
+    public void onUserCPasswordReset(UserPasswordResetEvent userPasswordResetEvent) {
+        Map<String, Object> model = new HashMap<>();
+        model.put("firstName", userPasswordResetEvent.firstName());
+        model.put("login", userPasswordResetEvent.login());
+        model.put("password", userPasswordResetEvent.password());
+        model.put("ilaUrl", ilaUrl);
+        try {
+            mailService.sendHtml(userPasswordResetEvent.email(),
+                    null,
+                    "user-password-reset",
                     model,
                     null);
         } catch (Throwable throwable) {
