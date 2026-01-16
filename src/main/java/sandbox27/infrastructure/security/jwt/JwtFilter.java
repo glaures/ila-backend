@@ -24,6 +24,7 @@ public class JwtFilter extends OncePerRequestFilter {
 
         if (!request.getRequestURI().startsWith("/auth")
                 && !request.getRequestURI().startsWith("/login")
+                && !request.getRequestURI().endsWith("/password-reset")
                 && !request.getMethod().equals("OPTIONS")
         ) {
             String auth = request.getHeader("Authorization");
