@@ -7,6 +7,7 @@ import sandbox27.ila.backend.assignments.CourseUserAssignmentRepository;
 import sandbox27.ila.backend.block.Block;
 import sandbox27.ila.backend.block.BlockRepository;
 import sandbox27.ila.backend.block.BlockService;
+import sandbox27.ila.backend.period.Period;
 import sandbox27.ila.backend.period.PeriodRepository;
 import sandbox27.ila.backend.preference.PreferenceRepository;
 import sandbox27.ila.backend.user.*;
@@ -54,6 +55,13 @@ public class CourseService {
             else
                 return allCoursesInBlock.stream().map(this::map).toList();
         }
+    }
+
+    @GetMapping("/instructedbyme")
+    @RequiredRole(Role.COURSE_INSTRUCTOR_ROLE_NAME)
+    public List<CourseDto> getCoursesInstructedByMe(@AuthenticatedUser User user) {
+        Period currentPeriod = periodRepository.findByCurrent(true).orElseThrow(() -> new ServiceException(ErrorCode.NotFound));
+        return courseRepository.findByInstructorAndPeriod(user, currentPeriod).stream().map(this::map).toList();
     }
 
     @GetMapping("/{courseId}")
