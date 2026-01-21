@@ -37,12 +37,22 @@ public class RequiredRoleResolver {
         RequiredRole annotation = resolveAnnotation(pjp);
         if (annotation != null) {
             Optional<String> principal = getPrincipalFromRequest();
-            String role = annotation.value();
-            if (principal.isEmpty() || !userManagement.hasRole(principal.get(), role)) {
-                throw new ServiceException(ErrorCode.RoleRequired, role);
+            String[] requiredRoles = annotation.value();
+
+            if (principal.isEmpty() || !hasAnyRole(principal.get(), requiredRoles)) {
+                throw new ServiceException(ErrorCode.RoleRequired, String.join(" oder ", requiredRoles));
             }
         }
         return pjp.proceed();
+    }
+
+    private boolean hasAnyRole(String username, String[] roles) {
+        for (String role : roles) {
+            if (userManagement.hasRole(username, role)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private RequiredRole resolveAnnotation(ProceedingJoinPoint pjp) {

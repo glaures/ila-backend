@@ -79,7 +79,7 @@ public class CourseUserAssignmentService {
     ) {
     }
 
-    @RequiredRole(Role.ADMIN_ROLE_NAME)
+    @RequiredRole({Role.ADMIN_ROLE_NAME, Role.COURSE_INSTRUCTOR_ROLE_NAME})
     @Transactional
     @PostMapping
     public Feedback assignCourseToUser(@RequestBody CourseUserAssignmentPayload courseUserAssignmentPayload) throws ServiceException {
@@ -101,7 +101,7 @@ public class CourseUserAssignmentService {
     }
 
 
-    @RequiredRole(Role.ADMIN_ROLE_NAME)
+    @RequiredRole({Role.ADMIN_ROLE_NAME, Role.COURSE_INSTRUCTOR_ROLE_NAME})
     @Transactional
     @PostMapping("/copy-assignments")
     public Feedback copyAssignments(@RequestParam("source-course-id") Long sourceCourseId,
@@ -123,13 +123,11 @@ public class CourseUserAssignmentService {
             return new Feedback(List.of(assignmentCount + " Teilnehmer hinzugefügt."), Collections.emptyList(), Collections.emptyList());
     }
 
-    @RequiredRole(Role.ADMIN_ROLE_NAME)
+    @RequiredRole({Role.ADMIN_ROLE_NAME, Role.COURSE_INSTRUCTOR_ROLE_NAME})
     @Transactional
     @DeleteMapping("/{assignmentId}")
     public Feedback deleteAssignment(@PathVariable("assignmentId") Long assignmentId,
                                      @AuthenticatedUser User authenticatedUser) throws ServiceException {
-        if (!authenticatedUser.getRoles().contains(Role.ADMIN))
-            throw new ServiceException(ErrorCode.AccessDenied);
         CourseUserAssignment assignment = courseUserAssignmentRepository.findById(assignmentId)
                 .orElseThrow(() -> new ServiceException(ErrorCode.NotFound));
         courseUserAssignmentRepository.delete(assignment);

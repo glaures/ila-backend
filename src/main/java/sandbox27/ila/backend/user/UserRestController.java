@@ -26,7 +26,7 @@ public class UserRestController {
     ) {
     }
 
-    @RequiredRole(Role.ADMIN_ROLE_NAME)
+    @RequiredRole({Role.ADMIN_ROLE_NAME, Role.COURSE_INSTRUCTOR_ROLE_NAME})
     @GetMapping
     public List<UserDto> getAllUsers(@RequestParam(name = "intern", defaultValue = "false") boolean internal,
                                      @RequestParam(name = "page", defaultValue = "0") int page,

@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import sandbox27.ila.backend.period.Period;
+import sandbox27.ila.backend.user.User;
 
 import java.time.DayOfWeek;
 import java.util.List;
@@ -36,4 +37,6 @@ public interface CourseRepository extends JpaRepository<Course, Long> {
     Optional<Course> findByCourseId(String s);
 
     Course getReferenceByCourseId(String courseId);
+
+    List<Course> findByInstructorAndPeriod(User user, Period period);
 }
