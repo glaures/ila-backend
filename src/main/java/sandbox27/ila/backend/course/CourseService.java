@@ -7,6 +7,7 @@ import sandbox27.ila.backend.assignments.CourseUserAssignmentRepository;
 import sandbox27.ila.backend.block.Block;
 import sandbox27.ila.backend.block.BlockRepository;
 import sandbox27.ila.backend.block.BlockService;
+import sandbox27.ila.backend.courseexclusions.CourseExclusionRepository;
 import sandbox27.ila.backend.period.Period;
 import sandbox27.ila.backend.period.PeriodRepository;
 import sandbox27.ila.backend.preference.PreferenceRepository;
@@ -34,6 +35,7 @@ public class CourseService {
     private final PreferenceRepository preferenceRepository;
     private final UserManagementService userManagementService;
     private final UserRepository userRepository;
+    private final CourseExclusionRepository courseExclusionRepository;
 
     @GetMapping
     public List<CourseDto> getCourses(@RequestParam(name = "block-id", required = false) Long blockId,
@@ -91,10 +93,11 @@ public class CourseService {
     @DeleteMapping("/{id}")
     public void deleteCourse(@PathVariable Long id) throws ServiceException {
         Course course = courseRepository.findById(id).orElseThrow(() -> new ServiceException(ErrorCode.NotFound));
-        // Kurszuweisungen zuerst löschen
+        // Abhängige Daten zuerst löschen
         courseBlockAssignmentRepository.deleteByCourse(course);
         courseUserAssignmentRepository.deleteByCourse(course);
         preferenceRepository.deleteByCourse(course);
+        courseExclusionRepository.deleteByCourseId(id);
         courseRepository.delete(course);
     }
 

@@ -4,7 +4,6 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
-import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.web.bind.annotation.*;
 import sandbox27.ila.backend.block.Block;
 import sandbox27.ila.backend.block.BlockDto;
@@ -12,6 +11,7 @@ import sandbox27.ila.backend.course.Course;
 import sandbox27.ila.backend.course.CourseBlockAssignmentRepository;
 import sandbox27.ila.backend.course.CourseDto;
 import sandbox27.ila.backend.course.CourseRepository;
+import sandbox27.ila.backend.courseexclusions.CourseExclusionRepository;
 import sandbox27.ila.backend.user.Role;
 import sandbox27.ila.backend.user.User;
 import sandbox27.ila.backend.user.UserRepository;
@@ -38,6 +38,7 @@ public class CourseUserAssignmentService {
     private final UserRepository userRepository;
     private final CourseRepository courseRepository;
     final CourseBlockAssignmentRepository courseBlockAssignmentRepository;
+    private final CourseExclusionRepository courseExclusionRepository;
 
     @GetMapping("/{blockId}")
     @Transactional
@@ -87,6 +88,12 @@ public class CourseUserAssignmentService {
                 .orElseThrow(() -> new ServiceException(ErrorCode.UserNotFound));
         Course course = courseRepository.findByCourseId(courseUserAssignmentPayload.courseId)
                 .orElseThrow(() -> new ServiceException(ErrorCode.NotFound));
+
+        // Prüfen, ob der Benutzer von diesem Kurs ausgeschlossen ist
+        if (courseExclusionRepository.existsByCourseAndUser(course, user)) {
+            throw new ServiceException(ErrorCode.UserExcludedFromCourse, user.getFirstName() + " " + user.getLastName(), course.getName());
+        }
+
         Block block = courseBlockAssignmentRepository.findAllByCourse(course).getFirst().getBlock();
         CourseUserAssignment courseUserAssignment = CourseUserAssignment.builder()
                 .user(user)
@@ -105,22 +112,43 @@ public class CourseUserAssignmentService {
     @Transactional
     @PostMapping("/copy-assignments")
     public Feedback copyAssignments(@RequestParam("source-course-id") Long sourceCourseId,
-                                     @RequestParam("destination-course-id") Long destinationCourseId) throws ServiceException {
+                                    @RequestParam("destination-course-id") Long destinationCourseId) throws ServiceException {
         Course destinationCourse = courseRepository.getReferenceById(destinationCourseId);
         List<CourseUserAssignment> allAssignments = courseUserAssignmentRepository.findByCourse_idOrderByUser_LastName(sourceCourseId);
         Set<User> alreadyAssignedUsers = courseUserAssignmentRepository.findByCourse_idOrderByUser_LastName(destinationCourseId)
                 .stream()
                 .map(CourseUserAssignment::getUser)
                 .collect(Collectors.toSet());
+
+        // Ausgeschlossene Benutzer für den Zielkurs ermitteln
+        Set<String> excludedUserNames = courseExclusionRepository.findAllByCourseId(destinationCourseId)
+                .stream()
+                .map(e -> e.getUser().getUserName())
+                .collect(Collectors.toSet());
+
         int assignmentCount = 0;
+        int skippedCount = 0;
         for(CourseUserAssignment assignment : allAssignments){
             if(!alreadyAssignedUsers.contains(assignment.getUser())){
+                // Ausgeschlossene Benutzer überspringen
+                if (excludedUserNames.contains(assignment.getUser().getUserName())) {
+                    skippedCount++;
+                    log.info("Überspringe ausgeschlossenen Benutzer {} für Kurs {}",
+                            assignment.getUser().getUserName(), destinationCourse.getName());
+                    continue;
+                }
                 CourseUserAssignmentPayload p = new CourseUserAssignmentPayload(assignment.getUser().getUserName(), destinationCourse.getCourseId());
                 assignCourseToUser(p);
-                assignmentCount ++;
+                assignmentCount++;
             }
         }
-            return new Feedback(List.of(assignmentCount + " Teilnehmer hinzugefügt."), Collections.emptyList(), Collections.emptyList());
+
+        List<String> infos = new java.util.ArrayList<>();
+        infos.add(assignmentCount + " Teilnehmer hinzugefügt.");
+        if (skippedCount > 0) {
+            infos.add(skippedCount + " ausgeschlossene Teilnehmer übersprungen.");
+        }
+        return new Feedback(infos, Collections.emptyList(), Collections.emptyList());
     }
 
     @RequiredRole({Role.ADMIN_ROLE_NAME, Role.COURSE_INSTRUCTOR_ROLE_NAME})
