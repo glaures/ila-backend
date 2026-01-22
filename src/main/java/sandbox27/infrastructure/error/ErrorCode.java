@@ -16,6 +16,8 @@ public enum ErrorCode {
     InvalidRole,
     UserNotInternal,
     InvalidIServCode,
-    AttendanceSessionAlreadyExists
+    AttendanceSessionAlreadyExists,
+    InvalidCredentials,
+    UserExcludedFromCourse
 
 }

@@ -92,9 +92,13 @@ public class UserManagementService implements UserManagement {
         switch ((AuthenticationType) userInfoAttributes.get(AuthenticationType.USER_INFO_AUTH_TYPE_KEY)) {
             case AuthenticationType.internal -> {
                 final String username = (String) userInfoAttributes.get(InternalAuthController.INTERNAL_AUTH_USERNAME_KEY);
-                userOpt = userRepository.findById(username);
-                if(userOpt.isEmpty())
-                    userOpt = userRepository.findByEmail(username).stream().findFirst();
+                final String password = (String) userInfoAttributes.get(InternalAuthController.INTERNAL_AUTH_PASSWORD_KEY);
+                User user = userRepository.findById(username)
+                        .orElse(userRepository.findByEmail(username).stream().findFirst()
+                                .orElseThrow(() -> new ServiceException(ErrorCode.InvalidCredentials)));
+                if(!PasswordUtils.verifyPassword(password, user.getPasswordHash()))
+                    throw new ServiceException(ErrorCode.InvalidCredentials);
+                userOpt = Optional.of(user);
             }
             case AuthenticationType.external -> {
                 String iServId = (String) userInfoAttributes.get("preferred_username");
