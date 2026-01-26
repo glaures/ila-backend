@@ -44,7 +44,6 @@ public class UserRestController {
     @PutMapping
     public UserDto createUser(@RequestBody UserPayload userPayload) {
         User user = userManagementService.createUser(
-                userPayload.login,
                 userPayload.firstName,
                 userPayload.lastName,
                 userPayload.email,

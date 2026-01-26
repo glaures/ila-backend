@@ -47,7 +47,7 @@ public class BlockService {
                                 @RequestBody BlockDto blockDto) {
         Block block = blockRepository.findById(id).orElseThrow(() -> new ServiceException(ErrorCode.NotFound));
         modelMapper.map(blockDto, block);
-        blockRepository.saveAndFlush(block);
+        block = blockRepository.saveAndFlush(block);
         return modelMapper.map(block, BlockDto.class);
     }
 
@@ -55,7 +55,7 @@ public class BlockService {
     @PostMapping
     public BlockDto createBlock(@RequestBody BlockDto blockDto) {
         Block block = modelMapper.map(blockDto, Block.class);
-        blockRepository.saveAndFlush(block);
+        block = blockRepository.saveAndFlush(block);
         return modelMapper.map(block, BlockDto.class);
     }
 

@@ -57,7 +57,7 @@ public class BesteSchuleImportService {
             User user = userOptional.get();
             Gender gender = parseGender(dto.gender());
             user.setGender(gender);
-            userRepository.save(user);
+            user = userRepository.save(user);
             result.incrementUpdated();
             log.debug("Updated gender for user {}: {}", user.getUserName(), gender);
         } else {

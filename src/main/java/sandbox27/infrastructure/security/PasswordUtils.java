@@ -17,7 +17,7 @@ public class PasswordUtils {
     private static final String LOWERCASE = "abcdefghijklmnopqrstuvwxyz";
     private static final String DIGITS = "0123456789";
 
-    private static final String SPECIAL_CHARS = "!@#$%&*+-_.,?=";
+    private static final String SPECIAL_CHARS = "!@#$%&*+";
 
     public static String hashPassword(@NonNull String plainPassword) {
         return BCrypt.hashpw(plainPassword, BCrypt.gensalt(LOG_ROUNDS));

@@ -35,23 +35,22 @@ public class UserManagementService implements UserManagement {
     List<String> adminUserNames;
 
     @Transactional
-    public List<User> getAllStudents(){
+    public List<User> getAllStudents() {
         return userRepository.findAllByRole(Role.STUDENT);
     }
 
     @Transactional
-    public User createUser(String username, String firstName, String lastName, String email, @Nullable String internalId, String initialRole, boolean internal) {
+    public User createUser(String firstName, String lastName, String email, @Nullable String internalId, String initialRole, boolean internal) {
         if (!Role.isValidRole(initialRole)) {
             throw new ServiceException(ErrorCode.InvalidRole, initialRole);
         }
-        if (username == null)
-            throw new ServiceException(ErrorCode.FieldRequired, messageSource.getMessage("username", null, Locale.GERMAN));
-        else if (userRepository.existsById(username))
-            throw new ServiceException(ErrorCode.UserAlreadyExists, username);
         if (firstName == null)
             throw new ServiceException(ErrorCode.FieldRequired, messageSource.getMessage("firstName", null, Locale.GERMAN));
         if (lastName == null)
             throw new ServiceException(ErrorCode.FieldRequired, messageSource.getMessage("lastName", null, Locale.GERMAN));
+        String username = createUniqueUserPrincipal(firstName, lastName);
+        if (userRepository.existsById(username))
+            throw new ServiceException(ErrorCode.UserAlreadyExists, username);
         final String randomPassword = PasswordUtils.generateRandomPassword();
         User user = User.builder()
                 .userName(username)
@@ -63,7 +62,7 @@ public class UserManagementService implements UserManagement {
                 .internal(internal)
                 .build();
         user.getRoles().add(Role.valueOf(initialRole));
-        userRepository.save(user);
+        user = userRepository.save(user);
         eventPublisher.publishEvent(new UserCreatedEvent(username, firstName, lastName, email, randomPassword));
         return user;
     }
@@ -96,7 +95,7 @@ public class UserManagementService implements UserManagement {
                 User user = userRepository.findById(username)
                         .orElse(userRepository.findByEmail(username).stream().findFirst()
                                 .orElseThrow(() -> new ServiceException(ErrorCode.InvalidCredentials)));
-                if(!PasswordUtils.verifyPassword(password, user.getPasswordHash()))
+                if (!PasswordUtils.verifyPassword(password, user.getPasswordHash()))
                     throw new ServiceException(ErrorCode.InvalidCredentials);
                 userOpt = Optional.of(user);
             }
@@ -116,7 +115,7 @@ public class UserManagementService implements UserManagement {
                     });
                     if (!adminUser.getRoles().contains(Role.ADMIN))
                         adminUser.getRoles().add(Role.ADMIN);
-                    userRepository.save(adminUser);
+                    adminUser = userRepository.save(adminUser);
                     return Optional.of(adminUser);
                 }
             }
@@ -135,12 +134,26 @@ public class UserManagementService implements UserManagement {
         User user = userRepository.findByEmail(email)
                 .stream().findFirst()
                 .orElseThrow(() -> new ServiceException(ErrorCode.UserNotFound));
-        if(!user.isInternal())
+        if (!user.isInternal())
             throw new ServiceException(ErrorCode.UserNotInternal);
         final String randomPassword = PasswordUtils.generateRandomPassword();
         user.setPasswordHash(PasswordUtils.hashPassword(randomPassword));
-        userRepository.save(user);
+        user = userRepository.save(user);
         eventPublisher.publishEvent(new UserPasswordResetEvent(user.getUserName(), user.getFirstName(), user.getEmail(), randomPassword));
         return user;
+    }
+
+    public String createDefaultUserPrincipal(String firstName, String lastName) {
+        return firstName.trim().toLowerCase() + "." + lastName.trim().toLowerCase();
+    }
+
+    public String createUniqueUserPrincipal(String firstName, String lastName) {
+        String principal = firstName.trim().toLowerCase() + "." + lastName.trim().toLowerCase();
+        int number = 1;
+        while (userRepository.existsById(principal))
+            if (Character.isDigit(principal.charAt(principal.length() - 1)))
+                principal = principal.substring(0, principal.length() - 1) + (++number);
+            else principal = principal + (++number);
+        return principal;
     }
 }

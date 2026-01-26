@@ -80,7 +80,7 @@ public class AttendanceService {
                     .user(assignment.getUser())
                     .present(true)
                     .build();
-            entryRepository.save(entry);
+            entry = entryRepository.save(entry);
             session.getEntries().add(entry);
         }
 
@@ -140,7 +140,7 @@ public class AttendanceService {
                         .present(request.present())
                         .note(request.note())
                         .build();
-                entryRepository.save(newEntry);
+                newEntry = entryRepository.save(newEntry);
                 session.getEntries().add(newEntry);
             }
         }

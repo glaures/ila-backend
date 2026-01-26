@@ -65,7 +65,6 @@ public class UserMetaInfoManagement {
                 User user = userRepository.findById(iservUser.user())
                         .orElseGet(() -> {
                             return userManagement.createUser(
-                                    iservUser.user,
                                     iservUser.firstname,
                                     iservUser.lastname,
                                     iservUser.user + "@jmoosdorf.de",
@@ -145,7 +144,7 @@ public class UserMetaInfoManagement {
                 }
 
                 if (updated) {
-                    userRepository.save(user);
+                    user = userRepository.save(user);
                     updatedCount++;
                     log.info("Updated user: {}", user.getUserName());
                 }

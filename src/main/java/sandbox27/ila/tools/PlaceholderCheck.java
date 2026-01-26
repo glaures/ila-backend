@@ -42,7 +42,7 @@ public class PlaceholderCheck {
                         .grades(Set.of(5, 6, 7, 8, 9, 10, 11, 12))
                         .placeholder(true)
                         .build();
-                courseRepository.save(placeHolderCourse);
+                placeHolderCourse = courseRepository.save(placeHolderCourse);
                 CourseBlockAssignment courseBlockAssignment = new CourseBlockAssignment();
                 courseBlockAssignment.setBlock(block);
                 courseBlockAssignment.setCourse(placeHolderCourse);

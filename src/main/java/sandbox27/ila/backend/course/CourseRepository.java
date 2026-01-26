@@ -34,7 +34,7 @@ public interface CourseRepository extends JpaRepository<Course, Long> {
             "where cba.block.id=:blockId order by cba.course.courseId")
     List<Course> findAllByBlock_Id(Long blockId);
 
-    Optional<Course> findByCourseId(String s);
+    Optional<Course> findByCourseIdAndPeriod(String s, Period p);
 
     Course getReferenceByCourseId(String courseId);
 

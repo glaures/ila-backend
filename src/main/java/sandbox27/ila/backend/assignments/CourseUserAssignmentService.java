@@ -12,6 +12,8 @@ import sandbox27.ila.backend.course.CourseBlockAssignmentRepository;
 import sandbox27.ila.backend.course.CourseDto;
 import sandbox27.ila.backend.course.CourseRepository;
 import sandbox27.ila.backend.courseexclusions.CourseExclusionRepository;
+import sandbox27.ila.backend.period.Period;
+import sandbox27.ila.backend.period.PeriodService;
 import sandbox27.ila.backend.user.Role;
 import sandbox27.ila.backend.user.User;
 import sandbox27.ila.backend.user.UserRepository;
@@ -39,6 +41,7 @@ public class CourseUserAssignmentService {
     private final CourseRepository courseRepository;
     final CourseBlockAssignmentRepository courseBlockAssignmentRepository;
     private final CourseExclusionRepository courseExclusionRepository;
+    private final PeriodService periodService;
 
     @GetMapping("/{blockId}")
     @Transactional
@@ -84,9 +87,10 @@ public class CourseUserAssignmentService {
     @Transactional
     @PostMapping
     public Feedback assignCourseToUser(@RequestBody CourseUserAssignmentPayload courseUserAssignmentPayload) throws ServiceException {
+        final Period period = periodService.getCurrent();
         User user = userRepository.findById(courseUserAssignmentPayload.userName)
                 .orElseThrow(() -> new ServiceException(ErrorCode.UserNotFound));
-        Course course = courseRepository.findByCourseId(courseUserAssignmentPayload.courseId)
+        Course course = courseRepository.findByCourseIdAndPeriod(courseUserAssignmentPayload.courseId, period)
                 .orElseThrow(() -> new ServiceException(ErrorCode.NotFound));
 
         // Prüfen, ob der Benutzer von diesem Kurs ausgeschlossen ist

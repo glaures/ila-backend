@@ -9,9 +9,9 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
 import sandbox27.ila.backend.course.Course;
 import sandbox27.ila.backend.course.CourseRepository;
+import sandbox27.ila.backend.period.Period;
 import sandbox27.ila.backend.user.User;
 import sandbox27.ila.backend.user.UserRepository;
-import sandbox27.ila.tools.special_2526_1.theater.TheaterBelegung;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -29,11 +29,11 @@ public class RoomAndInstructorImporter {
     final UserRepository userRepository;
 
     @Transactional
-    public void runImport() throws IOException {
+    public void runImport(Period period) throws IOException {
         List<RoomAndInstructor> importedRnI = importFromFile();
         for (RoomAndInstructor rnI : importedRnI) {
             try {
-                Optional<Course> courseOptional = courseRepository.findByCourseId(rnI.courseId);
+                Optional<Course> courseOptional = courseRepository.findByCourseIdAndPeriod(rnI.courseId, period);
                 if(courseOptional.isPresent()) {
                     Course course = courseOptional.get();
                     course.setRoom(rnI.room);

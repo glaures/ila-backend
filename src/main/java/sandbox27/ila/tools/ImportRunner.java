@@ -24,19 +24,18 @@ public class ImportRunner {
     final PeriodRepository periodRepository;
     final PlaceholderCheck placeholderCheck;
 
-    public static final String PERIOD = "2. Quartal 25/26";
+    public static final String PERIOD = "3. Quartal 25/26";
 
     @EventListener(ApplicationReadyEvent.class)
     @Transactional
     public void onApplicationReady() throws IOException {
-        /*
         Period periodToImportInto = periodRepository.findByName(PERIOD).orElseGet(() -> periodRepository.save(
                 Period.builder()
                         .name(PERIOD)
-                        .startDate(LocalDate.of(2025, 11, 3))
-                        .endDate(LocalDate.of(2025, 11, 6))
+                        .startDate(LocalDate.of(2026, 1, 29))
+                        .endDate(LocalDate.of(2025, 2, 3))
                         .build()));
-        periodRepository.save(periodToImportInto);
+        periodToImportInto = periodRepository.save(periodToImportInto);
         // log.info("Starting user import");
         // userImporter.runImport();
         log.info("Starting course import");
@@ -47,8 +46,6 @@ public class ImportRunner {
         // prüfen, ob jeder Block der aktuellen Phase Platzhalter hat
         // placeholderCheck.ensurePlaceholdersInEveryBlockOfCurrentPeriod();
         // log.info("Placeholders in every block");
-
-         */
     }
 
 
