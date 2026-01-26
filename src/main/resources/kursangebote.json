@@ -1,29 +1,11 @@
 [
   {
-    "Wochentag": "Montag",
-    "Block": "11:20 - 12:00",
-    "Kurs": "Brettspielclub",
-    "KursId": "1001",
-    "Kategorien": [
-      "KuP"
-    ],
-    "Klassen": [
-      "8",
-      "9",
-      "10"
-    ],
-    "Beschreibung": "",
-    "maxAttendees": 28,
-    "Raum": "224",
-    "Nachname": "Abicht"
-  },
-  {
-    "Wochentag": "Montag",
+    "Wochentag": "Freitag",
     "Block": "12:00 - 12:40",
-    "Kurs": "Mandala malen",
-    "KursId": "1002",
+    "Kurs": "Tischtennis Fortgeschritten",
+    "KursId": "2001",
     "Kategorien": [
-      "KuP"
+      "BuE"
     ],
     "Klassen": [
       "5",
@@ -33,72 +15,61 @@
       "9",
       "10"
     ],
-    "Beschreibung": "",
-    "maxAttendees": 28,
-    "Raum": "224",
-    "Nachname": "Abicht"
+    "Beschreibung": "Das begehrte Sportangebot wird mehrmals angeboten. Diese Gruppe richtet sich konkret an Kinder, die das Spiel bereits beherrschen. Es werden Teamspiele aber auch Einzelmatches und Mixed-Spiele organisiert. \nEs wird in der Halle gespielt. Daher werden mindestens Sportschuhe benötigt.",
+    "maxAttendees": 20,
+    "Raum": "TH",
+    "Nachname": "Alber",
+    "Vorname": "Karsten"
   },
   {
     "Wochentag": "Donnerstag",
-    "Block": "11:20 - 12:00",
-    "Kurs": "Foyergestaltung 2.0",
-    "KursId": "1003",
-    "Kategorien": [
-      "KuP"
-    ],
-    "Klassen": [
-      "8",
-      "9",
-      "10"
-    ],
-    "Beschreibung": "In diesem ila soll das Eingangsfoyer weiter gestaltet werden - es richtet sich an Interessierte die Lust am Organisieren, auf Handwerkliches und Kreatives haben:_x000D_\nWandtattoos zu Johanna Moosdorf an zwei Wändern erstellen._x000D_\nHochbeet aus Stahl beschaffen und bepflanzen, Sitzbänke auswählen._x000D_\nBestellungen und Installation der Gestaltungselemente liegen in eurer Verantwortung.",
-    "maxAttendees": 10,
-    "Raum": "Bibliothek",
-    "Nachname": "Alber"
-  },
-  {
-    "Wochentag": "Donnerstag",
-    "Block": "12:00 - 12:40",
-    "Kurs": "Pub Quiz",
-    "KursId": "1004",
-    "Kategorien": [
-      "FuF"
-    ],
-    "Klassen": [
-      "7",
-      "8",
-      "9",
-      "10"
-    ],
-    "Beschreibung": "Pub Quiz – Wissen, Lachen, Gewinnen\nMagst du knifflige Fragen, verrückte Fakten und ein bisschen Wettkampf? Gemeinsam denkt ihr euch spannende Quizfragen aus – von „Harry Potter“ bis Weltgeschichte – und tretet dann in Teams gegeneinander an. Es wird geraten, gelacht und geknobelt, bis klar ist, wer das Quizkrönchen bekommt.",
-    "maxAttendees": 25,
-    "Raum": "Bibliothek",
-    "Nachname": "Altner"
+    "Kurs": "Sprechzeit Beratungslehrerin",
+    "KursId": "2002",
+    "maxAttendees": 0,
+    "Nachname": "Altner",
+    "Vorname": "Isa"
   },
   {
     "Wochentag": "Freitag",
     "Block": "12:00 - 12:40",
-    "Kurs": "Workout-Fitness",
-    "KursId": "1005",
+    "Kurs": "Eventmanagement für das 2. HJ",
+    "KursId": "2003",
     "Kategorien": [
-      "BuE"
+      "KuP"
     ],
     "Klassen": [
       "7",
       "8",
-      "9",
-      "10"
+      "9"
     ],
-    "Beschreibung": "Basic-Kurs (geeignet für Anfänger)\nIn deinem Step-Aerobic-Kurs erwartet dich ein dynamisches und energiegeladenes Workout, das auf einem Stepper durchgeführt wird.\nStep-Aerobic kombiniert rhythmische Bewegungen mit Musik und fördert sowohl die Ausdauer als auch die Koordination. Du steigst auf und von dem Stepper, während du verschiedene Schritte und Choreografien ausführst.",
-    "maxAttendees": 20,
-    "Raum": "TH",
-    "Nachname": "Andriefski"
+    "Beschreibung": "Du möchtest an der professionellen Planung, Organisation und Durchführung von Veranstaltungen und Projekten unserer Schule teilnehmen und Erlebnisse für unsere Schulgemeinschaft schaffen?  Dann bist du hier genau richtig. Wir planen u.a. unser Schuljubiläum im August und ihr könnt euch auch mit euren Ideen einbringen: evtl. Herbstball, Adventsmarkt, Talentefest, Abiturzeugnisausgabe und vieles mehr.  Dabei lernt ihr Zielgruppen zu aktivieren und spezifische Kommunikationsziele zu erreichen, indem alle Prozesse von Finanzplanung und Location bis zur Koordination der Dienstleister reibungslos koordiniert werden müssen.  Von der Konzeption zur Planung und Organisation bis hin zur Durchführung und Nachbereitung. Es verbindet Kreativität mit strategischem Denken.  Traut euch, schafft bleibende Erlebnisse und seid ein Teil des Teams. Ich freu mich auf euch.",
+    "maxAttendees": 25,
+    "Raum": "315",
+    "Nachname": "Andriefski",
+    "Vorname": "Doreen"
+  },
+  {
+    "Wochentag": "Montag",
+    "Block": "12:00 - 12:40",
+    "Kurs": "Deutsche Aussprache für DaZ",
+    "KursId": "2004",
+    "Kategorien": [
+      "FuF"
+    ],
+    "Klassen": [
+      "VK"
+    ],
+    "Beschreibung": "Dieser Kurs richtet sich an Lernende, für die Deutsch die Zweitsprache ist (DaZ), und hat zum Ziel, die deutsche Aussprache zu verbessern. Die Teilnehmenden lernen die Besonderheiten der deutschen Phonetik kennen und üben die korrekte Aussprache von Lauten, Silben und Wörtern.\nZiel des Kurses ist es, die Verständlichkeit und Klarheit der Sprache zu erhöhen sowie Hör- und Sprechkompetenzen zu fördern, damit die Schülerinnen und Schüler sicherer kommunizieren und die deutsche Sprache im Alltag und in der Schule besser verstehen können.",
+    "maxAttendees": 15,
+    "Raum": "328",
+    "Nachname": "Becker",
+    "Vorname": "Helena"
   },
   {
     "Wochentag": "Freitag",
     "Block": "12:00 - 12:40",
     "Kurs": "Knobel-& Logikspiele",
-    "KursId": "1006",
+    "KursId": "2005",
     "Kategorien": [
       "FuF"
     ],
@@ -109,28 +80,15 @@
     ],
     "Beschreibung": "Wir lösen gemeinsam spannennde Rätsel, Sudokus, Kreuzworträtsel und andere Knobelaufgaben. Die SuS dürfen auch eigene Rätsel für die Gruppe erstellen",
     "maxAttendees": 28,
-    "Raum": "327",
-    "Nachname": "Becker"
-  },
-  {
-    "Wochentag": "Montag",
-    "Block": "12:00 - 12:40",
-    "Kurs": "Deutsche Aussprache für DaZ",
-    "KursId": "1007",
-    "Kategorien": [
-      "FuF"
-    ],
-    "Klassen": [],
-    "Beschreibung": "Dieser Kurs richtet sich an Lernende, für die Deutsch die Zweitsprache ist (DaZ), und hat zum Ziel, die deutsche Aussprache zu verbessern. Die Teilnehmenden lernen die Besonderheiten der deutschen Phonetik kennen und üben die korrekte Aussprache von Lauten, Silben und Wörtern._x000D_\n_x000D_\nZiel des Kurses ist es, die Verständlichkeit und Klarheit der Sprache zu erhöhen sowie Hör- und Sprechkompetenzen zu fördern, damit die Schülerinnen und Schüler sicherer kommunizieren und die deutsche Sprache im Alltag und in der Schule besser verstehen können.",
-    "maxAttendees": 15,
     "Raum": "328",
-    "Nachname": "Becker"
+    "Nachname": "Becker",
+    "Vorname": "Helena"
   },
   {
     "Wochentag": "Dienstag",
     "Block": "12:00 - 12:40",
     "Kurs": "Russisch für alle",
-    "KursId": "1008",
+    "KursId": "2006",
     "Kategorien": [
       "FuF"
     ],
@@ -142,16 +100,17 @@
       "9",
       "10"
     ],
-    "Beschreibung": "Russisch gehört zur slawischen Sprachfamilie und eröffnet den Zugang zur sprachlichen Welt Osteuropas. In diesem Kurs lernt man das kyrillische Alphabet, erste Redewendungen und erhält Einblicke in die russische Kultur und Denkweise._x000D_\nFür Anfänger geeignet – keine Vorkenntnisse nötig!",
+    "Beschreibung": "Russisch gehört zur slawischen Sprachfamilie und eröffnet den Zugang zur sprachlichen Welt Osteuropas. In diesem Kurs lernt man das kyrillische Alphabet, erste Redewendungen und erhält Einblicke in die russische Kultur und Denkweise.\nFür Anfänger geeignet – keine Vorkenntnisse nötig!",
     "maxAttendees": 20,
     "Raum": "327",
-    "Nachname": "Becker"
+    "Nachname": "Becker",
+    "Vorname": "Helena"
   },
   {
     "Wochentag": "Donnerstag",
     "Block": "12:00 - 12:40",
     "Kurs": "Englisch Fördern Klasse 5",
-    "KursId": "1009",
+    "KursId": "2007",
     "Kategorien": [
       "FuF"
     ],
@@ -160,48 +119,50 @@
     ],
     "Beschreibung": "Unser iLa „Englisch Fördern“ richtet sich an Schülerinnen und Schüler der Klasse 5. In einer kleineren Gruppe arbeiten wir gezielt an Lücken aus dem Englischunterricht. Mit individuellen Methoden für deinen Lerntyp wirst du individuell unterstützt. Gemeinsam legen wir klare Ziele fest und verfolgen deinen Fortschritt. So lernst du neue Vokabeln sicher und festigst Grammatik.",
     "maxAttendees": 18,
-    "Raum": "327",
-    "Nachname": "Biewendt"
+    "Raum": "101",
+    "Nachname": "Biewendt",
+    "Vorname": "Judith"
+  },
+  {
+    "Wochentag": "Donnerstag",
+    "Block": "11:20 - 12:00",
+    "Kurs": "Dein Geld, dein Plan – Finanzkompetenz für jetzt und später - Durchblick in der Welt des Geldes",
+    "KursId": "2008",
+    "Kategorien": [
+      "KuP"
+    ],
+    "Klassen": [
+      "9",
+      "10"
+    ],
+    "Beschreibung": "Achtung: Keine Fortsetzung aus dem 1. Halbjahr; NUR für Einstieger. Geld begegnet uns überall – beim Einkaufen, auf dem Konto, im Job oder in unseren Träumen von der Zukunft. Lange hieß es: „Über Geld spricht man nicht.“ Aber wer klug handeln will, muss lernen, genau das zu tun. In diesem Kurs reden wir offen darüber, wie Geld funktioniert, wie man es verdient, ausgibt, spart und plant. Du wirst herausfinden, welche Rolle es in deinem Alltag spielt, wie du finanzielle Ziele setzt und kluge Entscheidungen triffst. Denn: Je mehr du über Geld weißt, desto freier und sicherer kannst du deine Zukunft gestalten.",
+    "maxAttendees": 20,
+    "Raum": "318",
+    "Nachname": "Darius",
+    "Vorname": "Cindy"
   },
   {
     "Wochentag": "Freitag",
     "Block": "11:20 - 12:00",
-    "Kurs": "Dein Geld, dein Plan – Finanzkompetenz für jetzt und später - Durchblick in der Welt des Geldes",
-    "KursId": "1010",
+    "Kurs": "Fremdsprachen im Vergleich - Eng+ 2.Fremdsprache -Strukturen verstehen, Systeme durchdringen",
+    "KursId": "2009",
     "Kategorien": [
-      "KuP"
+      "FuF"
     ],
     "Klassen": [
-      "9",
       "10"
     ],
-    "Beschreibung": "Geld begegnet uns überall – beim Einkaufen, auf dem Konto, im Job oder in unseren Träumen von der Zukunft. Lange hieß es: „Über Geld spricht man nicht.“ Aber wer klug handeln will, muss lernen, genau das zu tun. In diesem Kurs reden wir offen darüber, wie Geld funktioniert, wie man es verdient, ausgibt, spart und plant. Du wirst herausfinden, welche Rolle es in deinem Alltag spielt, wie du finanzielle Ziele setzt und kluge Entscheidungen triffst. Denn: Je mehr du über Geld weißt, desto freier und sicherer kannst du deine Zukunft gestalten.",
-    "maxAttendees": 20,
+    "Beschreibung": "Hier lernst du Sprachen nicht neu – du durchdringst sie. Von Englisch aus vergleichst du Strukturen in deiner romanischen Sprache. Parallel erhältst du auch Einblicke in die anderen 2.Fremdsprachen. Du arbeitest analytisch, digital und produktorientiert. Ideal für alle, die das Sprachenlernen als persönliche Zukunftskompetenz für sich verstehen und die 2.Fremdsprache in der Oberstufe weiterführen möchten.",
+    "maxAttendees": 23,
     "Raum": "318",
-    "Nachname": "Darius"
+    "Nachname": "Darius",
+    "Vorname": "Cindy"
   },
   {
-    "Wochentag": "Donnerstag",
-    "Block": "11:20 - 12:00",
-    "Kurs": "Dein Geld, dein Plan – Finanzkompetenz für jetzt und später - Durchblick in der Welt des Geldes",
-    "KursId": "1011",
-    "Kategorien": [
-      "KuP"
-    ],
-    "Klassen": [
-      "9",
-      "10"
-    ],
-    "Beschreibung": "Geld begegnet uns überall – beim Einkaufen, auf dem Konto, im Job oder in unseren Träumen von der Zukunft. Lange hieß es: „Über Geld spricht man nicht.“ Aber wer klug handeln will, muss lernen, genau das zu tun. In diesem Kurs reden wir offen darüber, wie Geld funktioniert, wie man es verdient, ausgibt, spart und plant. Du wirst herausfinden, welche Rolle es in deinem Alltag spielt, wie du finanzielle Ziele setzt und kluge Entscheidungen triffst. Denn: Je mehr du über Geld weißt, desto freier und sicherer kannst du deine Zukunft gestalten.",
-    "maxAttendees": 20,
-    "Raum": "318",
-    "Nachname": "Darius"
-  },
-  {
-    "Wochentag": "Donnerstag",
+    "Wochentag": "Montag",
     "Block": "12:00 - 12:40",
-    "Kurs": "Mathe Fördern 6a + 6b",
-    "KursId": "1012",
+    "Kurs": "Mathe Fördern 6",
+    "KursId": "2010",
     "Kategorien": [
       "FuF"
     ],
@@ -209,47 +170,16 @@
       "6"
     ],
     "Beschreibung": "Dir geht es manchmal zu schnell in Mathe oder möchtest einfach sicherer werden? In diesem Kurs helfen dir ältere Schülerinnen und Schüler in entspannter Atmosphäre – gezielt und verständlich.",
-    "maxAttendees": 14,
-    "Raum": "224",
-    "Nachname": "Engel"
+    "maxAttendees": 42,
+    "Raum": "224, 225",
+    "Nachname": "Engel",
+    "Vorname": "Johannes"
   },
   {
-    "Wochentag": "Donnerstag",
+    "Wochentag": "Montag",
     "Block": "12:00 - 12:40",
-    "Kurs": "Mathe Fördern 6c + 6d",
-    "KursId": "1013",
-    "Kategorien": [
-      "FuF"
-    ],
-    "Klassen": [
-      "6"
-    ],
-    "Beschreibung": "Dir geht es manchmal zu schnell in Mathe oder möchtest einfach sicherer werden? In diesem Kurs helfen dir ältere Schülerinnen und Schüler in entspannter Atmosphäre – gezielt und verständlich.",
-    "maxAttendees": 14,
-    "Raum": "225",
-    "Nachname": "Engel"
-  },
-  {
-    "Wochentag": "Donnerstag",
-    "Block": "12:00 - 12:40",
-    "Kurs": "Mathe Fördern 6e + 6f",
-    "KursId": "1014",
-    "Kategorien": [
-      "FuF"
-    ],
-    "Klassen": [
-      "6"
-    ],
-    "Beschreibung": "Dir geht es manchmal zu schnell in Mathe oder möchtest einfach sicherer werden? In diesem Kurs helfen dir ältere Schülerinnen und Schüler in entspannter Atmosphäre – gezielt und verständlich.",
-    "maxAttendees": 14,
-    "Raum": "234",
-    "Nachname": "Engel"
-  },
-  {
-    "Wochentag": "Donnerstag",
-    "Block": "12:00 - 12:40",
-    "Kurs": "Puzzlen zur Entspannung",
-    "KursId": "1015",
+    "Kurs": "Puzzeln zur Entspannung",
+    "KursId": "2011",
     "Kategorien": [
       "BuE"
     ],
@@ -263,14 +193,56 @@
     ],
     "Beschreibung": "Im iLA \"Puzzlen zur Entspannung\" kannst du in ruhiger Atmosphäre entspannen und deinen Kopf freibekommen. Beim Zusammensetzen der Teile trainierst du spielerisch Geduld und Konzentration. Ganz ohne Zeitdruck kannst du allein oder gemeinsam mit anderen puzzeln, begleitet von entspannender Musik. Das Angebot ist offen für alle und lädt dazu ein, einmal abzuschalten und neue Energie für den restlichen Schultag zu tanken.",
     "maxAttendees": 20,
-    "Raum": "",
-    "Nachname": "Goltz"
+    "Raum": "325",
+    "Nachname": "Goltz",
+    "Vorname": "Antonia"
+  },
+  {
+    "Wochentag": "Montag",
+    "Block": "12:00 - 12:40",
+    "Kurs": "Aerobic für Anfänger",
+    "KursId": "2012",
+    "Kategorien": [
+      "BuE"
+    ],
+    "Klassen": [
+      "5",
+      "6",
+      "7",
+      "8",
+      "9",
+      "10"
+    ],
+    "maxAttendees": 24,
+    "Raum": "TH",
+    "Nachname": "Große",
+    "Vorname": "Lisa-Marie"
+  },
+  {
+    "Wochentag": "Donnerstag",
+    "Block": "12:00 - 12:40",
+    "Kurs": "Entspannungs- und Atemtechniken",
+    "KursId": "2013",
+    "Kategorien": [
+      "BuE"
+    ],
+    "Klassen": [
+      "5",
+      "6",
+      "7",
+      "8",
+      "9",
+      "10"
+    ],
+    "maxAttendees": 24,
+    "Nachname": "Große",
+    "Vorname": "Lisa-Marie"
   },
   {
     "Wochentag": "Montag",
     "Block": "11:20 - 12:00",
     "Kurs": "Basketball 3x3 mit den Leipzig Lakers",
-    "KursId": "1016",
+    "KursId": "2014",
     "Kategorien": [
       "BuE"
     ],
@@ -279,16 +251,17 @@
       "6",
       "7"
     ],
-    "Beschreibung": "",
     "maxAttendees": 20,
     "Raum": "TH",
-    "Nachname": "GTA"
+    "Nachname": "GTA",
+    "Vorname": "GTA",
+    "Email": "Jugend@leipziglakers.de"
   },
   {
     "Wochentag": "Montag",
     "Block": "12:00 - 12:40",
     "Kurs": "Basketball 3x3 mit den Leipzig Lakers",
-    "KursId": "1017",
+    "KursId": "2015",
     "Kategorien": [
       "BuE"
     ],
@@ -297,32 +270,17 @@
       "9",
       "10"
     ],
-    "Beschreibung": "",
     "maxAttendees": 20,
     "Raum": "TH",
-    "Nachname": "GTA"
-  },
-  {
-    "Wochentag": "Dienstag",
-    "Block": "11:20 - 12:00",
-    "Kurs": "Grammatik neu gedacht",
-    "KursId": "1018",
-    "Kategorien": [
-      "FuF"
-    ],
-    "Klassen": [
-      "7"
-    ],
-    "Beschreibung": "",
-    "maxAttendees": 20,
-    "Raum": "",
-    "Nachname": "GTA"
+    "Nachname": "GTA",
+    "Vorname": "GTA",
+    "Email": "Jugend@leipziglakers.de"
   },
   {
     "Wochentag": "Dienstag",
     "Block": "11:20 - 12:00",
     "Kurs": "Kochen und Ernährung",
-    "KursId": "1019",
+    "KursId": "2016",
     "Kategorien": [
       "KuP"
     ],
@@ -334,13 +292,15 @@
     "Beschreibung": "0,50 € Eigenbeitrag pro Woche",
     "maxAttendees": 20,
     "Raum": "Bistro",
-    "Nachname": "GTA"
+    "Nachname": "Mittmann",
+    "Vorname": "GTA",
+    "Email": "Foodcoach.mittmann@outlook.com"
   },
   {
     "Wochentag": "Dienstag",
     "Block": "12:00 - 12:40",
     "Kurs": "Kochen und Ernährung",
-    "KursId": "1020",
+    "KursId": "2017",
     "Kategorien": [
       "KuP"
     ],
@@ -352,13 +312,15 @@
     "Beschreibung": "0,50 € Eigenbeitrag pro Woche",
     "maxAttendees": 20,
     "Raum": "Bistro",
-    "Nachname": "GTA"
+    "Nachname": "Mittmann",
+    "Vorname": "GTA",
+    "Email": "Foodcoach.mittmann@outlook.com"
   },
   {
     "Wochentag": "Freitag",
     "Block": "11:20 - 12:00",
     "Kurs": "Kreative Reparaturen und Neues schaffen",
-    "KursId": "1021",
+    "KursId": "2018",
     "Kategorien": [
       "KuP"
     ],
@@ -370,52 +332,17 @@
       "9",
       "10"
     ],
-    "Beschreibung": "",
     "maxAttendees": 16,
-    "Raum": "",
-    "Nachname": "GTA"
-  },
-  {
-    "Wochentag": "Dienstag",
-    "Block": "11:20 - 12:00",
-    "Kurs": "Parkour mit den Flying Dudes",
-    "KursId": "1022",
-    "Kategorien": [
-      "BuE"
-    ],
-    "Klassen": [
-      "5",
-      "6",
-      "7"
-    ],
-    "Beschreibung": "",
-    "maxAttendees": 20,
-    "Raum": "TH",
-    "Nachname": "GTA"
-  },
-  {
-    "Wochentag": "Dienstag",
-    "Block": "12:00 - 12:40",
-    "Kurs": "Parkour mit den Flying Dudes",
-    "KursId": "1023",
-    "Kategorien": [
-      "BuE"
-    ],
-    "Klassen": [
-      "8",
-      "9",
-      "10"
-    ],
-    "Beschreibung": "",
-    "maxAttendees": 20,
-    "Raum": "TH",
-    "Nachname": "GTA"
+    "Raum": "325",
+    "Nachname": "Kollai",
+    "Vorname": "Helen",
+    "Email": "Helen.kollai@gmail.com"
   },
   {
     "Wochentag": "Donnerstag",
     "Block": "11:20 - 12:00",
     "Kurs": "Sport & Spiel im Klassenraum 1",
-    "KursId": "1024",
+    "KursId": "2019",
     "Kategorien": [
       "BuE"
     ],
@@ -424,16 +351,17 @@
       "6",
       "7"
     ],
-    "Beschreibung": "",
     "maxAttendees": 20,
     "Raum": "328",
-    "Nachname": "GTA"
+    "Nachname": "GTA",
+    "Vorname": "GTA",
+    "Email": "Jaros.jakub04@gmail.com"
   },
   {
     "Wochentag": "Donnerstag",
     "Block": "12:00 - 12:40",
     "Kurs": "Sport & Spiel im Klassenraum 2",
-    "KursId": "1025",
+    "KursId": "2020",
     "Kategorien": [
       "BuE"
     ],
@@ -442,16 +370,17 @@
       "9",
       "10"
     ],
-    "Beschreibung": "",
     "maxAttendees": 20,
     "Raum": "328",
-    "Nachname": "GTA"
+    "Nachname": "GTA",
+    "Vorname": "GTA",
+    "Email": "Jaros.jakub04@gmail.com"
   },
   {
     "Wochentag": "Dienstag",
     "Block": "11:20 - 12:00",
     "Kurs": "Theater 5-7",
-    "KursId": "1026",
+    "KursId": "2021",
     "Kategorien": [
       "KuP"
     ],
@@ -463,13 +392,15 @@
     "Beschreibung": "über 4 Quartale",
     "maxAttendees": 16,
     "Raum": "Aula",
-    "Nachname": "GTA"
+    "Nachname": "Neubauer",
+    "Vorname": "Simone",
+    "Email": "Simone.neubauer@gmx.de"
   },
   {
     "Wochentag": "Dienstag",
     "Block": "12:00 - 12:40",
     "Kurs": "Theater 8-9",
-    "KursId": "1027",
+    "KursId": "2022",
     "Kategorien": [
       "KuP"
     ],
@@ -481,13 +412,15 @@
     "Beschreibung": "über 4 Quartale",
     "maxAttendees": 16,
     "Raum": "Aula",
-    "Nachname": "GTA"
+    "Nachname": "Neubauer",
+    "Vorname": "Simone",
+    "Email": "Simone.neubauer@gmx.de"
   },
   {
     "Wochentag": "Dienstag",
     "Block": "11:20 - 12:00",
     "Kurs": "Tischlerei",
-    "KursId": "1028",
+    "KursId": "2023",
     "Kategorien": [
       "KuP"
     ],
@@ -499,16 +432,17 @@
       "9",
       "10"
     ],
-    "Beschreibung": "",
     "maxAttendees": 10,
     "Raum": "308",
-    "Nachname": "GTA"
+    "Nachname": "GTA",
+    "Vorname": "GTA",
+    "Email": "info@kindertischlerei-pinocchio.de"
   },
   {
     "Wochentag": "Dienstag",
     "Block": "12:00 - 12:40",
     "Kurs": "Tischlerei/Werken",
-    "KursId": "1029",
+    "KursId": "2024",
     "Kategorien": [
       "KuP"
     ],
@@ -520,56 +454,17 @@
       "9",
       "10"
     ],
-    "Beschreibung": "",
     "maxAttendees": 10,
     "Raum": "308",
-    "Nachname": "GTA"
-  },
-  {
-    "Wochentag": "Dienstag",
-    "Block": "11:20 - 12:00",
-    "Kurs": "Kreatives Schreiben (Einstiegskurs)",
-    "KursId": "1030",
-    "Kategorien": [
-      "KuP"
-    ],
-    "Klassen": [
-      "6",
-      "7",
-      "8",
-      "9",
-      "10"
-    ],
-    "Beschreibung": "Techniken und Impulse für Kreatives Schreiben",
-    "maxAttendees": 24,
-    "Raum": "",
-    "Nachname": "Gündel"
-  },
-  {
-    "Wochentag": "Dienstag",
-    "Block": "12:00 - 12:40",
-    "Kurs": "Kreatives Schreiben (Fortführungskurs)",
-    "KursId": "1031",
-    "Kategorien": [
-      "KuP"
-    ],
-    "Klassen": [
-      "6",
-      "7",
-      "8",
-      "9",
-      "10"
-    ],
-    "Beschreibung": "Techniken und Impulse für Kreatives Schreiben. Der Kurs knüpft an die Inhalte des 1. Quartals an.",
-    "maxAttendees": 24,
-    "Raum": "125",
-    "Nachname": "Gündel"
+    "Nachname": "GTA",
+    "Vorname": "GTA",
+    "Email": "info@kindertischlerei-pinocchio.de"
   },
   {
     "Wochentag": "Donnerstag",
     "Block": "11:20 - 12:00",
     "Kurs": "Debattierclub // Jugend debattiert (Level 1)",
-    "KursId": "1032",
+    "KursId": "2025",
     "Kategorien": [
       "FuF"
     ],
@@ -577,16 +472,17 @@
       "5",
       "6"
     ],
-    "Beschreibung": "Mitdenken, mitreden, überzeugen – trainiere Fähigkeiten, die dir in Schule und Alltag helfen. Lerne, unterschiedliche Positionen neutral und sachlich zu debattieren – auch solche, die du selbst nicht vertrittst. So schärfst du deinen Blick für Argumente und wirst in jeder Diskussion sicherer._x000D_\n_x000D_\nDie Teilnahme dieses Kurses gilt als Vorbereitung auf eine mögliche Wettbewerbsteilnahme bei Jugend debattiert!_x000D_\n_x000D_\nKeine Vorkenntnisse nötig – nur Mut zum Sprechen, Respekt vor anderen Meinungen und aktive Mitarbeit._x000D_\n_x000D_\nMach mit und erlebe, wie spannend Debattieren sein kann!",
+    "Beschreibung": "Mitdenken, mitreden, überzeugen – trainiere Fähigkeiten, die dir in Schule und Alltag helfen. Lerne, unterschiedliche Positionen neutral und sachlich zu debattieren – auch solche, die du selbst nicht vertrittst. So schärfst du deinen Blick für Argumente und wirst in jeder Diskussion sicherer.\nDie Teilnahme dieses Kurses gilt als Vorbereitung auf eine mögliche Wettbewerbsteilnahme bei Jugend debattiert!\nKeine Vorkenntnisse nötig – nur Mut zum Sprechen, Respekt vor anderen Meinungen und aktive Mitarbeit.\nMach mit und erlebe, wie spannend Debattieren sein kann!",
     "maxAttendees": 16,
-    "Raum": "",
-    "Nachname": "Gürtler"
+    "Raum": "118",
+    "Nachname": "Gürtler",
+    "Vorname": "Sarah Bernadette"
   },
   {
     "Wochentag": "Dienstag",
     "Block": "12:00 - 12:40",
     "Kurs": "Yoga (Ashtanga)",
-    "KursId": "1033",
+    "KursId": "2026",
     "Kategorien": [
       "BuE"
     ],
@@ -601,13 +497,14 @@
     "Beschreibung": "Du lernst einige Dehnübungen aus dem eher sportlichen Ashtanga Yoga kennen – genau das Richtige, um im Trubel des Alltags zu entspannen und neue Energie zu tanken. Voraussetzung\ndafür sind bequeme, lockere Kleidung, die Bewegungsfreiheit ermöglicht, sowie eine eigene Yogamatte oder eine rutschfeste Unterlage. Außerdem solltest du offen sein und bereit, dich auf die Übungen und die Atemführung einzulassen.",
     "maxAttendees": 16,
     "Raum": "TH unten",
-    "Nachname": "Gürtler"
+    "Nachname": "Gürtler",
+    "Vorname": "Sarah Bernadette"
   },
   {
-    "Wochentag": "Dienstag",
-    "Block": "11:20 - 12:00",
+    "Wochentag": "Donnerstag",
+    "Block": "12:00 - 12:40",
     "Kurs": "(Beach)Volleyball Grundkurs",
-    "KursId": "1034",
+    "KursId": "2027",
     "Kategorien": [
       "BuE"
     ],
@@ -620,15 +517,33 @@
     "Beschreibung": "Das iLa richtet sich an alle, die Lust haben das Volleyballspielen zu erlernen. Wir werden uns insbesondere mit den Grundtechniken auseinandersetzen und mit vielen spielerischen Aspekten, die vor allem im Beachvolleyball angewandt werden. Spielspaß und Freude stehen hier im Mittelpunkt, aber natülich auch das notwendige blinde Vertrauen und das Finetuning in Hinblick auf Kommunikation, die besonders im Sand enorm wichtig ist. Die Spielpartner/innen werden ständig wechseln, damit alle Fähigkeiten optimal erlernt werden können.",
     "maxAttendees": 16,
     "Raum": "TH unten",
-    "Nachname": "Halling"
+    "Nachname": "Halling",
+    "Vorname": "Philipp"
   },
   {
-    "Wochentag": "Donnerstag",
-    "Block": "12:00 - 12:40",
-    "Kurs": "Black Stories",
-    "KursId": "1035",
+    "Wochentag": "Freitag",
+    "Block": "11:20 - 12:00",
+    "Kurs": "Floorball",
+    "KursId": "2028",
     "Kategorien": [
-      "KuP"
+      "BuE"
+    ],
+    "Klassen": [
+      "5", "6"
+    ],
+    "maxAttendees": 25,
+    "Raum": "TH unten",
+    "Nachname": "Heuschkel",
+    "Vorname": "Luisa",
+    "Email": "luisaheuschkel@gmail.com"
+  },
+  {
+    "Wochentag": "Freitag",
+    "Block": "12:00 - 12:40",
+    "Kurs": "Floorball",
+    "KursId": "2029",
+    "Kategorien": [
+      "BuE"
     ],
     "Klassen": [
       "7",
@@ -636,16 +551,54 @@
       "9",
       "10"
     ],
-    "Beschreibung": "Du magst skurrile Rätsel, arbeitest gerne kreativ und lässt deinen Gedanken freien Lauf, dann bist du in diesem iLa genau richtig. Wir lösen gemeinschaftlich rabenschwarze und weniger düstere Rätsel und erstellen selber einige zum Knacken für die anderen Teilnehmer/innen. Du solltest die Bereitschaft mitbringen, mit allen anderen Gruppenmitgliedern zusammenzuarbeiten, das iLa ist nichts für Einzelkämpfer. ",
-    "maxAttendees": 20,
-    "Raum": "217",
-    "Nachname": "Halling"
+    "maxAttendees": 25,
+    "Raum": "TH unten",
+    "Nachname": "Heuschkel",
+    "Vorname": "Luisa",
+    "Email": "luisaheuschkel@gmail.com"
+  },
+  {
+    "Wochentag": "Dienstag",
+    "Block": "11:20 - 12:00",
+    "Kurs": "Sportspiele",
+    "KursId": "2030",
+    "Kategorien": [
+      "BuE"
+    ],
+    "Klassen": [
+      "5", "6"
+    ],
+    "maxAttendees": 25,
+    "Raum": "TH unten",
+    "Nachname": "Heuschkel",
+    "Vorname": "Luisa",
+    "Email": "luisaheuschkel@gmail.com"
+  },
+  {
+    "Wochentag": "Dienstag",
+    "Block": "12:00 - 12:40",
+    "Kurs": "Sportspiele",
+    "KursId": "2031",
+    "Kategorien": [
+      "BuE"
+    ],
+    "Klassen": [
+      "7",
+      "8",
+      "9",
+      "10"
+    ],
+    "maxAttendees": 25,
+    "Raum": "TH unten",
+    "Nachname": "Heuschkel",
+    "Vorname": "Luisa",
+    "Email": "luisaheuschkel@gmail.com"
   },
   {
     "Wochentag": "Montag",
     "Block": "11:20 - 12:00",
     "Kurs": "Buchclub",
-    "KursId": "1036",
+    "KursId": "2032",
     "Kategorien": [
       "FuF"
     ],
@@ -653,37 +606,54 @@
       "5",
       "6"
     ],
-    "Beschreibung": "Lest ihr gern, dann kommt zum Buchclub! _x000D_\n_x000D_\nWir nehmen uns Zeit und lesen gemeinsam ausgewählte Bücher unterschiedlicher Genre und Themen wie z.B. Fantasie, Abenteuer, Freundschaft. Und natürlich werden wir auch über die Bücher sprechen, wie sie euch gefallen, was ihr besonders gut oder vielleicht auch gar nicht so gut gefunden habt. _x000D_\n_x000D_\nBuchvorschläge können sehr gern von euch kommen, es wird aber natürlich auch schon einen Fundus vor Ort geben._x000D_\n_x000D_\nTreff ist - natürlich - in der Schulbibliothek.",
+    "Beschreibung": "Lest ihr gern, dann kommt zum Buchclub! \nWir nehmen uns Zeit und lesen gemeinsam ausgewählte Bücher unterschiedlicher Genre und Themen wie z.B. Fantasie, Abenteuer, Freundschaft. Und natürlich werden wir auch über die Bücher sprechen, wie sie euch gefallen, was ihr besonders gut oder vielleicht auch gar nicht so gut gefunden habt. \nBuchvorschläge können sehr gern von euch kommen, es wird aber natürlich auch schon einen Fundus vor Ort geben.\nTreff ist - natürlich - in der Schulbibliothek.",
     "maxAttendees": 20,
     "Raum": "Bibliothek",
-    "Nachname": "Hoffmann"
+    "Nachname": "Hoffmann",
+    "Vorname": "Silvia"
   },
   {
     "Wochentag": "Freitag",
-    "Block": "11:20 - 12:00",
-    "Kurs": "BallKoRobics",
-    "KursId": "1037",
+    "Block": "12:00 - 12:40",
+    "Kurs": "Gestaltung Hausaufgabenheft der Johanna-Moosdorf-Schule",
+    "KursId": "2033",
     "Kategorien": [
-      "BuE"
+      "KuP"
     ],
     "Klassen": [
-      "5",
-      "6",
-      "7",
       "8",
       "9",
       "10"
     ],
-    "Beschreibung": "Dieses individuelle Lernangebot verbindet die energetischen Elemente von Aerobic mit der Dynamik und Kreativität des Ballsports. Hier lernen die Schülerinnen und Schüler, wie sie mit Begeisterung und Teamgeist in Bewegung bleiben können, während sie ihre Koordination, Ausdauer und Teamfähigkeit verbessern und das unter Benutzung eines Balles.\n\nWas ist BallKoRobics?\n\nBallKoRobics ist eine kreative Bewegungseinheit, die sowohl Fitness als auch Spielspaß vereint. Mit einem Ball in der Hand oder unter dem Fuß erleben die Schülerinnen und Schüler, wie sie durch innovative Übungen und rhythmische Bewegungen Kraft, Geschicklichkeit und Körpersprache entwickeln. Es ist ein Spielplatz für alle Sinne, in dem Musik, Bewegung und Teamarbeit eine zentrale Rolle spielen. \n\nDauer: (erst einmal) 2 Quartale",
-    "maxAttendees": 24,
-    "Raum": "TH unten",
-    "Nachname": "Jödicke"
+    "Beschreibung": "Seid Teil des Projektes Hausaufgabengestaltung bei dem eure kreativen Köpfe und Ideen gefragt sind! \nGemeinsam mit anderen Schülern und Schülerinnen gestaltet ihr das neue Hausaufgabenheft für unsere Schule. Kommt zusammen, diskutiert, entwerft und bringt eure Vorschläge ein – denn dieses Heft soll nicht nur informativ, sondern auch individuell und ansprechend sein. Lasst uns gemeinsam ein Hausaufgabenheft erschaffen, das die Vielfalt unserer Schüler widerspiegelt und den Schulalltag bereichert. Freut euch auf einen spannenden Austausch, kreative Stunden und jede Menge Spaß!",
+    "maxAttendees": 18,
+    "Raum": "316",
+    "Nachname": "Jödicke",
+    "Vorname": "Katrin"
+  },
+  {
+    "Wochentag": "Freitag",
+    "Block": "12:00 - 12:40",
+    "Kurs": "Deutsch Fördern - letzte Chance!",
+    "KursId": "2034",
+    "Kategorien": [
+      "KuP"
+    ],
+    "Klassen": [
+      "9",
+      "10"
+    ],
+    "Beschreibung": "Dieses besondere Förderangebot bietet euch die (letzte) Chance, eure Fähigkeiten in der Rechtschreibung, der Kommasetzung und im schriftlichen Formulieren auszubauen. In einer angenehmen und freundlichen Atmosphäre arbeiten ihr gezielt an euren individuellen Fehlerschwerpunkten und ich unterstütze euch dabei. Dieses Angebot richtet sich an alle, die ernsthaft an einer Verbesserung im Fach Deutsch interessiert sind. Nutzt die Gelegenheit, euch optimal auf die bevorstehenden Herausforderungen vorzubereiten! Ich freue mich auf eure aktive Teilnahme und eine erfolgreiche gemeinsame Lernzeit! Eure Frau Kahlo",
+    "maxAttendees": 16,
+    "Raum": "125",
+    "Nachname": "Kahlo",
+    "Vorname": "Julia"
   },
   {
     "Wochentag": "Montag",
     "Block": "12:00 - 12:40",
     "Kurs": "Deutsch Fördern Klasse 5/6",
-    "KursId": "1038",
+    "KursId": "2035",
     "Kategorien": [
       "FuF"
     ],
@@ -694,13 +664,14 @@
     "Beschreibung": "Übe allein oder gemeinsam mit anderen und verbessere deine Fähigkeiten im Fach Deutsch. Du kannst dir Übungsaufgaben aussuchen und an deinen eigenen Schwerpunkten arbeiten.",
     "maxAttendees": 18,
     "Raum": "125",
-    "Nachname": "Kahlo"
+    "Nachname": "Kahlo",
+    "Vorname": "Julia"
   },
   {
     "Wochentag": "Donnerstag",
     "Block": "11:20 - 12:00",
     "Kurs": "Moosdorf-Chor",
-    "KursId": "1039",
+    "KursId": "2036",
     "Kategorien": [
       "FuF"
     ],
@@ -715,33 +686,16 @@
     "Beschreibung": "Deine Stimme zählt! - Werde Teil des Moosdorf-Chors!  Unser Chor ist für alle da, die ihre Stimme entdecken und ihre musikalischen Fähigkeiten weiterentwickeln möchten. Dazu gehören regelmäßige Proben und gemeinsame Auftritte im Verlauf des Schuljahres. Der Moosdorf-Chor folgt dem Hop-on-Prinzip. Das heißt, du kannst, jederzeit in den Chor einsteigen und singst das gesamte Schuljahr mit uns. Sing mit!",
     "maxAttendees": 60,
     "Raum": "Aula",
-    "Nachname": "Kahlo"
+    "Nachname": "Kahlo",
+    "Vorname": "Julia"
   },
   {
-    "Wochentag": "Freitag",
+    "Wochentag": "Montag",
     "Block": "12:00 - 12:40",
-    "Kurs": "offenes Musik-iLa",
-    "KursId": "1040",
+    "Kurs": "Gerechtigkeit im Wandel: Geschichte verstehen - Positionen prüfen - Handeln reflektieren",
+    "KursId": "2037",
     "Kategorien": [
-      "KuP"
-    ],
-    "Klassen": [
-      "6",
-      "7",
-      "8"
-    ],
-    "Beschreibung": "Du hast Lust auf Singen, Tanzen und Musizieren, dann bist du hier richtig. In angenehmer Atmosphäre schnuppern wir in die verschiedenen Praxisbereiche des Faches Musik hinein und festigen bereits erlernte Fähigkeiten.",
-    "maxAttendees": 16,
-    "Raum": "417",
-    "Nachname": "Kahlo"
-  },
-  {
-    "Wochentag": "Donnerstag",
-    "Block": "12:00 - 12:40",
-    "Kurs": "\"Unsichtbar? Nicht mit uns!\" - Walk & Talk zu Fairness und Gleichstellung",
-    "KursId": "1041",
-    "Kategorien": [
-      "BuE"
+      "FuF"
     ],
     "Klassen": [
       "6",
@@ -750,18 +704,19 @@
       "9",
       "10"
     ],
-    "Beschreibung": "Hast du manchmal das Gefühl, dass dich niemand so richtig hört? In diesem Projekt gehen wir gemeinsam raus, bewegen uns, reden - und hören einander wirklich zu. Jede Woche git es ein spannendes Thema rund um Fairness, Freundschaft, Mut oder Gleichstellung.",
+    "Beschreibung": "Dieses iLa ist die Fortsetzung von \"Walk & Talk\", neue Schüler:innen windausdrücklich willkommen.\nIn diesem Quartal beschäftigen wir uns mit Fragen rund um Gerechtigkeit, Gleichstellung und Feminismus - historisch und heute. Dabei geht es darum, verschiedene Positionen zu verstehen, abzuwägen und gemeinsam zu überlegen, an welcher Stelle Handeln wichtig und richtig ist. Ein Aktionstag für die Schulgemeinschaft könnte Teil des Lernprozesses werden.",
     "maxAttendees": 20,
     "Raum": "201",
-    "Nachname": "Kaldune"
+    "Nachname": "Kaldune",
+    "Vorname": "Sandra"
   },
   {
     "Wochentag": "Dienstag",
-    "Block": "11:20 - 12:00",
+    "Block": "12:00 - 12:40",
     "Kurs": "Wo sind die Frauen? Ein Lesespaziergang",
-    "KursId": "1042",
+    "KursId": "2038",
     "Kategorien": [
-      "KuP"
+      "FuF"
     ],
     "Klassen": [
       "5",
@@ -770,32 +725,15 @@
     ],
     "Beschreibung": "In vielen Geschichtsbüchern, Texten oder Medien tauchen sie nur selten auf - obwohl Frauen schon immer prägende Geschichten zu erzählen hatten. In diesem Literaturspaziergang begeben wir uns auf die Reise durch Texte von und über Frauen. Wir lesen, tauschen uns aus, gestalten neu - ein Spaziergang also durch ihre und unsere Gedanken.",
     "maxAttendees": 24,
-    "Raum": "201",
-    "Nachname": "Kaldune"
-  },
-  {
-    "Wochentag": "Montag",
-    "Block": "12:00 - 12:40",
-    "Kurs": "Entspannung",
-    "KursId": "1043",
-    "Kategorien": [
-      "BuE"
-    ],
-    "Klassen": [
-      "5",
-      "6",
-      "7"
-    ],
-    "Beschreibung": "Dieses Angebot richtet sich an Schüler:innen der Klassen 5-7, die Lust haben, verschiedene Möglichkeiten zur Entspannung kennenzulernen._x000D_\nDu brauchst keine Vorerfahrungen. Alle Übungen sind leicht erlernbar._x000D_\nWichtig ist nur, dass du bereit bist, dich auf Ruhe-und Entspannungsphasen einzulassen und Neues auszuprobieren.",
-    "maxAttendees": 20,
     "Raum": "125",
-    "Nachname": "Kerl"
+    "Nachname": "Kaldune",
+    "Vorname": "Sandra"
   },
   {
     "Wochentag": "Montag",
     "Block": "11:20 - 12:00",
     "Kurs": "Entspannung",
-    "KursId": "1044",
+    "KursId": "2039",
     "Kategorien": [
       "BuE"
     ],
@@ -804,16 +742,36 @@
       "9",
       "10"
     ],
-    "Beschreibung": "Dieses Angebot richtet sich an Schüler:innen der Klassen 8-10, die Lust haben, verschiedene Möglichkeiten zur Entspannung kennenzulernen._x000D_\nDu brauchst keine Vorerfahrungen. Alle Übungen sind leicht erlernbar._x000D_\nWichtig ist nur, dass du bereit bist, dich auf Ruhe-und Entspannungsphasen einzulassen und Neues auszuprobieren.",
+    "Beschreibung": "Dieses Angebot richtet sich an Schüler:innen der Klassen 8-10, die Lust haben, verschiedene Möglichkeiten zur Entspannung kennenzulernen.\nDu brauchst keine Vorerfahrungen. Alle Übungen sind leicht erlernbar.\nWichtig ist nur, dass du bereit bist, dich auf Ruhe-und Entspannungsphasen einzulassen und Neues auszuprobieren.",
     "maxAttendees": 20,
-    "Raum": "125",
-    "Nachname": "Kerl"
+    "Raum": "122",
+    "Nachname": "Kerl",
+    "Vorname": "Gina-Marie"
+  },
+  {
+    "Wochentag": "Montag",
+    "Block": "12:00 - 12:40",
+    "Kurs": "Entspannung",
+    "KursId": "2040",
+    "Kategorien": [
+      "BuE"
+    ],
+    "Klassen": [
+      "5",
+      "6",
+      "7"
+    ],
+    "Beschreibung": "Dieses Angebot richtet sich an Schüler:innen der Klassen 5-7, die Lust haben, verschiedene Möglichkeiten zur Entspannung kennenzulernen.\nDu brauchst keine Vorerfahrungen. Alle Übungen sind leicht erlernbar.\nWichtig ist nur, dass du bereit bist, dich auf Ruhe-und Entspannungsphasen einzulassen und Neues auszuprobieren.",
+    "maxAttendees": 20,
+    "Raum": "122",
+    "Nachname": "Kerl",
+    "Vorname": "Gina-Marie"
   },
   {
     "Wochentag": "Freitag",
     "Block": "12:00 - 12:40",
-    "Kurs": "Mathe Fördern 7/1 + 7/2",
-    "KursId": "1045",
+    "Kurs": "Mathe Fördern 7",
+    "KursId": "2041",
     "Kategorien": [
       "FuF"
     ],
@@ -821,31 +779,16 @@
       "7"
     ],
     "Beschreibung": "Dir geht es manchmal zu schnell in Mathe oder möchtest einfach sicherer werden? In diesem Kurs helfen dir ältere Schülerinnen und Schüler in entspannter Atmosphäre – gezielt und verständlich.",
-    "maxAttendees": 14,
-    "Raum": "124",
-    "Nachname": "Kiethe Rudel"
-  },
-  {
-    "Wochentag": "Freitag",
-    "Block": "12:00 - 12:40",
-    "Kurs": "Mathe Fördern 7/3. + 7/4",
-    "KursId": "1046",
-    "Kategorien": [
-      "FuF"
-    ],
-    "Klassen": [
-      "7"
-    ],
-    "Beschreibung": "Dir geht es manchmal zu schnell in Mathe oder möchtest einfach sicherer werden? In diesem Kurs helfen dir ältere Schülerinnen und Schüler in entspannter Atmosphäre – gezielt und verständlich.",
-    "maxAttendees": 14,
-    "Raum": "125",
-    "Nachname": "Kiethe Rudel"
+    "maxAttendees": 28,
+    "Raum": "124, 125",
+    "Nachname": "Kiethe Rudel",
+    "Vorname": "Antonia"
   },
   {
     "Wochentag": "Dienstag",
     "Block": "12:00 - 12:40",
-    "Kurs": "Mathe Fördern 8/1 + 8/2",
-    "KursId": "1047",
+    "Kurs": "Mathe Fördern 8",
+    "KursId": "2042",
     "Kategorien": [
       "FuF"
     ],
@@ -853,31 +796,16 @@
       "8"
     ],
     "Beschreibung": "Dir geht es manchmal zu schnell in Mathe oder möchtest einfach sicherer werden? In diesem Kurs helfen dir ältere Schülerinnen und Schüler in entspannter Atmosphäre – gezielt und verständlich.",
-    "maxAttendees": 14,
-    "Raum": "227",
-    "Nachname": "Kiethe Rudel"
-  },
-  {
-    "Wochentag": "Dienstag",
-    "Block": "12:00 - 12:40",
-    "Kurs": "Mathe Fördern 8/3 + 8/4",
-    "KursId": "1048",
-    "Kategorien": [
-      "FuF"
-    ],
-    "Klassen": [
-      "8"
-    ],
-    "Beschreibung": "Dir geht es manchmal zu schnell in Mathe oder möchtest einfach sicherer werden? In diesem Kurs helfen dir ältere Schülerinnen und Schüler in entspannter Atmosphäre – gezielt und verständlich.",
-    "maxAttendees": 14,
-    "Raum": "228",
-    "Nachname": "Kiethe Rudel"
+    "maxAttendees": 28,
+    "Raum": "227, 228",
+    "Nachname": "Kiethe Rudel",
+    "Vorname": "Antonia"
   },
   {
     "Wochentag": "Donnerstag",
     "Block": "12:00 - 12:40",
     "Kurs": "Brettspielclub",
-    "KursId": "1049",
+    "KursId": "2043",
     "Kategorien": [
       "BuE"
     ],
@@ -888,14 +816,15 @@
     ],
     "Beschreibung": "Spiele mit deinen Mitschüler*innen Brett- und Kartenspiele in entspannter Atmosphäre. Du kannst Spiele aus dem Schulclub ausleihen oder eigene Spiele mitbringen.",
     "maxAttendees": 28,
-    "Raum": "201",
-    "Nachname": "Krebs"
+    "Raum": "234",
+    "Nachname": "Krebs",
+    "Vorname": "Alex"
   },
   {
     "Wochentag": "Dienstag",
     "Block": "12:00 - 12:40",
     "Kurs": "Technik- & Internetcafé",
-    "KursId": "1050",
+    "KursId": "2044",
     "Kategorien": [
       "FuF"
     ],
@@ -904,52 +833,34 @@
       "9",
       "10"
     ],
-    "Beschreibung": "In diesem iLA hast du die Möglichkeit individuell an technisch-informatischen Projekten zu arbeiten, z.B. 3D-Druck, 3D-Modellierung, Programmierung, ... Bring gern eigene Ideen und/oder Projekte mit in das iLA. Im iLA kann außerdem an Unterrichtsprojekten weitergearbeitet werden, für die ein Internetzugang oder der Zugang zu bestimmter Software, z.B. Word, Powerpoint, notwendig ist._x000D_\nDie Teilnehmer*innen des iLA stehen außerdem als Ansprechpartner für die IT-Technik im Schulhaus zur Verfügung.",
+    "Beschreibung": "In diesem iLA hast du die Möglichkeit individuell an technisch-informatischen Projekten zu arbeiten, z.B. 3D-Druck, 3D-Modellierung, Programmierung, ... Bring gern eigene Ideen und/oder Projekte mit in das iLA. Im iLA kann außerdem an Unterrichtsprojekten weitergearbeitet werden, für die ein Internetzugang oder der Zugang zu bestimmter Software, z.B. Word, Powerpoint, notwendig ist.\nDie Teilnehmer*innen des iLA stehen außerdem als Ansprechpartner für die IT-Technik im Schulhaus zur Verfügung.",
     "maxAttendees": 16,
     "Raum": "216",
-    "Nachname": "Krebs"
+    "Nachname": "Krebs",
+    "Vorname": "Alex"
   },
   {
-    "Wochentag": "Freitag",
-    "Block": "12:00 - 12:40",
-    "Kurs": "Fortgeschrittenenkurs Volleyball",
-    "KursId": "1051",
-    "Kategorien": [
-      "BuE"
-    ],
-    "Klassen": [
-      "5",
-      "6",
-      "7"
-    ],
-    "Beschreibung": "Dieser Kurs richtet sich an fortgeschrittene Spielerinnen und Spieler, die bereits über grundlegende Technik- und Regelkenntnisse im Volleyball verfügen. Im Mittelpunkt stehen die Weiterentwicklung individueller Spieltechniken (z. B. gezieltes Pritschen und Baggern, Angriffsschlag, Block- und Aufschlagvarianten) sowie das taktische Spielverständnis im Team.",
-    "maxAttendees": 24,
-    "Raum": "TH unten",
-    "Nachname": "Kretschmer"
-  },
-  {
-    "Wochentag": "Montag",
+    "Wochentag": "Donnerstag",
     "Block": "11:20 - 12:00",
-    "Kurs": "Fußball",
-    "KursId": "1052",
+    "Kurs": "Chemie für Anfänger",
+    "KursId": "2045",
     "Kategorien": [
-      "BuE"
+      "FuF"
     ],
     "Klassen": [
-      "5",
-      "6",
-      "7"
+      "6"
     ],
-    "Beschreibung": "Der Fußballkurs bietet den Teilnehmenden die Möglichkeit, ihre technischen, taktischen und konditionellen Fähigkeiten im Fußball systematisch zu verbessern. Durch spielnahe Übungsformen und regelmäßige Matches werden sowohl die individuelle Leistung als auch das Zusammenspiel im Team gefördert. Fairplay, Teamgeist und Freude an Bewegung bilden die Grundlage des Kurses.",
-    "maxAttendees": 16,
-    "Raum": "TH",
-    "Nachname": "Kretschmer"
+    "Beschreibung": "kleine Experimente durchzuführen, ihnen die Geräte vorzustellen und eventuell den Brennerführerschein zu machen",
+    "maxAttendees": 24,
+    "Raum": "410",
+    "Nachname": "Kutschinsky",
+    "Vorname": "Celine"
   },
   {
     "Wochentag": "Dienstag",
     "Block": "11:20 - 12:00",
     "Kurs": "Spikeball Anfänger",
-    "KursId": "1053",
+    "KursId": "2046",
     "Kategorien": [
       "BuE"
     ],
@@ -963,13 +874,14 @@
     "Beschreibung": "Möchtest du eine spannende neue Sportart kennenlernen? Dann ist Spikeball genau das Richtige für dich! Spikeball ist eine dynamische Sportart, die in den letzten Jahren immer beliebter geworden ist und sich perfekt im Park spielen lässt. Zwei Teams mit jeweils zwei Spielern treten gegeneinander an. Ziel ist es, den Ball so auf das kleine, runde Netz zu schlagen, dass das gegnerische Team ihn nicht mehr zurückspielen kann – ähnlich wie beim Beachvolleyball, aber ohne feste Spielfeldgrenzen. Für den Einstieg brauchst du keine Vorkenntnisse, schnell lernst du, alles was du wissen musst, um Spaß am Spiel zu haben und die ersten Punkte zu machen!",
     "maxAttendees": 24,
     "Raum": "TH",
-    "Nachname": "Lehmann"
+    "Nachname": "Lehmann",
+    "Vorname": "Jenny"
   },
   {
     "Wochentag": "Montag",
     "Block": "12:00 - 12:40",
     "Kurs": "#StillLeben – Kreativ mit Farbe & Form",
-    "KursId": "1054",
+    "KursId": "2047",
     "Kategorien": [
       "KuP"
     ],
@@ -979,16 +891,17 @@
       "9",
       "10"
     ],
-    "Beschreibung": "Du hast Lust zu malen, dich kreativ auszuprobieren und neue Techniken zu lernen?_x000D_\nDann bist du hier genau richtig!_x000D_\n_x000D_\nHier lernst du:_x000D_\n_x000D_\n-wie man klassische und moderne Stillleben gestaltet,_x000D_\n-wie man mit Pinsel und Farbe sanfte Übergänge schafft,_x000D_\n-wie man Gegenstände spannend anordnet und glaubhaft im Raum darstellt,_x000D_\n-wie Licht, Schatten und Atmosphäre ein Bild lebendig machen._x000D_\n_x000D_\nEgal ob du schon Erfahrung hast oder ganz neu einsteigst – du brauchst keine besonderen Vorkenntnisse._x000D_\nWichtig ist nur: Neugier, Spaß am Malen und die Offenheit, dich künstlerisch weiterzuentwickeln._x000D_\nHier hast du Zeit und Raum, um eigene Ideen umzusetzen und Schritt für Schritt sicherer im Umgang mit Farben, Formen und Komposition zu werden._x000D_\n_x000D_\nMach mit und entdecke dein kreatives Potenzial!",
+    "Beschreibung": "Du hast Lust zu malen, dich kreativ auszuprobieren und neue Techniken zu lernen?\nDann bist du hier genau richtig!\nHier lernst du:\n-wie man klassische und moderne Stillleben gestaltet,\n-wie man mit Pinsel und Farbe sanfte Übergänge schafft,\n-wie man Gegenstände spannend anordnet und glaubhaft im Raum darstellt,\n-wie Licht, Schatten und Atmosphäre ein Bild lebendig machen.\nEgal ob du schon Erfahrung hast oder ganz neu einsteigst – du brauchst keine besonderen Vorkenntnisse.\nWichtig ist nur: Neugier, Spaß am Malen und die Offenheit, dich künstlerisch weiterzuentwickeln.\nHier hast du Zeit und Raum, um eigene Ideen umzusetzen und Schritt für Schritt sicherer im Umgang mit Farben, Formen und Komposition zu werden.\nMach mit und entdecke dein kreatives Potenzial!",
     "maxAttendees": 18,
     "Raum": "315",
-    "Nachname": "Lichner"
+    "Nachname": "Lichner",
+    "Vorname": "Judith Marie"
   },
   {
     "Wochentag": "Freitag",
     "Block": "12:00 - 12:40",
     "Kurs": "Express Yourself – Porträtkunst mit Stil",
-    "KursId": "1055",
+    "KursId": "2048",
     "Kategorien": [
       "KuP"
     ],
@@ -997,16 +910,17 @@
       "9",
       "10"
     ],
-    "Beschreibung": "Du hast Lust zu zeichnen oder zu malen, Menschen darzustellen und mit Farben, Formen und Ausdruck zu experimentieren?_x000D_\nDann bist du hier genau richtig!_x000D_\n_x000D_\nHier lernst du:_x000D_\n_x000D_\n-wie man Gesichter realistisch oder kreativ verfremdet darstellt,_x000D_\n-wie man mit Linien, Licht und Schatten Ausdruck erzeugt,_x000D_\n-wie man Proportionen erkennt und geschickt umsetzt,_x000D_\n-wie du Emotionen in Gesichtern sichtbar machst – mal ganz fein, mal ganz intensiv._x000D_\n_x000D_\nOb klassisch mit Bleistift und Kohle, farbenfroh mit Aquarell oder expressiv mit Acryl:_x000D_\nWir probieren verschiedene Techniken aus und lassen uns von alten Meistern und modernen Künstler:innen inspirieren._x000D_\n_x000D_\nEgal, ob du schon Erfahrung hast oder ganz neu einsteigst – du brauchst keine besonderen Vorkenntnisse._x000D_\nWichtig ist nur: Neugier, Offenheit und Spaß am kreativen Ausprobieren!_x000D_\n_x000D_\nHier hast du Zeit und Raum, deine Fähigkeiten zu entdecken und zu vertiefen – Schritt für Schritt, ganz in deinem Stil.",
+    "Beschreibung": "Du hast Lust zu zeichnen oder zu malen, Menschen darzustellen und mit Farben, Formen und Ausdruck zu experimentieren?\nDann bist du hier genau richtig!\nHier lernst du:\n-wie man Gesichter realistisch oder kreativ verfremdet darstellt,\n-wie man mit Linien, Licht und Schatten Ausdruck erzeugt,\n-wie man Proportionen erkennt und geschickt umsetzt,\n-wie du Emotionen in Gesichtern sichtbar machst – mal ganz fein, mal ganz intensiv.\nOb klassisch mit Bleistift und Kohle, farbenfroh mit Aquarell oder expressiv mit Acryl:\nWir probieren verschiedene Techniken aus und lassen uns von alten Meistern und modernen Künstler:innen inspirieren.\nEgal, ob du schon Erfahrung hast oder ganz neu einsteigst – du brauchst keine besonderen Vorkenntnisse.\nWichtig ist nur: Neugier, Offenheit und Spaß am kreativen Ausprobieren!\nHier hast du Zeit und Raum, deine Fähigkeiten zu entdecken und zu vertiefen – Schritt für Schritt, ganz in deinem Stil.",
     "maxAttendees": 18,
     "Raum": "315",
-    "Nachname": "Lichner"
+    "Nachname": "Lichner",
+    "Vorname": "Judith Marie"
   },
   {
     "Wochentag": "Montag",
     "Block": "12:00 - 12:40",
-    "Kurs": "Physik 6b - praktische Einführung in die Naturwissenschaft",
-    "KursId": "1056",
+    "Kurs": "Physik 6c - praktische Einführung in die Naturwissenschaft",
+    "KursId": "2049",
     "Kategorien": [
       "FuF"
     ],
@@ -1016,13 +930,14 @@
     "Beschreibung": "Dieses Angebot richtet sich verbindlich an alle Sechstklässler, damit neben der Theorie im Unterricht die experimentelle Praxis nicht zu kurz kommt.",
     "maxAttendees": 28,
     "Raum": "211",
-    "Nachname": "Liebers"
+    "Nachname": "Liebers",
+    "Vorname": "Marco"
   },
   {
     "Wochentag": "Dienstag",
     "Block": "11:20 - 12:00",
-    "Kurs": "Physik 6d - praktische Einführung in die Naturwissenschaft",
-    "KursId": "1057",
+    "Kurs": "Physik 6e - praktische Einführung in die Naturwissenschaft",
+    "KursId": "2050",
     "Kategorien": [
       "FuF"
     ],
@@ -1032,13 +947,14 @@
     "Beschreibung": "Dieses Angebot richtet sich verbindlich an alle Sechstklässler, damit neben der Theorie im Unterricht die experimentelle Praxis nicht zu kurz kommt.",
     "maxAttendees": 28,
     "Raum": "208",
-    "Nachname": "Liebers"
+    "Nachname": "Liebers",
+    "Vorname": "Marco"
   },
   {
     "Wochentag": "Montag",
     "Block": "12:00 - 12:40",
     "Kurs": "Kleine Spiele",
-    "KursId": "1058",
+    "KursId": "2051",
     "Kategorien": [
       "BuE"
     ],
@@ -1053,13 +969,14 @@
     "Beschreibung": "Das iLa richtet sich an alle Jahrgangsstufen und ermöglicht das Ausprobieren verschiedener kleiner Spiele mit unterschiedlichen Materialien. Voraussetzungen sind lediglich Spielfreude und die Bereitschaft, neue Regeln kennenzulernen und einzuhalten.",
     "maxAttendees": 28,
     "Raum": "TH",
-    "Nachname": "Maaß"
+    "Nachname": "Maaß",
+    "Vorname": "Anne"
   },
   {
     "Wochentag": "Donnerstag",
     "Block": "12:00 - 12:40",
     "Kurs": "English Book Club",
-    "KursId": "1059",
+    "KursId": "2052",
     "Kategorien": [
       "BuE"
     ],
@@ -1070,16 +987,17 @@
       "8",
       "9"
     ],
-    "Beschreibung": "Hast du Lust, einfach mal in ein englisches Buch einzutauchen – ganz ohne Tests, Noten oder Druck? Dann komm zum English Reading Club!_x000D_\nWas machen wir? Du liest dein eigenes englisches Buch – in deinem Tempo, ganz für dich. / Ich stelle auch eine kleine Auswahl an Büchern bereit, falls du noch keine Idee hast. / Wenn du beim Lesen auf schwierige Wörter, Ausdrücke oder Inhalte stößt, helfe ich dir gerne weiter.",
+    "Beschreibung": "Hast du Lust, einfach mal in ein englisches Buch einzutauchen – ganz ohne Tests, Noten oder Druck? Dann komm zum English Reading Club!\nWas machen wir? Du liest dein eigenes englisches Buch – in deinem Tempo, ganz für dich. / Ich stelle auch eine kleine Auswahl an Büchern bereit, falls du noch keine Idee hast. / Wenn du beim Lesen auf schwierige Wörter, Ausdrücke oder Inhalte stößt, helfe ich dir gerne weiter.",
     "maxAttendees": 20,
     "Raum": "326",
-    "Nachname": "Martin"
+    "Nachname": "Martin",
+    "Vorname": "Sarah"
   },
   {
     "Wochentag": "Freitag",
     "Block": "12:00 - 12:40",
     "Kurs": "Kreative Plakatpräsentationen im Geographieunterricht",
-    "KursId": "1060",
+    "KursId": "2053",
     "Kategorien": [
       "KuP"
     ],
@@ -1091,13 +1009,32 @@
     "Beschreibung": "Ihr wollt dieses Jahr einen Vortrag in Geographie halten, aber so richtig kreativ sah euer Plakat bisher nicht aus? Gemeinsam besprechen wir Möglichkeiten einer kreativen Umsetzung eures Themas und zusätzlich habt ihr Zeit, eurer Plakat während des iLas zu gestalten. Im Anschluss daran könnt ihr mit Teilnehmenden eure Vorträge üben.",
     "maxAttendees": 24,
     "Raum": "326",
-    "Nachname": "Martin"
+    "Nachname": "Martin",
+    "Vorname": "Sarah"
+  },
+  {
+    "Wochentag": "Freitag",
+    "Block": "11:20 - 12:00",
+    "Kurs": "Geschichte intensiv: Methoden, Debatten und Zusammenhänge",
+    "KursId": "2054",
+    "Kategorien": [
+      "FuF"
+    ],
+    "Klassen": [
+      "9",
+      "10"
+    ],
+    "Beschreibung": "Du interessierst dich für Geschichte und möchtest tiefer in die Themen der 9. und 10. Klasse eintauchen? In dieser AG bereite ich dich auf die methodisches Arbeiten des Grund- und Leistungskurses Geschichte vor und wir stärken dein historisches Denken. Entdecke Zusammenhänge, diskutiere große Fragen der Vergangenheit und lege den Grundstein für deinen weiteren Weg im Fach Geschichte!",
+    "maxAttendees": 28,
+    "Raum": "325",
+    "Nachname": "Mettke",
+    "Vorname": "Maria"
   },
   {
     "Wochentag": "Donnerstag",
     "Block": "12:00 - 12:40",
     "Kurs": "Lernwerkstatt",
-    "KursId": "1061",
+    "KursId": "2055",
     "Kategorien": [
       "FuF"
     ],
@@ -1112,65 +1049,72 @@
     "Beschreibung": "Du hast manchmal Schwierigkeiten, Dinge auswendig zu lernen? Hier lernen wir gemeinsam. Jede Woche probieren wir eine neue Methode aus, die dabei helfen kann, sich Dinge besser zu merken und ihr könnt sie gleich auf den derzeitigen Lernstoff anwenden.",
     "maxAttendees": 28,
     "Raum": "227",
-    "Nachname": "Mettke"
-  },
-  {
-    "Wochentag": "Freitag",
-    "Block": "11:20 - 12:00",
-    "Kurs": "Vorbereitung Schüleraustausch Frankreich",
-    "KursId": "1062",
-    "Kategorien": [
-      "KuP"
-    ],
-    "Klassen": [
-      "9"
-    ],
-    "Beschreibung": "Unser individuelles Lernangebot bereitet gezielt auf den bevorstehenden Schüleraustausch mit Frankreich vor. Neben der sprachlichen Förderung steht das interkulturelle Lernen im Mittelpunkt, um Verständnis, Offenheit und kulturelle Kompetenz zu stärken. Die Schülerinnen und Schüler setzen sich aktiv mit den Gepflogenheiten und Perspektiven des Partnerlandes auseinander und gestalten so ihre Rolle im Austausch bewusst und reflektiert. Ziel ist eine fundierte Vorbereitung auf die persönliche Begegnung im Frühjahr.",
-    "maxAttendees": 16,
-    "Raum": "227",
-    "Nachname": "Mettke, Telschow"
+    "Nachname": "Mettke",
+    "Vorname": "Maria"
   },
   {
     "Wochentag": "Dienstag",
     "Block": "12:00 - 12:40",
-    "Kurs": "Förderkurs Englisch Klasse 6",
-    "KursId": "1063",
+    "Kurs": "Spanisch Fördern Klasse 6",
+    "KursId": "2056",
     "Kategorien": [
       "FuF"
     ],
     "Klassen": [
       "6"
     ],
-    "Beschreibung": "Wir greifen Themen aus dem Englischunterricht auf (Grammatik, Vokabeln, Lesen, Hören, Schreiben, Sprechen) und üben individuell das, was ihr braucht.",
+    "Beschreibung": "Wir wiederholen die Unterrichtsinhalte aus Spanisch Klasse 6 und vertiefen diese, damit ihr Lücken schließen könnt. Vokabeln können spielerisch wiederholt werden, Grammatik wird erneut erklärt und geübt sowie das Sprechen und Schreiben.",
     "maxAttendees": 18,
-    "Raum": "222",
-    "Nachname": "Neumann"
+    "Raum": "228",
+    "Nachname": "Neumann",
+    "Vorname": "Anne"
   },
   {
     "Wochentag": "Montag",
     "Block": "11:20 - 12:00",
-    "Kurs": "Grafik- und Malwerkstatt Schwerpunkt Porträt",
-    "KursId": "1064",
+    "Kurs": "Design-Zeichnung",
+    "KursId": "2057",
     "Kategorien": [
       "FuF"
     ],
     "Klassen": [
+      "8",
+      "9",
+      "10"
+    ],
+    "Beschreibung": "Hier lernst du mit verschiedenen Zeichentricks aus einfachen Formen kreative Design-Skizzen zu entwickeln und Gegenstände perspektivisch richtig darzustellen. Du interessierst dich für Produkt- und Industriedesign, dann bist du hier genau richtig!",
+    "maxAttendees": 20,
+    "Raum": "R 315 oder R 317",
+    "Nachname": "Neuner",
+    "Vorname": "Katja"
+  },
+  {
+    "Wochentag": "Donnerstag",
+    "Block": "12:00 - 12:40",
+    "Kurs": "Kreativlabor Zeichenspiele",
+    "KursId": "2058",
+    "Kategorien": [
+      "KuP"
+    ],
+    "Klassen": [
+      "5",
       "6",
       "7",
       "8",
       "9",
       "10"
     ],
-    "Beschreibung": "Du hast Lust dein Können im Bereich der Darstellung menschlicher Figuren zu erweitern, dann bist Du hier genau richtig! Du lernst unterschiedliche Arten der Darstellung, von der klassischen Handzeichnung bis zum abstrakten gemalten Bild kennen und wirst Zeit haben, selbstständig an einer größeren Arbeit in einer selbstgewählten Technik zu arbeiten.",
-    "maxAttendees": 20,
-    "Raum": "317",
-    "Nachname": "Neuner"
+    "Beschreibung": "Du hast Spaß am spielerischen Umgang mit Mustern aus Linien, Punkten und Kreisen und daran aus ihnen kleinere und größere Kunstwerke entstehen zu lassen, dann bist du hier genau richtig. In einer entspannten kreativen Atmosphäre begibst du dich auf eine spannende Entdeckungsreise zur eigenen Kreativität, indem du mit grafischen Mitteln Kunstwerke erweiterst & neue Formen und eigene Bildwelten entstehen lässt.",
+    "maxAttendees": 25,
+    "Raum": "R 315 oder R 317",
+    "Nachname": "Neuner",
+    "Vorname": "Katja"
   },
   {
     "Wochentag": "Montag",
     "Block": "12:00 - 12:40",
     "Kurs": "Englisch Fördern Klasse 7",
-    "KursId": "1065",
+    "KursId": "2059",
     "Kategorien": [
       "FuF"
     ],
@@ -1180,13 +1124,14 @@
     "Beschreibung": "Lernlücken in Englisch schließen, egal ob beim Sprechen, Schreiben oder Grammatik",
     "maxAttendees": 12,
     "Raum": "127",
-    "Nachname": "Nickel"
+    "Nachname": "Nickel",
+    "Vorname": "Jacqueline"
   },
   {
     "Wochentag": "Freitag",
     "Block": "12:00 - 12:40",
-    "Kurs": "Mathe Fördern 5a + 5b",
-    "KursId": "1066",
+    "Kurs": "Mathe Fördern 5",
+    "KursId": "2060",
     "Kategorien": [
       "FuF"
     ],
@@ -1194,47 +1139,16 @@
       "5"
     ],
     "Beschreibung": "Dir geht es manchmal zu schnell in Mathe oder möchtest einfach sicherer werden? In diesem Kurs helfen dir ältere Schülerinnen und Schüler in entspannter Atmosphäre – gezielt und verständlich.",
-    "maxAttendees": 14,
-    "Raum": "124",
-    "Nachname": "Pannecke"
-  },
-  {
-    "Wochentag": "Freitag",
-    "Block": "12:00 - 12:40",
-    "Kurs": "Mathe Fördern 5c + 5d",
-    "KursId": "1067",
-    "Kategorien": [
-      "FuF"
-    ],
-    "Klassen": [
-      "5"
-    ],
-    "Beschreibung": "Dir geht es manchmal zu schnell in Mathe oder möchtest einfach sicherer werden? In diesem Kurs helfen dir ältere Schülerinnen und Schüler in entspannter Atmosphäre – gezielt und verständlich.",
-    "maxAttendees": 14,
-    "Raum": "125",
-    "Nachname": "Pannecke"
-  },
-  {
-    "Wochentag": "Freitag",
-    "Block": "12:00 - 12:40",
-    "Kurs": "Mathe Fördern 5e + 5f",
-    "KursId": "1068",
-    "Kategorien": [
-      "FuF"
-    ],
-    "Klassen": [
-      "5"
-    ],
-    "Beschreibung": "Dir geht es manchmal zu schnell in Mathe oder möchtest einfach sicherer werden? In diesem Kurs helfen dir ältere Schülerinnen und Schüler in entspannter Atmosphäre – gezielt und verständlich.",
-    "maxAttendees": 14,
-    "Raum": "134",
-    "Nachname": "Pannecke"
+    "maxAttendees": 42,
+    "Raum": "128, 130, 134",
+    "Nachname": "Pannecke",
+    "Vorname": "Jakob"
   },
   {
     "Wochentag": "Donnerstag",
     "Block": "11:20 - 12:00",
     "Kurs": "Bistro „Nussecke“",
-    "KursId": "1069",
+    "KursId": "2061",
     "Kategorien": [
       "KuP"
     ],
@@ -1249,13 +1163,14 @@
     "Beschreibung": "Die Planung, Organisation und Begleitung des Schülerbustros wird durch diese Schülerfirma umgesetzt. Neben den festen Mitgliedern dürfen bis zu 5 neue Schülerinnen und Schüler teilnehmen.",
     "maxAttendees": 15,
     "Raum": "Bistro",
-    "Nachname": "Persson"
+    "Nachname": "Persson",
+    "Vorname": "Kristina"
   },
   {
     "Wochentag": "Freitag",
     "Block": "11:20 - 12:00",
     "Kurs": "kreatives Bauen mit Lego",
-    "KursId": "1070",
+    "KursId": "2062",
     "Kategorien": [
       "KuP"
     ],
@@ -1270,13 +1185,14 @@
     "Beschreibung": "Wir bauen gemeinsam oder in kleinen Gruppen Bauwerke nach einem von uns gewähltem Thema.",
     "maxAttendees": 24,
     "Raum": "322",
-    "Nachname": "Persson"
+    "Nachname": "Persson",
+    "Vorname": "Kristina"
   },
   {
     "Wochentag": "Montag",
     "Block": "12:00 - 12:40",
     "Kurs": "Antike Mythologie – Sagen, Götter und Heldengeschichten entdecken",
-    "KursId": "1071",
+    "KursId": "2063",
     "Kategorien": [
       "FuF"
     ],
@@ -1288,13 +1204,14 @@
     "Beschreibung": "In diesem individuellen Lernangebot setzen sich die Schülerinnen und Schüler mit der faszinierenden Welt der antiken Mythologie auseinander. Sie lernen zentrale Götter, Heldinnen und Helden sowie berühmte Mythen aus der griechischen und römischen Antike kennen. Dabei entwickeln sie ein Verständnis für die kulturelle Bedeutung von Mythen und deren Wirkung bis in die heutige Zeit. Das Angebot fördert eigenständiges Recherchieren, kreatives Arbeiten und die Präsentation von Ergebnissen.",
     "maxAttendees": 24,
     "Raum": "114",
-    "Nachname": "Petersen"
+    "Nachname": "Petersen",
+    "Vorname": "Liessa"
   },
   {
-    "Wochentag": "Dienstag",
+    "Wochentag": "Freitag",
     "Block": "12:00 - 12:40",
     "Kurs": "Gemeinsam lernen – Lernpartnerschaften stärken Integration und Bildungschancen",
-    "KursId": "1072",
+    "KursId": "2064",
     "Kategorien": [
       "FuF"
     ],
@@ -1308,13 +1225,14 @@
     "Beschreibung": "In diesem individuellen Lernangebot unterstützen leistungsstarke oder sprachlich sichere Schülerinnen und Schüler ihre Mitschülerinnen und Mitschüler mit Integrationshintergrund beim Lernen. In festen Lernpartnerschaften oder Kleingruppen werden gemeinsam Hausaufgaben bearbeitet, Lerninhalte wiederholt und sprachliche Hürden abgebaut. Ziel ist es, durch gegenseitige Unterstützung nicht nur den schulischen Erfolg zu fördern, sondern auch soziale Kompetenzen, Toleranz und Teamarbeit zu stärken.",
     "maxAttendees": 24,
     "Raum": "114",
-    "Nachname": "Petersen"
+    "Nachname": "Petersen",
+    "Vorname": "Liessa"
   },
   {
-    "Wochentag": "Freitag",
+    "Wochentag": "Donnerstag",
     "Block": "12:00 - 12:40",
     "Kurs": "Hausaufgabenbetreuung",
-    "KursId": "1073",
+    "KursId": "2065",
     "Kategorien": [
       "FuF"
     ],
@@ -1326,31 +1244,14 @@
     "Beschreibung": "In diesem iLa erhalten die Schülerinnen und Schüler bei Bedarf gezielte Unterstützung bei der Bearbeitung ihrer Hausaufgaben. Dabei steht neben der inhaltlichen Hilfe auch das Erlernen von Methoden zur selbstständigen und strukturierten Arbeitsweise im Vordergrund. Durch eine ruhige Lernatmosphäre und individuelle Förderung werden die Lernenden in ihrer Selbstorganisation und Eigenverantwortung gestärkt.",
     "maxAttendees": 28,
     "Raum": "114",
-    "Nachname": "Petersen"
+    "Nachname": "Petersen",
+    "Vorname": "Liessa"
   },
   {
-    "Wochentag": "Donnerstag",
-    "Block": "12:00 - 12:40",
-    "Kurs": "10-Finger-Tippen",
-    "KursId": "1074",
-    "Kategorien": [
-      "FuF"
-    ],
-    "Klassen": [
-      "8",
-      "9",
-      "10"
-    ],
-    "Beschreibung": "Schluss mit langsamem Tippen!_x000D_\nLerne das 10-Finger-System – schnell, spielerisch, effizient!_x000D_\nMach deine Hausaufgaben, Referate & Chats in Rekordzeit._x000D_\nWerde Tipp-Profi – jetzt anmelden!",
-    "maxAttendees": 14,
-    "Raum": "",
-    "Nachname": "Pohl"
-  },
-  {
-    "Wochentag": "Dienstag",
+    "Wochentag": "Montag",
     "Block": "11:20 - 12:00",
     "Kurs": "Floorball",
-    "KursId": "1075",
+    "KursId": "2066",
     "Kategorien": [
       "BuE"
     ],
@@ -1365,30 +1266,36 @@
     "Beschreibung": "Wir spielen gemeinsam Floorball. Dazu lernen wir in spielnahen Situationen Technik und Taktik der Sportart kennen, um diese dann im Spiel anwenden zu können.",
     "maxAttendees": 20,
     "Raum": "TH unten",
-    "Nachname": "Pohl"
+    "Nachname": "Pohl",
+    "Vorname": "Eric"
   },
   {
     "Wochentag": "Dienstag",
-    "Block": "11:20 - 12:00",
-    "Kurs": "InsideMind — Psychologie entdecken",
-    "KursId": "1076",
+    "Block": "12:00 - 12:40",
+    "Kurs": "Medienscout werden",
+    "KursId": "2067",
     "Kategorien": [
-      "BuE"
+      "KuP"
     ],
     "Klassen": [
+      "5",
+      "6",
+      "7",
+      "8",
       "9",
       "10"
     ],
-    "Beschreibung": "Was dich erwartet: Ein kompakter, spannender Einstieg in die Psychologie mit klarem Fokus auf Alltag und Schule. Kerninhalte: Was ist Psychologie, Hauptströmungen, Persönlichkeit, Lernen, Wahrnehmung, Motivation, Emotionen und Stressmanagement. Die Kursinhalte werden nach Interesse angepasst. Methoden: Tests durchführen, Experimente ausprobieren, Fallbeispiele und Filmausschnitte analysieren, praktische Entspannungs- und Stresstechniken üben.",
+    "Beschreibung": "Ihr interessiert euch für Medien und Medienkompetenz? Ihr wollt euch auf diesen Gebieten weiterbilden und in Peer-to-Peer-Projekten eurer medienpädagogisches Know-how an andere Jugendliche unserer Schule weitergeben und dabei unsere Schule aktiv mitgestalten? Dann seid ihr hier genau richtig.  \nDenn ihr werdet euer Wissen in Workshops mit uns und mit externen Partnern auf- oder ausbauen und euch mit anderen Medienscouts an Leipziger Schulen vernetzen und sachsenweit an Netzwerktreffen der Initiative Medienscouts in Sachsen (https://www.mesax.de/wws/9.php#/wws/medienscouts.php?sid=79940355730484567274529864857201680273167057971328651776832463246810Sf7561dff) teilnehmen, um dann an unserer Schule Gleichaltrigen und Jüngeren bei digitalen Herausforderungen zu helfen, indem ihr Workshops u.a. zu Themen wie Cybermobbing, Datenschutz, Fake News, Social Media, Online-Sucht, Künstliche Intelligenz anbietet und als Vertrauenspersonen agiert. \nTraut euch und macht mit!",
     "maxAttendees": 20,
-    "Raum": "",
-    "Nachname": "Radtke"
+    "Raum": "115",
+    "Nachname": "Pohl",
+    "Vorname": "Eric"
   },
   {
     "Wochentag": "Donnerstag",
     "Block": "12:00 - 12:40",
     "Kurs": "Ancient Egypt Uncovered: Secrets, Wonders & Legacy",
-    "KursId": "1077",
+    "KursId": "2068",
     "Kategorien": [
       "KuP"
     ],
@@ -1400,14 +1307,16 @@
     ],
     "Beschreibung": "The course explores Ancient Egypt as a vibrant and fascinating civilization. Led by an Egyptologist and conducted in English, the lessons delve into history, mythology, pharaohs, hidden tomb treasures, mummies, as well as art and symbols, all presented in a simple and effective way. Through captivating stories, interactive discussions, and enjoyable activities, including conversation practice and targeted quizzes, the program encourages curiosity and reinforces key vocabulary. Its ultimate goal is to offer an authentic perspective on Egyptian culture, going beyond what is typically taught in schools, with a special focus on daily life and the unique qualities that made this civilization extraordinary.",
     "maxAttendees": 18,
-    "Raum": "",
-    "Nachname": "Rapisarda"
+    "Raum": "131",
+    "Nachname": "Rapisarda",
+    "Vorname": "Vittoria",
+    "Email": "Vittoria.rapisarda@gmail.com"
   },
   {
     "Wochentag": "Donnerstag",
     "Block": "11:20 - 12:00",
     "Kurs": "Corso di conversazione italiana",
-    "KursId": "1078",
+    "KursId": "2069",
     "Kategorien": [
       "FuF"
     ],
@@ -1418,14 +1327,16 @@
     ],
     "Beschreibung": "Il nuovo percorso di conversazione italiana è guidato da una madrelingua, per far vivere l’italiano in modo autentico e immersivo. Il corso è pensato come un vero e proprio viaggio attraverso l’Italia: tappa dopo tappa, da nord a sud, esplorando l’arte, la musica, la cucina e le tradizioni culturali che caratterizzano ogni regione, e scoprendone anche la geografia e gli aspetti meno noti. Ogni incontro è un’occasione per mettere in pratica le abilità di dialogo in contesti reali, con lezioni dinamiche e interattive che stimolano la partecipazione e favoriscono lo sviluppo di sicurezza e naturalezza nell’uso quotidiano dell’italiano.",
     "maxAttendees": 18,
-    "Raum": "",
-    "Nachname": "Rapisarda"
+    "Raum": "131",
+    "Nachname": "Rapisarda",
+    "Vorname": "Vittoria",
+    "Email": "Vittoria.rapisarda@gmail.com"
   },
   {
     "Wochentag": "Dienstag",
     "Block": "12:00 - 12:40",
     "Kurs": "Klettern",
-    "KursId": "1079",
+    "KursId": "2070",
     "Kategorien": [
       "BuE"
     ],
@@ -1440,13 +1351,14 @@
     "Beschreibung": "Klettern",
     "maxAttendees": 18,
     "Raum": "TH",
-    "Nachname": "Redenyi"
+    "Nachname": "Redenyi",
+    "Vorname": "Reinold"
   },
   {
     "Wochentag": "Donnerstag",
     "Block": "11:20 - 12:00",
     "Kurs": "Klettern",
-    "KursId": "1080",
+    "KursId": "2071",
     "Kategorien": [
       "BuE"
     ],
@@ -1461,13 +1373,14 @@
     "Beschreibung": "Klettern",
     "maxAttendees": 18,
     "Raum": "TH",
-    "Nachname": "Redenyi"
+    "Nachname": "Redenyi",
+    "Vorname": "Reinold"
   },
   {
     "Wochentag": "Montag",
     "Block": "12:00 - 12:40",
     "Kurs": "Häkeln",
-    "KursId": "1081",
+    "KursId": "2072",
     "Kategorien": [
       "KuP"
     ],
@@ -1481,14 +1394,15 @@
     ],
     "Beschreibung": "In diesem iLa wollen wir in entspannter Atmosphäre gemeinsam häkeln (lernen). Es ist dabei komplett egal, ob du schon ganz viel Erfahrung hast oder noch nie eine Häkelnadel in der Hand hattest. Alle sind willkommen!",
     "maxAttendees": 24,
-    "Raum": "",
-    "Nachname": "Rosenow"
+    "Raum": "325",
+    "Nachname": "Rosenow",
+    "Vorname": "Lea"
   },
   {
     "Wochentag": "Montag",
     "Block": "11:20 - 12:00",
     "Kurs": "Commercial Dance",
-    "KursId": "1082",
+    "KursId": "2073",
     "Kategorien": [
       "BuE"
     ],
@@ -1503,13 +1417,14 @@
     "Beschreibung": "Wir wollen gemeinsam eine Choreografie erlernen und uns kreativ zu Musik bewegen. Commercial ist eine Mischung aus den Tanzstilen HipHop, Jazz und Lady Style und wird häufig auf Bühnen oder in Musikvideos getanzt.",
     "maxAttendees": 30,
     "Raum": "TH",
-    "Nachname": "Rosenow, Maaß"
+    "Nachname": "Rosenow, Maaß",
+    "Vorname": "Lea, Anna"
   },
   {
     "Wochentag": "Donnerstag",
     "Block": "11:20 - 12:00",
     "Kurs": "Englisch fördern Klasse 5",
-    "KursId": "1083",
+    "KursId": "2074",
     "Kategorien": [
       "FuF"
     ],
@@ -1519,13 +1434,14 @@
     "Beschreibung": "Sichere Kenntnisse in Englisch sind für Schülerinnnen und Schüler von entscheidender Bedeutung für das Abitur und alle weiterführenden Bildungsstufen. Die Teilnehmenden im Förderkurs werden in Kleingruppen betreut und können in lebensnahen Situationen - vor allem im dialogischem Sprechen - ihren Sprachschatz erweitern.",
     "maxAttendees": 18,
     "Raum": "122",
-    "Nachname": "Ruge"
+    "Nachname": "Ruge",
+    "Vorname": "Matthias"
   },
   {
     "Wochentag": "Dienstag",
     "Block": "11:20 - 12:00",
     "Kurs": "Spanisch-Fördern – dein persönliches Lernangebot! Klasse 7",
-    "KursId": "1084",
+    "KursId": "2075",
     "Kategorien": [
       "FuF"
     ],
@@ -1535,13 +1451,14 @@
     "Beschreibung": "Du möchtest in Ruhe das wiederholen, was du noch nicht ganz verstanden hast? Hier bekommst du Unterstützung bei Grammatik, Wortschatz oder beim Sprechen – ganz in deinem Tempo. Gemeinsam stärken wir genau das, was du brauchst!",
     "maxAttendees": 15,
     "Raum": "323",
-    "Nachname": "Samaniego"
+    "Nachname": "Samaniego",
+    "Vorname": "Maria Eugenia"
   },
   {
     "Wochentag": "Donnerstag",
     "Block": "12:00 - 12:40",
     "Kurs": "Spanisch-Fördern – dein persönliches Lernangebot! Klasse 8",
-    "KursId": "1085",
+    "KursId": "2076",
     "Kategorien": [
       "FuF"
     ],
@@ -1551,34 +1468,31 @@
     "Beschreibung": "Du möchtest in Ruhe das wiederholen, was du noch nicht ganz verstanden hast? Hier bekommst du Unterstützung bei Grammatik, Wortschatz oder beim Sprechen – ganz in deinem Tempo. Gemeinsam stärken wir genau das, was du brauchst!",
     "maxAttendees": 15,
     "Raum": "323",
-    "Nachname": "Samaniego"
+    "Nachname": "Samaniego",
+    "Vorname": "Maria Eugenia"
   },
   {
-    "Wochentag": "Freitag",
+    "Wochentag": "Dienstag",
     "Block": "12:00 - 12:40",
-    "Kurs": "Johanna Moosdorf- Auf den Spuren unserer Namensgeberin",
-    "KursId": "1086",
+    "Kurs": "\"Memories across borders\" - Erinnerungskultur",
+    "KursId": "2077",
     "Kategorien": [
-      "KuP"
+      "FuF"
     ],
     "Klassen": [
-      "5",
-      "6",
-      "7",
-      "8",
-      "9",
-      "10"
+      "8", "9"
     ],
-    "Beschreibung": "Die ILa setzt die begonnenen Ansätze fort - es sollen ein Eintrag auf der Homepage, ein Image-Film über unsere Schule und ein Erklär-Video zu Johanna Moosdorf entstehen. Angedacht sind auch eine Info-Tafel im Foyer, künstlerische Werke sowie eine Ausstellung zu ihr.",
+    "Beschreibung": "In diesem Projekt erkunden Schülerinnen und Schüler die vielfältigen Formen der Erinnerungskultur in Deutschland und bereiten ihre Erkenntnisse für ein internationales Publikum auf. Kreative Kompetenzen sind ebenso gefragt wie multimediale und wissenschaftliche.",
     "maxAttendees": 20,
-    "Raum": "233",
-    "Nachname": "Schmidt"
+    "Raum": "201",
+    "Nachname": "Schmidt",
+    "Vorname": "Annika"
   },
   {
     "Wochentag": "Donnerstag",
     "Block": "11:20 - 12:00",
     "Kurs": "Basteln und Gestalten",
-    "KursId": "1087",
+    "KursId": "2078",
     "Kategorien": [
       "KuP"
     ],
@@ -1593,34 +1507,52 @@
     "Beschreibung": "Ihr wollte einfach mal abschalten und ganz entspannt etwas basteln. Schmuck, Deko oder ein Geschenk? In dieser ILa könnt ihr eurer Kreativität freien Lauf lassen, eigene Ideen und Talente einbringen und mit anderen teilen.",
     "maxAttendees": 20,
     "Raum": "230",
-    "Nachname": "Schmidt"
+    "Nachname": "Schmidt",
+    "Vorname": "Annika"
   },
   {
     "Wochentag": "Freitag",
     "Block": "11:20 - 12:00",
     "Kurs": "Digitale Drehtür",
-    "KursId": "1088",
+    "KursId": "2079",
     "Kategorien": [
       "FuF"
     ],
     "Klassen": [
       "5",
       "6",
-      "7",
+      "7"
+    ],
+    "Beschreibung": "In digitalen Selbstlernkursen könnt ihr euer Wissen in Naturwissenschaften oder Sprachen vertiefen, lernen, wie die KI funktioniert oder wie man effektiv lernt. Ihr lernt in eurem Tempo und das, was ihr gern mögt.",
+    "maxAttendees": 18,
+    "Raum": "214",
+    "Nachname": "Schmidt",
+    "Vorname": "Annika"
+  },
+  {
+    "Wochentag": "Freitag",
+    "Block": "11:20 - 12:00",
+    "Kurs": "Digitale Drehtür",
+    "KursId": "2080",
+    "Kategorien": [
+      "FuF"
+    ],
+    "Klassen": [
       "8",
       "9",
       "10"
     ],
     "Beschreibung": "In digitalen Selbstlernkursen könnt ihr euer Wissen in Naturwissenschaften oder Sprachen vertiefen, lernen, wie die KI funktioniert oder wie man effektiv lernt. Ihr lernt in eurem Tempo und das, was ihr gern mögt.",
-    "maxAttendees": 20,
-    "Raum": "230",
-    "Nachname": "Schmidt"
+    "maxAttendees": 18,
+    "Raum": "216",
+    "Nachname": "Schmidt",
+    "Vorname": "Annika"
   },
   {
     "Wochentag": "Montag",
     "Block": "11:20 - 12:00",
     "Kurs": "Latein für Angeber",
-    "KursId": "1089",
+    "KursId": "2081",
     "Kategorien": [
       "FuF"
     ],
@@ -1635,13 +1567,14 @@
     "Beschreibung": "Ihr lernt lateinische Sätze und Inschriften zu übersetzen oder bei bester Gelegenheit in ein Gespräch einzubauen. Nebenbei lernt ihr auch die wichtigsten grammatischen Grundlagen dieser Sprache, was vielleicht Lust auf mehr macht.",
     "maxAttendees": 20,
     "Raum": "118",
-    "Nachname": "Schmidt"
+    "Nachname": "Schmidt",
+    "Vorname": "Annika"
   },
   {
-    "Wochentag": "Montag",
+    "Wochentag": "Dienstag",
     "Block": "11:20 - 12:00",
     "Kurs": "Englisch Fördern Klasse 6",
-    "KursId": "1090",
+    "KursId": "2082",
     "Kategorien": [
       "FuF"
     ],
@@ -1650,14 +1583,15 @@
     ],
     "Beschreibung": "Unterrichtsinhalte werden hier noch einmal aufgearbeitet und wiederholt. Dieses iLa ist für alle SuS geeignet, welche Inhalte noch einmal wiederholen möchten oder zusätzlich Zeit zum Verständnis der Inhalte benötigen.",
     "maxAttendees": 18,
-    "Raum": "224",
-    "Nachname": "Schmidt"
+    "Raum": "225",
+    "Nachname": "Schmidt",
+    "Vorname": "Svenja"
   },
   {
     "Wochentag": "Donnerstag",
     "Block": "11:20 - 12:00",
     "Kurs": "Schulband",
-    "KursId": "1091",
+    "KursId": "2083",
     "Kategorien": [
       "FuF"
     ],
@@ -1671,30 +1605,30 @@
     "Beschreibung": "Teilnahmevoraussetzungen: bereits an Schulband teilgenommen.",
     "maxAttendees": 7,
     "Raum": "417",
-    "Nachname": "Schmidt"
+    "Nachname": "Schmidt",
+    "Vorname": "Svenja"
   },
   {
-    "Wochentag": "Donnerstag",
-    "Block": "12:00 - 12:40",
+    "Wochentag": "Dienstag",
+    "Block": "11:20 - 12:00",
     "Kurs": "Modern Dance 5/6",
-    "KursId": "1092",
+    "KursId": "2084",
     "Kategorien": [
       "BuE"
     ],
     "Klassen": [
-      "5",
-      "6"
+      "5", "6"
     ],
-    "Beschreibung": "",
     "maxAttendees": 24,
     "Raum": "TH",
-    "Nachname": "Schneider"
+    "Nachname": "Schneider",
+    "Vorname": "Sophie"
   },
   {
     "Wochentag": "Freitag",
     "Block": "11:20 - 12:00",
     "Kurs": "Running Club",
-    "KursId": "1093",
+    "KursId": "2085",
     "Kategorien": [
       "BuE"
     ],
@@ -1709,50 +1643,30 @@
     "Beschreibung": "Vorbereitung auf den Leipzig Marathon",
     "maxAttendees": 20,
     "Raum": "Foyer",
-    "Nachname": "Schneider"
+    "Nachname": "Schneider",
+    "Vorname": "Sophie"
+  },
+  {
+    "Wochentag": "Montag",
+    "Block": "12:00 - 12:40",
+    "Kurs": "DaZ - Fit für den Fachunterricht",
+    "KursId": "2086",
+    "Kategorien": [
+      "FuF"
+    ],
+    "Klassen": [
+      "VK"
+    ],
+    "maxAttendees": 20,
+    "Raum": "327",
+    "Nachname": "Schönert",
+    "Vorname": "Alexandra"
   },
   {
     "Wochentag": "Donnerstag",
     "Block": "11:20 - 12:00",
-    "Kurs": "Erste Schritte ins Arabische",
-    "KursId": "1094",
-    "Kategorien": [
-      "FuF"
-    ],
-    "Klassen": [
-      "6",
-      "7",
-      "8",
-      "9",
-      "10"
-    ],
-    "Beschreibung": "In dem Anfänger-Kurs \"Erste Schritte ins Arabische\"﻿ lernst du ganz einfach die ersten Wörter, kurze Sätze und Fragen auf Arabisch. Du entdeckst, wie die arabischen Buchstaben aussehen und wie sie geschrieben werden. Der Kurs ist perfekt, um neugierig auf die Sprache zu werden und ganz locker die ersten Schritte zu machen. Komm vorbei und probiere es aus! (Du kannst auch teilnehmen, wenn du schon im letzten Quartal dabei warst.)",
-    "maxAttendees": 20,
-    "Raum": "327",
-    "Nachname": "Schönert"
-  },
-  {
-    "Wochentag": "Freitag",
-    "Block": "12:00 - 12:40",
-    "Kurs": "Französisch Fördern",
-    "KursId": "1095",
-    "Kategorien": [
-      "FuF"
-    ],
-    "Klassen": [
-      "9",
-      "10"
-    ],
-    "Beschreibung": "Du möchtest dich in Französisch sicherer fühlen? Im individuellen Lernangebot \"Französisch Fördern\" arbeiten wir gemeinsam an Hausaufgaben, wiederholen wichtige Inhalte aus dem Unterricht und üben schwierige Themen – alles in entspannter Atmosphäre. Du kannst Fragen stellen, bekommst Unterstützung und entdeckst mehr von der französischen Sprache.",
-    "maxAttendees": 15,
-    "Raum": "327",
-    "Nachname": "Schönert"
-  },
-  {
-    "Wochentag": "Dienstag",
-    "Block": "11:20 - 12:00",
     "Kurs": "Italienisch Fördern",
-    "KursId": "1096",
+    "KursId": "2087",
     "Kategorien": [
       "FuF"
     ],
@@ -1766,13 +1680,14 @@
     "Beschreibung": "Du möchtest dich in Italienisch sicherer fühlen? Im individuellen Lernangebot \"Italienisch Fördern\" arbeiten wir gemeinsam an Hausaufgaben, wiederholen wichtige Inhalte aus dem Unterricht und üben schwierige Themen – alles in entspannter Atmosphäre. Du kannst Fragen stellen, bekommst Unterstützung und entdeckst mehr von der italienischen Sprache.",
     "maxAttendees": 15,
     "Raum": "327",
-    "Nachname": "Schönert"
+    "Nachname": "Schönert",
+    "Vorname": "Alexandra"
   },
   {
     "Wochentag": "Donnerstag",
     "Block": "11:20 - 12:00",
     "Kurs": "Badminton (Anfänger)",
-    "KursId": "1097",
+    "KursId": "2088",
     "Kategorien": [
       "BuE"
     ],
@@ -1787,13 +1702,14 @@
     "Beschreibung": "Schnelle Bälle, flinke Beine: Wir spielen im Team Badminton und stärken dabei Koordination und Ausdauer. Der Kurs richtet sich an Spieler mit keiner oder wenig Erfahrung.",
     "maxAttendees": 24,
     "Raum": "TH",
-    "Nachname": "Schuster"
+    "Nachname": "Schuster",
+    "Vorname": "Anja"
   },
   {
     "Wochentag": "Donnerstag",
     "Block": "12:00 - 12:40",
     "Kurs": "Badminton (Fortgeschrittene)",
-    "KursId": "1098",
+    "KursId": "2089",
     "Kategorien": [
       "BuE"
     ],
@@ -1808,15 +1724,16 @@
     "Beschreibung": "Schnelle Bälle, flinke Beine: Wir spielen im Team Badminton und stärken dabei Koordination und Ausdauer. Der Kurs richtet sich an Spieler mit Erfahrung.",
     "maxAttendees": 24,
     "Raum": "TH",
-    "Nachname": "Schuster"
+    "Nachname": "Schuster",
+    "Vorname": "Anja"
   },
   {
     "Wochentag": "Freitag",
     "Block": "12:00 - 12:40",
-    "Kurs": "Tischtennis",
-    "KursId": "1099",
+    "Kurs": "Urban Gardening",
+    "KursId": "2090",
     "Kategorien": [
-      "BuE"
+      "KuP"
     ],
     "Klassen": [
       "5",
@@ -1826,16 +1743,36 @@
       "9",
       "10"
     ],
-    "Beschreibung": "",
-    "maxAttendees": 24,
-    "Raum": "TH",
-    "Nachname": "Schuster"
+    "Beschreibung": "Gemeinschaftliches Gärtnern auf dem Schulgelände; Anlegen der Hochbeete; Anlegen einer Blumenwiese; Pflege",
+    "maxAttendees": 28,
+    "Raum": "108",
+    "Nachname": "Schuster",
+    "Vorname": "Anja"
+  },
+  {
+    "Wochentag": "Dienstag",
+    "Block": "11:20 - 12:00",
+    "Kurs": "Kopfrechentraining & Rechenstrategien",
+    "KursId": "2091",
+    "Kategorien": [
+      "FuF"
+    ],
+    "Klassen": [
+      "5",
+      "6",
+      "7"
+    ],
+    "Beschreibung": "In diesem iLa trainierst du dein Kopfrechnen und lernst hilfreiche Rechenstrategien kennen. Dabei geht es darum, Aufgaben geschickt zu zerlegen, zahlen passend zu verändern und clevere Wege zum Ergebnis zum finden. So wirst du nicht nur im Umgang schneller, sondern auch sicherer und kannst Mathematik im Unterricht und im Alltag besser anwenden.",
+    "maxAttendees": 20,
+    "Raum": "225",
+    "Nachname": "Schüttler",
+    "Vorname": "Christoph"
   },
   {
     "Wochentag": "Montag",
     "Block": "11:20 - 12:00",
-    "Kurs": "Mathe Fördern 10/1 + 10/2",
-    "KursId": "1100",
+    "Kurs": "Mathe Fördern 10",
+    "KursId": "2092",
     "Kategorien": [
       "FuF"
     ],
@@ -1843,31 +1780,16 @@
       "10"
     ],
     "Beschreibung": "Dir geht es manchmal zu schnell in Mathe oder möchtest einfach sicherer werden? In diesem Kurs helfen dir ältere Schülerinnen und Schüler in entspannter Atmosphäre – gezielt und verständlich. Dieses iLa richtet sich exklusiv an die Klassen ??? und ???.",
-    "maxAttendees": 14,
-    "Raum": "328",
-    "Nachname": "Schüttler"
-  },
-  {
-    "Wochentag": "Montag",
-    "Block": "11:20 - 12:00",
-    "Kurs": "Mathe Fördern 10/3 + 10/4",
-    "KursId": "1101",
-    "Kategorien": [
-      "FuF"
-    ],
-    "Klassen": [
-      "10"
-    ],
-    "Beschreibung": "Dir geht es manchmal zu schnell in Mathe oder möchtest einfach sicherer werden? In diesem Kurs helfen dir ältere Schülerinnen und Schüler in entspannter Atmosphäre – gezielt und verständlich. Dieses iLa richtet sich exklusiv an die Klassen ??? und ???.",
-    "maxAttendees": 14,
-    "Raum": "332",
-    "Nachname": "Schüttler"
+    "maxAttendees": 28,
+    "Raum": "328, 332",
+    "Nachname": "Schüttler",
+    "Vorname": "Christoph"
   },
   {
     "Wochentag": "Freitag",
     "Block": "11:20 - 12:00",
     "Kurs": "Wir bauen unsere Schule in Minecraft",
-    "KursId": "1102",
+    "KursId": "2093",
     "Kategorien": [
       "KuP"
     ],
@@ -1882,13 +1804,32 @@
     "Beschreibung": "In diesem Angebot gestalten wir gemeinsam unsere Schule virtuell in Minecraft - von den Klassenzimmern bis zum Pausenhof. Dabei könnt ihr kreativ bauen, Ideen ausprobieren und im Team spannende Projekte umsetzen. Es handelt sich um die Fortsetzung des Angebots aus dem letzten Schuljahr, daher wird es nur wenige neue freie Plätze geben.",
     "maxAttendees": 26,
     "Raum": "122",
-    "Nachname": "Schüttler"
+    "Nachname": "Schüttler",
+    "Vorname": "Christoph"
+  },
+  {
+    "Wochentag": "Freitag",
+    "Block": "11:20 - 12:00",
+    "Kurs": "Französisch Fördern 7-9",
+    "KursId": "2094",
+    "Kategorien": [
+      "FuF"
+    ],
+    "Klassen": [
+      "7",
+      "8",
+      "9"
+    ],
+    "Beschreibung": "Du hast Lust, dein Französisch zu verbessern? Dann komm zum Französisch Fördern! Wir wiederholen und festigen die wichtigsten Themen aus dem Unterricht – von Grammatik und Wortschatz bis hin zum Sprechen. Und keine Sorge: Fehler sind erlaubt – sie gehören zum Lernen dazu! :)",
+    "maxAttendees": 20,
+    "Nachname": "Strothmann",
+    "Vorname": "Ronja"
   },
   {
     "Wochentag": "Dienstag",
     "Block": "12:00 - 12:40",
-    "Kurs": "Fussball für Mädchen",
-    "KursId": "1103",
+    "Kurs": "Latin Dance: Salsa/Bachata/Merengue",
+    "KursId": "2095",
     "Kategorien": [
       "BuE"
     ],
@@ -1898,37 +1839,17 @@
       "9",
       "10"
     ],
-    "Beschreibung": "Dieses Angebot richtet sich an Mädchen die Lust haben Fussball zu spielen oder es lernen wollen. Es werden keine fußballerischen Vorkenntnisse benötigt.",
-    "maxAttendees": 16,
+    "Beschreibung": "Unter der Leitung der Fremdsprachenassistentin (Erin) werden in diesem iLa die Grundlagen des lateinamerikanischen Tanzes vermittelt, nämlich Salsa, Bachata und Merengue. Tanzerfahrung ist keine Voraussetzung für die Teilnahme. Die Ziele dieses iLa sind interkulturelles Lernen, Förderung der englischen Sprache, gesunde Körperbewegungen und Spaß haben.",
+    "maxAttendees": 20,
     "Raum": "TH",
-    "Nachname": "Schwarze"
-  },
-  {
-    "Wochentag": "Montag",
-    "Block": "12:00 - 12:40",
-    "Kurs": "Tischtennis",
-    "KursId": "1104",
-    "Kategorien": [
-      "BuE"
-    ],
-    "Klassen": [
-      "5",
-      "6",
-      "7",
-      "8",
-      "9",
-      "10"
-    ],
-    "Beschreibung": "",
-    "maxAttendees": 24,
-    "Raum": "TH",
-    "Nachname": "Sullenberger"
+    "Nachname": "Sullenberger",
+    "Vorname": "Erin"
   },
   {
     "Wochentag": "Donnerstag",
     "Block": "11:20 - 12:00",
     "Kurs": "Poetry Slam",
-    "KursId": "1105",
+    "KursId": "2096",
     "Kategorien": [
       "KuP"
     ],
@@ -1939,15 +1860,16 @@
       "10"
     ],
     "Beschreibung": "Dieser ILA richtet sich in erster Linie an Schüler der 8. bis 10. Klasse, die sich für kreatives Schreiben, Philosophie und Politik in englischer Sprache interessieren (unterrichtet von Erin, der Englisch-Lehrassistentin). In diesem ILA lernen die Schüler, wie sie ihre Ideen in kreativer Prosa ausdrücken und diese Ideen vor einem kleinen Publikum (oder nicht) in Form von Gedichten oder Poetry Slam präsentieren können. Die Themen können natürlich variieren.",
-    "maxAttendees": 15,
-    "Raum": "",
-    "Nachname": "Sullenberger"
+    "maxAttendees": 18,
+    "Raum": "332",
+    "Nachname": "Sullenberger",
+    "Vorname": "Erin"
   },
   {
     "Wochentag": "Montag",
     "Block": "12:00 - 12:40",
     "Kurs": "LRS-Fördern für Klassen 5/6",
-    "KursId": "1106",
+    "KursId": "2097",
     "Kategorien": [
       "FuF"
     ],
@@ -1958,13 +1880,14 @@
     "Beschreibung": "Du hast LRS und möchtest auf spielerische Weise deine Strategien für das Schreiben und Lesen üben und festigen? Dann bist du hier genau richtig.",
     "maxAttendees": 12,
     "Raum": "124",
-    "Nachname": "Telschow"
+    "Nachname": "Telschow",
+    "Vorname": "Claudia"
   },
   {
     "Wochentag": "Freitag",
     "Block": "11:20 - 12:00",
     "Kurs": "Basketball",
-    "KursId": "1107",
+    "KursId": "2098",
     "Kategorien": [
       "BuE"
     ],
@@ -1976,13 +1899,14 @@
     "Beschreibung": "-",
     "maxAttendees": 15,
     "Raum": "TH",
-    "Nachname": "Thomas"
+    "Nachname": "Thomas",
+    "Vorname": "Franzi"
   },
   {
     "Wochentag": "Donnerstag",
     "Block": "11:20 - 12:00",
     "Kurs": "Bunte Auszeit",
-    "KursId": "1108",
+    "KursId": "2099",
     "Kategorien": [
       "KuP"
     ],
@@ -1990,16 +1914,17 @@
       "5",
       "6"
     ],
-    "Beschreibung": "In diesem Angebot tauchen wir gemeinsam in die Welt der Kreativität ein. Wir zeichnen und malen ganz frei – ohne feste Vorgaben, ohne richtig oder falsch. Jede Idee darf ihren Platz auf dem Papier finden._x000D_\n_x000D_\nWir nutzen alles, was im Federmäppchen steckt: Buntstifte, Filzstifte, Fineliner oder andere Stifte. Dabei können Formen, Muster, Fantasiewesen oder einfach bunte Farbflächen entstehen – ganz so, wie es dir gefällt._x000D_\n_x000D_\nDas freie Gestalten hilft dabei, Stress abzubauen, die eigene Kreativität zu fördern und neue Ideen zu entdecken. Hier zählt nur der Spaß am Malen und die Freude am Ausprobieren.",
+    "Beschreibung": "In diesem Angebot tauchen wir gemeinsam in die Welt der Kreativität ein. Wir zeichnen und malen ganz frei – ohne feste Vorgaben, ohne richtig oder falsch. Jede Idee darf ihren Platz auf dem Papier finden.\nWir nutzen alles, was im Federmäppchen steckt: Buntstifte, Filzstifte, Fineliner oder andere Stifte. Dabei können Formen, Muster, Fantasiewesen oder einfach bunte Farbflächen entstehen – ganz so, wie es dir gefällt.\nDas freie Gestalten hilft dabei, Stress abzubauen, die eigene Kreativität zu fördern und neue Ideen zu entdecken. Hier zählt nur der Spaß am Malen und die Freude am Ausprobieren.",
     "maxAttendees": 28,
     "Raum": "112",
-    "Nachname": "Thomas"
+    "Nachname": "Thomas",
+    "Vorname": "Franzi"
   },
   {
     "Wochentag": "Freitag",
     "Block": "11:20 - 12:00",
     "Kurs": "Tischtennis",
-    "KursId": "1109",
+    "KursId": "2100",
     "Kategorien": [
       "BuE"
     ],
@@ -2014,13 +1939,36 @@
     "Beschreibung": "-",
     "maxAttendees": 24,
     "Raum": "TH",
-    "Nachname": "Thomas"
+    "Nachname": "Thomas",
+    "Vorname": "Franzi"
+  },
+  {
+    "Wochentag": "Montag",
+    "Block": "11:20 - 12:00",
+    "Kurs": "Comic/Manga zeichen",
+    "KursId": "2101",
+    "Kategorien": [
+      "KuP"
+    ],
+    "Klassen": [
+      "5",
+      "6",
+      "7",
+      "8",
+      "9",
+      "10"
+    ],
+    "Beschreibung": "Erlernen von Grundzeichentechniken zum Erstellen eigener Mangas und Comics.",
+    "maxAttendees": 24,
+    "Raum": "222",
+    "Nachname": "Trettner",
+    "Vorname": "Paul"
   },
   {
     "Wochentag": "Montag",
     "Block": "12:00 - 12:40",
     "Kurs": "Comic/Manga zeichen",
-    "KursId": "1110",
+    "KursId": "2102",
     "Kategorien": [
       "KuP"
     ],
@@ -2035,34 +1983,14 @@
     "Beschreibung": "Erlernen von Grundzeichentechniken zum Erstellen eigener Mangas und Comics.",
     "maxAttendees": 24,
     "Raum": "222",
-    "Nachname": "Trettner"
-  },
-  {
-    "Wochentag": "Montag",
-    "Block": "11:20 - 12:00",
-    "Kurs": "Comic/Manga zeichen",
-    "KursId": "1111",
-    "Kategorien": [
-      "KuP"
-    ],
-    "Klassen": [
-      "5",
-      "6",
-      "7",
-      "8",
-      "9",
-      "10"
-    ],
-    "Beschreibung": "Erlernen von Grundzeichentechniken zum Erstellen eigener Mangas und Comics.",
-    "maxAttendees": 24,
-    "Raum": "222",
-    "Nachname": "Trettner"
+    "Nachname": "Trettner",
+    "Vorname": "Paul"
   },
   {
     "Wochentag": "Dienstag",
     "Block": "11:20 - 12:00",
-    "Kurs": "Mathe Fördern Gruppe 1",
-    "KursId": "1112",
+    "Kurs": "Mathe Fördern 9",
+    "KursId": "2103",
     "Kategorien": [
       "FuF"
     ],
@@ -2070,49 +1998,122 @@
       "9"
     ],
     "Beschreibung": "Dir geht es manchmal zu schnell in Mathe oder möchtest einfach sicherer werden? In diesem Kurs helfen dir ältere Schülerinnen und Schüler in entspannter Atmosphäre – gezielt und verständlich. Dieses iLa richtet sich exklusiv an die Klassen 9-1 und 9-2.",
-    "maxAttendees": 14,
-    "Raum": "230",
-    "Nachname": "Uhlmann"
+    "maxAttendees": 28,
+    "Raum": "230, 231",
+    "Nachname": "Uhlmann",
+    "Vorname": "Nadja"
   },
   {
     "Wochentag": "Dienstag",
-    "Block": "11:20 - 12:00",
-    "Kurs": "Mathe Fördern Gruppe 2",
-    "KursId": "1113",
+    "Block": "12:00 - 12:40",
+    "Kurs": "Silent Book Club – Zeit zum Lesen, Reden und Entspannen",
+    "KursId": "2104",
     "Kategorien": [
-      "FuF"
-    ],
-    "Klassen": [
-      "9"
-    ],
-    "Beschreibung": "Dir geht es manchmal zu schnell in Mathe oder möchtest einfach sicherer werden? In diesem Kurs helfen dir ältere Schülerinnen und Schüler in entspannter Atmosphäre – gezielt und verständlich. Dieses iLa richtet sich exklusiv an die Klassen 9-3 und 9-4.",
-    "maxAttendees": 14,
-    "Raum": "231",
-    "Nachname": "Uhlmann"
-  },
-  {
-    "Wochentag": "Donnerstag",
-    "Block": "11:20 - 12:00",
-    "Kurs": "Konzentration trainieren",
-    "KursId": "1114",
-    "Kategorien": [
-      "FuF"
+      "BuE"
     ],
     "Klassen": [
       "5",
       "6",
       "7"
     ],
-    "Beschreibung": "Einmal pro Woche trainieren wir gemeinsam deine Konzentration mit praktischen Übungen, Spielen und Techniken, die dir helfen, im Unterricht fokussiert zu bleiben, Hausaufgaben schneller zu erledigen und dein Denken zu schärfen",
+    "Beschreibung": "Im Silent Book Club darfst du genau das tun: lesen, abschalten, entspannen – ganz ohne Stress oder Notendruck. Jede Woche bringt jede*r sein eigenes Buch mit – egal ob Roman, Manga, Fantasy oder Sachbuch.\nNach einer kurzen gemeinsamen Runde zum Ankommen, Austauschen oder für kleine Lese-Challenges, liest jede*r still für sich. Am Ende tauschen wir uns locker über das Gelesene aus – wer mag, kann erzählen, worum es ging, was spannend war oder einfach nur zuhören.\nEinmal wöchentlich – dein persönlicher Leseplatz mit Gemeinschaft.",
+    "maxAttendees": 28,
+    "Raum": "130",
+    "Nachname": "Vogel",
+    "Vorname": "Sarah"
+  },
+  {
+    "Wochentag": "Donnerstag",
+    "Block": "11:20 - 12:00",
+    "Kurs": "Silent Book Club – Zeit zum Lesen, Reden und Entspannen",
+    "KursId": "2105",
+    "Kategorien": [
+      "BuE"
+    ],
+    "Klassen": [
+      "8",
+      "9",
+      "10"
+    ],
+    "Beschreibung": "Im Silent Book Club darfst du genau das tun: lesen, abschalten, entspannen – ganz ohne Stress oder Notendruck. Jede Woche bringt jede*r sein eigenes Buch mit – egal ob Roman, Manga, Fantasy oder Sachbuch.\nNach einer kurzen gemeinsamen Runde zum Ankommen, Austauschen oder für kleine Lese-Challenges, liest jede*r still für sich. Am Ende tauschen wir uns locker über das Gelesene aus – wer mag, kann erzählen, worum es ging, was spannend war oder einfach nur zuhören.\nEinmal wöchentlich – dein persönlicher Leseplatz mit Gemeinschaft.",
     "maxAttendees": 28,
     "Raum": "111",
-    "Nachname": "Vogel"
+    "Nachname": "Vogel",
+    "Vorname": "Sarah"
+  },
+  {
+    "Wochentag": "Montag",
+    "Block": "12:00 - 12:40",
+    "Kurs": "spielerisch Programmieren lernen",
+    "KursId": "2106",
+    "Kategorien": [
+      "KuP"
+    ],
+    "Klassen": [
+      "5", "6"
+    ],
+    "Beschreibung": "Starte deine ersten Programmier-Abenteuer in MakeCode! Baue mit Blöcken kleine Spiele und probiere sie direkt am Gerät aus. So lernst du spielend, wie Programmieren funktioniert.",
+    "maxAttendees": 14,
+    "Raum": "115",
+    "Nachname": "Vogel",
+    "Vorname": "Sarah"
+  },
+  {
+    "Wochentag": "Donnerstag",
+    "Block": "11:20 - 12:00",
+    "Kurs": "Physik 6a - praktische Einführung in die Naturwissenschaft",
+    "KursId": "2107",
+    "Kategorien": [
+      "FuF"
+    ],
+    "Klassen": [
+      "6"
+    ],
+    "Beschreibung": "Es geht endlich los! Ihr habt Physik!\nHier im iLA wollen wir uns verstärkt um die Durchführung von Experimenten und Forschungsaufträgen kümmern, die leider sonst im Unterricht zu kurz kommen.",
+    "maxAttendees": 28,
+    "Raum": "234",
+    "Nachname": "Werner",
+    "Vorname": "Peter"
   },
   {
     "Wochentag": "Dienstag",
     "Block": "12:00 - 12:40",
-    "Kurs": "Silent Book Club – Zeit zum Lesen, Reden und Entspannen",
-    "KursId": "1115",
+    "Kurs": "Physik 6f - praktische Einführung in die Naturwissenschaft",
+    "KursId": "2108",
+    "Kategorien": [
+      "KuP"
+    ],
+    "Klassen": [
+      "6"
+    ],
+    "Beschreibung": "Es geht endlich los! Ihr habt Physik!\nHier im iLA wollen wir uns verstärkt um die Durchführung von Experimenten und Forschungsaufträgen kümmern, die leider sonst im Unterricht zu kurz kommen.",
+    "maxAttendees": 28,
+    "Raum": "211",
+    "Nachname": "Werner",
+    "Vorname": "Peter"
+  },
+  {
+    "Wochentag": "Donnerstag",
+    "Block": "12:00 - 12:40",
+    "Kurs": "10 Finger tippen",
+    "KursId": "2109",
+    "Kategorien": [
+      "FuF"
+    ],
+    "Klassen": [
+      "6", "7"
+    ],
+    "Beschreibung": "Wir lernen mit zehn Fingern auf der Tastatur zu schreiben.",
+    "maxAttendees": 16,
+    "Raum": "214",
+    "Nachname": "Weyer",
+    "Vorname": "Maxi"
+  },
+  {
+    "Wochentag": "Donnerstag",
+    "Block": "11:20 - 12:00",
+    "Kurs": "Fahrradwerkstatt",
+    "KursId": "2110",
     "Kategorien": [
       "BuE"
     ],
@@ -2124,84 +2125,16 @@
       "9",
       "10"
     ],
-    "Beschreibung": "Im Silent Book Club darfst du genau das tun: lesen, abschalten, entspannen – ganz ohne Stress oder Notendruck. Jede Woche bringt jede*r sein eigenes Buch mit – egal ob Roman, Manga, Fantasy oder Sachbuch._x000D_\nNach einer kurzen gemeinsamen Runde zum Ankommen, Austauschen oder für kleine Lese-Challenges, liest jede*r still für sich. Am Ende tauschen wir uns locker über das Gelesene aus – wer mag, kann erzählen, worum es ging, was spannend war oder einfach nur zuhören._x000D_\nEinmal wöchentlich – dein persönlicher Leseplatz mit Gemeinschaft.",
-    "maxAttendees": 28,
-    "Raum": "130",
-    "Nachname": "Vogel"
-  },
-  {
-    "Wochentag": "Montag",
-    "Block": "12:00 - 12:40",
-    "Kurs": "spielerisch Programmieren lernen",
-    "KursId": "1116",
-    "Kategorien": [
-      "KuP"
-    ],
-    "Klassen": [
-      "5",
-      "6",
-      "7"
-    ],
-    "Beschreibung": "Starte deine ersten Programmier-Abenteuer in MakeCode! Baue mit Blöcken kleine Spiele und probiere sie direkt am Gerät aus. So lernst du spielend, wie Programmieren funktioniert.",
-    "maxAttendees": 14,
-    "Raum": "115",
-    "Nachname": "Vogel"
-  },
-  {
-    "Wochentag": "Donnerstag",
-    "Block": "11:20 - 12:00",
-    "Kurs": "Formeln und Gleichungen im LaTEX-Code schreiben",
-    "KursId": "1117",
-    "Kategorien": [
-      "FuF"
-    ],
-    "Klassen": [
-      "9",
-      "10"
-    ],
-    "Beschreibung": "Du möchtest Formeln und Gleichungen an deinem Laptop oder Tablet (beispielsweise in deiner KOL) ordentlich darstellen? Dann nutze einfach den LaTEX-Code._x000D_\nHier erlernst du erste Schritte.",
     "maxAttendees": 15,
-    "Raum": "234",
-    "Nachname": "Werner"
-  },
-  {
-    "Wochentag": "Dienstag",
-    "Block": "12:00 - 12:40",
-    "Kurs": "Schattentheater",
-    "KursId": "1118",
-    "Kategorien": [
-      "KuP"
-    ],
-    "Klassen": [
-      "6"
-    ],
-    "Beschreibung": "Wir wollen gemeinsam ein Schattentheater aufführen._x000D_\nDafür denken wir uns eine Geschichte aus, basteln dazugehörige Figuren und planen die Aufführung",
-    "maxAttendees": 20,
-    "Raum": "211",
-    "Nachname": "Werner"
-  },
-  {
-    "Wochentag": "Donnerstag",
-    "Block": "12:00 - 12:40",
-    "Kurs": "10 Finger tippen",
-    "KursId": "1119",
-    "Kategorien": [
-      "FuF"
-    ],
-    "Klassen": [
-      "6",
-      "7"
-    ],
-    "Beschreibung": "Wir lernen mit zehn Fingern auf der Tastatur zu schreiben.",
-    "maxAttendees": 16,
-    "Raum": "214",
-    "Nachname": "Weyer"
+    "Nachname": "Winkelmann",
+    "Vorname": "Kai",
+    "Email": "fahrradkiwi@gmail.com"
   },
   {
     "Wochentag": "Freitag",
     "Block": "11:20 - 12:00",
     "Kurs": "Schrift ohne Stift",
-    "KursId": "1120",
+    "KursId": "2111",
     "Kategorien": [
       "KuP"
     ],
@@ -2213,26 +2146,10 @@
       "9",
       "10"
     ],
-    "Beschreibung": "n typografischen Experimenten findest du heraus, wie sich Buchstaben und Schriften auf vielfältige Weise erzeugen oder entdecken lassen",
+    "Beschreibung": "In typografischen Experimenten findest du heraus, wie sich Buchstaben und Schriften auf vielfältige Weise erzeugen oder entdecken lassen",
     "maxAttendees": 20,
     "Raum": "315",
-    "Nachname": "Zsilla"
-  },
-  {
-    "Wochentag": "Freitag",
-    "Block": "12:00 - 12:40",
-    "Kurs": "Digitale Drehtür",
-    "KursId": "1121",
-    "Kategorien": [
-      "FuF"
-    ],
-    "Klassen": [
-      "9",
-      "10"
-    ],
-    "Beschreibung": "Digitale Drehtür – dein Projekt, deine Ideen\nDu hast ein Thema, das dich besonders interessiert – egal ob Astronomie, Programmieren, Kunst oder Geschichte – und willst tiefer eintauchen? Mit der Digitalen Drehtür kannst du während der Schulzeit an eigenen Projekten arbeiten, online forschen oder dich mit anderen Begabten vernetzen. Du bestimmst, woran du arbeitest, und wir unterstützen dich dabei, deine Ideen zum Leuchten zu bringen.",
-    "maxAttendees": 19,
-    "Raum": "130, 131",
-    "Nachname": ""
+    "Nachname": "Zsilla",
+    "Vorname": "Sabine"
   }
 ]

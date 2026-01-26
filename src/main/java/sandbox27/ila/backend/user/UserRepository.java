@@ -36,4 +36,8 @@ public interface UserRepository extends JpaRepository<User, String> {
     List<Integer> findAllDistinctGrades();
 
     Optional<User> findByLastName(String instructor);
+
+    Optional<User> findByFirstNameAndLastNameAndEmail(String firstName, String lastName, String email);
+
+
 }

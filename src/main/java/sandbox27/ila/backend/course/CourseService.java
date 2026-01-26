@@ -18,6 +18,7 @@ import sandbox27.infrastructure.security.AuthenticatedUser;
 import sandbox27.infrastructure.security.RequiredRole;
 
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @RestController
@@ -47,15 +48,25 @@ public class CourseService {
                     .collect(Collectors.toList());
         } else {
             List<Course> allCoursesInBlock = courseRepository.findAllByBlock_Id(blockId);
-            if (!user.getRoles().contains(Role.ADMIN))
+            if (!user.getRoles().contains(Role.ADMIN)) {
+                // Ausgeschlossene Kurse für diesen Benutzer ermitteln
+                Set<Long> excludedCourseIds = courseExclusionRepository.findAllByCourseIdIn(
+                                allCoursesInBlock.stream().map(Course::getId).collect(Collectors.toSet())
+                        ).stream()
+                        .filter(e -> e.getUser().getUserName().equals(user.getUserName()))
+                        .map(e -> e.getCourse().getId())
+                        .collect(Collectors.toSet());
+
                 return allCoursesInBlock.stream()
                         .filter(course -> !course.manualAssignmentOnly
                                 && course.getGrades().contains(user.getGrade())
-                                && !course.getExcludedGenders().contains(user.getGender()))
+                                && !course.getExcludedGenders().contains(user.getGender())
+                                && !excludedCourseIds.contains(course.getId()))
                         .map(this::map)
                         .toList();
-            else
+            } else {
                 return allCoursesInBlock.stream().map(this::map).toList();
+            }
         }
     }
 
@@ -145,7 +156,7 @@ public class CourseService {
         course.getExcludedGenders().clear();
         course.getExcludedGenders().addAll(courseDto.excludedGenders);
         course.setManualAssignmentOnly(courseDto.manualAssignmentOnly);
-        courseRepository.save(course);
+        course = courseRepository.save(course);
         if (courseDto.getBlockId() != null) {
             List<CourseBlockAssignment> courseBlockAssignments = courseBlockAssignmentRepository.findAllByCourse(course);
             courseBlockAssignmentRepository.deleteAll(courseBlockAssignments);

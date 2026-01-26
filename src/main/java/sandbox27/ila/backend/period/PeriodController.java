@@ -49,7 +49,7 @@ public class PeriodController {
         validatePeriod(periodDto);
         Period period = modelMapper.map(periodDto, Period.class);
         period.id = null;
-        periodRepository.save(period);
+        period = periodRepository.save(period);
         ExtendedPeriodDto result = modelMapper.map(period, ExtendedPeriodDto.class);
         result.setCourseCount(courseRepository.countByPeriod_Id(period.id));
         return result;
@@ -63,10 +63,11 @@ public class PeriodController {
         validatePeriod(extendedPeriodDto);
         Period period = periodRepository.findById(id).orElseThrow(() -> new ServiceException(ErrorCode.NotFound));
         modelMapper.map(extendedPeriodDto, period);
-        periodRepository.saveAndFlush(period);
+        period = periodRepository.saveAndFlush(period);
+        final long periodId = period.getId();
         if (period.isCurrent())
             periodRepository.findAll().stream()
-                    .filter(p -> p.isCurrent() && !p.getId().equals(period.id))
+                    .filter(p -> p.isCurrent() && !p.getId().equals(periodId))
                     .forEach(p -> p.setCurrent(false));
         ExtendedPeriodDto result = modelMapper.map(period, ExtendedPeriodDto.class);
         result.setCourseCount(courseRepository.countByPeriod_Id(period.id));

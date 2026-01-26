@@ -3,12 +3,15 @@ package sandbox27.ila.backend.courseexclusions;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 import sandbox27.ila.backend.course.Course;
 import sandbox27.ila.backend.user.User;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
+@Repository
 public interface CourseExclusionRepository extends JpaRepository<CourseExclusion, Long> {
 
     List<CourseExclusion> findAllByCourse(Course course);
@@ -37,4 +40,7 @@ public interface CourseExclusionRepository extends JpaRepository<CourseExclusion
 
     @Query("SELECT ce FROM CourseExclusion ce JOIN ce.course c WHERE c.period.id = :periodId AND ce.user.userName = :userName")
     List<CourseExclusion> findAllByPeriodIdAndUserName(@Param("periodId") Long periodId, @Param("userName") String userName);
+
+    @Query("SELECT ce FROM CourseExclusion ce WHERE ce.course.id IN :courseIds")
+    List<CourseExclusion> findAllByCourseIdIn(@Param("courseIds") Set<Long> courseIds);
 }

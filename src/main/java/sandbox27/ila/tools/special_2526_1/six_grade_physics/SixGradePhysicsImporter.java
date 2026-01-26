@@ -12,6 +12,7 @@ import sandbox27.ila.backend.block.Block;
 import sandbox27.ila.backend.course.Course;
 import sandbox27.ila.backend.course.CourseBlockAssignmentRepository;
 import sandbox27.ila.backend.course.CourseRepository;
+import sandbox27.ila.backend.period.Period;
 import sandbox27.ila.backend.user.User;
 import sandbox27.ila.backend.user.UserRepository;
 
@@ -33,11 +34,11 @@ public class SixGradePhysicsImporter {
     final CourseUserAssignmentRepository courseUserAssignmentRepository;
 
     @Transactional
-    public void runImport() throws IOException {
+    public void runImport(Period period) throws IOException {
         List<Assignment> importedAssignments = importFromFile();
         for (Assignment importedAssignment : importedAssignments) {
             try {
-                storeImportedAssignment(importedAssignment);
+                storeImportedAssignment(importedAssignment, period);
             } catch (Throwable e) {
                 e.printStackTrace();
             }
@@ -45,10 +46,10 @@ public class SixGradePhysicsImporter {
     }
 
     @Transactional
-    public void storeImportedAssignment(Assignment assignment) throws IOException {
+    public void storeImportedAssignment(Assignment assignment, Period period) throws IOException {
         User user = userRepository.findByFirstNameAndLastName(assignment.firstName, assignment.lastName)
                 .orElseThrow(() -> new IOException("can not find user " + assignment.firstName + " " + assignment.lastName));
-        Course course = courseRepository.findByCourseId(assignment.courseId)
+        Course course = courseRepository.findByCourseIdAndPeriod(assignment.courseId, period)
                 .orElseThrow(() -> new IOException("can not find course " + assignment.courseId));
         Block block = courseBlockAssignmentRepository.findAllByCourse(course).get(0).getBlock();
         courseUserAssignmentRepository.findByCourseAndUser(course, user)

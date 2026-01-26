@@ -12,6 +12,7 @@ import sandbox27.ila.backend.course.Course;
 import sandbox27.ila.backend.course.CourseBlockAssignment;
 import sandbox27.ila.backend.course.CourseBlockAssignmentRepository;
 import sandbox27.ila.backend.course.CourseRepository;
+import sandbox27.ila.backend.period.Period;
 import sandbox27.ila.backend.user.User;
 import sandbox27.ila.backend.user.UserRepository;
 
@@ -33,7 +34,7 @@ public class CourseUserAssignmentImporter {
     private final CourseBlockAssignmentRepository courseBlockAssignmentRepository;
     private final CourseUserAssignmentRepository courseUserAssignmentRepository;
 
-    public void runImport() throws IOException {
+    public void runImport(Period period) throws IOException {
         InputStream inputStream = new ClassPathResource("course_assignments.json").getInputStream();
         List<AssignmentRecord> records = objectMapper.readValue(
                 inputStream,
@@ -42,7 +43,7 @@ public class CourseUserAssignmentImporter {
         );
 
         for (AssignmentRecord record : records) {
-            Optional<Course> courseOpt = courseRepository.findByCourseId(record.courseId());
+            Optional<Course> courseOpt = courseRepository.findByCourseIdAndPeriod(record.courseId(), period);
             Optional<User> userOpt = userRepository.findByInternalId(record.userInternalId());
 
             if (courseOpt.isEmpty()) {

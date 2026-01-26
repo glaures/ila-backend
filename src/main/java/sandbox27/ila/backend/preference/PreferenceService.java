@@ -13,6 +13,7 @@ import sandbox27.ila.backend.course.Course;
 import sandbox27.ila.backend.course.CourseCategory;
 import sandbox27.ila.backend.course.CourseRepository;
 import sandbox27.ila.backend.course.CourseService;
+import sandbox27.ila.backend.courseexclusions.CourseExclusionRepository;
 import sandbox27.ila.backend.period.Period;
 import sandbox27.ila.backend.period.PeriodRepository;
 import sandbox27.ila.backend.user.User;
@@ -25,30 +26,29 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/preferences")
 @RequiredArgsConstructor
 public class PreferenceService {
 
-    final BlockService blockService;
     final BlockRepository blockRepository;
-    final CourseService courseService;
     final CourseRepository courseRepository;
     final PreferenceRepository preferenceRepository;
-    final ModelMapper modelMapper;
     private final PeriodRepository periodRepository;
     private final CourseUserAssignmentRepository courseUserAssignmentRepository;
+    private final CourseExclusionRepository courseExclusionRepository;
 
     @GetMapping("/{blockId}")
     public PreferencePayload getPreferences(@PathVariable("blockId") Long blockId,
                                             @AuthenticatedUser User authenticatedUser) {
-        int grade = authenticatedUser.getGrade();
         PreferencePayload payload = new PreferencePayload();
         payload.setBlockId(blockId);
         List<Long> preferencedCourseIds = preferenceRepository.findByUserAndBlock_IdOrderByPreferenceIndex(authenticatedUser, blockId)
-                        .stream().map(p -> p.getCourse().getId())
-                        .toList();
+                .stream().map(p -> p.getCourse().getId())
+                .toList();
         payload.setPreferencedCourseIds(preferencedCourseIds);
         return payload;
     }
@@ -65,6 +65,25 @@ public class PreferenceService {
                 || block.getPeriod().getEndDate().isBefore(LocalDate.now())) {
             throw new ServiceException(ErrorCode.PeriodNotStartedYet);
         }
+
+        // Prüfen, ob der Benutzer von einem der gewählten Kurse ausgeschlossen ist
+        if (!preferencedCourseIds.isEmpty()) {
+            Set<Long> excludedCourseIds = courseExclusionRepository.findAllByCourseIdIn(
+                            Set.copyOf(preferencedCourseIds)
+                    ).stream()
+                    .filter(e -> e.getUser().getUserName().equals(user.getUserName()))
+                    .map(e -> e.getCourse().getId())
+                    .collect(Collectors.toSet());
+
+            if (!excludedCourseIds.isEmpty()) {
+                // Ersten ausgeschlossenen Kurs für die Fehlermeldung finden
+                Course excludedCourse = courseRepository.findById(excludedCourseIds.iterator().next()).orElse(null);
+                String courseName = excludedCourse != null ? excludedCourse.getName() : "Unbekannt";
+                throw new ServiceException(ErrorCode.UserExcludedFromCourse,
+                        user.getFirstName() + " " + user.getLastName(), courseName);
+            }
+        }
+
         preferenceRepository.deleteByUserAndBlock(user, block);
         for (Long courseId : preferencedCourseIds) {
             Course course = courseRepository.findById(courseId).orElseThrow();
@@ -74,7 +93,7 @@ public class PreferenceService {
                     .course(course)
                     .preferenceIndex(preferencedCourseIds.indexOf(courseId))
                     .build();
-            preferenceRepository.save(pref);
+            pref = preferenceRepository.save(pref);
         }
         return getPreferences(blockId, user);
     }

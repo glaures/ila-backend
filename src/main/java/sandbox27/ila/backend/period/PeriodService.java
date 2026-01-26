@@ -14,4 +14,8 @@ public class PeriodService {
     public Period getPeriodById(long periodId) {
         return periodRepository.findById(periodId).orElseThrow(() -> new ServiceException(ErrorCode.NotFound));
     }
+
+    public Period getCurrent(){
+        return periodRepository.findByCurrent(true).get();
+    }
 }

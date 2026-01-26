@@ -8,7 +8,6 @@ import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 import sandbox27.ila.tools.special_2526_1.roomandinstructor.RoomAndInstructorImporter;
 import sandbox27.ila.tools.special_2526_1.six_grade_physics.SixGradePhysicsImporter;
-import sandbox27.ila.tools.special_2526_1.theater.TheaterBelegung;
 
 import java.io.IOException;
 
@@ -17,7 +16,6 @@ import java.io.IOException;
 @Log4j2
 public class Special2526_1Runner {
 
-    final TheaterBelegung theaterBelegung;;
     final SixGradePhysicsImporter sixGradePhysicsImporter;
     final RoomAndInstructorImporter roomAndInstructorImporter;
 

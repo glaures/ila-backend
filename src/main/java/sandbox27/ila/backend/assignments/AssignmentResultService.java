@@ -25,7 +25,7 @@ public class AssignmentResultService {
         AssignmentResult assignmentResult = assignmentResultRepository.findById(assignmentResultId)
                 .orElseThrow(() -> new ServiceException(ErrorCode.NotFound));
         assignmentResult.setFinalized(true);
-        assignmentResultRepository.save(assignmentResult);
+        assignmentResult = assignmentResultRepository.save(assignmentResult);
         AssignmentsFinalEvent assignmentsFinalEvent = new AssignmentsFinalEvent(assignmentResult.getPeriod().getId());
         applicationEventPublisher.publishEvent(assignmentsFinalEvent);
         return assignmentResultRepository.findByPeriod_IdOrderByExecutedAtDesc(assignmentResult.getPeriod().getId());
