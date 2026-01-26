@@ -39,7 +39,7 @@ public class ImportRunner {
         // log.info("Starting user import");
         // userImporter.runImport();
         log.info("Starting course import");
-        courseImporter.runImport(periodToImportInto);
+        // courseImporter.runImport(periodToImportInto);
         // log.info("Starting course assignment import");
         // courseUserAssignmentImporter.runImport();
         log.info("All imports complete");
