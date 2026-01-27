@@ -63,16 +63,17 @@ public class UserMetaInfoManagement {
         for (IServUser iservUser : iservUsers) {
             try {
                 User user = userRepository.findById(iservUser.user())
-                        .orElseGet(() -> {
-                            return userManagement.createUser(
-                                    iservUser.firstname,
-                                    iservUser.lastname,
-                                    iservUser.user + "@jmoosdorf.de",
-                                    iservUser.importId,
-                                    instructors ? Role.ADMIN.name() : Role.STUDENT.name(),
-                                    false // kein interner Nutzer, sondern von IServ verwaltet
-                            );
-                        });
+                        .orElse(userRepository.findByFirstNameAndLastName(iservUser.firstname, iservUser.lastname)
+                                .orElseGet(() -> {
+                                    return userManagement.createUser(
+                                            iservUser.firstname,
+                                            iservUser.lastname,
+                                            iservUser.user + "@jmoosdorf.de",
+                                            iservUser.importId,
+                                            instructors ? Role.ADMIN.name() : Role.STUDENT.name(),
+                                            false // kein interner Nutzer, sondern von IServ verwaltet
+                                    );
+                                }));
 
                 boolean updated = false;
                 // Extract and update grade from auxInfo
