@@ -18,6 +18,7 @@ import sandbox27.ila.backend.user.Role;
 import sandbox27.ila.backend.user.User;
 import sandbox27.ila.backend.user.UserRepository;
 import sandbox27.infrastructure.error.ErrorCode;
+import sandbox27.infrastructure.error.ErrorHandlingService;
 import sandbox27.infrastructure.error.ServiceException;
 import sandbox27.infrastructure.security.AuthenticatedUser;
 import sandbox27.infrastructure.security.RequiredRole;
@@ -42,18 +43,21 @@ public class CourseUserAssignmentService {
     final CourseBlockAssignmentRepository courseBlockAssignmentRepository;
     private final CourseExclusionRepository courseExclusionRepository;
     private final PeriodService periodService;
+    private final ErrorHandlingService errorHandlingService;
 
     @GetMapping("/{blockId}")
     @Transactional
     public CourseUserAssignmentResponse getCourseUserAssignment(@PathVariable("blockId") Long blockId,
                                                                 @AuthenticatedUser User authenticatedUser) {
-        Optional<CourseUserAssignment> assignmentOptional = courseUserAssignmentRepository.findByUserAndBlock_Id(authenticatedUser, blockId);
-        return assignmentOptional.map(courseUserAssignment -> {
-                    CourseDto courseDto = modelMapper.map(courseUserAssignment.getCourse(), CourseDto.class);
-                    BlockDto blockDto = modelMapper.map(courseUserAssignment.getBlock(), BlockDto.class);
-                    return new CourseUserAssignmentResponse(new CourseUserAssignmentDto(courseUserAssignment, courseDto, blockDto));
-                })
-                .orElseGet(CourseUserAssignmentResponse::new);
+        List<CourseUserAssignment> assignments = courseUserAssignmentRepository.findByUserAndBlock_Id(authenticatedUser, blockId);
+        if (assignments.size() > 1) {
+            errorHandlingService.handleWarning(authenticatedUser.getUserName() + " hat mehr als einen Block assigned. Nehme den ersten.");
+        }
+        if (assignments.isEmpty()) return new CourseUserAssignmentResponse();
+        CourseUserAssignment assignment = assignments.getFirst();
+        CourseDto courseDto = modelMapper.map(assignment.getCourse(), CourseDto.class);
+        BlockDto blockDto = modelMapper.map(assignment.getBlock(), BlockDto.class);
+        return new CourseUserAssignmentResponse(new CourseUserAssignmentDto(assignment, courseDto, blockDto));
     }
 
     @GetMapping
@@ -65,7 +69,7 @@ public class CourseUserAssignmentService {
         if (courseId != null) {
             assignments = courseUserAssignmentRepository.findByCourse_idOrderByUser_LastName(courseId);
         } else if (userName != null) {
-            if(periodId == null)
+            if (periodId == null)
                 throw new ServiceException(ErrorCode.FieldRequired, "Phase");
             assignments = courseUserAssignmentRepository.findByUser_userNameAndCourse_Period_Id(userName, periodId);
         }
@@ -132,8 +136,8 @@ public class CourseUserAssignmentService {
 
         int assignmentCount = 0;
         int skippedCount = 0;
-        for(CourseUserAssignment assignment : allAssignments){
-            if(!alreadyAssignedUsers.contains(assignment.getUser())){
+        for (CourseUserAssignment assignment : allAssignments) {
+            if (!alreadyAssignedUsers.contains(assignment.getUser())) {
                 // Ausgeschlossene Benutzer überspringen
                 if (excludedUserNames.contains(assignment.getUser().getUserName())) {
                     skippedCount++;

@@ -18,6 +18,7 @@ import sandbox27.ila.backend.period.Period;
 import sandbox27.ila.backend.period.PeriodRepository;
 import sandbox27.ila.backend.user.User;
 import sandbox27.infrastructure.error.ErrorCode;
+import sandbox27.infrastructure.error.ErrorHandlingService;
 import sandbox27.infrastructure.error.ServiceException;
 import sandbox27.infrastructure.security.AuthenticatedUser;
 
@@ -40,6 +41,7 @@ public class PreferenceService {
     private final PeriodRepository periodRepository;
     private final CourseUserAssignmentRepository courseUserAssignmentRepository;
     private final CourseExclusionRepository courseExclusionRepository;
+    private final ErrorHandlingService errorHandlingService;
 
     @GetMapping("/{blockId}")
     public PreferencePayload getPreferences(@PathVariable("blockId") Long blockId,
@@ -133,8 +135,12 @@ public class PreferenceService {
         List<Block> blocks = blockRepository.findAllByPeriod_idOrderByDayOfWeekAscStartTimeAsc(currentPeriod.getId());
         for (Block block : blocks) {
             // assignment suchen
-            CourseUserAssignment assignment = courseUserAssignmentRepository.findByUserAndBlock_Id(user, block.getId())
-                    .orElse(null);
+            List<CourseUserAssignment> assignments = courseUserAssignmentRepository.findByUserAndBlock_Id(user, block.getId());
+            CourseUserAssignment assignment = null;
+            if(assignments.size() > 1) {
+                errorHandlingService.handleWarning(user.getUserName() + " hat mehr als einen Block assigned. Nehme den ersten.");
+            }
+            if(!assignments.isEmpty()) assignment = assignments.getFirst();
             CourseCategory assignmentCourseCategory = assignment == null ? null :
                     assignment.getCourse().getCourseCategories().stream().findFirst().orElse(CourseCategory.iLa);
             List<TopPreference> topPreferenceList = new ArrayList<>();
