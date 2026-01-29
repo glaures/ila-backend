@@ -98,14 +98,17 @@ public class PreferencesStatusService {
         // fixed assignment
         courseUserAssignmentRepository.findByUserAndBlock_Period(user, period)
                 .forEach(assignment -> {
-                    definedBlocks.add(assignment.getBlock());
+                    Block assignedBlock = assignment.getBlock();
+                    // da der andere Block an diesem Tag keine Präferenzen bekommt, werden beide
+                    // Blöcke des Tages hinzugefügt
+                    definedBlocks.addAll(blockRepository.findByPeriod_IdAndDayOfWeek(period.getId(), assignedBlock.getDayOfWeek()));
                 });
         // preferences
         preferenceRepository.findByUserAndBlock_Period(user, period)
                 .forEach(preference -> {
                     definedBlocks.add(preference.getBlock());
                 });
-        return definedBlocks.size() / totalBlocks;
+        return Math.min(definedBlocks.size() / totalBlocks, 1.0);
     }
 
 

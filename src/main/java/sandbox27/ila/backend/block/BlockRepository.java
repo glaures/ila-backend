@@ -7,6 +7,7 @@ import sandbox27.ila.backend.period.Period;
 
 import java.time.DayOfWeek;
 import java.time.LocalTime;
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,4 +22,5 @@ public interface BlockRepository extends JpaRepository<Block, Long> {
     List<Block> findAllByPeriod_idOrderByDayOfWeekAscStartTimeAsc(long periodId);
 
     List<Block> findByPeriod(Period period);
-}
+
+
