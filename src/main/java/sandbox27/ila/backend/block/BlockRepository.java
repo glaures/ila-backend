@@ -23,4 +23,4 @@ public interface BlockRepository extends JpaRepository<Block, Long> {
 
     List<Block> findByPeriod(Period period);
 
-
+}
