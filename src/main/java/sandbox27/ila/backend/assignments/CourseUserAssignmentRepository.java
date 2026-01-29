@@ -15,7 +15,7 @@ import java.util.Optional;
 @Repository
 public interface CourseUserAssignmentRepository extends JpaRepository<CourseUserAssignment, Long> {
 
-    Optional<CourseUserAssignment> findByUserAndBlock_Id(User user, Long blockId);
+    List<CourseUserAssignment> findByUserAndBlock_Id(User user, Long blockId);
 
     Optional<CourseUserAssignment> findByCourseAndUser(Course course, User user);
 

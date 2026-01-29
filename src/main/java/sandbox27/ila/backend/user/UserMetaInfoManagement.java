@@ -198,6 +198,8 @@ public class UserMetaInfoManagement {
     private Integer extractGradeFromAuxInfo(String auxInfo) {
         if (auxInfo == null || auxInfo.isEmpty()) {
             return null;
+        } else if(auxInfo.startsWith("VK")) {
+            return -1;
         }
 
         try {
