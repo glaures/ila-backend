@@ -49,6 +49,8 @@ public class UserManagementService implements UserManagement {
         if (lastName == null)
             throw new ServiceException(ErrorCode.FieldRequired, messageSource.getMessage("lastName", null, Locale.GERMAN));
         String username = createUniqueUserPrincipal(firstName, lastName);
+        if(Character.isDigit(username.charAt(username.length()-1)))
+            lastName += username.charAt(username.length()-1);
         if (userRepository.existsById(username))
             throw new ServiceException(ErrorCode.UserAlreadyExists, username);
         final String randomPassword = PasswordUtils.generateRandomPassword();
