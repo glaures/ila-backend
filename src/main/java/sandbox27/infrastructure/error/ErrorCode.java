@@ -18,6 +18,7 @@ public enum ErrorCode {
     InvalidIServCode,
     AttendanceSessionAlreadyExists,
     InvalidCredentials,
-    UserExcludedFromCourse
+    UserExcludedFromCourse,
+    UserAlreadyHasCourseAssignedThatDay
 
 }

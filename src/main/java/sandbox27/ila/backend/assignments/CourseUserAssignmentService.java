@@ -103,6 +103,16 @@ public class CourseUserAssignmentService {
         }
 
         Block block = courseBlockAssignmentRepository.findAllByCourse(course).getFirst().getBlock();
+
+        // Prüfen, ob der Benutzer bereits eine Zuweisung am selben Tag in dieser Periode hat
+        Optional<CourseUserAssignment> existingAssignment = courseUserAssignmentRepository
+                .findByUserAndBlock_DayOfWeekAndBlock_Period(user, block.getDayOfWeek(), period);
+
+        if (existingAssignment.isPresent()) {
+            throw new ServiceException(ErrorCode.UserAlreadyHasCourseAssignedThatDay,
+                    existingAssignment.get().getCourse().getName());
+        }
+
         CourseUserAssignment courseUserAssignment = CourseUserAssignment.builder()
                 .user(user)
                 .course(course)
@@ -114,7 +124,6 @@ public class CourseUserAssignmentService {
                 .info(List.of("Zuweisung gespeichert."))
                 .build();
     }
-
 
     @RequiredRole({Role.ADMIN_ROLE_NAME, Role.COURSE_INSTRUCTOR_ROLE_NAME})
     @Transactional

@@ -9,6 +9,7 @@ import sandbox27.ila.backend.period.Period;
 import sandbox27.ila.backend.user.Role;
 import sandbox27.ila.backend.user.User;
 
+import java.time.DayOfWeek;
 import java.util.List;
 import java.util.Optional;
 
@@ -60,5 +61,7 @@ public interface CourseUserAssignmentRepository extends JpaRepository<CourseUser
     List<CourseUserAssignment> findByUser_userNameAndCourse_Period_Id(String userName, Long periodId);
 
     List<CourseUserAssignment> findByUserAndCourse_Period(User user, Period course_period);
+
+    Optional<CourseUserAssignment> findByUserAndBlock_DayOfWeekAndBlock_Period(User user, DayOfWeek dayOfWeek, Period period);
 }
 
