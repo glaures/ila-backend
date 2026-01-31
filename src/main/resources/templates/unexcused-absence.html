@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Unentschuldigte Abwesenheit</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .header {
+            background-color: #dc3545;
+            color: white;
+            padding: 15px 20px;
+            border-radius: 5px 5px 0 0;
+        }
+        .content {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border: 1px solid #dee2e6;
+            border-top: none;
+            border-radius: 0 0 5px 5px;
+        }
+        .info-box {
+            background-color: white;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        .info-row {
+            display: flex;
+            margin-bottom: 8px;
+        }
+        .info-label {
+            font-weight: bold;
+            width: 120px;
+            color: #666;
+        }
+        .info-value {
+            flex: 1;
+        }
+        .highlight {
+            color: #dc3545;
+            font-weight: bold;
+        }
+        .footer {
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px solid #dee2e6;
+            font-size: 12px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+<div class="header">
+    <h2 style="margin: 0;">⚠️ Unentschuldigte Abwesenheit</h2>
+</div>
+
+<div class="content">
+    <p>
+        Im Rahmen der iLA-Anwesenheitserfassung wurde eine <span class="highlight">unentschuldigte Abwesenheit</span>
+        festgestellt, die nicht in Beste.Schule hinterlegt ist:
+    </p>
+
+    <div class="info-box">
+        <h3 style="margin-top: 0; color: #333;">Schüler/in</h3>
+        <div class="info-row">
+            <span class="info-label">Name:</span>
+            <span class="info-value" th:text="${studentName}">Max Mustermann</span>
+        </div>
+        <div class="info-row">
+            <span class="info-label">Klasse:</span>
+            <span class="info-value" th:text="${studentGrade} + '. Klasse'">7. Klasse</span>
+        </div>
+    </div>
+
+    <div class="info-box">
+        <h3 style="margin-top: 0; color: #333;">Kurs &amp; Termin</h3>
+        <div class="info-row">
+            <span class="info-label">Kurs:</span>
+            <span class="info-value" th:text="${courseName}">Robotik AG</span>
+        </div>
+        <div class="info-row">
+            <span class="info-label">Kursleiter/in:</span>
+            <span class="info-value" th:text="${courseInstructor}">Herr Schmidt</span>
+        </div>
+        <div class="info-row">
+            <span class="info-label">Datum:</span>
+            <span class="info-value">
+                    <span th:text="${dayOfWeek}">Mittwoch</span>,
+                    <span th:text="${sessionDate}">15.01.2025</span>
+                </span>
+        </div>
+        <div class="info-row" th:if="${courseStartTime}">
+            <span class="info-label">Uhrzeit:</span>
+            <span class="info-value">
+                    <span th:text="${courseStartTime}">10:00</span> -
+                    <span th:text="${courseEndTime}">11:30</span> Uhr
+                </span>
+        </div>
+    </div>
+
+    <p>
+        <strong>Hinweis:</strong> Diese/r Schüler/in wurde vom Kursleiter als abwesend markiert,
+        ist aber in Beste.Schule für diesen Zeitraum <em>nicht</em> als abwesend eingetragen.
+    </p>
+
+    <p>
+        Bitte prüfen Sie, ob eine Krankmeldung oder Entschuldigung vorliegt und
+        tragen Sie diese ggf. in Beste.Schule nach.
+    </p>
+
+    <div class="footer">
+        <p>
+            Diese E-Mail wurde automatisch vom iLA-System der Johanna-Moosdorf-Schule generiert.
+        </p>
+    </div>
+</div>
+</body>
+</html>
