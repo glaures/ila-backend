@@ -11,6 +11,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class ProblemDto {
 
     String description;
-    String type;
+    ProblemTypes type;
     String id;
 }
