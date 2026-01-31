@@ -42,6 +42,16 @@ public class PeriodController {
         return modelMapper.map(periodRepository.findByCurrent(true).get(), PeriodDto.class);
     }
 
+    /**
+     * Gibt den Status der Wechselphase für eine Periode zurück
+     */
+    @GetMapping("/{id}/exchange-phase")
+    public ExchangePhaseDto getExchangePhase(@PathVariable("id") Long id) {
+        Period period = periodRepository.findById(id)
+                .orElseThrow(() -> new ServiceException(ErrorCode.NotFound));
+        return ExchangePhaseDto.fromPeriod(period);
+    }
+
     @RequiredRole(Role.ADMIN_ROLE_NAME)
     @PostMapping
     public ExtendedPeriodDto createPeriod(@RequestBody PeriodDto periodDto,
@@ -88,6 +98,5 @@ public class PeriodController {
             throw new ServiceException(ErrorCode.FieldRequired, "Startdatum");
         }
     }
-
 
 }
