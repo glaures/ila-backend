@@ -52,8 +52,33 @@ public interface CourseUserAssignmentRepository extends JpaRepository<CourseUser
             """)
     List<StudentAssignmentSummary> findStudentsWithLessThanInPeriod(
             @Param("role") Role role,
-            @Param("periodId") Long periodId,   // null = „alle Perioden“
-            @Param("minCount") long minCount    // z.B. 3
+            @Param("periodId") Long periodId,
+            @Param("minCount") long minCount
+    );
+
+    /**
+     * Findet alle Studenten, die mehr als einen Kurs am gleichen Wochentag zugewiesen haben.
+     */
+    @Query("""
+            SELECT new sandbox27.ila.backend.assignments.StudentDuplicateDayOfWeek(
+                u.userName,
+                u.firstName,
+                u.lastName,
+                b.dayOfWeek,
+                COUNT(cua)
+            )
+            FROM CourseUserAssignment cua
+            JOIN cua.user u
+            JOIN cua.block b
+            WHERE :role MEMBER OF u.roles
+              AND b.period.id = :periodId
+            GROUP BY u.userName, u.firstName, u.lastName, b.dayOfWeek
+            HAVING COUNT(cua) > 1
+            ORDER BY u.lastName, u.firstName, b.dayOfWeek
+            """)
+    List<StudentDuplicateDayOfWeek> findStudentsWithMultipleCoursesOnSameDayInPeriod(
+            @Param("role") Role role,
+            @Param("periodId") Long periodId
     );
 
     void deleteByCourse(Course course);
@@ -64,4 +89,3 @@ public interface CourseUserAssignmentRepository extends JpaRepository<CourseUser
 
     Optional<CourseUserAssignment> findByUserAndBlock_DayOfWeekAndBlock_Period(User user, DayOfWeek dayOfWeek, Period period);
 }
-
