@@ -4,6 +4,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import sandbox27.ila.backend.block.Block;
 import sandbox27.ila.backend.course.Course;
 import sandbox27.ila.backend.period.Period;
 import sandbox27.ila.backend.user.Role;
@@ -88,4 +89,9 @@ public interface CourseUserAssignmentRepository extends JpaRepository<CourseUser
     List<CourseUserAssignment> findByUserAndCourse_Period(User user, Period course_period);
 
     Optional<CourseUserAssignment> findByUserAndBlock_DayOfWeekAndBlock_Period(User user, DayOfWeek dayOfWeek, Period period);
+
+    List<CourseUserAssignment> findByUserAndCourse_Period_Id(User user, Long periodId);
+
+    int countByCourseAndBlock(Course course, Block block);
+
 }

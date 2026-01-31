@@ -23,6 +23,11 @@ public class PeriodDto {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd.MM.yyyy")
     LocalDate endDate;
     boolean current;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd.MM.yyyy HH:mm")
+    private LocalDateTime exchangePhaseStart;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd.MM.yyyy HH:mm")
+    private LocalDateTime exchangePhaseEnd;
+    private boolean exchangePhaseActive;
 
     public boolean isClosed(){
         return LocalDate.now().isAfter(endDate);

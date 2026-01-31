@@ -60,6 +60,38 @@ public class CourseUserAssignmentService {
         return new CourseUserAssignmentResponse(new CourseUserAssignmentDto(assignment, courseDto, blockDto));
     }
 
+    /**
+     * Gibt alle Kurszuweisungen des eingeloggten Benutzers für eine Periode zurück.
+     * Wird für die Wechselrunde verwendet.
+     */
+    @GetMapping("/my")
+    @Transactional
+    @RequiredRole(Role.STUDENT_ROLE_NAME)
+    public List<CourseUserAssignmentDto> getMyAssignments(
+            @AuthenticatedUser User authenticatedUser,
+            @RequestParam("periodId") Long periodId) {
+
+        List<CourseUserAssignment> assignments = courseUserAssignmentRepository
+                .findByUser_userNameAndCourse_Period_Id(authenticatedUser.getUserName(), periodId);
+
+        return assignments.stream()
+                .map(a -> {
+                    CourseDto courseDto = modelMapper.map(a.getCourse(), CourseDto.class);
+                    // BlockDto manuell erstellen, um dayOfWeek korrekt als String zu haben
+                    BlockDto blockDto = BlockDto.builder()
+                            .id(a.getBlock().getId())
+                            .name(a.getBlock().getName())
+                            .dayOfWeek(a.getBlock().getDayOfWeek() != null
+                                    ? a.getBlock().getDayOfWeek().name()
+                                    : null)
+                            .startTime(a.getBlock().getStartTime())
+                            .endTime(a.getBlock().getEndTime())
+                            .build();
+                    return new CourseUserAssignmentDto(a, courseDto, blockDto);
+                })
+                .toList();
+    }
+
     @GetMapping
     @Transactional
     public List<CourseUserAssignmentDto> getCourseUserAssignment(@RequestParam(value = "course-id", required = false) Long courseId,

@@ -19,6 +19,13 @@ public enum ErrorCode {
     AttendanceSessionAlreadyExists,
     InvalidCredentials,
     UserExcludedFromCourse,
-    UserAlreadyHasCourseAssignedThatDay
+    UserAlreadyHasCourseAssignedThatDay,
+    ExchangePhaseNotConfigured,
+    ExchangePhaseNotStarted,
+    ExchangePhaseEnded,
+    ExchangeRequestAlreadyExists,
+    ExchangeRequestNotPending,
+    PresetCourseNotExchangeable
+
 
 }

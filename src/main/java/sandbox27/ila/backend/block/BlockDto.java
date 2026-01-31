@@ -17,6 +17,7 @@ public class BlockDto {
     private Long id;
     private Long periodId;
     private String dayOfWeek;
+    private String name;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm")
     private LocalTime startTime;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm")
