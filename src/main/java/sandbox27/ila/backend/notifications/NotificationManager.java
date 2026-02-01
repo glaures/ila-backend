@@ -59,7 +59,7 @@ public class NotificationManager {
 
     @Async
     @TransactionalEventListener(phase = TransactionPhase.AFTER_COMPLETION)
-    public void onUserCPasswordReset(UserPasswordResetEvent userPasswordResetEvent) {
+    public void onUserPasswordReset(UserPasswordResetEvent userPasswordResetEvent) {
         Map<String, Object> model = new HashMap<>();
         model.put("firstName", userPasswordResetEvent.firstName());
         model.put("login", userPasswordResetEvent.login());

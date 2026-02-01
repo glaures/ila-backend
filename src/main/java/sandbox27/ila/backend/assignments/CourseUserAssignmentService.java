@@ -1,22 +1,29 @@
 package sandbox27.ila.backend.assignments;
 
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.event.TransactionPhase;
+import org.springframework.transaction.event.TransactionalEventListener;
 import org.springframework.web.bind.annotation.*;
 import sandbox27.ila.backend.block.Block;
 import sandbox27.ila.backend.block.BlockDto;
+import sandbox27.ila.backend.block.BlockRepository;
 import sandbox27.ila.backend.course.Course;
 import sandbox27.ila.backend.course.CourseBlockAssignmentRepository;
 import sandbox27.ila.backend.course.CourseDto;
 import sandbox27.ila.backend.course.CourseRepository;
+import sandbox27.ila.backend.course.events.CourseBlockChangedEvent;
 import sandbox27.ila.backend.courseexclusions.CourseExclusionRepository;
 import sandbox27.ila.backend.period.Period;
 import sandbox27.ila.backend.period.PeriodService;
 import sandbox27.ila.backend.user.Role;
 import sandbox27.ila.backend.user.User;
 import sandbox27.ila.backend.user.UserRepository;
+import sandbox27.ila.backend.user.events.UserCreatedEvent;
 import sandbox27.infrastructure.error.ErrorCode;
 import sandbox27.infrastructure.error.ErrorHandlingService;
 import sandbox27.infrastructure.error.ServiceException;
@@ -24,10 +31,7 @@ import sandbox27.infrastructure.security.AuthenticatedUser;
 import sandbox27.infrastructure.security.RequiredRole;
 
 import java.time.LocalDate;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @RestController
@@ -36,11 +40,12 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class CourseUserAssignmentService {
 
-    final CourseUserAssignmentRepository courseUserAssignmentRepository;
-    final ModelMapper modelMapper;
+    private final CourseUserAssignmentRepository courseUserAssignmentRepository;
+    private final ModelMapper modelMapper;
     private final UserRepository userRepository;
     private final CourseRepository courseRepository;
-    final CourseBlockAssignmentRepository courseBlockAssignmentRepository;
+    private final BlockRepository blockRepository;
+    private final CourseBlockAssignmentRepository courseBlockAssignmentRepository;
     private final CourseExclusionRepository courseExclusionRepository;
     private final PeriodService periodService;
     private final ErrorHandlingService errorHandlingService;
@@ -212,5 +217,18 @@ public class CourseUserAssignmentService {
                 .info(List.of("Die Kurszuordnung wurde entfernt"))
                 .build();
     }
+
+    @Async
+    @TransactionalEventListener(phase = TransactionPhase.AFTER_COMPLETION)
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    public void onCourseBlockChange(CourseBlockChangedEvent courseBlockChangedEvent) {
+        List<CourseUserAssignment> assignmentsForMovedCourse = courseUserAssignmentRepository.findByCourse_idOrderByUser_LastName(courseBlockChangedEvent.courseId());
+        final Block newBlock = blockRepository.getReferenceById(courseBlockChangedEvent.newBlockId());
+        for (CourseUserAssignment assignment : assignmentsForMovedCourse) {
+            assignment.setBlock(newBlock);
+            courseUserAssignmentRepository.save(assignment);
+        }
+    }
+
 
 }

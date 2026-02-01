@@ -2,11 +2,13 @@ package sandbox27.ila.backend.course;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.web.bind.annotation.*;
 import sandbox27.ila.backend.assignments.CourseUserAssignmentRepository;
 import sandbox27.ila.backend.block.Block;
 import sandbox27.ila.backend.block.BlockRepository;
 import sandbox27.ila.backend.block.BlockService;
+import sandbox27.ila.backend.course.events.CourseBlockChangedEvent;
 import sandbox27.ila.backend.courseexclusions.CourseExclusionRepository;
 import sandbox27.ila.backend.period.Period;
 import sandbox27.ila.backend.period.PeriodRepository;
@@ -37,6 +39,7 @@ public class CourseService {
     private final UserManagementService userManagementService;
     private final UserRepository userRepository;
     private final CourseExclusionRepository courseExclusionRepository;
+    private final ApplicationEventPublisher applicationEventPublisher;
 
     @GetMapping
     public List<CourseDto> getCourses(@RequestParam(name = "block-id", required = false) Long blockId,
@@ -96,6 +99,13 @@ public class CourseService {
     @PutMapping("/{id}")
     public CourseDto updateCourse(@PathVariable Long id, @RequestBody CourseDto courseDto) throws ServiceException {
         Course course = courseRepository.findById(id).orElseThrow(() -> new ServiceException(ErrorCode.NotFound));
+        Block currentBlockOfCourse = courseBlockAssignmentRepository.findByCourse(course).orElse(null).getBlock();
+        if (currentBlockOfCourse != null) {
+            final Long newBlockId = courseDto.getBlockId();
+            if (newBlockId != null && newBlockId != currentBlockOfCourse.getId()) {
+                applicationEventPublisher.publishEvent(new CourseBlockChangedEvent(course.getId(), newBlockId));
+            }
+        }
         map(courseDto, course);
         return map(course);
     }
