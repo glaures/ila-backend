@@ -49,6 +49,7 @@ public interface CourseUserAssignmentRepository extends JpaRepository<CourseUser
                                  where a3.user = u
                                    and a3.block.period.id = :periodId
                               ) < :minCount
+                          and u.grade > 0
                         order by u.userName asc
             """)
     List<StudentAssignmentSummary> findStudentsWithLessThanInPeriod(

@@ -3,6 +3,7 @@ package sandbox27.ila.backend.preference;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.context.event.EventListener;
 import org.springframework.web.bind.annotation.*;
 import sandbox27.ila.backend.assignments.CourseUserAssignment;
 import sandbox27.ila.backend.assignments.CourseUserAssignmentRepository;
@@ -13,6 +14,7 @@ import sandbox27.ila.backend.course.Course;
 import sandbox27.ila.backend.course.CourseCategory;
 import sandbox27.ila.backend.course.CourseRepository;
 import sandbox27.ila.backend.course.CourseService;
+import sandbox27.ila.backend.course.events.CourseBlockChangedEvent;
 import sandbox27.ila.backend.courseexclusions.CourseExclusionRepository;
 import sandbox27.ila.backend.period.Period;
 import sandbox27.ila.backend.period.PeriodRepository;
@@ -137,10 +139,10 @@ public class PreferenceService {
             // assignment suchen
             List<CourseUserAssignment> assignments = courseUserAssignmentRepository.findByUserAndBlock_Id(user, block.getId());
             CourseUserAssignment assignment = null;
-            if(assignments.size() > 1) {
+            if (assignments.size() > 1) {
                 errorHandlingService.handleWarning(user.getUserName() + " hat mehr als einen Block assigned. Nehme den ersten.");
             }
-            if(!assignments.isEmpty()) assignment = assignments.getFirst();
+            if (!assignments.isEmpty()) assignment = assignments.getFirst();
             CourseCategory assignmentCourseCategory = assignment == null ? null :
                     assignment.getCourse().getCourseCategories().stream().findFirst().orElse(CourseCategory.iLa);
             List<TopPreference> topPreferenceList = new ArrayList<>();
@@ -177,5 +179,23 @@ public class PreferenceService {
             }
         }
         return result;
+    }
+
+    @EventListener
+    @Transactional
+    public void handleCourseBlockChanged(CourseBlockChangedEvent event) {
+        Course course = courseRepository.findById(event.courseId())
+                .orElseThrow(() -> new ServiceException(ErrorCode.NotFound));
+
+        Block newBlock = blockRepository.findById(event.newBlockId())
+                .orElseThrow(() -> new ServiceException(ErrorCode.NotFound));
+
+        // Alle Preferences für diesen Kurs finden, die NICHT im neuen Block sind
+        preferenceRepository.findByCourse(course)
+                .forEach(pref -> {
+                    pref.setBlock(newBlock);
+                    preferenceRepository.save(pref);
+                });
+
     }
 }

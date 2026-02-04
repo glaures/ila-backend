@@ -12,6 +12,7 @@ import sandbox27.ila.backend.course.CourseService;
 import sandbox27.ila.backend.period.Period;
 import sandbox27.ila.backend.user.User;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
@@ -51,4 +52,6 @@ public interface PreferenceRepository extends JpaRepository<Preference, Long> {
                                                             Pageable pageable);
 
     Optional<Preference> findByUserAndBlock_IdAndCourse_Id(User user, long id, long id1);
+
+    List<Preference> findByCourse(Course course);
 }

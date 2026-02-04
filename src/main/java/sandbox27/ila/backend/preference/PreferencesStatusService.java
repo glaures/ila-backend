@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.*;
 import sandbox27.ila.backend.assignments.CourseUserAssignmentRepository;
 import sandbox27.ila.backend.block.Block;
 import sandbox27.ila.backend.block.BlockRepository;
+import sandbox27.ila.backend.course.CourseBlockAssignment;
+import sandbox27.ila.backend.course.CourseBlockAssignmentRepository;
 import sandbox27.ila.backend.period.Period;
 import sandbox27.ila.backend.period.PeriodRepository;
 import sandbox27.ila.backend.user.User;
@@ -41,6 +43,7 @@ public class PreferencesStatusService {
     final PreferenceRepository preferenceRepository;
     final BlockRepository blockRepository;
     final CourseUserAssignmentRepository courseUserAssignmentRepository;
+    final CourseBlockAssignmentRepository courseBlockAssignmentRepository;
     final PeriodUserPreferencesSubmitStatusRepository periodUserPreferencesSubmitStatusRepository;
 
     @GetMapping
@@ -106,7 +109,8 @@ public class PreferencesStatusService {
         // preferences
         preferenceRepository.findByUserAndBlock_Period(user, period)
                 .forEach(preference -> {
-                    definedBlocks.add(preference.getBlock());
+                    Block preferenceBlock = courseBlockAssignmentRepository.findByCourse(preference.getCourse()).get().getBlock();
+                    definedBlocks.add(preferenceBlock);
                 });
         return Math.min(definedBlocks.size() / totalBlocks, 1.0);
     }

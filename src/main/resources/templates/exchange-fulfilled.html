@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="de">
+<body>
+<p>
+    Hallo <span th:text="${firstName}">Vorname</span>,<br/>
+    <br/>
+    gute Nachrichten! Dein Wechselwunsch wurde erfolgreich erfüllt.
+</p>
+
+<h3>Details zum Kurswechsel:</h3>
+<ul>
+    <li><strong>Alter Kurs:</strong> <span th:text="${oldCourseName}">Alter Kurs</span></li>
+    <li><strong>Neuer Kurs:</strong> <span th:text="${newCourseName}">Neuer Kurs</span></li>
+    <li><strong>Block:</strong> <span th:text="${blockName}">Block</span> (<span th:text="${dayOfWeek}">Wochentag</span>)</li>
+</ul>
+
+<p>
+    Du kannst Deine aktuelle Kurszuordnung jederzeit unter <a th:href="${ilaUrl}"><span th:text="${ilaUrl}">URL</span></a> einsehen.
+</p>
+
+<p>
+    Herzliche Grüße,<br/>
+    Das iLA Orga Team
+</p>
+</body>
+</html>

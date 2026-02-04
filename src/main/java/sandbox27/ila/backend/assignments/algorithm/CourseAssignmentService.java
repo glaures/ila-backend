@@ -9,6 +9,8 @@ import sandbox27.ila.backend.block.BlockRepository;
 import sandbox27.ila.backend.course.Course;
 import sandbox27.ila.backend.course.CourseCategory;
 import sandbox27.ila.backend.course.CourseRepository;
+import sandbox27.ila.backend.course.CourseBlockAssignment;
+import sandbox27.ila.backend.course.CourseBlockAssignmentRepository;
 import sandbox27.ila.backend.assignments.CourseUserAssignment;
 import sandbox27.ila.backend.assignments.CourseUserAssignmentRepository;
 import sandbox27.ila.backend.period.Period;
@@ -22,6 +24,7 @@ import sandbox27.infrastructure.error.ErrorCode;
 import sandbox27.infrastructure.error.ServiceException;
 
 import java.time.DayOfWeek;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -36,6 +39,7 @@ public class CourseAssignmentService {
     private final BlockRepository blockRepository;
     private final PreferenceRepository preferenceRepository;
     private final CourseUserAssignmentRepository courseUserAssignmentRepository;
+    private final CourseBlockAssignmentRepository courseBlockAssignmentRepository;
     private final UserBlockExclusionService userBlockExclusionService;
     private final AssignmentResultRepository assignmentResultRepository;
 
@@ -51,7 +55,6 @@ public class CourseAssignmentService {
     @Transactional
     public AssignmentResult assignCourses(Long periodId) {
         long startTime = System.currentTimeMillis();
-        log.info("Starting course assignment for period {}", periodId);
 
         Period period = periodRepository.findById(periodId)
                 .orElseThrow(() -> new ServiceException(ErrorCode.NotFound, "Period", periodId));
@@ -60,6 +63,7 @@ public class CourseAssignmentService {
         List<User> students = userRepository.findAll().stream()
                 .filter(User::isIlaMember)
                 .filter(u -> u.getRoles().stream().anyMatch(r -> r.name().contains("STUDENT")))
+                .filter(u -> u.getGrade() > 0)
                 .collect(Collectors.toList());
 
         List<Course> courses = courseRepository.findAllByPeriod(period).stream()
@@ -68,6 +72,15 @@ public class CourseAssignmentService {
                 .collect(Collectors.toList());
 
         List<Block> blocks = blockRepository.findByPeriod(period);
+
+        // WICHTIG: Erstelle Course -> Block Mapping aus CourseBlockAssignment
+        // Dies ist die EINZIGE Quelle der Wahrheit für den Block eines Kurses!
+        Map<Long, Block> courseToBlock = new HashMap<>();
+        List<CourseBlockAssignment> courseBlockAssignments = courseBlockAssignmentRepository.findAllByPeriodId(periodId);
+        for (CourseBlockAssignment cba : courseBlockAssignments) {
+            courseToBlock.put(cba.getCourse().getId(), cba.getBlock());
+        }
+        log.info("Loaded {} course-block assignments", courseToBlock.size());
 
         Map<String, List<Preference>> userPreferences = preferenceRepository
                 .findAllByBlock_Period(period)
@@ -98,8 +111,8 @@ public class CourseAssignmentService {
                 .collect(Collectors.toList());
         courseUserAssignmentRepository.deleteAll(toDelete);
 
-        // Initialize assignment state
-        AssignmentState state = new AssignmentState(students, courses, blocks, userPreferences, userBlockExclusions);
+        // Initialize assignment state - jetzt mit courseToBlock Map!
+        AssignmentState state = new AssignmentState(students, courses, blocks, userPreferences, userBlockExclusions, courseToBlock);
 
         // Load preset assignments into state
         log.info("Loading {} preset assignments into state", presetAssignments.size());
@@ -108,6 +121,9 @@ public class CourseAssignmentService {
             // Priority -1 indicates a preset assignment (not from preferences)
             state.assign(student, preset.getBlock(), preset.getCourse(), -1);
         }
+
+        // Log students with constraints
+        logStudentsWithConstraints(state);
 
         // Phase 1: Greedy assignment with fairness
         log.info("Phase 1: Greedy assignment with fairness balancing");
@@ -120,6 +136,13 @@ public class CourseAssignmentService {
         // Phase 3: Assign students without preferences
         log.info("Phase 3: Assigning students without preferences");
         int studentsWithoutPreferences = assignStudentsWithoutPreferences(state);
+
+        // Phase 4: Fill incomplete assignments (relaxed category constraint)
+        log.info("Phase 4: Filling incomplete assignments (relaxed category constraint)");
+        int filledInPhase4 = fillIncompleteAssignmentsRelaxed(state);
+        if (filledInPhase4 > 0) {
+            log.info("Phase 4 completed: {} additional assignments made", filledInPhase4);
+        }
 
         // Save assignments to database
         log.info("Saving assignments to database");
@@ -139,27 +162,65 @@ public class CourseAssignmentService {
         return assignmentResultRepository.save(result);
     }
 
-    private void greedyAssignmentWithFairness(AssignmentState state) {
-        Random random = new Random(System.currentTimeMillis());
+    /**
+     * Loggt Schüler mit Einschränkungen (Block-Exclusions oder Presets) zur Transparenz.
+     */
+    private void logStudentsWithConstraints(AssignmentState state) {
+        List<User> constrainedStudents = state.students.stream()
+                .filter(s -> state.getExclusionCount(s) > 0 || state.getAssignmentCount(s) > 0)
+                .sorted(Comparator.comparingInt(state::getRemainingSlots))
+                .collect(Collectors.toList());
 
+        if (!constrainedStudents.isEmpty()) {
+            log.info("=== Schüler mit Einschränkungen (werden bevorzugt behandelt) ===");
+            for (User student : constrainedStudents) {
+                int exclusions = state.getExclusionCount(student);
+                int presets = state.getAssignmentCount(student);
+                int remainingSlots = state.getRemainingSlots(student);
+                int availableBlocks = state.getAvailableBlocks(student).size();
+
+                log.info("  {} (Klasse {}): {} Exclusions, {} Presets, {} verbleibende Slots, {} verfügbare Blöcke",
+                        student.getUserName(),
+                        student.getGrade(),
+                        exclusions,
+                        presets,
+                        remainingSlots,
+                        availableBlocks);
+            }
+        }
+    }
+
+    private void greedyAssignmentWithFairness(AssignmentState state) {
         for (int iteration = 0; iteration < MAX_ITERATIONS; iteration++) {
-            // Sort students by current fairness score (worst first)
+            // Sort students using "Most Constrained Variable First" principle
             List<User> sortedStudents = new ArrayList<>(state.students);
-            sortedStudents.sort(Comparator.comparingDouble(state::getFairnessScore).reversed());
+            sortedStudents.sort(
+                    Comparator.comparingInt(state::getRemainingSlots)
+                            .thenComparingInt(s -> state.getAvailableBlocks(s).size())
+                            .thenComparing(Comparator.comparingDouble(state::getFairnessScore).reversed())
+            );
 
             boolean anyAssignment = false;
 
             for (User student : sortedStudents) {
                 if (state.getAssignmentCount(student) >= COURSES_PER_STUDENT) {
-                    continue; // Student already has 3 courses
+                    continue;
                 }
 
-                // Find best valid assignment
                 Assignment bestAssignment = findBestAssignment(student, state);
 
                 if (bestAssignment != null) {
                     state.assign(student, bestAssignment.block, bestAssignment.course, bestAssignment.priority);
                     anyAssignment = true;
+
+                    if (state.getExclusionCount(student) > 0) {
+                        log.debug("Constrained student {} assigned to {} (priority {}), now has {}/{} courses",
+                                student.getUserName(),
+                                bestAssignment.course.getName(),
+                                bestAssignment.priority,
+                                state.getAssignmentCount(student),
+                                COURSES_PER_STUDENT);
+                    }
                 }
             }
 
@@ -175,20 +236,18 @@ public class CourseAssignmentService {
         Assignment bestAssignment = null;
         int bestPriority = Integer.MAX_VALUE;
 
-        // Iterate through ALL available blocks to find the best possible assignment
         for (Block block : availableBlocks) {
-            List<Preference> prefs = state.getPreferences(student, block);
+            // Hole Präferenzen für diesen Block (basierend auf CourseBlockAssignment, nicht Preference.block!)
+            List<Preference> prefs = state.getPreferencesForBlock(student, block);
 
             for (Preference pref : prefs) {
                 Course course = pref.getCourse();
 
                 if (isValidAssignment(student, block, course, state)) {
-                    // Check if this is better than our current best
                     if (pref.getPreferenceIndex() < bestPriority) {
                         bestPriority = pref.getPreferenceIndex();
                         bestAssignment = new Assignment(block, course, pref.getPreferenceIndex());
 
-                        // If we found a first preference (0), we can't do better
                         if (bestPriority == 0) {
                             return bestAssignment;
                         }
@@ -201,42 +260,42 @@ public class CourseAssignmentService {
     }
 
     private boolean isValidAssignment(User student, Block block, Course course, AssignmentState state) {
-        // Check if user is excluded from this block
+        return isValidAssignment(student, block, course, state, true);
+    }
+
+    private boolean isValidAssignment(User student, Block block, Course course,
+                                      AssignmentState state, boolean strictCategoryCheck) {
         if (state.isBlockExcludedForUser(student, block)) {
             return false;
         }
 
-        // Check if course is full
         if (state.getCourseAttendees(course, block) >= course.getMaxAttendees()) {
             return false;
         }
 
-        // Check grade
         if (!course.getGrades().isEmpty() && !course.getGrades().contains(student.getGrade())) {
             return false;
         }
 
-        // Check gender exclusion
         if (course.getExcludedGenders().contains(student.getGender())) {
             return false;
         }
 
-        // Check day conflict (no two courses on same day)
         Set<DayOfWeek> assignedDays = state.getAssignedDays(student);
         if (assignedDays.contains(block.getDayOfWeek())) {
             return false;
         }
 
-        // Check if adding this course would allow for 2+ categories
-        Set<CourseCategory> currentCategories = state.getAssignedCategories(student);
-        Set<CourseCategory> newCategories = new HashSet<>(currentCategories);
-        newCategories.addAll(course.getCourseCategories());
+        if (strictCategoryCheck) {
+            Set<CourseCategory> currentCategories = state.getAssignedCategories(student);
+            Set<CourseCategory> newCategories = new HashSet<>(currentCategories);
+            newCategories.addAll(course.getCourseCategories());
 
-        int remainingSlots = COURSES_PER_STUDENT - state.getAssignmentCount(student) - 1;
+            int remainingSlots = COURSES_PER_STUDENT - state.getAssignmentCount(student) - 1;
 
-        // If this is the last course and we don't have 2 categories yet, check if possible
-        if (remainingSlots == 0 && newCategories.size() < MIN_CATEGORIES) {
-            return false;
+            if (remainingSlots == 0 && newCategories.size() < MIN_CATEGORIES) {
+                return false;
+            }
         }
 
         return true;
@@ -246,7 +305,6 @@ public class CourseAssignmentService {
         Random random = new Random();
 
         for (int attempt = 0; attempt < SWAP_ATTEMPTS; attempt++) {
-            // Pick two random students with complete assignments
             List<User> completeStudents = state.students.stream()
                     .filter(s -> state.getAssignmentCount(s) == COURSES_PER_STUDENT)
                     .collect(Collectors.toList());
@@ -262,57 +320,47 @@ public class CourseAssignmentService {
                 continue;
             }
 
-            // Try to swap one course between them
             trySwap(student1, student2, state);
         }
     }
 
     private void trySwap(User student1, User student2, AssignmentState state) {
-        // Create copies to avoid ConcurrentModificationException
         List<StudentAssignment> assignments1 = new ArrayList<>(state.getAssignments(student1));
         List<StudentAssignment> assignments2 = new ArrayList<>(state.getAssignments(student2));
 
         for (StudentAssignment a1 : assignments1) {
             for (StudentAssignment a2 : assignments2) {
-                // Only swap if they're in the same block
                 if (!a1.block.equals(a2.block)) {
                     continue;
                 }
 
-                // Calculate current satisfaction
                 double currentSatisfaction = state.getFairnessScore(student1) + state.getFairnessScore(student2);
 
-                // Temporarily swap
                 state.unassign(student1, a1.block);
                 state.unassign(student2, a2.block);
 
-                // Check if swap is valid
                 boolean swap1Valid = isValidAssignment(student1, a2.block, a2.course, state);
                 boolean swap2Valid = isValidAssignment(student2, a1.block, a1.course, state);
 
                 if (swap1Valid && swap2Valid) {
-                    // Get priorities for swapped assignments
-                    int priority1 = state.getPriorityForCourse(student1, a2.block, a2.course);
-                    int priority2 = state.getPriorityForCourse(student2, a1.block, a1.course);
+                    int priority1 = state.getPriorityForCourse(student1, a2.course);
+                    int priority2 = state.getPriorityForCourse(student2, a1.course);
 
                     state.assign(student1, a2.block, a2.course, priority1);
                     state.assign(student2, a1.block, a1.course, priority2);
 
                     double newSatisfaction = state.getFairnessScore(student1) + state.getFairnessScore(student2);
 
-                    // Keep swap if it improves overall satisfaction
                     if (newSatisfaction < currentSatisfaction) {
                         log.debug("Successful swap between {} and {}", student1.getUserName(), student2.getUserName());
-                        return; // Keep the swap
+                        return;
                     } else {
-                        // Revert swap
                         state.unassign(student1, a2.block);
                         state.unassign(student2, a1.block);
                         state.assign(student1, a1.block, a1.course, a1.priority);
                         state.assign(student2, a2.block, a2.course, a2.priority);
                     }
                 } else {
-                    // Revert invalid swap
                     state.assign(student1, a1.block, a1.course, a1.priority);
                     state.assign(student2, a2.block, a2.course, a2.priority);
                 }
@@ -321,7 +369,6 @@ public class CourseAssignmentService {
     }
 
     private int assignStudentsWithoutPreferences(AssignmentState state) {
-        // Identify students without preferences (no assignments yet)
         List<User> studentsWithoutPreferences = state.students.stream()
                 .filter(s -> state.getAssignmentCount(s) == 0)
                 .collect(Collectors.toList());
@@ -332,7 +379,11 @@ public class CourseAssignmentService {
             return 0;
         }
 
-        // For each student without preferences, assign 3 courses
+        studentsWithoutPreferences.sort(
+                Comparator.comparingInt(state::getExclusionCount).reversed()
+                        .thenComparingInt(s -> state.getAvailableBlocks(s).size())
+        );
+
         for (User student : studentsWithoutPreferences) {
             List<Block> availableBlocks = state.getAvailableBlocks(student);
 
@@ -341,18 +392,15 @@ public class CourseAssignmentService {
                     break;
                 }
 
-                // Find best course for this block based on popularity (least free spots relative to capacity)
                 Course bestCourse = findMostPopularAvailableCourse(student, block, state);
 
                 if (bestCourse != null) {
-                    // Assign with a special priority marker (e.g., 999) to indicate no preference
                     state.assign(student, block, bestCourse, 999);
                     log.debug("Assigned {} to course {} (no preference)",
                             student.getUserName(), bestCourse.getName());
                 }
             }
 
-            // Log warning if student couldn't be fully assigned
             if (state.getAssignmentCount(student) < COURSES_PER_STUDENT) {
                 log.warn("Student {} without preferences could only be assigned {} courses",
                         student.getUserName(), state.getAssignmentCount(student));
@@ -362,17 +410,172 @@ public class CourseAssignmentService {
         return studentsWithoutPreferences.size();
     }
 
-    private Course findMostPopularAvailableCourse(User student, Block block, AssignmentState state) {
-        // Get all courses that are assigned to this block using repository
-        List<Course> coursesInBlock = courseRepository.findAllByBlock_Id(block.getId());
+    private int fillIncompleteAssignmentsRelaxed(AssignmentState state) {
+        int additionalAssignments = 0;
 
-        // Filter for valid assignments and sort by popularity (least free spots relative to capacity)
+        List<User> incompleteStudents = state.students.stream()
+                .filter(s -> {
+                    int count = state.getAssignmentCount(s);
+                    return count > 0 && count < COURSES_PER_STUDENT;
+                })
+                .collect(Collectors.toList());
+
+        log.info("Found {} students with incomplete assignments", incompleteStudents.size());
+
+        incompleteStudents.sort(
+                Comparator.comparingInt(state::getExclusionCount).reversed()
+                        .thenComparingInt(s -> state.getAvailableBlocks(s).size())
+        );
+
+        for (User student : incompleteStudents) {
+            while (state.getAssignmentCount(student) < COURSES_PER_STUDENT) {
+                Assignment bestAssignment = findBestAssignmentRelaxed(student, state);
+
+                if (bestAssignment == null) {
+                    log.warn("Schüler {} (Klasse {}) konnte nicht vollständig zugewiesen werden: {}/{} Kurse. " +
+                                    "Verfügbare Blöcke: {}, Exclusions: {}",
+                            student.getUserName(),
+                            student.getGrade(),
+                            state.getAssignmentCount(student),
+                            COURSES_PER_STUDENT,
+                            state.getAvailableBlocks(student).stream()
+                                    .map(b -> b.getDayOfWeek().toString() + " " + b.getStartTime().format(DateTimeFormatter.ofPattern("HH:mm")))
+                                    .collect(Collectors.joining(", ")),
+                            state.getExclusionCount(student));
+                    break;
+                }
+
+                state.assign(student, bestAssignment.block, bestAssignment.course, bestAssignment.priority);
+                additionalAssignments++;
+
+                Set<CourseCategory> categories = state.getAssignedCategories(student);
+                log.info("Phase 4: Assigned {} to {} (relaxed category check). Categories: {}",
+                        student.getUserName(),
+                        bestAssignment.course.getName(),
+                        categories);
+            }
+        }
+
+        return additionalAssignments;
+    }
+
+    private Assignment findBestAssignmentRelaxed(User student, AssignmentState state) {
+        List<Block> availableBlocks = state.getAvailableBlocks(student);
+        Assignment bestPreferenceAssignment = null;
+        int bestPriority = Integer.MAX_VALUE;
+
+        // Phase 1: Suche nach Präferenzen über alle Blöcke
+        for (Block block : availableBlocks) {
+            List<Preference> prefs = state.getPreferencesForBlock(student, block);
+
+            for (Preference pref : prefs) {
+                Course course = pref.getCourse();
+
+                if (isValidAssignment(student, block, course, state, false)) {
+                    if (pref.getPreferenceIndex() < bestPriority) {
+                        bestPriority = pref.getPreferenceIndex();
+                        bestPreferenceAssignment = new Assignment(block, course, pref.getPreferenceIndex());
+
+                        if (bestPriority == 0) {
+                            return bestPreferenceAssignment;
+                        }
+                    }
+                }
+            }
+        }
+
+        if (bestPreferenceAssignment != null) {
+            return bestPreferenceAssignment;
+        }
+
+        // Phase 2: Fallback - suche nach IRGENDEINEM verfügbaren Kurs in ALLEN Blöcken
+        for (Block block : availableBlocks) {
+            Course anyAvailable = findAnyAvailableCourse(student, block, state);
+            if (anyAvailable != null) {
+                return new Assignment(block, anyAvailable, 999);
+            } else {
+                logWhyNoCourseFound(student, block, state);
+            }
+        }
+
+        return null;
+    }
+
+    private void logWhyNoCourseFound(User student, Block block, AssignmentState state) {
+        List<Course> coursesInBlock = getCoursesInBlock(block, state);
+
+        if (coursesInBlock.isEmpty()) {
+            log.warn("  Block {} ({}): Keine Kurse diesem Block zugewiesen!",
+                    block.getId(), block.getDayOfWeek());
+            return;
+        }
+
+        log.warn("  Block {} ({}) - Analyse warum kein Kurs passt:", block.getId(), block.getDayOfWeek());
+
+        for (Course course : coursesInBlock) {
+            StringBuilder reasons = new StringBuilder();
+
+            if (course.isManualAssignmentOnly()) {
+                reasons.append("manualAssignmentOnly, ");
+            }
+            if (course.isPlaceholder()) {
+                reasons.append("placeholder, ");
+            }
+            if (state.isBlockExcludedForUser(student, block)) {
+                reasons.append("userExcluded, ");
+            }
+            if (state.getCourseAttendees(course, block) >= course.getMaxAttendees()) {
+                reasons.append("voll (" + state.getCourseAttendees(course, block) + "/" + course.getMaxAttendees() + "), ");
+            }
+            if (!course.getGrades().isEmpty() && !course.getGrades().contains(student.getGrade())) {
+                reasons.append("falsche Klasse (erlaubt: " + course.getGrades() + ", Schüler: " + student.getGrade() + "), ");
+            }
+            if (course.getExcludedGenders().contains(student.getGender())) {
+                reasons.append("Geschlecht ausgeschlossen, ");
+            }
+
+            if (reasons.length() > 0) {
+                log.warn("    - {} (ID {}): {}", course.getName(), course.getId(),
+                        reasons.substring(0, reasons.length() - 2));
+            } else {
+                log.warn("    - {} (ID {}): SOLLTE PASSEN - FEHLER IM ALGORITHMUS?", course.getName(), course.getId());
+            }
+        }
+    }
+
+    /**
+     * Ermittelt alle Kurse in einem Block basierend auf CourseBlockAssignment.
+     */
+    private List<Course> getCoursesInBlock(Block block, AssignmentState state) {
+        return state.courses.stream()
+                .filter(course -> {
+                    Block courseBlock = state.getBlockForCourse(course);
+                    return courseBlock != null && courseBlock.equals(block);
+                })
+                .collect(Collectors.toList());
+    }
+
+    private Course findAnyAvailableCourse(User student, Block block, AssignmentState state) {
+        List<Course> coursesInBlock = getCoursesInBlock(block, state);
+
+        return coursesInBlock.stream()
+                .filter(course -> !course.isManualAssignmentOnly())
+                .filter(course -> !course.isPlaceholder())
+                .filter(course -> isValidAssignment(student, block, course, state, false))
+                .sorted(Comparator.comparingInt(course ->
+                        course.getMaxAttendees() - state.getCourseAttendees(course, block)))
+                .findFirst()
+                .orElse(null);
+    }
+
+    private Course findMostPopularAvailableCourse(User student, Block block, AssignmentState state) {
+        List<Course> coursesInBlock = getCoursesInBlock(block, state);
+
         return coursesInBlock.stream()
                 .filter(course -> isValidAssignmentForStudentWithoutPreference(student, block, course, state))
                 .sorted(Comparator.comparingDouble(course -> {
                     int attendees = state.getCourseAttendees(course, block);
                     int maxAttendees = course.getMaxAttendees();
-                    // Calculate free spots ratio (lower = more popular)
                     return (double) (maxAttendees - attendees) / maxAttendees;
                 }))
                 .findFirst()
@@ -380,40 +583,30 @@ public class CourseAssignmentService {
     }
 
     private boolean isValidAssignmentForStudentWithoutPreference(User student, Block block, Course course, AssignmentState state) {
-        // Use the same validation as regular assignments, but skip category check
-        // since we're just trying to fill up their schedule
-
-        // Check if course is manual assignment only
         if (course.isManualAssignmentOnly()) {
             return false;
         }
 
-        // Check if course is placeholder
         if (course.isPlaceholder()) {
             return false;
         }
 
-        // Check if user is excluded from this block
         if (state.isBlockExcludedForUser(student, block)) {
             return false;
         }
 
-        // Check if course is full
         if (state.getCourseAttendees(course, block) >= course.getMaxAttendees()) {
             return false;
         }
 
-        // Check grade
         if (!course.getGrades().isEmpty() && !course.getGrades().contains(student.getGrade())) {
             return false;
         }
 
-        // Check gender exclusion
         if (course.getExcludedGenders().contains(student.getGender())) {
             return false;
         }
 
-        // Check day conflict (no two courses on same day)
         Set<DayOfWeek> assignedDays = state.getAssignedDays(student);
         if (assignedDays.contains(block.getDayOfWeek())) {
             return false;
@@ -427,7 +620,6 @@ public class CourseAssignmentService {
 
         for (User student : state.students) {
             for (StudentAssignment assignment : state.getAssignments(student)) {
-                // Skip preset assignments (priority -1), as they already exist in the database
                 if (assignment.priority == -1) {
                     continue;
                 }
@@ -446,15 +638,12 @@ public class CourseAssignmentService {
     }
 
     private AssignmentResult generateStatistics(AssignmentState state, int studentsWithoutPreferences) {
-        // ===== 1. ALLGEMEINE ZUWEISUNGSSTATISTIK (alle Schüler, alle Assignments) =====
         int totalStudents = state.students.size();
 
-        // Schüler mit genau 3 Kursen (egal ob preset, mit Präferenz oder ohne)
         int assignedStudents = (int) state.students.stream()
                 .filter(s -> state.getAssignmentCount(s) == COURSES_PER_STUDENT)
                 .count();
 
-        // Schüler mit 1-2 Kursen
         int partiallyAssigned = (int) state.students.stream()
                 .filter(s -> {
                     int count = state.getAssignmentCount(s);
@@ -462,13 +651,10 @@ public class CourseAssignmentService {
                 })
                 .count();
 
-        // Schüler ohne Kurse
         int unassigned = (int) state.students.stream()
                 .filter(s -> state.getAssignmentCount(s) == 0)
                 .count();
 
-        // ===== 2. PRÄFERENZ-BEZOGENE STATISTIK (nur Schüler mit Präferenzen) =====
-        // Finde alle Schüler, die mindestens eine preference-basierte Assignment haben (priority 0-998)
         List<User> studentsWithPreferences = state.students.stream()
                 .filter(s -> state.getAssignments(s).stream()
                         .anyMatch(a -> a.priority >= 0 && a.priority < 999))
@@ -478,13 +664,11 @@ public class CourseAssignmentService {
         double totalPriority = 0;
         int totalAssignments = 0;
 
-        // Zähle nur preference-basierte Assignments (priority 0-998)
         for (User student : studentsWithPreferences) {
             for (StudentAssignment assignment : state.getAssignments(student)) {
                 if (assignment.priority < 0 || assignment.priority >= 999) {
-                    continue; // Skip preset and "without preferences" assignments
+                    continue;
                 }
-                // Convert 0-based priority to 1-based for statistics display
                 int displayPriority = assignment.priority + 1;
                 priorityDistribution.merge(displayPriority, 1L, Long::sum);
                 totalPriority += displayPriority;
@@ -494,20 +678,17 @@ public class CourseAssignmentService {
 
         double averagePriority = totalAssignments > 0 ? totalPriority / totalAssignments : 0;
 
-        // Fairness: Nur für Schüler mit genau 3 preference-basierten Assignments berechnen
-        // (Schüler mit preset oder "ohne Präferenz"-Kursen werden bei Fairness nicht betrachtet)
         List<Double> fairnessScores = studentsWithPreferences.stream()
                 .filter(s -> state.getAssignments(s).stream()
                         .filter(a -> a.priority >= 0 && a.priority < 999)
                         .count() == COURSES_PER_STUDENT)
                 .map(s -> {
-                    // Calculate fairness score only from preference-based assignments
                     double score = state.getAssignments(s).stream()
                             .filter(a -> a.priority >= 0 && a.priority < 999)
                             .mapToInt(a -> a.priority)
                             .average()
                             .orElse(0);
-                    return score + 1.0; // Convert to 1-based
+                    return score + 1.0;
                 })
                 .collect(Collectors.toList());
 
@@ -577,15 +758,18 @@ public class CourseAssignmentService {
         final Map<String, List<StudentAssignment>> assignments;
         final Map<String, Integer> courseAttendees; // "courseId-blockId" -> count
         final Map<String, Set<Long>> userBlockExclusions; // userName -> excluded block IDs
+        final Map<Long, Block> courseToBlock; // courseId -> Block (aus CourseBlockAssignment!)
 
         AssignmentState(List<User> students, List<Course> courses, List<Block> blocks,
                         Map<String, List<Preference>> userPreferences,
-                        Map<String, Set<Long>> userBlockExclusions) {
+                        Map<String, Set<Long>> userBlockExclusions,
+                        Map<Long, Block> courseToBlock) {
             this.students = students;
             this.courses = courses;
             this.blocks = blocks;
             this.userPreferences = userPreferences;
             this.userBlockExclusions = userBlockExclusions;
+            this.courseToBlock = courseToBlock;
             this.assignments = new HashMap<>();
             this.courseAttendees = new HashMap<>();
         }
@@ -642,12 +826,27 @@ public class CourseAssignmentService {
         double getFairnessScore(User student) {
             List<StudentAssignment> userAssignments = getAssignments(student);
             if (userAssignments.isEmpty()) {
-                return Double.MAX_VALUE; // Worst possible score
+                return Double.MAX_VALUE;
             }
             return userAssignments.stream()
                     .mapToInt(a -> a.priority)
                     .average()
                     .orElse(Double.MAX_VALUE);
+        }
+
+        int getExclusionCount(User student) {
+            return userBlockExclusions.getOrDefault(student.getUserName(), Collections.emptySet()).size();
+        }
+
+        int getRemainingSlots(User student) {
+            return COURSES_PER_STUDENT - getAssignmentCount(student);
+        }
+
+        int getInitialAvailableBlockCount(User student) {
+            Set<Long> excludedBlocks = userBlockExclusions.getOrDefault(student.getUserName(), Collections.emptySet());
+            return (int) blocks.stream()
+                    .filter(b -> !excludedBlocks.contains(b.getId()))
+                    .count();
         }
 
         List<Block> getAvailableBlocks(User student) {
@@ -659,17 +858,38 @@ public class CourseAssignmentService {
                     .collect(Collectors.toList());
         }
 
-        List<Preference> getPreferences(User student, Block block) {
+        /**
+         * Ermittelt den aktuellen Block eines Kurses aus CourseBlockAssignment.
+         * WICHTIG: Der Block aus Preference.getBlock() ist möglicherweise veraltet!
+         */
+        Block getBlockForCourse(Course course) {
+            return courseToBlock.get(course.getId());
+        }
+
+        /**
+         * Ermittelt Präferenzen für einen Block basierend auf dem AKTUELLEN Block des Kurses
+         * (aus CourseBlockAssignment), NICHT aus Preference.block!
+         */
+        List<Preference> getPreferencesForBlock(User student, Block block) {
             return userPreferences.getOrDefault(student.getUserName(), Collections.emptyList())
                     .stream()
-                    .filter(p -> p.getBlock().equals(block))
+                    // WICHTIG: Den Block des Kurses aus courseToBlock ermitteln, NICHT aus p.getBlock()!
+                    .filter(p -> {
+                        Block courseBlock = courseToBlock.get(p.getCourse().getId());
+                        return courseBlock != null && courseBlock.equals(block);
+                    })
                     .sorted(Comparator.comparingInt(Preference::getPreferenceIndex))
                     .collect(Collectors.toList());
         }
 
-        int getPriorityForCourse(User student, Block block, Course course) {
-            return getPreferences(student, block).stream()
-                    .filter(p -> p.getCourse().equals(course))
+        /**
+         * Ermittelt die Priority für einen Kurs (unabhängig vom Block).
+         * Der Block wird aus CourseBlockAssignment ermittelt.
+         */
+        int getPriorityForCourse(User student, Course course) {
+            return userPreferences.getOrDefault(student.getUserName(), Collections.emptyList())
+                    .stream()
+                    .filter(p -> p.getCourse().getId() == course.getId())
                     .findFirst()
                     .map(Preference::getPreferenceIndex)
                     .orElse(Integer.MAX_VALUE);

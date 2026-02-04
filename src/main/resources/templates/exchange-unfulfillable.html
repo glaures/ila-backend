@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="de">
+<body>
+<p>
+    Hallo <span th:text="${firstName}">Vorname</span>,<br/>
+    <br/>
+    leider konnten wir Deinen Wechselwunsch nicht erfüllen.
+</p>
+
+<h3>Details zu Deinem Wechselwunsch:</h3>
+<ul>
+    <li><strong>Aktueller Kurs:</strong> <span th:text="${currentCourseName}">Aktueller Kurs</span> (<span th:text="${blockName}">Block</span>)</li>
+    <li><strong>Gewünschte Kurse:</strong>
+        <ul>
+            <li th:each="courseName : ${desiredCourseNames}" th:text="${courseName}">Kursname</li>
+        </ul>
+    </li>
+</ul>
+
+<p>
+    <strong>Grund:</strong> <span th:text="${reason}">Grund</span>
+</p>
+
+<p>
+    Du bleibst somit in Deinem aktuellen Kurs "<span th:text="${currentCourseName}">Aktueller Kurs</span>" eingeschrieben.
+</p>
+
+<p>
+    Bei Fragen wende Dich bitte an das iLA Orga Team.
+</p>
+
+<p>
+    Herzliche Grüße,<br/>
+    Das iLA Orga Team
+</p>
+</body>
+</html>

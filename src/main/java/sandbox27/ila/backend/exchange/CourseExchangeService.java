@@ -2,6 +2,7 @@ package sandbox27.ila.backend.exchange;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import sandbox27.ila.backend.assignments.CourseUserAssignment;
@@ -9,6 +10,8 @@ import sandbox27.ila.backend.assignments.CourseUserAssignmentRepository;
 import sandbox27.ila.backend.block.Block;
 import sandbox27.ila.backend.course.Course;
 import sandbox27.ila.backend.course.CourseRepository;
+import sandbox27.ila.backend.exchange.events.ExchangeRequestFulfilledEvent;
+import sandbox27.ila.backend.exchange.events.ExchangeRequestUnfulfillableEvent;
 import sandbox27.ila.backend.period.Period;
 import sandbox27.ila.backend.period.PeriodRepository;
 import sandbox27.ila.backend.user.User;
@@ -29,6 +32,7 @@ public class CourseExchangeService {
     private final CourseRepository courseRepository;
     private final PeriodRepository periodRepository;
     private final CourseEligibilityService eligibilityService;
+    private final ApplicationEventPublisher eventPublisher;
 
     /**
      * Erstellt einen neuen Wechselwunsch
@@ -274,9 +278,28 @@ public class CourseExchangeService {
         // Markiere alle verbleibenden als nicht erfüllbar
         for (ExchangeRequest request : sortedRequests) {
             if (request.getStatus() == ExchangeRequestStatus.PENDING) {
-                request.markAsUnfulfillable("Kein passender Kurs mit freien Plätzen gefunden");
+                String reason = "Kein passender Kurs mit freien Plätzen gefunden";
+                request.markAsUnfulfillable(reason);
                 exchangeRequestRepository.save(request);
                 unfulfillable++;
+
+                // Event für Email-Benachrichtigung auslösen
+                User student = request.getStudent();
+                CourseUserAssignment currentAssignment = request.getCurrentAssignment();
+                List<String> desiredCourseNames = request.getDesiredCourses().stream()
+                        .sorted(Comparator.comparingInt(ExchangeRequestOption::getPriority))
+                        .map(opt -> opt.getDesiredCourse().getName())
+                        .toList();
+
+                eventPublisher.publishEvent(new ExchangeRequestUnfulfillableEvent(
+                        student.getUserName(),
+                        student.getEmail(),
+                        student.getFirstName(),
+                        currentAssignment.getCourse().getName(),
+                        currentAssignment.getBlock().getName(),
+                        desiredCourseNames,
+                        reason
+                ));
             }
         }
 
@@ -325,6 +348,8 @@ public class CourseExchangeService {
     private void executeExchange(ExchangeRequest request, Course newCourse) {
         User student = request.getStudent();
         CourseUserAssignment oldAssignment = request.getCurrentAssignment();
+        String oldCourseName = oldAssignment.getCourse().getName();
+        Block oldBlock = oldAssignment.getBlock();
 
         // Block über CourseBlockAssignment ermitteln
         Block newBlock = eligibilityService.getBlockForCourse(newCourse);
@@ -347,8 +372,19 @@ public class CourseExchangeService {
 
         log.info("Wechsel durchgeführt: {} tauscht {} gegen {}",
                 student.getUserName(),
-                oldAssignment.getCourse().getName(),
+                oldCourseName,
                 newCourse.getName());
+
+        // Event für Email-Benachrichtigung auslösen
+        eventPublisher.publishEvent(new ExchangeRequestFulfilledEvent(
+                student.getUserName(),
+                student.getEmail(),
+                student.getFirstName(),
+                oldCourseName,
+                newCourse.getName(),
+                newBlock.getName(),
+                newBlock.getDayOfWeek().toString()
+        ));
     }
 
     /**
@@ -407,6 +443,26 @@ public class CourseExchangeService {
             throw new ServiceException(ErrorCode.AccessDenied,
                     "Die Wechselphase ist bereits beendet");
         }
+    }
+
+    /**
+     * Löscht einen Wechselwunsch (nur für Admins)
+     */
+    @Transactional
+    public void deleteRequestAsAdmin(Long requestId) {
+        ExchangeRequest request = exchangeRequestRepository.findById(requestId)
+                .orElseThrow(() -> new ServiceException(ErrorCode.NotFound, "ExchangeRequest", requestId));
+
+        // Nur PENDING Requests sollten gelöscht werden können
+        if (request.getStatus() != ExchangeRequestStatus.PENDING) {
+            throw new ServiceException(ErrorCode.AccessDenied,
+                    "Nur offene Wechselwünsche können gelöscht werden");
+        }
+
+        exchangeRequestRepository.delete(request);
+
+        log.info("Admin hat Wechselwunsch {} von Schüler {} gelöscht",
+                requestId, request.getStudent().getUserName());
     }
 
     /**
