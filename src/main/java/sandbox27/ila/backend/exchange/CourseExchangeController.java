@@ -192,6 +192,16 @@ public class CourseExchangeController {
                 .collect(Collectors.toList()));
     }
 
+    /**
+     * Löscht einen Wechselwunsch (Admin)
+     */
+    @DeleteMapping("/admin/{requestId}")
+    @RequiredRole(Role.ADMIN_ROLE_NAME)
+    public ResponseEntity<Void> deleteRequest(@PathVariable Long requestId) {
+        exchangeService.deleteRequestAsAdmin(requestId);
+        return ResponseEntity.noContent().build();
+    }
+
     // ==================== Helper ====================
 
     private ExchangeRequestResponseDto toResponseDto(ExchangeRequest request) {
