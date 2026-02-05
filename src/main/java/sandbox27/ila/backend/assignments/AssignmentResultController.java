@@ -32,4 +32,9 @@ public class AssignmentResultController {
         assignmentResultService.deleteAssignmentResult(assignmentResultId);
     }
 
+    @GetMapping("/is-finalized")
+    public boolean isCurrentPeriodFinalized() {
+        return assignmentResultService.isCurrentPeriodFinalized();
+    }
+
 }
