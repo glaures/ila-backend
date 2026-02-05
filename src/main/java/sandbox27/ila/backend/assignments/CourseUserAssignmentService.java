@@ -154,7 +154,7 @@ public class CourseUserAssignmentService {
                 .user(user)
                 .course(course)
                 .block(block)
-                .preset(block.getPeriod().getEndDate().isAfter(LocalDate.now()))
+                .preset(true)
                 .build();
         courseUserAssignmentRepository.save(courseUserAssignment);
         return Feedback.builder()
