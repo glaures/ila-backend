@@ -22,6 +22,7 @@ public class AssignmentResultService {
     final ApplicationEventPublisher applicationEventPublisher;
     final AssignmentResultRepository assignmentResultRepository;
     final PeriodRepository periodRepository;
+    final CourseUserAssignmentRepository courseUserAssignmentRepository;
 
     @Transactional
     public List<AssignmentResult> markCourseAssignmentProcessFinal(@PathVariable long assignmentResultId) throws ServiceException {
@@ -44,7 +45,15 @@ public class AssignmentResultService {
 
     @Transactional
     public void deleteAssignmentResult(Long assignmentResultId) {
-        assignmentResultRepository.deleteById(assignmentResultId);
+        AssignmentResult assignmentResult = assignmentResultRepository.findById(assignmentResultId)
+                .orElseThrow(() -> new ServiceException(ErrorCode.NotFound));
+
+        Period period = assignmentResult.getPeriod();
+
+        // Alle algorithmisch generierten Assignments der Periode löschen (preset = false)
+        courseUserAssignmentRepository.deleteByPresetFalseAndBlock_Period(period);
+
+        assignmentResultRepository.delete(assignmentResult);
     }
 
 
