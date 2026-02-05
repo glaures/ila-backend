@@ -16,7 +16,7 @@ import java.util.Map;
 @AllArgsConstructor
 @Entity
 @Table(name = "assignment_result")
-public class AssignmentResult {
+public class    AssignmentResult {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

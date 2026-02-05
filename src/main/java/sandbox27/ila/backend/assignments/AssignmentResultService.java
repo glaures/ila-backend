@@ -50,12 +50,15 @@ public class AssignmentResultService {
 
         Period period = assignmentResult.getPeriod();
 
-        // Alle algorithmisch generierten Assignments der Periode löschen (preset = false)
-        courseUserAssignmentRepository.deleteByPresetFalseAndBlock_Period(period);
+        // Prüfen, ob dies der zeitlich letzte Durchlauf der Periode ist
+        boolean isLatest = !assignmentResultRepository
+                .existsByPeriodAndExecutedAtAfter(period, assignmentResult.getExecutedAt());
 
         assignmentResultRepository.delete(assignmentResult);
+
+        // Nur beim letzten Durchlauf auch die algorithmischen Zuweisungen löschen
+        if (isLatest) {
+            courseUserAssignmentRepository.deleteByPresetFalseAndBlock_Period(period);
+        }
     }
-
-
-
 }
