@@ -14,6 +14,8 @@ import sandbox27.ila.backend.exchange.events.ExchangeRequestFulfilledEvent;
 import sandbox27.ila.backend.exchange.events.ExchangeRequestUnfulfillableEvent;
 import sandbox27.ila.backend.period.Period;
 import sandbox27.ila.backend.period.PeriodRepository;
+import sandbox27.ila.backend.preference.Preference;
+import sandbox27.ila.backend.preference.PreferenceRepository;
 import sandbox27.ila.backend.user.User;
 import sandbox27.infrastructure.error.ErrorCode;
 import sandbox27.infrastructure.error.ServiceException;
@@ -32,6 +34,7 @@ public class CourseExchangeService {
     private final CourseRepository courseRepository;
     private final PeriodRepository periodRepository;
     private final CourseEligibilityService eligibilityService;
+    private final PreferenceRepository preferenceRepository;
     private final ApplicationEventPublisher eventPublisher;
 
     /**
@@ -349,22 +352,15 @@ public class CourseExchangeService {
         User student = request.getStudent();
         CourseUserAssignment oldAssignment = request.getCurrentAssignment();
         String oldCourseName = oldAssignment.getCourse().getName();
-        Block oldBlock = oldAssignment.getBlock();
 
         // Block über CourseBlockAssignment ermitteln
         Block newBlock = eligibilityService.getBlockForCourse(newCourse);
 
-        // Lösche die alte Zuweisung
-        assignmentRepository.delete(oldAssignment);
-
-        // Erstelle die neue Zuweisung
-        CourseUserAssignment newAssignment = CourseUserAssignment.builder()
-                .user(student)
-                .course(newCourse)
-                .block(newBlock)
-                .preset(false)
-                .build();
-        assignmentRepository.save(newAssignment);
+        // Bestehende Zuweisung aktualisieren (nicht löschen, da ExchangeRequest per FK darauf verweist)
+        oldAssignment.setCourse(newCourse);
+        oldAssignment.setBlock(newBlock);
+        oldAssignment.setPreset(false);
+        assignmentRepository.save(oldAssignment);
 
         // Markiere Request als erfüllt
         request.markAsFulfilled(newCourse);
@@ -410,17 +406,44 @@ public class CourseExchangeService {
     }
 
     /**
-     * Berechnet den Fairness-Score eines Schülers (durchschnittliche Priorität seiner Kurse)
+     * Berechnet den Fairness-Score eines Schülers anhand der durchschnittlichen
+     * Präferenz-Priorität seiner zugewiesenen Kurse.
+     * Höherer Wert = schlechter bedient bei der Erstverteilung = höhere Priorität beim Tausch.
      */
     private double calculateFairnessScore(User student, Long periodId) {
         List<CourseUserAssignment> assignments =
                 assignmentRepository.findByUserAndCourse_Period_Id(student, periodId);
 
-        // Finde die ursprünglichen Prioritäten aus den Preferences
-        // Hier vereinfacht: Je mehr preset/ohne-Präferenz-Kurse, desto neutraler
-        // In einer vollständigen Implementierung würdest du die Original-Preferences laden
+        if (assignments.isEmpty()) {
+            return 0.0;
+        }
 
-        return assignments.size(); // Vereinfacht - besser wäre die Original-Priority
+        double totalPriority = 0;
+        int counted = 0;
+
+        for (CourseUserAssignment assignment : assignments) {
+            if (assignment.isPreset()) {
+                continue; // Preset-Kurse zählen nicht zur Fairness
+            }
+
+            Optional<Preference> preference = preferenceRepository
+                    .findByUserAndBlock_IdAndCourse_Id(
+                            student,
+                            assignment.getBlock().getId(),
+                            assignment.getCourse().getId());
+
+            if (preference.isPresent()) {
+                totalPriority += preference.get().getPreferenceIndex();
+                counted++;
+            }
+            // Kein Preference-Eintrag = Schüler hat keine Präferenz abgegeben → ignorieren
+        }
+
+        if (counted == 0) {
+            return 0.0; // Nur Preset-Kurse → neutral
+        }
+
+        return totalPriority / counted;
     }
 
     /**
