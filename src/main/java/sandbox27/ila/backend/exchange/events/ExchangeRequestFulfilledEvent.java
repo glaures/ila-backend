@@ -8,7 +8,9 @@ public record ExchangeRequestFulfilledEvent(
         String studentEmail,
         String studentFirstName,
         String oldCourseName,
+        String oldBlockName,
+        String oldDayOfWeek,
         String newCourseName,
-        String blockName,
-        String dayOfWeek
+        String newBlockName,
+        String newDayOfWeek
 ) {}

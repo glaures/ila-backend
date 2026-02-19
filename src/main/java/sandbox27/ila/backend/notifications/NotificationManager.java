@@ -111,9 +111,11 @@ public class NotificationManager {
         Map<String, Object> model = new HashMap<>();
         model.put("firstName", event.studentFirstName());
         model.put("oldCourseName", event.oldCourseName());
+        model.put("oldBlockName", event.oldBlockName());
+        model.put("oldDayOfWeek", translateDayOfWeek(event.oldDayOfWeek()));
         model.put("newCourseName", event.newCourseName());
-        model.put("blockName", event.blockName());
-        model.put("dayOfWeek", translateDayOfWeek(event.dayOfWeek()));
+        model.put("newBlockName", event.newBlockName());
+        model.put("newDayOfWeek", translateDayOfWeek(event.newDayOfWeek()));
         model.put("ilaUrl", ilaUrl);
         try {
             mailService.sendHtml(event.studentEmail(),
@@ -134,6 +136,7 @@ public class NotificationManager {
         model.put("firstName", event.studentFirstName());
         model.put("currentCourseName", event.currentCourseName());
         model.put("blockName", event.blockName());
+        model.put("dayOfWeek", translateDayOfWeek(event.dayOfWeek()));
         model.put("desiredCourseNames", event.desiredCourseNames());
         model.put("reason", event.reason());
         model.put("ilaUrl", ilaUrl);

@@ -93,7 +93,7 @@ public class CourseExchangeService {
 
         // Validiere jeden gewünschten Kurs
         for (Course desiredCourse : desiredCourses) {
-            EligibilityResult result = eligibilityService.checkExchangeEligibility(
+            EligibilityResult result = eligibilityService.checkExchangeEligibilityForDisplay(
                     student, currentAssignment, desiredCourse, periodId);
 
             if (result.isIneligible()) {
@@ -300,6 +300,7 @@ public class CourseExchangeService {
                         student.getFirstName(),
                         currentAssignment.getCourse().getName(),
                         currentAssignment.getBlock().getName(),
+                        currentAssignment.getBlock().getDayOfWeek().toString(),
                         desiredCourseNames,
                         reason
                 ));
@@ -329,7 +330,7 @@ public class CourseExchangeService {
             Course desiredCourse = option.getDesiredCourse();
 
             // Prüfe Berechtigung zum Zeitpunkt der Auflösung
-            EligibilityResult eligibility = eligibilityService.checkExchangeEligibility(
+            EligibilityResult eligibility = eligibilityService.checkExchangeEligibilityForResolution(
                     student, currentAssignment, desiredCourse, periodId);
 
             if (eligibility.isEligible()) {
@@ -352,6 +353,7 @@ public class CourseExchangeService {
         User student = request.getStudent();
         CourseUserAssignment oldAssignment = request.getCurrentAssignment();
         String oldCourseName = oldAssignment.getCourse().getName();
+        Block oldBlock = oldAssignment.getBlock();
 
         // Block über CourseBlockAssignment ermitteln
         Block newBlock = eligibilityService.getBlockForCourse(newCourse);
@@ -377,6 +379,8 @@ public class CourseExchangeService {
                 student.getEmail(),
                 student.getFirstName(),
                 oldCourseName,
+                oldBlock.getName(),
+                oldBlock.getDayOfWeek().toString(),
                 newCourse.getName(),
                 newBlock.getName(),
                 newBlock.getDayOfWeek().toString()
@@ -513,7 +517,7 @@ public class CourseExchangeService {
         List<AvailableCourseDto> result = new ArrayList<>();
 
         for (Course course : allCourses) {
-            EligibilityResult eligibility = eligibilityService.checkExchangeEligibility(
+            EligibilityResult eligibility = eligibilityService.checkExchangeEligibilityForDisplay(
                     student, assignmentToGiveUp, course, periodId);
 
             // Kurse mit harten Ausschlüssen (Klassenstufe, Geschlecht etc.) komplett ausblenden

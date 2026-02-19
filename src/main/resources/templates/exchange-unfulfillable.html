@@ -9,7 +9,7 @@
 
 <h3>Details zu Deinem Wechselwunsch:</h3>
 <ul>
-    <li><strong>Aktueller Kurs:</strong> <span th:text="${currentCourseName}">Aktueller Kurs</span> (<span th:text="${blockName}">Block</span>)</li>
+    <li><strong>Aktueller Kurs:</strong> <span th:text="${currentCourseName}">Aktueller Kurs</span> (<span th:text="${blockName}">Block</span>, <span th:text="${dayOfWeek}">Wochentag</span>)</li>
     <li><strong>Gewünschte Kurse:</strong>
         <ul>
             <li th:each="courseName : ${desiredCourseNames}" th:text="${courseName}">Kursname</li>
