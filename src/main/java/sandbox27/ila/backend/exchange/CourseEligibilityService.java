@@ -46,23 +46,28 @@ public class CourseEligibilityService {
     /**
      * Prüft, ob ein Schüler einen bestimmten Kurs belegen darf.
      * Berücksichtigt alle aktuellen Zuweisungen des Schülers.
+     * Verwendet forResolution=false (für Anzeige).
      */
     public EligibilityResult checkEligibility(User student, Course course, Long periodId) {
         List<CourseUserAssignment> currentAssignments =
                 assignmentRepository.findByUserAndCourse_Period_Id(student, periodId);
 
-        return checkEligibilityWithAssignments(student, course, currentAssignments, periodId);
+        return checkEligibilityWithAssignments(student, course, currentAssignments, periodId, false);
     }
 
     /**
      * Prüft die Berechtigung mit einer expliziten Liste von Zuweisungen.
      * Nützlich für Simulationen (z.B. "was wäre wenn ich diesen Kurs abgebe?")
+     *
+     * @param forResolution wenn true, werden volle Kurse als ineligible behandelt (für Batch-Auflösung).
+     *                      wenn false, werden volle Kurse als eligibleWithWarning behandelt (für Anzeige).
      */
     public EligibilityResult checkEligibilityWithAssignments(
             User student,
             Course course,
             List<CourseUserAssignment> currentAssignments,
-            Long periodId) {
+            Long periodId,
+            boolean forResolution) {
 
         // Block über CourseBlockAssignment ermitteln
         Block targetBlock = getBlockForCourse(course);
@@ -96,7 +101,7 @@ public class CourseEligibilityService {
             return EligibilityResult.excluded("Geschlecht ist für diesen Kurs ausgeschlossen");
         }
 
-        // === WEICHE EINSCHRÄNKUNGEN (Kurs wird angezeigt, aber als "nicht ideal" markiert) ===
+        // === WEICHE EINSCHRÄNKUNGEN ===
 
         // 6. Tageskonflikt? (kein zweiter Kurs am selben Tag)
         Set<DayOfWeek> assignedDays = currentAssignments.stream()
@@ -108,31 +113,41 @@ public class CourseEligibilityService {
         }
 
         // 7. Kategorien-Regel: Nach Zuweisung mind. 2 Kategorien möglich?
-        Set<CourseCategory> currentCategories = currentAssignments.stream()
-                .flatMap(a -> a.getCourse().getCourseCategories().stream())
-                .collect(Collectors.toSet());
+        //    Nur bei der Batch-Auflösung prüfen - bei der Anzeige ignorieren,
+        //    da andere Wechselwünsche des Schülers die Regel erfüllen könnten.
+        if (forResolution) {
+            Set<CourseCategory> currentCategories = currentAssignments.stream()
+                    .flatMap(a -> a.getCourse().getCourseCategories().stream())
+                    .collect(Collectors.toSet());
 
-        Set<CourseCategory> newCategories = new HashSet<>(currentCategories);
-        newCategories.addAll(course.getCourseCategories());
+            Set<CourseCategory> newCategories = new HashSet<>(currentCategories);
+            newCategories.addAll(course.getCourseCategories());
 
-        int assignmentsAfter = currentAssignments.size() + 1;
-        int remainingSlots = COURSES_PER_STUDENT - assignmentsAfter;
+            int assignmentsAfter = currentAssignments.size() + 1;
+            int remainingSlots = COURSES_PER_STUDENT - assignmentsAfter;
 
-        // Wenn das der letzte Kurs wäre und wir nicht genug Kategorien haben
-        if (remainingSlots == 0 && newCategories.size() < MIN_CATEGORIES) {
-            return EligibilityResult.ineligible("Mindestens " + MIN_CATEGORIES +
-                    " verschiedene Kategorien erforderlich");
+            // Wenn das der letzte Kurs wäre und wir nicht genug Kategorien haben
+            if (remainingSlots == 0 && newCategories.size() < MIN_CATEGORIES) {
+                return EligibilityResult.ineligible("Mindestens " + MIN_CATEGORIES +
+                        " verschiedene Kategorien erforderlich");
+            }
         }
 
-        // 8. Schüler hat bereits max. Kurse?
+        // 8. Schüler hat bereits max. Kurse? (Bei Wechsel irrelevant, da abzugebender Kurs simuliert entfernt wird)
         if (currentAssignments.size() >= COURSES_PER_STUDENT) {
             return EligibilityResult.ineligible("Schüler hat bereits " + COURSES_PER_STUDENT + " Kurse");
         }
 
-        // 9. Kurs voll? (Warnung, aber trotzdem wählbar für Wechselrunde)
+        // 9. Kurs voll?
         int currentAttendees = assignmentRepository.countByCourseAndBlock(course, targetBlock);
         if (currentAttendees >= course.getMaxAttendees()) {
-            return EligibilityResult.eligibleWithWarning("Kurs ist aktuell voll (" + currentAttendees + "/" + course.getMaxAttendees() + ")");
+            if (forResolution) {
+                // Bei der Batch-Auflösung: Kurs ist voll → nicht möglich (Request bleibt PENDING für nächste Runde)
+                return EligibilityResult.ineligible("Kurs ist voll (" + currentAttendees + "/" + course.getMaxAttendees() + ")");
+            } else {
+                // Bei der Anzeige: Kurs ist voll → wählbar für Wunschliste mit Warnung
+                return EligibilityResult.eligibleWithWarning("Kurs ist aktuell voll (" + currentAttendees + "/" + course.getMaxAttendees() + ")");
+            }
         }
 
         return EligibilityResult.eligible();
@@ -141,12 +156,16 @@ public class CourseEligibilityService {
     /**
      * Prüft, ob ein Wechsel von einem Kurs zu einem anderen möglich ist.
      * Simuliert den Zustand nach Abgabe des alten Kurses.
+     *
+     * @param forResolution wenn true, werden volle Kurse als ineligible behandelt (für Batch-Auflösung).
+     *                      wenn false, werden volle Kurse als eligibleWithWarning behandelt (für Anzeige).
      */
     public EligibilityResult checkExchangeEligibility(
             User student,
             CourseUserAssignment assignmentToGiveUp,
             Course desiredCourse,
-            Long periodId) {
+            Long periodId,
+            boolean forResolution) {
 
         // Lade aktuelle Zuweisungen
         List<CourseUserAssignment> currentAssignments =
@@ -158,7 +177,29 @@ public class CourseEligibilityService {
                 .collect(Collectors.toList());
 
         // Prüfe mit simuliertem Zustand
-        return checkEligibilityWithAssignments(student, desiredCourse, simulatedAssignments, periodId);
+        return checkEligibilityWithAssignments(student, desiredCourse, simulatedAssignments, periodId, forResolution);
+    }
+
+    /**
+     * Prüft, ob ein Wechsel möglich ist - für die Anzeige (volle Kurse mit Warning).
+     */
+    public EligibilityResult checkExchangeEligibilityForDisplay(
+            User student,
+            CourseUserAssignment assignmentToGiveUp,
+            Course desiredCourse,
+            Long periodId) {
+        return checkExchangeEligibility(student, assignmentToGiveUp, desiredCourse, periodId, false);
+    }
+
+    /**
+     * Prüft, ob ein Wechsel möglich ist - für die Batch-Auflösung (volle Kurse = ineligible).
+     */
+    public EligibilityResult checkExchangeEligibilityForResolution(
+            User student,
+            CourseUserAssignment assignmentToGiveUp,
+            Course desiredCourse,
+            Long periodId) {
+        return checkExchangeEligibility(student, assignmentToGiveUp, desiredCourse, periodId, true);
     }
 
     /**

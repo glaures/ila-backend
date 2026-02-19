@@ -11,6 +11,7 @@ public record ExchangeRequestUnfulfillableEvent(
         String studentFirstName,
         String currentCourseName,
         String blockName,
+        String dayOfWeek,
         List<String> desiredCourseNames,
         String reason
 ) {}

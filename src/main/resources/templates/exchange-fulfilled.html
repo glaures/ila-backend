@@ -9,9 +9,8 @@
 
 <h3>Details zum Kurswechsel:</h3>
 <ul>
-    <li><strong>Alter Kurs:</strong> <span th:text="${oldCourseName}">Alter Kurs</span></li>
-    <li><strong>Neuer Kurs:</strong> <span th:text="${newCourseName}">Neuer Kurs</span></li>
-    <li><strong>Block:</strong> <span th:text="${blockName}">Block</span> (<span th:text="${dayOfWeek}">Wochentag</span>)</li>
+    <li><strong>Alter Kurs:</strong> <span th:text="${oldCourseName}">Alter Kurs</span> (<span th:text="${oldBlockName}">Block</span>, <span th:text="${oldDayOfWeek}">Wochentag</span>)</li>
+    <li><strong>Neuer Kurs:</strong> <span th:text="${newCourseName}">Neuer Kurs</span> (<span th:text="${newBlockName}">Block</span>, <span th:text="${newDayOfWeek}">Wochentag</span>)</li>
 </ul>
 
 <p>
