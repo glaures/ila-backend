@@ -3,12 +3,14 @@ package sandbox27.ila.backend.assignments;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.event.TransactionPhase;
 import org.springframework.transaction.event.TransactionalEventListener;
 import org.springframework.web.bind.annotation.*;
+import sandbox27.ila.backend.assignments.events.CourseAssignmentDeleteEvent;
 import sandbox27.ila.backend.block.Block;
 import sandbox27.ila.backend.block.BlockDto;
 import sandbox27.ila.backend.block.BlockRepository;
@@ -49,6 +51,7 @@ public class CourseUserAssignmentService {
     private final CourseExclusionRepository courseExclusionRepository;
     private final PeriodService periodService;
     private final ErrorHandlingService errorHandlingService;
+    private final ApplicationEventPublisher applicationEventPublisher;
 
     @GetMapping("/{blockId}")
     @Transactional
@@ -212,6 +215,7 @@ public class CourseUserAssignmentService {
                                      @AuthenticatedUser User authenticatedUser) throws ServiceException {
         CourseUserAssignment assignment = courseUserAssignmentRepository.findById(assignmentId)
                 .orElseThrow(() -> new ServiceException(ErrorCode.NotFound));
+        applicationEventPublisher.publishEvent(new CourseAssignmentDeleteEvent(assignmentId));
         courseUserAssignmentRepository.delete(assignment);
         return Feedback.builder()
                 .info(List.of("Die Kurszuordnung wurde entfernt"))
