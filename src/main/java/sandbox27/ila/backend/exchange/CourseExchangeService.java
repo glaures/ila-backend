@@ -3,10 +3,14 @@ package sandbox27.ila.backend.exchange;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.event.TransactionPhase;
+import org.springframework.transaction.event.TransactionalEventListener;
 import sandbox27.ila.backend.assignments.CourseUserAssignment;
 import sandbox27.ila.backend.assignments.CourseUserAssignmentRepository;
+import sandbox27.ila.backend.assignments.events.CourseAssignmentDeleteEvent;
 import sandbox27.ila.backend.block.Block;
 import sandbox27.ila.backend.course.Course;
 import sandbox27.ila.backend.course.CourseRepository;
@@ -551,4 +555,11 @@ public class CourseExchangeService {
 
         return result;
     }
+
+    @EventListener
+    public void onCourseAssignmentDelete(CourseAssignmentDeleteEvent event) {
+        List<ExchangeRequest> requestsForAssignment = exchangeRequestRepository.findByCurrentAssignment_Id(event.courseAssignmentId());
+        exchangeRequestRepository.deleteAll(requestsForAssignment);
+    }
+
 }

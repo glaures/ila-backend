@@ -21,6 +21,8 @@ public interface ExchangeRequestRepository extends JpaRepository<ExchangeRequest
 
     List<ExchangeRequest> findByStudentAndPeriodAndStatus(User student, Period period, ExchangeRequestStatus status);
 
+    List<ExchangeRequest> findByCurrentAssignment_Id(Long assignmentId);
+
     @Query("SELECT er FROM ExchangeRequest er " +
             "JOIN FETCH er.desiredCourses " +
             "WHERE er.period = :period AND er.status = :status")
