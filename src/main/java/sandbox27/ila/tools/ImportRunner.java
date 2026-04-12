@@ -24,7 +24,7 @@ public class ImportRunner {
     final PeriodRepository periodRepository;
     final PlaceholderCheck placeholderCheck;
 
-    public static final String PERIOD = "3. Quartal 25/26";
+    public static final String PERIOD = "4. Quartal 25/26";
 
     @EventListener(ApplicationReadyEvent.class)
     @Transactional
@@ -32,14 +32,14 @@ public class ImportRunner {
         Period periodToImportInto = periodRepository.findByName(PERIOD).orElseGet(() -> periodRepository.save(
                 Period.builder()
                         .name(PERIOD)
-                        .startDate(LocalDate.of(2026, 1, 29))
-                        .endDate(LocalDate.of(2025, 2, 3))
+                        .startDate(LocalDate.of(2026, 5, 1))
+                        .endDate(LocalDate.of(2025, 5, 3))
                         .build()));
         periodToImportInto = periodRepository.save(periodToImportInto);
         // log.info("Starting user import");
         // userImporter.runImport();
         log.info("Starting course import");
-        // courseImporter.runImport(periodToImportInto);
+        courseImporter.runImport(periodToImportInto);
         // log.info("Starting course assignment import");
         // courseUserAssignmentImporter.runImport();
         log.info("All imports complete");

@@ -33,5 +33,6 @@ build/
 .vscode/
 /src/main/resources/application-dev.properties
 /src/main/resources/application-production.properties
+/src/main/resources/kursangebote.json
 /docs/UserExport.xlsx
 /docs/~$UserExport.xlsx
