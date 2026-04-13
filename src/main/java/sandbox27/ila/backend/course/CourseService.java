@@ -75,9 +75,19 @@ public class CourseService {
 
     @GetMapping("/instructedbyme")
     @RequiredRole(Role.COURSE_INSTRUCTOR_ROLE_NAME)
-    public List<CourseDto> getCoursesInstructedByMe(@AuthenticatedUser User user) {
-        Period currentPeriod = periodRepository.findByCurrent(true).orElseThrow(() -> new ServiceException(ErrorCode.NotFound));
-        return courseRepository.findByInstructorAndPeriod(user, currentPeriod).stream().map(this::map).toList();
+    public List<CourseDto> getCoursesInstructedByMe(
+            @RequestParam(value = "period-id", required = false) Long periodId,
+            @AuthenticatedUser User user) {
+        Period period;
+        if (periodId != null) {
+            period = periodRepository.findById(periodId)
+                    .orElseThrow(() -> new ServiceException(ErrorCode.NotFound));
+        } else {
+            period = periodRepository.findByCurrent(true)
+                    .orElseThrow(() -> new ServiceException(ErrorCode.NotFound));
+        }
+        return courseRepository.findByInstructorAndPeriod(user, period).stream()
+                .map(this::map).toList();
     }
 
     @GetMapping("/{courseId}")
