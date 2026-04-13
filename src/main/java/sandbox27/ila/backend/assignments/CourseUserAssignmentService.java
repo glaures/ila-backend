@@ -170,42 +170,79 @@ public class CourseUserAssignmentService {
     @PostMapping("/copy-assignments")
     public Feedback copyAssignments(@RequestParam("source-course-id") Long sourceCourseId,
                                     @RequestParam("destination-course-id") Long destinationCourseId) throws ServiceException {
-        Course destinationCourse = courseRepository.getReferenceById(destinationCourseId);
-        List<CourseUserAssignment> allAssignments = courseUserAssignmentRepository.findByCourse_idOrderByUser_LastName(sourceCourseId);
-        Set<User> alreadyAssignedUsers = courseUserAssignmentRepository.findByCourse_idOrderByUser_LastName(destinationCourseId)
+        Course destinationCourse = courseRepository.findById(destinationCourseId)
+                .orElseThrow(() -> new ServiceException(ErrorCode.NotFound));
+
+        // Block des Zielkurses (single source of truth: CourseBlockAssignment)
+        Block destinationBlock = courseBlockAssignmentRepository.findAllByCourse(destinationCourse)
+                .stream().findFirst()
+                .orElseThrow(() -> new ServiceException(ErrorCode.NotFound))
+                .getBlock();
+
+        List<CourseUserAssignment> sourceAssignments =
+                courseUserAssignmentRepository.findByCourse_idOrderByUser_LastName(sourceCourseId);
+
+        Set<User> alreadyAssignedUsers = courseUserAssignmentRepository
+                .findByCourse_idOrderByUser_LastName(destinationCourseId)
                 .stream()
                 .map(CourseUserAssignment::getUser)
                 .collect(Collectors.toSet());
 
-        // Ausgeschlossene Benutzer für den Zielkurs ermitteln
         Set<String> excludedUserNames = courseExclusionRepository.findAllByCourseId(destinationCourseId)
                 .stream()
                 .map(e -> e.getUser().getUserName())
                 .collect(Collectors.toSet());
 
         int assignmentCount = 0;
-        int skippedCount = 0;
-        for (CourseUserAssignment assignment : allAssignments) {
-            if (!alreadyAssignedUsers.contains(assignment.getUser())) {
-                // Ausgeschlossene Benutzer überspringen
-                if (excludedUserNames.contains(assignment.getUser().getUserName())) {
-                    skippedCount++;
-                    log.info("Überspringe ausgeschlossenen Benutzer {} für Kurs {}",
-                            assignment.getUser().getUserName(), destinationCourse.getName());
-                    continue;
-                }
-                CourseUserAssignmentPayload p = new CourseUserAssignmentPayload(assignment.getUser().getUserName(), destinationCourse.getCourseId());
-                assignCourseToUser(p);
-                assignmentCount++;
+        int skippedExcluded = 0;
+        int skippedDayConflict = 0;
+        List<String> warnings = new ArrayList<>();
+
+        for (CourseUserAssignment sourceAssignment : sourceAssignments) {
+            User user = sourceAssignment.getUser();
+
+            if (alreadyAssignedUsers.contains(user)) {
+                continue;
             }
+
+            if (excludedUserNames.contains(user.getUserName())) {
+                skippedExcluded++;
+                log.info("Überspringe ausgeschlossenen Benutzer {} für Kurs {}",
+                        user.getUserName(), destinationCourse.getName());
+                continue;
+            }
+
+            // Prüfen, ob der Benutzer bereits eine Zuweisung am selben Tag in der Ziel-Periode hat
+            Optional<CourseUserAssignment> conflict = courseUserAssignmentRepository
+                    .findByUserAndBlock_DayOfWeekAndBlock_Period(
+                            user, destinationBlock.getDayOfWeek(), destinationCourse.getPeriod());
+            if (conflict.isPresent()) {
+                skippedDayConflict++;
+                warnings.add(user.getFirstName() + " " + user.getLastName()
+                        + " hat bereits einen Kurs an diesem Tag: " + conflict.get().getCourse().getName());
+                continue;
+            }
+
+            courseUserAssignmentRepository.save(
+                    CourseUserAssignment.builder()
+                            .user(user)
+                            .course(destinationCourse)
+                            .block(destinationBlock)
+                            .preset(true)
+                            .build()
+            );
+            assignmentCount++;
         }
 
-        List<String> infos = new java.util.ArrayList<>();
-        infos.add(assignmentCount + " Teilnehmer hinzugefügt.");
-        if (skippedCount > 0) {
-            infos.add(skippedCount + " ausgeschlossene Teilnehmer übersprungen.");
+        List<String> infos = new ArrayList<>();
+        infos.add(assignmentCount + " Teilnehmer:innen hinzugefügt.");
+        if (skippedExcluded > 0) {
+            infos.add(skippedExcluded + " ausgeschlossene Teilnehmer:innen übersprungen.");
         }
-        return new Feedback(infos, Collections.emptyList(), Collections.emptyList());
+        if (skippedDayConflict > 0) {
+            infos.add(skippedDayConflict + " Teilnehmer:innen mit Tages-Konflikt übersprungen.");
+        }
+        return new Feedback(infos, warnings, Collections.emptyList());
     }
 
     @RequiredRole({Role.ADMIN_ROLE_NAME, Role.COURSE_INSTRUCTOR_ROLE_NAME})
