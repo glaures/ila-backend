@@ -21,6 +21,7 @@ import sandbox27.ila.backend.course.CourseRepository;
 import sandbox27.ila.backend.course.events.CourseBlockChangedEvent;
 import sandbox27.ila.backend.courseexclusions.CourseExclusionRepository;
 import sandbox27.ila.backend.period.Period;
+import sandbox27.ila.backend.period.PeriodRepository;
 import sandbox27.ila.backend.period.PeriodService;
 import sandbox27.ila.backend.user.Role;
 import sandbox27.ila.backend.user.User;
@@ -50,6 +51,7 @@ public class CourseUserAssignmentService {
     private final CourseBlockAssignmentRepository courseBlockAssignmentRepository;
     private final CourseExclusionRepository courseExclusionRepository;
     private final PeriodService periodService;
+    private PeriodRepository periodRepository;
     private final ErrorHandlingService errorHandlingService;
     private final ApplicationEventPublisher applicationEventPublisher;
 
@@ -121,23 +123,21 @@ public class CourseUserAssignmentService {
                 .toList();
     }
 
-    public record CourseUserAssignmentPayload(
-            String userName,
-            String courseId
-    ) {
+    public record CourseUserAssignmentPayload(String userName, String courseId, Long periodId) {
     }
 
     @RequiredRole({Role.ADMIN_ROLE_NAME, Role.COURSE_INSTRUCTOR_ROLE_NAME})
     @Transactional
     @PostMapping
-    public Feedback assignCourseToUser(@RequestBody CourseUserAssignmentPayload courseUserAssignmentPayload) throws ServiceException {
-        final Period period = periodService.getCurrent();
-        User user = userRepository.findById(courseUserAssignmentPayload.userName)
+    public Feedback assignCourseToUser(@RequestBody CourseUserAssignmentPayload payload) throws ServiceException {
+        final Period period = payload.periodId() != null
+                ? periodRepository.findById(payload.periodId())
+                .orElseThrow(() -> new ServiceException(ErrorCode.NotFound))
+                : periodService.getCurrent();
+        User user = userRepository.findById(payload.userName())
                 .orElseThrow(() -> new ServiceException(ErrorCode.UserNotFound));
-        Course course = courseRepository.findByCourseIdAndPeriod(courseUserAssignmentPayload.courseId, period)
+        Course course = courseRepository.findByCourseIdAndPeriod(payload.courseId(), period)
                 .orElseThrow(() -> new ServiceException(ErrorCode.NotFound));
-
-        // Prüfen, ob der Benutzer von diesem Kurs ausgeschlossen ist
         if (courseExclusionRepository.existsByCourseAndUser(course, user)) {
             throw new ServiceException(ErrorCode.UserExcludedFromCourse, user.getFirstName() + " " + user.getLastName(), course.getName());
         }
