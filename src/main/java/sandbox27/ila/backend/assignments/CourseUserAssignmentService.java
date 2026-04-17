@@ -51,7 +51,7 @@ public class CourseUserAssignmentService {
     private final CourseBlockAssignmentRepository courseBlockAssignmentRepository;
     private final CourseExclusionRepository courseExclusionRepository;
     private final PeriodService periodService;
-    private PeriodRepository periodRepository;
+    private final PeriodRepository periodRepository;
     private final ErrorHandlingService errorHandlingService;
     private final ApplicationEventPublisher applicationEventPublisher;
 
