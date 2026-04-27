@@ -57,4 +57,7 @@ public interface ExternalAbsenceRepository extends JpaRepository<ExternalAbsence
     @Modifying
     @Query("DELETE FROM ExternalAbsence e WHERE e.date < :beforeDate")
     int deleteOlderThan(@Param("beforeDate") LocalDate beforeDate);
+
+    Optional<ExternalAbsence> findFirstByStudentLocalId(String studentLocalId);
+
 }

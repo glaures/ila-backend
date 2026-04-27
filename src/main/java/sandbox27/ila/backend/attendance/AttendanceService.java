@@ -188,7 +188,7 @@ public class AttendanceService {
     /**
      * Aktualisiert die Anwesenheitseinträge für einen Termin.
      * Wenn ein Schüler als abwesend markiert wird und NICHT in Beste.Schule
-     * als abwesend gemeldet ist, wird das Sekretariat benachrichtigt.
+     * als abwesend gemeldet ist, wird die Abwesenheit in Beste.Schule eingetragen.
      */
     @Transactional
     public List<AttendanceEntryDto> updateEntries(Long sessionId, List<UpdateAttendanceEntryRequest> requests) {
@@ -198,7 +198,7 @@ public class AttendanceService {
         Course course = session.getCourse();
         LocalDate sessionDate = session.getDate();
 
-        // Block-Informationen für Zeitprüfung und E-Mail
+        // Block-Informationen für Zeitprüfung
         Block block = getCourseBlock(course);
         LocalTime courseStartTime = block != null ? block.getStartTime() : LocalTime.of(10, 0);
         LocalTime courseEndTime = block != null ? block.getEndTime() : LocalTime.of(11, 30);
@@ -239,7 +239,7 @@ public class AttendanceService {
                             .isPresent();
 
                     if (!isExternallyAbsent) {
-                        // Unentschuldigte Abwesenheit -> Benachrichtigung vorbereiten
+                        // Unentschuldigte Abwesenheit -> Beste.Schule Meldung vorbereiten
                         User student = entry.getUser();
                         UnexcusedAbsenceInfo absenceInfo = UnexcusedAbsenceInfo.create(
                                 student,
@@ -297,7 +297,7 @@ public class AttendanceService {
             }
         }
 
-        // Benachrichtigungen für alle unentschuldigten Abwesenheiten senden
+        // Abwesenheiten in Beste.Schule eintragen
         if (!unexcusedAbsences.isEmpty()) {
             notificationService.notifyUnexcusedAbsences(unexcusedAbsences);
         }

@@ -40,6 +40,13 @@ public class ExternalAbsence {
     private String studentLocalId;
 
     /**
+     * Numerische Schüler-ID in Beste.Schule (student.id aus der API).
+     * Wird benötigt, um Abwesenheiten über die API einzutragen.
+     */
+    @Column(name = "beste_schule_student_id")
+    private Long besteSchuleStudentId;
+
+    /**
      * Beginn der Abwesenheit
      */
     @Column(name = "from_date_time", nullable = false)

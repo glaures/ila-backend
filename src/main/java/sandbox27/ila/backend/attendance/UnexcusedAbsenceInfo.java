@@ -8,7 +8,7 @@ import java.time.LocalTime;
 
 /**
  * Informationen über eine unentschuldigte Abwesenheit.
- * Wird für die Benachrichtigung des Sekretariats verwendet.
+ * Wird für die Meldung an Beste.Schule verwendet.
  */
 public record UnexcusedAbsenceInfo(
         // Schüler-Informationen

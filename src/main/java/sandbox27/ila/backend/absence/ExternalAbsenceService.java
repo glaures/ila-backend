@@ -157,6 +157,22 @@ public class ExternalAbsenceService {
     }
 
     /**
+     * Ermittelt die Beste.Schule Student-ID für einen Schüler anhand seiner internalId (SaxSVS UUID).
+     * Sucht in den gespeicherten Abwesenheitsdaten nach einem Eintrag mit passender studentLocalId.
+     *
+     * @param internalId die SaxSVS UUID des Schülers (User.internalId)
+     * @return Optional mit der numerischen Beste.Schule Student-ID
+     */
+    public Optional<Long> findBesteSchuleStudentId(String internalId) {
+        if (internalId == null || internalId.isBlank()) {
+            return Optional.empty();
+        }
+        return absenceRepository.findFirstByStudentLocalId(internalId)
+                .map(ExternalAbsence::getBesteSchuleStudentId)
+                .filter(Objects::nonNull);
+    }
+
+    /**
      * Räumt alte Abwesenheiten auf (älter als angegebene Tage).
      */
     @Transactional
@@ -195,6 +211,7 @@ public class ExternalAbsenceService {
         
         String absenceType = response.type() != null ? response.type().name() : "unbekannt";
         String studentLocalId = response.student() != null ? response.student().localId() : null;
+        Long besteSchuleStudentId = response.student() != null ? response.student().id() : null;
         
         if (studentLocalId == null) {
             throw new IllegalArgumentException("Keine student.local_id in Abwesenheit " + response.id());
@@ -203,6 +220,7 @@ public class ExternalAbsenceService {
         return ExternalAbsence.builder()
                 .externalId(response.id())
                 .studentLocalId(studentLocalId)
+                .besteSchuleStudentId(besteSchuleStudentId)
                 .fromDateTime(from)
                 .toDateTime(to)
                 .absenceType(absenceType)

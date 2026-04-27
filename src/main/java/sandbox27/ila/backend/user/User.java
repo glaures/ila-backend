@@ -36,6 +36,14 @@ public class User implements SecUser {
     boolean ilaMember;
     boolean internal = false;
 
+    /**
+     * Numerische Schüler-ID in Beste.Schule.
+     * Wird über den täglichen Sync aus der Beste.Schule API befüllt
+     * und für das Eintragen von Abwesenheiten benötigt.
+     */
+    @Column(name = "beste_schule_id")
+    Long besteSchuleId;
+
     @Override
     public String getId() {
         return userName;

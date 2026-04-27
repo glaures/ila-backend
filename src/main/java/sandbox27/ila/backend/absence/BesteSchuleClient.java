@@ -15,7 +15,9 @@ import java.util.List;
 
 /**
  * REST-Client für die Beste.Schule API.
- * Ruft Abwesenheitsmeldungen ab und handhabt die Paginierung automatisch.
+ * Verwendet zwei separate Tokens:
+ * - apiToken: für lesende Zugriffe (Abwesenheiten abrufen/Sync)
+ * - absenceWriteToken: für schreibende Zugriffe (Abwesenheiten eintragen)
  */
 @Component
 @Slf4j
@@ -24,19 +26,22 @@ public class BesteSchuleClient {
     private final RestTemplate restTemplate;
     private final String apiUrl;
     private final String apiToken;
+    private final String absenceWriteToken;
 
     public BesteSchuleClient(
             @Value("${besteschule.api.url:https://beste.schule/api}") String apiUrl,
-            @Value("${besteschule.api.token:}") String apiToken
+            @Value("${besteschule.api.token:}") String apiToken,
+            @Value("${besteschule.api.absence-write-token:}") String absenceWriteToken
     ) {
         this.restTemplate = new RestTemplate();
         this.apiUrl = apiUrl;
         this.apiToken = apiToken;
+        this.absenceWriteToken = absenceWriteToken;
     }
 
     /**
      * Ruft alle Abwesenheiten ab (mit automatischer Paginierung).
-     * Achtung: Kann viele Seiten abrufen - nur für initiale Imports verwenden.
+     * Verwendet den Lese-Token (apiToken).
      */
     public List<AbsenceResponse> fetchAllAbsences() {
         return fetchAbsencesWithPagination(null);
@@ -44,8 +49,6 @@ public class BesteSchuleClient {
 
     /**
      * Ruft Abwesenheiten ab, die nach einem bestimmten Zeitpunkt erfasst wurden.
-     * Die Beste.Schule API unterstützt möglicherweise Filter-Parameter.
-     * Falls nicht, werden alle abgerufen und lokal gefiltert.
      */
     public List<AbsenceResponse> fetchAbsencesWithPagination(String additionalParams) {
         if (apiToken == null || apiToken.isBlank()) {
@@ -55,7 +58,7 @@ public class BesteSchuleClient {
 
         List<AbsenceResponse> allAbsences = new ArrayList<>();
         int page = 1;
-        int maxPages = 100; // Sicherheitslimit
+        int maxPages = 100;
 
         try {
             while (page <= maxPages) {
@@ -65,7 +68,7 @@ public class BesteSchuleClient {
                 ResponseEntity<AbsencePageResponse> response = restTemplate.exchange(
                         url,
                         HttpMethod.GET,
-                        createRequestEntity(),
+                        createReadRequestEntity(),
                         AbsencePageResponse.class
                 );
 
@@ -79,7 +82,6 @@ public class BesteSchuleClient {
                     allAbsences.addAll(pageResponse.data());
                 }
 
-                // Paginierung prüfen
                 MetaResponse meta = pageResponse.meta();
                 if (meta == null || meta.currentPage() >= meta.lastPage()) {
                     break;
@@ -97,20 +99,70 @@ public class BesteSchuleClient {
         return allAbsences;
     }
 
+    /**
+     * Trägt eine Abwesenheit in Beste.Schule ein.
+     * Verwendet den Schreib-Token (absenceWriteToken).
+     *
+     * @param request die Abwesenheitsdaten
+     * @return true wenn erfolgreich (HTTP 200 oder 201), false bei Fehler
+     */
+    public boolean createAbsence(CreateAbsenceRequest request) {
+        if (absenceWriteToken == null || absenceWriteToken.isBlank()) {
+            log.warn("Beste.Schule Absence-Write-Token nicht konfiguriert " +
+                    "(besteschule.api.absence-write-token) - Abwesenheit kann nicht eingetragen werden");
+            return false;
+        }
+
+        String url = apiUrl + "/absences";
+
+        try {
+            HttpHeaders headers = new HttpHeaders();
+            headers.setBearerAuth(absenceWriteToken);
+            headers.setContentType(MediaType.APPLICATION_JSON);
+            headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
+
+            HttpEntity<CreateAbsenceRequest> entity = new HttpEntity<>(request, headers);
+
+            ResponseEntity<String> response = restTemplate.exchange(
+                    url,
+                    HttpMethod.POST,
+                    entity,
+                    String.class
+            );
+
+            if (response.getStatusCode() == HttpStatus.OK || response.getStatusCode() == HttpStatus.CREATED) {
+                log.info("Abwesenheit erfolgreich in Beste.Schule eingetragen für Student-ID {}",
+                        request.studentId());
+                return true;
+            } else {
+                log.error("Unerwarteter Status beim Eintragen der Abwesenheit in Beste.Schule: {} - Body: {}",
+                        response.getStatusCode(), response.getBody());
+                return false;
+            }
+
+        } catch (RestClientException e) {
+            log.error("Fehler beim Eintragen der Abwesenheit in Beste.Schule für Student-ID {}: {}",
+                    request.studentId(), e.getMessage(), e);
+            return false;
+        }
+    }
+
     private String buildUrl(int page, String additionalParams) {
         UriComponentsBuilder builder = UriComponentsBuilder
                 .fromHttpUrl(apiUrl + "/absences")
                 .queryParam("page", page);
 
         if (additionalParams != null && !additionalParams.isBlank()) {
-            // Zusätzliche Parameter anhängen (z.B. Filter)
             builder.query(additionalParams);
         }
 
         return builder.toUriString();
     }
 
-    private HttpEntity<Void> createRequestEntity() {
+    /**
+     * Request-Entity für lesende Zugriffe (mit apiToken).
+     */
+    private HttpEntity<Void> createReadRequestEntity() {
         HttpHeaders headers = new HttpHeaders();
         headers.setBearerAuth(apiToken);
         headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
@@ -130,7 +182,7 @@ public class BesteSchuleClient {
             ResponseEntity<AbsencePageResponse> response = restTemplate.exchange(
                     url,
                     HttpMethod.GET,
-                    createRequestEntity(),
+                    createReadRequestEntity(),
                     AbsencePageResponse.class
             );
             return response.getStatusCode() == HttpStatus.OK;

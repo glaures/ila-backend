@@ -66,4 +66,18 @@ public class BesteSchuleDto {
             String name,
             String gender
     ) {}
+
+    /**
+     * Request zum Eintragen einer Abwesenheit in Beste.Schule.
+     * Entspricht dem POST /api/absences Endpunkt.
+     */
+    public record CreateAbsenceRequest(
+            @JsonProperty("student_id") Long studentId,
+            @JsonProperty("type_id") int typeId,
+            @JsonProperty("subject_ids") List<Integer> subjectIds,
+            String from,  // Format: "2026-03-29 11:20"
+            String to,    // Format: "2026-03-29 12:00"
+            @JsonProperty("note_teacher") String noteTeacher,
+            @JsonProperty("recorded_at") String recordedAt
+    ) {}
 }

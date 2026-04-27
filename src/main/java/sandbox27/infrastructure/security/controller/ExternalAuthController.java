@@ -67,6 +67,7 @@ public class ExternalAuthController {
             ResponseEntity<Map> tokenResponse = rest.postForEntity(tokenUri, httpEntity, Map.class);
             accessToken = (String) tokenResponse.getBody().get("access_token");
         } catch (HttpClientErrorException e) {
+            errorHandlingService.handleError(e, "IServ token konnte nicht erstellt werden");
             throw new ServiceException(ErrorCode.InvalidIServCode);
         }
 
