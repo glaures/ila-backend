@@ -61,5 +61,14 @@ public class UserRestController {
         userManagementService.resetPassword(payload.email);
     }
 
+    record DisabledPayload(boolean disabled) {}
+
+    @RequiredRole(Role.ADMIN_ROLE_NAME)
+    @PostMapping("/{userName}/disabled")
+    public UserDto setDisabled(@PathVariable String userName,
+                               @RequestBody DisabledPayload payload) {
+        User user = userManagementService.setDisabled(userName, payload.disabled());
+        return modelMapper.map(user, UserDto.class);
+    }
 
 }

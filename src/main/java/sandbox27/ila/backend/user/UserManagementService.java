@@ -69,6 +69,19 @@ public class UserManagementService implements UserManagement {
         return user;
     }
 
+    @Transactional
+    public User setDisabled(String userName, boolean disabled) {
+        User user = userRepository.findById(userName)
+                .orElseThrow(() -> new ServiceException(ErrorCode.UserNotFound));
+        user.setDisabled(disabled);
+        if (disabled) {
+            // Aus dem Assignment-Prozess herausnehmen
+            user.setIlaMember(false);
+            user.getRoles().remove(Role.STUDENT);
+        }
+        return userRepository.save(user);
+    }
+
     public Page<User> getAllUsers(boolean internalOnly, Pageable page) {
         if (internalOnly)
             return userRepository.findAllByInternal(true, page);

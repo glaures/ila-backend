@@ -44,6 +44,13 @@ public class User implements SecUser {
     @Column(name = "beste_schule_id")
     Long besteSchuleId;
 
+    /**
+     * Wenn true, wird der Nutzer komplett aus dem iLA-Prozess ausgenommen.
+     * Wird manuell über die Admin-UI gepflegt und vom IServ-Sync respektiert
+     * (lokal überschreibt extern: weder Rolle noch ilaMember werden vom Sync angefasst).
+     */
+    boolean disabled;
+
     @Override
     public String getId() {
         return userName;

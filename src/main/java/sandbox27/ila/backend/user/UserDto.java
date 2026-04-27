@@ -19,6 +19,7 @@ public class UserDto {
     Gender gender;
     boolean ilaMember;
     List<String> roles;
+    boolean disabled;
 
     public static UserDto map(User user) {
         // Null-safe: return null if user is null
@@ -35,6 +36,7 @@ public class UserDto {
                 .gender(user.getGender())
                 .roles(user.getRoles().stream().map(Enum::name).toList())
                 .ilaMember(user.isIlaMember())
+                .disabled(user.isDisabled())
                 .build();
     }
 }

@@ -75,6 +75,11 @@ public class UserMetaInfoManagement {
                                     );
                                 }));
 
+                if (user.isDisabled()) {
+                    log.debug("Skipping disabled user {} during IServ sync", user.getUserName());
+                    continue;
+                }
+
                 boolean updated = false;
                 // Extract and update grade from auxInfo
                 final Integer grade = extractGradeFromAuxInfo(iservUser.auxInfo());
