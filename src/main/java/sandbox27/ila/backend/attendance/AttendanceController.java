@@ -118,11 +118,19 @@ public class AttendanceController {
     }
 
     /**
-     * Aktualisiert die Anwesenheitseinträge für einen Termin
+     * Aktualisiert die Anwesenheitseinträge für einen Termin.
+     *
+     * Antwort: UpdateAttendanceEntriesResult mit
+     *  - entries: aktualisierte Einträge
+     *  - warnings: Hinweise an den Kursleiter (z.B. wenn extern gemeldete
+     *    Abwesenheiten nicht aus der iLA entfernt werden konnten).
+     *
+     * Der eingeloggte User wird als "meldender Kursleiter" durchgereicht
+     * und landet im note_teacher der Beste.Schule-Meldung.
      */
     @PutMapping("/sessions/{sessionId}/entries")
     @RequiredRole({Role.ADMIN_ROLE_NAME, Role.COURSE_INSTRUCTOR_ROLE_NAME})
-    public ResponseEntity<List<AttendanceEntryDto>> updateEntries(
+    public ResponseEntity<UpdateAttendanceEntriesResult> updateEntries(
             @PathVariable Long sessionId,
             @RequestBody List<UpdateAttendanceEntryRequest> requests,
             @AuthenticatedUser User currentUser) {
@@ -131,6 +139,6 @@ public class AttendanceController {
             throw new ServiceException(ErrorCode.AccessDenied);
         }
 
-        return ResponseEntity.ok(attendanceService.updateEntries(sessionId, requests));
+        return ResponseEntity.ok(attendanceService.updateEntries(sessionId, requests, currentUser));
     }
 }

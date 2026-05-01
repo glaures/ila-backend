@@ -80,4 +80,20 @@ public class BesteSchuleDto {
             @JsonProperty("note_teacher") String noteTeacher,
             @JsonProperty("recorded_at") String recordedAt
     ) {}
+
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    public record CreateAbsenceResponse(Long id, NestedData data) {
+
+        @JsonIgnoreProperties(ignoreUnknown = true)
+        public record NestedData(Long id) {}
+
+        /**
+         * Liefert die ID, egal ob die API sie auf Top-Level oder in {"data": {...}} zurückgibt.
+         */
+        public Long resolvedId() {
+            if (id != null) return id;
+            if (data != null) return data.id();
+            return null;
+        }
+    }
 }

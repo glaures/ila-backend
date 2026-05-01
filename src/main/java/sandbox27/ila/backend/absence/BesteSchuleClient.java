@@ -12,6 +12,7 @@ import sandbox27.ila.backend.absence.BesteSchuleDto.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * REST-Client für die Beste.Schule API.
@@ -103,14 +104,14 @@ public class BesteSchuleClient {
      * Trägt eine Abwesenheit in Beste.Schule ein.
      * Verwendet den Schreib-Token (absenceWriteToken).
      *
-     * @param request die Abwesenheitsdaten
-     * @return true wenn erfolgreich (HTTP 200 oder 201), false bei Fehler
+     * @return Optional mit der von Beste.Schule vergebenen Absence-ID
+     *         oder Optional.empty() bei Fehler / fehlendem Token.
      */
-    public boolean createAbsence(CreateAbsenceRequest request) {
+    public Optional<Long> createAbsence(CreateAbsenceRequest request) {
         if (absenceWriteToken == null || absenceWriteToken.isBlank()) {
             log.warn("Beste.Schule Absence-Write-Token nicht konfiguriert " +
                     "(besteschule.api.absence-write-token) - Abwesenheit kann nicht eingetragen werden");
-            return false;
+            return Optional.empty();
         }
 
         String url = apiUrl + "/absences";
@@ -123,26 +124,82 @@ public class BesteSchuleClient {
 
             HttpEntity<CreateAbsenceRequest> entity = new HttpEntity<>(request, headers);
 
-            ResponseEntity<String> response = restTemplate.exchange(
+            ResponseEntity<CreateAbsenceResponse> response = restTemplate.exchange(
                     url,
                     HttpMethod.POST,
                     entity,
-                    String.class
+                    CreateAbsenceResponse.class
             );
 
-            if (response.getStatusCode() == HttpStatus.OK || response.getStatusCode() == HttpStatus.CREATED) {
-                log.info("Abwesenheit erfolgreich in Beste.Schule eingetragen für Student-ID {}",
-                        request.studentId());
-                return true;
-            } else {
+            HttpStatusCode status = response.getStatusCode();
+            if (status != HttpStatus.OK && status != HttpStatus.CREATED) {
                 log.error("Unerwarteter Status beim Eintragen der Abwesenheit in Beste.Schule: {} - Body: {}",
-                        response.getStatusCode(), response.getBody());
-                return false;
+                        status, response.getBody());
+                return Optional.empty();
             }
+
+            CreateAbsenceResponse body = response.getBody();
+            Long id = body != null ? body.resolvedId() : null;
+            if (id == null) {
+                log.error("Beste.Schule lieferte erfolgreichen Status, aber keine Absence-ID. " +
+                        "Antwort: {} — bitte Response-Struktur prüfen.", body);
+                return Optional.empty();
+            }
+
+            log.info("Abwesenheit erfolgreich in Beste.Schule eingetragen für Student-ID {} (Absence-ID {})",
+                    request.studentId(), id);
+            return Optional.of(id);
 
         } catch (RestClientException e) {
             log.error("Fehler beim Eintragen der Abwesenheit in Beste.Schule für Student-ID {}: {}",
                     request.studentId(), e.getMessage(), e);
+            return Optional.empty();
+        }
+    }
+
+    /**
+     * Löscht eine Abwesenheit in Beste.Schule.
+     * Verwendet den Schreib-Token (absenceWriteToken).
+     *
+     * @return true bei Erfolg (2xx oder 404 = bereits weg), false sonst.
+     */
+    public boolean deleteAbsence(long absenceId) {
+        if (absenceWriteToken == null || absenceWriteToken.isBlank()) {
+            log.warn("Beste.Schule Absence-Write-Token nicht konfiguriert - " +
+                    "Abwesenheit {} kann nicht gelöscht werden", absenceId);
+            return false;
+        }
+
+        String url = apiUrl + "/absences/" + absenceId;
+
+        try {
+            HttpHeaders headers = new HttpHeaders();
+            headers.setBearerAuth(absenceWriteToken);
+            headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
+
+            ResponseEntity<String> response = restTemplate.exchange(
+                    url,
+                    HttpMethod.DELETE,
+                    new HttpEntity<>(headers),
+                    String.class
+            );
+
+            HttpStatusCode status = response.getStatusCode();
+            if (status.is2xxSuccessful()) {
+                log.info("Abwesenheit {} in Beste.Schule gelöscht", absenceId);
+                return true;
+            }
+            if (status == HttpStatus.NOT_FOUND) {
+                log.warn("Abwesenheit {} in Beste.Schule nicht (mehr) vorhanden — gilt als gelöscht", absenceId);
+                return true;
+            }
+            log.error("Unerwarteter Status beim Löschen der Abwesenheit {} in Beste.Schule: {} - Body: {}",
+                    absenceId, status, response.getBody());
+            return false;
+
+        } catch (RestClientException e) {
+            log.error("Fehler beim Löschen der Abwesenheit {} in Beste.Schule: {}",
+                    absenceId, e.getMessage(), e);
             return false;
         }
     }

@@ -187,11 +187,29 @@ public class AttendanceService {
 
     /**
      * Aktualisiert die Anwesenheitseinträge für einen Termin.
-     * Wenn ein Schüler als abwesend markiert wird und NICHT in Beste.Schule
-     * als abwesend gemeldet ist, wird die Abwesenheit in Beste.Schule eingetragen.
+     *
+     * Verhalten der drei Übergänge:
+     *   anwesend -> abwesend:
+     *     Wenn weder extern (Sekretariat) noch von uns selbst bereits in
+     *     Beste.Schule eingetragen, wird die Abwesenheit dort eingetragen.
+     *     Die zurückgegebene Absence-ID wird am AttendanceEntry persistiert
+     *     (besteSchuleAbsenceId), wodurch wiederholte Speicherungen derselben
+     *     Session keine Doppelmeldungen mehr erzeugen.
+     *
+     *   abwesend -> anwesend:
+     *     Wenn die Abwesenheit von uns selbst angelegt wurde (besteSchuleAbsenceId
+     *     gesetzt), wird sie in Beste.Schule storniert. Bei extern gemeldeter
+     *     Abwesenheit (z.B. durch die Eltern) wird eine Warnung ans Frontend
+     *     zurückgegeben — wir dürfen fremde Einträge nicht löschen, weil sie
+     *     für andere Zeiträume des Tages gelten könnten.
+     *
+     *   sonst:
+     *     Nur Status/Notiz aktualisieren.
      */
     @Transactional
-    public List<AttendanceEntryDto> updateEntries(Long sessionId, List<UpdateAttendanceEntryRequest> requests) {
+    public UpdateAttendanceEntriesResult updateEntries(Long sessionId,
+                                                       List<UpdateAttendanceEntryRequest> requests,
+                                                       User reportingUser) {
         AttendanceSession session = sessionRepository.findByIdWithEntries(sessionId)
                 .orElseThrow(() -> new ServiceException(ErrorCode.NotFound));
 
@@ -211,51 +229,34 @@ public class AttendanceService {
         Map<String, AttendanceEntry> existingEntries = session.getEntries().stream()
                 .collect(Collectors.toMap(e -> e.getUser().getUserName(), Function.identity()));
 
-        // Sammle UserNames für Batch-Abfrage der externen Abwesenheiten
+        // Externe Abwesenheiten für ALLE betroffenen User laden — wir brauchen
+        // sie sowohl beim Wechsel "anwesend -> abwesend" (Doppelmeldung verhindern)
+        // als auch beim Wechsel "abwesend -> anwesend" (Storno-Schutz für fremde
+        // Einträge).
         List<String> userNamesToCheck = requests.stream()
-                .filter(r -> !r.present()) // Nur die, die als abwesend markiert werden
                 .map(UpdateAttendanceEntryRequest::userName)
                 .toList();
 
-        // Externe Abwesenheiten für alle relevanten User laden
         Map<String, Optional<ExternalAbsence>> externalAbsences =
                 externalAbsenceService.getAbsencesForUsers(userNamesToCheck, checkTime);
 
-        // Liste für unentschuldigte Abwesenheiten
-        List<UnexcusedAbsenceInfo> unexcusedAbsences = new ArrayList<>();
+        List<String> warnings = new ArrayList<>();
 
         for (UpdateAttendanceEntryRequest request : requests) {
             AttendanceEntry entry = existingEntries.get(request.userName());
 
             if (entry != null) {
                 boolean wasPresent = entry.isPresent();
-                boolean isNowAbsent = !request.present();
+                boolean isNowPresent = request.present();
 
-                // Prüfen: War vorher anwesend und wird jetzt als abwesend markiert?
-                if (wasPresent && isNowAbsent) {
-                    // Ist der Schüler in Beste.Schule als abwesend gemeldet?
-                    boolean isExternallyAbsent = externalAbsences
-                            .getOrDefault(request.userName(), Optional.empty())
-                            .isPresent();
-
-                    if (!isExternallyAbsent) {
-                        // Unentschuldigte Abwesenheit -> Beste.Schule Meldung vorbereiten
-                        User student = entry.getUser();
-                        UnexcusedAbsenceInfo absenceInfo = UnexcusedAbsenceInfo.create(
-                                student,
-                                course,
-                                sessionDate,
-                                courseStartTime,
-                                courseEndTime,
-                                dayOfWeek
-                        );
-                        unexcusedAbsences.add(absenceInfo);
-
-                        log.info("Unentschuldigte Abwesenheit erkannt: {} in Kurs {} am {}",
-                                student.getFirstName() + " " + student.getLastName(),
-                                course.getName(),
-                                sessionDate);
-                    }
+                if (wasPresent && !isNowPresent) {
+                    // anwesend -> abwesend
+                    reportAbsenceIfNeeded(entry, course, sessionDate,
+                            courseStartTime, courseEndTime, dayOfWeek,
+                            externalAbsences, reportingUser);
+                } else if (!wasPresent && isNowPresent) {
+                    // abwesend -> anwesend
+                    handleReturnToPresent(entry, externalAbsences, warnings);
                 }
 
                 entry.setPresent(request.present());
@@ -276,33 +277,109 @@ public class AttendanceService {
                 newEntry = entryRepository.save(newEntry);
                 session.getEntries().add(newEntry);
 
-                // Auch für neue Einträge prüfen
+                // Bei einem neuen Eintrag, der direkt abwesend angelegt wird:
+                // ggf. an Beste.Schule melden.
                 if (!request.present()) {
-                    boolean isExternallyAbsent = externalAbsences
-                            .getOrDefault(request.userName(), Optional.empty())
-                            .isPresent();
-
-                    if (!isExternallyAbsent) {
-                        UnexcusedAbsenceInfo absenceInfo = UnexcusedAbsenceInfo.create(
-                                user,
-                                course,
-                                sessionDate,
-                                courseStartTime,
-                                courseEndTime,
-                                dayOfWeek
-                        );
-                        unexcusedAbsences.add(absenceInfo);
-                    }
+                    reportAbsenceIfNeeded(newEntry, course, sessionDate,
+                            courseStartTime, courseEndTime, dayOfWeek,
+                            externalAbsences, reportingUser);
+                    // Erneut speichern, damit eine evtl. gesetzte Absence-ID persistiert wird
+                    entryRepository.save(newEntry);
                 }
             }
         }
 
-        // Abwesenheiten in Beste.Schule eintragen
-        if (!unexcusedAbsences.isEmpty()) {
-            notificationService.notifyUnexcusedAbsences(unexcusedAbsences);
+        return new UpdateAttendanceEntriesResult(getEntriesForSession(sessionId), warnings);
+    }
+
+    /**
+     * "anwesend -> abwesend": Trägt eine Abwesenheit in Beste.Schule ein, sofern
+     * noch keine Meldung für diesen Eintrag bekannt ist (weder von uns noch
+     * extern). Persistiert die zurückgegebene Absence-ID am übergebenen Entry,
+     * damit zukünftige Speicherungen derselben Session keine Doppelmeldungen
+     * erzeugen.
+     */
+    private void reportAbsenceIfNeeded(AttendanceEntry entry,
+                                       Course course,
+                                       LocalDate sessionDate,
+                                       LocalTime courseStartTime,
+                                       LocalTime courseEndTime,
+                                       String dayOfWeek,
+                                       Map<String, Optional<ExternalAbsence>> externalAbsences,
+                                       User reportingUser) {
+
+        // Schon von uns gemeldet? -> ID ist persistiert, nichts zu tun.
+        if (entry.getBesteSchuleAbsenceId() != null) {
+            log.debug("Abwesenheit für {} in Session {} bereits in Beste.Schule eingetragen (Absence-ID {}) — überspringe.",
+                    entry.getUser().getUserName(),
+                    entry.getSession().getId(),
+                    entry.getBesteSchuleAbsenceId());
+            return;
         }
 
-        return getEntriesForSession(sessionId);
+        // Extern (Sekretariat) bereits gemeldet? -> nicht doppelt eintragen.
+        boolean isExternallyAbsent = externalAbsences
+                .getOrDefault(entry.getUser().getUserName(), Optional.empty())
+                .isPresent();
+        if (isExternallyAbsent) {
+            log.debug("Abwesenheit für {} ist bereits extern in Beste.Schule erfasst — überspringe.",
+                    entry.getUser().getUserName());
+            return;
+        }
+
+        User student = entry.getUser();
+        UnexcusedAbsenceInfo absenceInfo = UnexcusedAbsenceInfo.create(
+                student, course, sessionDate, courseStartTime, courseEndTime, dayOfWeek,
+                reportingUser);
+
+        log.info("Unentschuldigte Abwesenheit erkannt: {} in Kurs {} am {} — wird an Beste.Schule gemeldet.",
+                student.getFirstName() + " " + student.getLastName(),
+                course.getName(),
+                sessionDate);
+
+        Optional<Long> absenceId = notificationService.notifyUnexcusedAbsence(absenceInfo);
+        absenceId.ifPresent(entry::setBesteSchuleAbsenceId);
+    }
+
+    /**
+     * "abwesend -> anwesend": Storno der eigenen BS-Eintragung; bei extern
+     * gemeldeter Abwesenheit eine Warning sammeln. Fremde Einträge werden
+     * grundsätzlich nicht gelöscht, weil sie für andere Zeiträume des Tages
+     * gelten könnten.
+     */
+    private void handleReturnToPresent(AttendanceEntry entry,
+                                       Map<String, Optional<ExternalAbsence>> externalAbsences,
+                                       List<String> warnings) {
+
+        Long absenceId = entry.getBesteSchuleAbsenceId();
+        String studentName = entry.getUser().getFirstName() + " " + entry.getUser().getLastName();
+
+        if (absenceId != null) {
+            // Eigene Eintragung -> Storno versuchen
+            String courseName = entry.getSession().getCourse().getName();
+            boolean ok = notificationService.cancelAbsence(absenceId, studentName, courseName);
+            if (ok) {
+                entry.setBesteSchuleAbsenceId(null);
+            } else {
+                warnings.add(String.format(
+                        "Die Abwesenheit von %s konnte in Beste.Schule nicht entfernt werden " +
+                                "(technischer Fehler). Der Admin wurde informiert.",
+                        studentName));
+            }
+            return;
+        }
+
+        // Keine eigene ID -> wenn extern abwesend, dürfen wir nicht löschen.
+        boolean isExternallyAbsent = externalAbsences
+                .getOrDefault(entry.getUser().getUserName(), Optional.empty())
+                .isPresent();
+        if (isExternallyAbsent) {
+            warnings.add(String.format(
+                    "Die Abwesenheit von %s wurde extern in Beste.Schule eingetragen " +
+                            "(z.B. durch die Eltern) und kann nicht aus der iLA-App entfernt werden. " +
+                            "Bei Bedarf bitte das Sekretariat kontaktieren.",
+                    studentName));
+        }
     }
 
     /**

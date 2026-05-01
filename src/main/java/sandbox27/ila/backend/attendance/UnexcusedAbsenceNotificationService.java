@@ -15,7 +15,10 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 /**
  * Service für die Meldung unentschuldigter Abwesenheiten an Beste.Schule.
@@ -43,7 +46,6 @@ public class UnexcusedAbsenceNotificationService {
      */
     private static final int ABSENCE_TYPE_ID = 205;                  // "fehlend"
     private static final List<Integer> SUBJECT_IDS = List.of(39790); // "individuelles Lernangebot"
-    private static final String NOTE_TEACHER = "unentschuldigtes Fehlen im ILA";
 
     private static final DateTimeFormatter BESTE_SCHULE_FORMAT =
             DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
@@ -52,11 +54,18 @@ public class UnexcusedAbsenceNotificationService {
 
     /**
      * Meldet eine einzelne unentschuldigte Abwesenheit an Beste.Schule.
+     *
+     * @return Optional mit der von Beste.Schule vergebenen Absence-ID, falls
+     *         der Eintrag erfolgreich war. Optional.empty() bei Fehler, fehlender
+     *         Student-ID oder wenn Benachrichtigungen deaktiviert sind. Die ID
+     *         sollte vom Aufrufer auf dem zugehörigen AttendanceEntry persistiert
+     *         werden, um Doppelmeldungen zu verhindern und spätere Stornierung
+     *         zu ermöglichen.
      */
-    public void notifyUnexcusedAbsence(UnexcusedAbsenceInfo absenceInfo) {
+    public Optional<Long> notifyUnexcusedAbsence(UnexcusedAbsenceInfo absenceInfo) {
         if (!notificationsEnabled) {
             log.debug("Benachrichtigungen deaktiviert - Abwesenheit wird nicht gemeldet");
-            return;
+            return Optional.empty();
         }
 
         // Beste.Schule ID direkt vom User holen
@@ -64,8 +73,8 @@ public class UnexcusedAbsenceNotificationService {
         if (studentId == null) {
             String errorMsg = String.format(
                     "Beste.Schule Student-ID ist nicht bekannt für %s (userName=%s). " +
-                    "Abwesenheit am %s in Kurs %s kann nicht eingetragen werden. " +
-                    "Wurde der Student-ID-Sync erfolgreich ausgeführt?",
+                            "Abwesenheit am %s in Kurs %s kann nicht eingetragen werden. " +
+                            "Wurde der Student-ID-Sync erfolgreich ausgeführt?",
                     absenceInfo.getStudentFullName(),
                     absenceInfo.studentUserName(),
                     absenceInfo.sessionDate(),
@@ -73,15 +82,16 @@ public class UnexcusedAbsenceNotificationService {
             );
             log.error(errorMsg);
             sendAdminNotification("Beste.Schule Student-ID fehlt", errorMsg);
-            return;
+            return Optional.empty();
         }
 
         CreateAbsenceRequest request = buildRequest(absenceInfo, studentId);
 
-        boolean success = besteSchuleClient.createAbsence(request);
+        Optional<Long> absenceId = besteSchuleClient.createAbsence(request);
 
-        if (success) {
-            log.info("Abwesenheit in Beste.Schule eingetragen: {} in Kurs {} am {}",
+        if (absenceId.isPresent()) {
+            log.info("Abwesenheit in Beste.Schule eingetragen (Absence-ID {}): {} in Kurs {} am {}",
+                    absenceId.get(),
                     absenceInfo.getStudentFullName(),
                     absenceInfo.courseName(),
                     absenceInfo.sessionDate());
@@ -96,15 +106,37 @@ public class UnexcusedAbsenceNotificationService {
             log.error(errorMsg);
             sendAdminNotification("Fehler bei Beste.Schule Abwesenheitsmeldung", errorMsg);
         }
+
+        return absenceId;
     }
 
     /**
-     * Meldet mehrere unentschuldigte Abwesenheiten an Beste.Schule.
+     * Storniert eine zuvor von uns angelegte Abwesenheit in Beste.Schule.
+     *
+     * Wird vom AttendanceService aufgerufen, wenn ein Schüler von "abwesend"
+     * zurück auf "anwesend" gesetzt wird UND wir die Eintragung selbst
+     * angelegt hatten (d.h. besteSchuleAbsenceId ist gesetzt).
+     *
+     * @return true bei Erfolg, false bei Fehler (Admin wird per Mail informiert).
      */
-    public void notifyUnexcusedAbsences(List<UnexcusedAbsenceInfo> absences) {
-        for (UnexcusedAbsenceInfo absence : absences) {
-            notifyUnexcusedAbsence(absence);
+    public boolean cancelAbsence(long absenceId, String studentName, String courseName) {
+        if (!notificationsEnabled) {
+            log.debug("Benachrichtigungen deaktiviert - Storno wird nicht ausgeführt");
+            return false;
         }
+
+        boolean ok = besteSchuleClient.deleteAbsence(absenceId);
+        if (ok) {
+            log.info("Abwesenheit {} in Beste.Schule storniert ({} / Kurs {})",
+                    absenceId, studentName, courseName);
+        } else {
+            String errorMsg = String.format(
+                    "Storno der Abwesenheit %d in Beste.Schule fehlgeschlagen: %s in Kurs %s",
+                    absenceId, studentName, courseName);
+            log.error(errorMsg);
+            sendAdminNotification("Fehler beim Storno einer Beste.Schule-Abwesenheit", errorMsg);
+        }
+        return ok;
     }
 
     /**
@@ -118,6 +150,7 @@ public class UnexcusedAbsenceNotificationService {
 
     /**
      * Baut den Request für die Beste.Schule API.
+     * Der note_teacher-Text enthält Kursname und meldenden Kursleiter.
      */
     private CreateAbsenceRequest buildRequest(UnexcusedAbsenceInfo info, Long studentId) {
         LocalDate date = info.sessionDate();
@@ -128,13 +161,18 @@ public class UnexcusedAbsenceNotificationService {
         String to = LocalDateTime.of(date, endTime).format(BESTE_SCHULE_FORMAT);
         String recordedAt = LocalDateTime.now().format(BESTE_SCHULE_RECORDED_AT_FORMAT);
 
+        String noteTeacher = String.format(
+                "unentschuldigtes Fehlen im iLA Kurs %s gemeldet durch %s",
+                info.courseName(),
+                info.reportingTeacherFullName());
+
         return new CreateAbsenceRequest(
                 studentId,
                 ABSENCE_TYPE_ID,
                 SUBJECT_IDS,
                 from,
                 to,
-                NOTE_TEACHER,
+                noteTeacher,
                 recordedAt
         );
     }

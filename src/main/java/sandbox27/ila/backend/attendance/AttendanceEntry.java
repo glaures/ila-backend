@@ -28,4 +28,7 @@ public class AttendanceEntry {
     private boolean present;
 
     private String note;
+
+    @Column(name = "beste_schule_absence_id")
+    Long besteSchuleAbsenceId;
 }
