@@ -14,6 +14,7 @@ import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 @Service
@@ -61,19 +62,9 @@ public class UserMetaInfoManagement {
         int notFoundCount = 0;
 
         for (IServUser iservUser : iservUsers) {
+            log.info(iservUser.user());
             try {
-                User user = userRepository.findById(iservUser.user())
-                        .orElse(userRepository.findByFirstNameAndLastName(iservUser.firstname, iservUser.lastname)
-                                .orElseGet(() -> {
-                                    return userManagement.createUser(
-                                            iservUser.firstname,
-                                            iservUser.lastname,
-                                            iservUser.user + "@jmoosdorf.de",
-                                            iservUser.importId,
-                                            instructors ? Role.ADMIN.name() : Role.STUDENT.name(),
-                                            false // kein interner Nutzer, sondern von IServ verwaltet
-                                    );
-                                }));
+                User user = findOrCreateUser(iservUser, instructors);
 
                 if (user.isDisabled()) {
                     log.debug("Skipping disabled user {} during IServ sync", user.getUserName());
@@ -163,6 +154,49 @@ public class UserMetaInfoManagement {
                 groupName, updatedCount, notFoundCount);
     }
 
+    private User findOrCreateUser(IServUser iservUser, boolean instructors) {
+        // 1. Primär über internalId (= IServ importId) – stabilste Bindung
+        if (iservUser.importId() != null && !iservUser.importId().isBlank()) {
+            long count = userRepository.countByInternalId(iservUser.importId());
+            if (count > 1) {
+                log.warn("Duplicate internalId {} found {} times in DB", iservUser.importId(), count);
+            }
+            Optional<User> byInternalId = userRepository.findFirstByInternalId(iservUser.importId());
+            if (byInternalId.isPresent()) return byInternalId.get();
+        }
+        // 2. Sekundär über userName == iservUser.user() (echte IServ-ID)
+        Optional<User> byUserName = userRepository.findById(iservUser.user());
+        if (byUserName.isPresent()) {
+            return byUserName.get();
+        }
+
+        // 3. Fallback: Namens-Match – nur adoptieren, wenn noch keine IServ-Bindung besteht
+        Optional<User> byName = userRepository.findByFirstNameAndLastName(iservUser.firstname(), iservUser.lastname());
+        if (byName.isPresent()) {
+            User existing = byName.get();
+            if (existing.getInternalId() == null || existing.getInternalId().isBlank()) {
+                log.info("Adopting existing user {} for IServ-ID {} (importId={})",
+                        existing.getUserName(), iservUser.user(), iservUser.importId());
+                return existing;
+            }
+            // Anderer Account, der bereits einer anderen IServ-Identität gehört – nicht adoptieren
+            log.warn("Name match for {} {} found, but user {} is already bound to internalId {} – creating new user with IServ-ID {}",
+                    iservUser.firstname(), iservUser.lastname(),
+                    existing.getUserName(), existing.getInternalId(), iservUser.user());
+        }
+
+        // 4. Neuanlage mit echter IServ-ID als userName
+        return userManagement.createUser(
+                iservUser.user(),                     // <-- echte IServ-ID als Principal
+                iservUser.firstname(),
+                iservUser.lastname(),
+                iservUser.user() + "@jmoosdorf.de",
+                iservUser.importId(),
+                instructors ? Role.ADMIN.name() : Role.STUDENT.name(),
+                false
+        );
+    }
+
     private List<IServUser> fetchUsersFromIServ(String groupId) {
         RestTemplate restTemplate = new RestTemplate();
 
@@ -203,7 +237,7 @@ public class UserMetaInfoManagement {
     private Integer extractGradeFromAuxInfo(String auxInfo) {
         if (auxInfo == null || auxInfo.isEmpty()) {
             return null;
-        } else if(auxInfo.startsWith("VK")) {
+        } else if (auxInfo.startsWith("VK")) {
             return -1;
         }
 

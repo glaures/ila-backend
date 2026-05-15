@@ -40,7 +40,14 @@ public class UserManagementService implements UserManagement {
     }
 
     @Transactional
-    public User createUser(String firstName, String lastName, String email, @Nullable String internalId, String initialRole, boolean internal) {
+    public User createUser(String firstName, String lastName, String email,
+                           @Nullable String internalId, String initialRole, boolean internal) {
+        return createUser(null, firstName, lastName, email, internalId, initialRole, internal);
+    }
+
+    @Transactional
+    public User createUser(@Nullable String userName, String firstName, String lastName, String email,
+                           @Nullable String internalId, String initialRole, boolean internal) {
         if (!Role.isValidRole(initialRole)) {
             throw new ServiceException(ErrorCode.InvalidRole, initialRole);
         }
@@ -48,11 +55,20 @@ public class UserManagementService implements UserManagement {
             throw new ServiceException(ErrorCode.FieldRequired, messageSource.getMessage("firstName", null, Locale.GERMAN));
         if (lastName == null)
             throw new ServiceException(ErrorCode.FieldRequired, messageSource.getMessage("lastName", null, Locale.GERMAN));
-        String username = createUniqueUserPrincipal(firstName, lastName);
-        if(Character.isDigit(username.charAt(username.length()-1)))
-            lastName += username.charAt(username.length()-1);
-        if (userRepository.existsById(username))
-            throw new ServiceException(ErrorCode.UserAlreadyExists, username);
+
+        final String username;
+        if (userName != null && !userName.isBlank()) {
+            // Expliziter Principal (z.B. IServ-ID) – keine Namens-Synthese, keine Suffix-Logik
+            username = userName.trim().toLowerCase();
+            if (userRepository.existsById(username))
+                throw new ServiceException(ErrorCode.UserAlreadyExists, username);
+        } else {
+            // Fallback: aus Vor-/Nachname generieren (für intern angelegte Nutzer)
+            username = createUniqueUserPrincipal(firstName, lastName);
+            if (Character.isDigit(username.charAt(username.length() - 1)))
+                lastName += username.charAt(username.length() - 1);
+        }
+
         final String randomPassword = PasswordUtils.generateRandomPassword();
         User user = User.builder()
                 .userName(username)
