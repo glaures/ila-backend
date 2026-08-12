@@ -16,6 +16,8 @@ public class UserDto {
     String lastName;
     String email;
     int grade;
+    String classSuffix;
+    String schoolClass;
     Gender gender;
     boolean ilaMember;
     List<String> roles;
@@ -33,6 +35,8 @@ public class UserDto {
                 .lastName(user.getLastName())
                 .email(user.getEmail())
                 .grade(user.getGrade())
+                .classSuffix(user.getClassSuffix())
+                .schoolClass(user.getSchoolClass())
                 .gender(user.getGender())
                 .roles(user.getRoles().stream().map(Enum::name).toList())
                 .ilaMember(user.isIlaMember())

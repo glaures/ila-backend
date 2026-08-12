@@ -27,6 +27,11 @@ public class User implements SecUser {
     @Enumerated(EnumType.STRING)
     Gender gender;
     int grade;
+    /**
+     * Klassenzug innerhalb der Klassenstufe, z.B. "c" für die Klasse "6c".
+     * Wird aus dem auxInfo-Feld der IServ-Antwort übernommen (alles nach der führenden Klassenstufe).
+     */
+    String classSuffix;
     @Builder.Default
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"))
@@ -54,6 +59,18 @@ public class User implements SecUser {
     @Override
     public String getId() {
         return userName;
+    }
+
+    /**
+     * Vollständige Klassenbezeichnung aus Klassenstufe und Klassenzug, z.B. "6c".
+     * Liefert null, wenn weder Klassenstufe noch Klassenzug bekannt sind.
+     */
+    @Transient
+    public String getSchoolClass() {
+        if (grade > 0) {
+            return classSuffix == null ? String.valueOf(grade) : grade + classSuffix;
+        }
+        return classSuffix;
     }
 
     @Transient

@@ -74,6 +74,7 @@ public class UserMetaInfoManagement {
                 boolean updated = false;
                 // Extract and update grade from auxInfo
                 final Integer grade = extractGradeFromAuxInfo(iservUser.auxInfo());
+                final String classSuffix = extractClassSuffixFromAuxInfo(iservUser.auxInfo());
 
                 // First check, if user should is instructor or ilaMember
                 if (!instructors) {
@@ -85,6 +86,7 @@ public class UserMetaInfoManagement {
                             // Schüler wurde in IServ gelöscht
                             user.setIlaMember(false);
                             user.setGrade(0);
+                            user.setClassSuffix(null);
                             user.getRoles().clear();
                             updated = true;
                         }
@@ -112,6 +114,14 @@ public class UserMetaInfoManagement {
                         log.info("Updating grade for user {}: {} -> {}",
                                 user.getUserName(), user.getGrade(), grade);
                         user.setGrade(grade);
+                        updated = true;
+                    }
+
+                    // Update class suffix (Klassenzug, z.B. "c" aus "6c") – nur für Schüler
+                    if (!instructors && classSuffix != null && !classSuffix.equals(user.getClassSuffix())) {
+                        log.info("Updating class suffix for user {}: {} -> {}",
+                                user.getUserName(), user.getClassSuffix(), classSuffix);
+                        user.setClassSuffix(classSuffix);
                         updated = true;
                     }
 
@@ -260,6 +270,29 @@ public class UserMetaInfoManagement {
         }
 
         return null;
+    }
+
+    /**
+     * Extracts the class suffix (Klassenzug) from the auxInfo field, i.e. everything
+     * that follows the leading grade digits: "6c" -> "c", "10_1" -> "_1", "11" -> null.
+     * Values without a leading grade (e.g. "VK1") are returned unchanged.
+     *
+     * @param auxInfo the auxInfo string from IServ
+     * @return the extracted class suffix, or null if there is none
+     */
+    static String extractClassSuffixFromAuxInfo(String auxInfo) {
+        if (auxInfo == null || auxInfo.isBlank()) {
+            return null;
+        }
+
+        String trimmed = auxInfo.trim();
+        int i = 0;
+        while (i < trimmed.length() && Character.isDigit(trimmed.charAt(i))) {
+            i++;
+        }
+
+        String suffix = trimmed.substring(i);
+        return suffix.isEmpty() ? null : suffix;
     }
 
     // Inner class for JSON mapping

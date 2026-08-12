@@ -14,6 +14,8 @@ public record AttendanceEntryDto(
         String firstName,
         String lastName,
         int grade,
+        /** Vollständige Klassenbezeichnung inkl. Klassenzug, z.B. "6c". */
+        String schoolClass,
         boolean present,
         String note,
         ExternalAbsenceInfo externalAbsence
@@ -61,6 +63,7 @@ public record AttendanceEntryDto(
                 entry.getUser().getFirstName(),
                 entry.getUser().getLastName(),
                 entry.getUser().getGrade(),
+                entry.getUser().getSchoolClass(),
                 entry.isPresent(),
                 entry.getNote(),
                 ExternalAbsenceInfo.fromEntity(externalAbsence)
