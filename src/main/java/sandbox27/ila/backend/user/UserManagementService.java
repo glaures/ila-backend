@@ -51,9 +51,11 @@ public class UserManagementService implements UserManagement {
         if (!Role.isValidRole(initialRole)) {
             throw new ServiceException(ErrorCode.InvalidRole, initialRole);
         }
-        if (firstName == null)
+        // Leere Namen sind nicht zulässig: ohne sie entsteht im Fallback unten der
+        // Principal "." – ein Punkt-Segment, das in URLs wegnormalisiert wird.
+        if (firstName == null || firstName.isBlank())
             throw new ServiceException(ErrorCode.FieldRequired, messageSource.getMessage("firstName", null, Locale.GERMAN));
-        if (lastName == null)
+        if (lastName == null || lastName.isBlank())
             throw new ServiceException(ErrorCode.FieldRequired, messageSource.getMessage("lastName", null, Locale.GERMAN));
 
         final String username;
@@ -83,6 +85,33 @@ public class UserManagementService implements UserManagement {
         user = userRepository.save(user);
         eventPublisher.publishEvent(new UserCreatedEvent(username, firstName, lastName, email, randomPassword));
         return user;
+    }
+
+    /**
+     * Aktualisiert die Stammdaten eines intern angelegten Nutzers. Nicht gesetzte Felder
+     * (null oder leer) bleiben unverändert; der Login ist nicht änderbar, er ist die ID.
+     */
+    @Transactional
+    public User updateUser(String userName, @Nullable String firstName, @Nullable String lastName,
+                           @Nullable String email) {
+        if (userName == null || userName.isBlank())
+            throw new ServiceException(ErrorCode.FieldRequired, messageSource.getMessage("username", null, Locale.GERMAN));
+
+        User user = userRepository.findById(userName.trim().toLowerCase())
+                .orElseThrow(() -> new ServiceException(ErrorCode.UserNotFound, userName));
+
+        // IServ-Nutzer werden vom Sync gepflegt – Änderungen hier würden beim nächsten Lauf verlorengehen.
+        if (!user.isInternal())
+            throw new ServiceException(ErrorCode.UserNotInternal);
+
+        if (firstName != null && !firstName.isBlank())
+            user.setFirstName(firstName.trim());
+        if (lastName != null && !lastName.isBlank())
+            user.setLastName(lastName.trim());
+        if (email != null && !email.isBlank())
+            user.setEmail(email.trim());
+
+        return userRepository.save(user);
     }
 
     @Transactional
@@ -174,12 +203,48 @@ public class UserManagementService implements UserManagement {
         return user;
     }
 
+    /**
+     * Bereinigt einen Namensteil zu einem Principal, der ohne Encoding in einem URL-Pfad steht:
+     * Leerzeichen und Kommata werden zu Bindestrichen, alles Übrige außer Buchstaben, Ziffern,
+     * Punkt, Bindestrich und Unterstrich entfällt. Führende/abschließende Punkte und Bindestriche
+     * werden entfernt – ein Segment wie "." würde beim Normalisieren der URL sonst verschwinden.
+     * <p>
+     * Liefert {@code null}, wenn nichts Verwertbares übrig bleibt.
+     * Gilt <strong>nicht</strong> für extern vorgegebene Principals (z.B. IServ-IDs) – die bleiben
+     * unverändert, weil sie als Identität gegen das Fremdsystem matchen müssen.
+     */
+    @Nullable
+    public static String sanitizePrincipal(@Nullable String value) {
+        if (value == null) return null;
+        String cleaned = value.trim().toLowerCase(Locale.GERMAN)
+                .replaceAll("[\\s,]+", "-")
+                .replaceAll("[^a-z0-9äöüß._-]", "")
+                .replaceAll("-{2,}", "-")
+                .replaceAll("^[.\\-]+", "")
+                .replaceAll("[.\\-]+$", "");
+        return cleaned.isBlank() ? null : cleaned;
+    }
+
     public String createDefaultUserPrincipal(String firstName, String lastName) {
-        return firstName.trim().toLowerCase() + "." + lastName.trim().toLowerCase();
+        return buildPrincipalBase(firstName, lastName);
+    }
+
+    /**
+     * Setzt den Principal aus Vor- und Nachname zusammen. Wirft, wenn nach der Bereinigung
+     * kein verwertbarer Name übrig bleibt – sonst entstünden Principals wie "." oder ".2".
+     */
+    private String buildPrincipalBase(String firstName, String lastName) {
+        String first = sanitizePrincipal(firstName);
+        String last = sanitizePrincipal(lastName);
+        if (first == null && last == null)
+            throw new ServiceException(ErrorCode.FieldRequired, messageSource.getMessage("username", null, Locale.GERMAN));
+        if (first == null) return last;
+        if (last == null) return first;
+        return first + "." + last;
     }
 
     public String createUniqueUserPrincipal(String firstName, String lastName) {
-        String principal = firstName.trim().toLowerCase() + "." + lastName.trim().toLowerCase();
+        String principal = buildPrincipalBase(firstName, lastName);
         int number = 1;
         while (userRepository.existsById(principal))
             if (Character.isDigit(principal.charAt(principal.length() - 1)))

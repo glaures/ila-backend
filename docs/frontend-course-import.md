@@ -3,6 +3,9 @@
 Anleitung für das Frontend-Projekt zur Anbindung des Excel-basierten Kurs-Imports.
 Backend-Package: `sandbox27.ila.backend.imports`.
 
+> Gegenstück: [Excel-Export der Kurse einer Phase](frontend-course-export.md) – erzeugt aus einer
+> bestehenden Phase eine Vorlage, die hier unverändert wieder eingelesen werden kann.
+
 ## Idee & Ablauf
 
 Der Admin (z.B. Herr Engel) lädt seine Excel-Planungsdatei hoch. Das Backend **validiert** die Datei

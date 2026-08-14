@@ -41,6 +41,9 @@ public class CourseImportService {
 
     private static final Set<String> PAUSE_MARKERS = Set.of("hofpause", "mittagessen", "pause", "mittag");
 
+    /** "VK" (Vorbereitungsklasse) has no numeric grade and is stored under this pseudo grade. */
+    public static final int VK_GRADE = 99;
+
     /** Normalized category text (and short codes) -> enum. */
     private static final Map<String, CourseCategory> CATEGORY_BY_TEXT = Map.ofEntries(
             Map.entry("kreativität und praxis", CourseCategory.KuP),
@@ -240,7 +243,7 @@ public class CourseImportService {
             String t = token.trim();
             if (t.isBlank()) continue;
             if (t.equalsIgnoreCase("VK")) {
-                grades.add(99);
+                grades.add(VK_GRADE);
             } else {
                 try {
                     grades.add(Integer.parseInt(t));

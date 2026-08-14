@@ -43,13 +43,31 @@ public class UserRestController {
     @RequiredRole(Role.ADMIN_ROLE_NAME)
     @PutMapping
     public UserDto createUser(@RequestBody UserPayload userPayload) {
+        // Der vom Admin vergebene Login gewinnt; ohne Angabe wird er aus Vor-/Nachname abgeleitet.
         User user = userManagementService.createUser(
+                UserManagementService.sanitizePrincipal(userPayload.login),
                 userPayload.firstName,
                 userPayload.lastName,
                 userPayload.email,
                 null,
                 userPayload.initialRole,
                 true // interner Nutzer außerhalb von IServ
+        );
+        return modelMapper.map(user, UserDto.class);
+    }
+
+    /**
+     * Aktualisiert einen bestehenden Nutzer. Identifiziert wird er über {@code login};
+     * nicht gesetzte Felder bleiben unverändert. Rollenänderungen sind hier nicht vorgesehen.
+     */
+    @RequiredRole(Role.ADMIN_ROLE_NAME)
+    @PostMapping
+    public UserDto updateUser(@RequestBody UserPayload userPayload) {
+        User user = userManagementService.updateUser(
+                userPayload.login,
+                userPayload.firstName,
+                userPayload.lastName,
+                userPayload.email
         );
         return modelMapper.map(user, UserDto.class);
     }
