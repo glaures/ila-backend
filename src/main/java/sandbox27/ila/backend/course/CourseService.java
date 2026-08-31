@@ -50,27 +50,39 @@ public class CourseService {
                     .map(this::map)
                     .collect(Collectors.toList());
         } else {
-            List<Course> allCoursesInBlock = courseRepository.findAllByBlock_Id(blockId);
             if (!user.getRoles().contains(Role.ADMIN)) {
-                // Ausgeschlossene Kurse für diesen Benutzer ermitteln
-                Set<Long> excludedCourseIds = courseExclusionRepository.findAllByCourseIdIn(
-                                allCoursesInBlock.stream().map(Course::getId).collect(Collectors.toSet())
-                        ).stream()
-                        .filter(e -> e.getUser().getUserName().equals(user.getUserName()))
-                        .map(e -> e.getCourse().getId())
-                        .collect(Collectors.toSet());
-
-                return allCoursesInBlock.stream()
-                        .filter(course -> !course.manualAssignmentOnly
-                                && course.getGrades().contains(user.getGrade())
-                                && !course.getExcludedGenders().contains(user.getGender())
-                                && !excludedCourseIds.contains(course.getId()))
-                        .map(this::map)
-                        .toList();
+                return getSelectableCourses(blockId, user).stream().map(this::map).toList();
             } else {
-                return allCoursesInBlock.stream().map(this::map).toList();
+                return courseRepository.findAllByBlock_Id(blockId).stream().map(this::map).toList();
             }
         }
+    }
+
+    /**
+     * Kurse, die {@code user} in diesem Block überhaupt wählen kann.
+     * <p>
+     * Grundlage sowohl für die Kursliste im Frontend als auch für die Prüfung, ob ein Block für
+     * den Nutzer bearbeitbar ist. Beides muss dieselbe Antwort geben – sonst verlangt die
+     * Abgabeprüfung Blöcke, in denen dem Schüler gar nichts zur Auswahl steht.
+     */
+    public List<Course> getSelectableCourses(Long blockId, User user) {
+        List<Course> allCoursesInBlock = courseRepository.findAllByBlock_Id(blockId);
+        if (allCoursesInBlock.isEmpty())
+            return List.of();
+        // Ausgeschlossene Kurse für diesen Benutzer ermitteln
+        Set<Long> excludedCourseIds = courseExclusionRepository.findAllByCourseIdIn(
+                        allCoursesInBlock.stream().map(Course::getId).collect(Collectors.toSet())
+                ).stream()
+                .filter(e -> e.getUser().getUserName().equals(user.getUserName()))
+                .map(e -> e.getCourse().getId())
+                .collect(Collectors.toSet());
+
+        return allCoursesInBlock.stream()
+                .filter(course -> !course.manualAssignmentOnly
+                        && course.getGrades().contains(user.getGrade())
+                        && !course.getExcludedGenders().contains(user.getGender())
+                        && !excludedCourseIds.contains(course.getId()))
+                .toList();
     }
 
     @GetMapping("/instructedbyme")

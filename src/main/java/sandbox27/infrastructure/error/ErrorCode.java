@@ -25,7 +25,8 @@ public enum ErrorCode {
     ExchangePhaseEnded,
     ExchangeRequestAlreadyExists,
     ExchangeRequestNotPending,
-    PresetCourseNotExchangeable
+    PresetCourseNotExchangeable,
+    ImpersonationNotAllowed
 
 
 }

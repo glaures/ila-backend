@@ -9,6 +9,7 @@ import sandbox27.ila.backend.block.Block;
 import sandbox27.ila.backend.block.BlockRepository;
 import sandbox27.ila.backend.course.CourseBlockAssignment;
 import sandbox27.ila.backend.course.CourseBlockAssignmentRepository;
+import sandbox27.ila.backend.course.CourseService;
 import sandbox27.ila.backend.period.Period;
 import sandbox27.ila.backend.period.PeriodRepository;
 import sandbox27.ila.backend.user.User;
@@ -29,6 +30,14 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class PreferencesStatusService {
 
+    private final static int MIN_DIFFERENT_CATEGORIES = 3;
+
+    /**
+     * Ab dieser Klassenstufe entfällt die Kategorienvorgabe: Die Oberstufe wählt nach eigenen
+     * Schwerpunkten, eine erzwungene Streuung über drei Kategorien ergibt dort keinen Sinn.
+     */
+    private final static int MIN_GRADE_WITHOUT_CATEGORY_RULE = 11;
+
     public record PreferencesStatus(
             Double progress,
             List<String> categories,
@@ -45,29 +54,30 @@ public class PreferencesStatusService {
     final CourseUserAssignmentRepository courseUserAssignmentRepository;
     final CourseBlockAssignmentRepository courseBlockAssignmentRepository;
     final PeriodUserPreferencesSubmitStatusRepository periodUserPreferencesSubmitStatusRepository;
+    final CourseService courseService;
 
     @GetMapping
     public PreferencesStatus getPreferencesStatus(@AuthenticatedUser User user) throws ServiceException {
-        final int minDifferentCategories = 3;
         Period currentPeriod = periodRepository.findByCurrent(true).orElseThrow(() -> new ServiceException(ErrorCode.PeriodNotStartedYet));
         List<String> selectedCategories = getSelectedCategories(user, currentPeriod);
-        double blocksDefined = getBlocksDefined(currentPeriod, user);
+        BlockProgress blockProgress = getBlockProgress(currentPeriod, user);
+        double blocksDefined = blockProgress.progress();
         long distinctCount = selectedCategories.stream()
                 .distinct()
                 .count();
         boolean courseSelectionComplete = true;//selectedCategories.size() == 3;
-        boolean categoryDistributionOk = distinctCount >= minDifferentCategories;
+        boolean categoryDistributionOk = !isCategoryRuleApplicable(user) || distinctCount >= MIN_DIFFERENT_CATEGORIES;
         List<String> advices = new ArrayList<>();
         if (blocksDefined < 1.0)
-            advices.add("Bearbeite alle " + blockRepository.findAllByPeriod_idOrderByDayOfWeekAscStartTimeAsc(currentPeriod.getId()).size() + " Blöcke");
+            advices.add("Bearbeite alle " + blockProgress.relevantBlockIds().size() + " Blöcke");
         /*
         if (!courseSelectionComplete)
             advices.add("Belege genau 3 Blöcke");
          */
         if (!categoryDistributionOk)
-            advices.add("Setze mindestens " + minDifferentCategories + " verschiedenen Kategorien auf Platz 1");
+            advices.add("Setze mindestens " + MIN_DIFFERENT_CATEGORIES + " verschiedenen Kategorien auf Platz 1");
         PeriodUserPreferencesSubmitStatus submitStatus = periodUserPreferencesSubmitStatusRepository.findByUserAndPeriod(user, currentPeriod).orElse(PeriodUserPreferencesSubmitStatus.builder().submitted(false).build());
-        return new PreferencesStatus(getBlocksDefined(currentPeriod, user),
+        return new PreferencesStatus(blocksDefined,
                 selectedCategories,
                 courseSelectionComplete,
                 categoryDistributionOk,
@@ -95,26 +105,65 @@ public class PreferencesStatusService {
     }
 
 
-    private double getBlocksDefined(Period period, User user) {
-        double totalBlocks = blockRepository.findAllByPeriod_idOrderByDayOfWeekAscStartTimeAsc(period.getId()).size();
-        final Set<Block> definedBlocks = new HashSet<>();
+    /**
+     * Bearbeitungsstand über die Blöcke einer Phase.
+     *
+     * @param definedBlockIds  Blöcke, für die der Nutzer eine Zuweisung oder Präferenzen hat
+     * @param relevantBlockIds Blöcke, die von ihm überhaupt bearbeitet werden können
+     */
+    record BlockProgress(Set<Long> definedBlockIds, Set<Long> relevantBlockIds) {
+
+        double progress() {
+            if (relevantBlockIds.isEmpty())
+                return 1.0;
+            return Math.min((double) definedBlockIds.size() / relevantBlockIds.size(), 1.0);
+        }
+    }
+
+    /**
+     * Blöcke ohne für den Nutzer wählbare Kurse zählen nicht mit: Gibt es in einem Block etwa nur
+     * Kurse für andere Klassenstufen, kann der Schüler dort keine Präferenzen setzen und wäre sonst
+     * dauerhaft von der Abgabe ausgesperrt. Maßgeblich ist dieselbe Auswahllogik wie in der
+     * Kursliste ({@link CourseService#getSelectableCourses}).
+     */
+    BlockProgress getBlockProgress(Period period, User user) {
+        final Set<Long> definedBlockIds = new HashSet<>();
         // fixed assignment
         courseUserAssignmentRepository.findByUserAndBlock_Period(user, period)
                 .forEach(assignment -> {
                     Block assignedBlock = assignment.getBlock();
                     // da der andere Block an diesem Tag keine Präferenzen bekommt, werden beide
                     // Blöcke des Tages hinzugefügt
-                    definedBlocks.addAll(blockRepository.findByPeriod_IdAndDayOfWeek(period.getId(), assignedBlock.getDayOfWeek()));
+                    blockRepository.findByPeriod_IdAndDayOfWeek(period.getId(), assignedBlock.getDayOfWeek())
+                            .forEach(block -> definedBlockIds.add(block.getId()));
                 });
         // preferences
         preferenceRepository.findByUserAndBlock_Period(user, period)
                 .forEach(preference -> {
                     Block preferenceBlock = courseBlockAssignmentRepository.findByCourse(preference.getCourse()).get().getBlock();
-                    definedBlocks.add(preferenceBlock);
+                    definedBlockIds.add(preferenceBlock.getId());
                 });
-        return Math.min(definedBlocks.size() / totalBlocks, 1.0);
+
+        // Bereits bearbeitete Blöcke bleiben relevant, auch wenn dort inzwischen nichts mehr
+        // wählbar ist – sonst würde eine Kursänderung den Fortschritt über 100% treiben.
+        final Set<Long> relevantBlockIds = new HashSet<>(definedBlockIds);
+        blockRepository.findAllByPeriod_idOrderByDayOfWeekAscStartTimeAsc(period.getId())
+                .forEach(block -> {
+                    if (!courseService.getSelectableCourses(block.getId(), user).isEmpty())
+                        relevantBlockIds.add(block.getId());
+                });
+
+        return new BlockProgress(definedBlockIds, relevantBlockIds);
     }
 
+
+    /**
+     * Ob die Vorgabe, mehrere verschiedene Kategorien auf Platz 1 zu setzen, für diesen Nutzer
+     * gilt. Ab der Oberstufe entfällt sie.
+     */
+    boolean isCategoryRuleApplicable(User user) {
+        return user.getGrade() < MIN_GRADE_WITHOUT_CATEGORY_RULE;
+    }
 
     private List<String> getSelectedCategories(User user, Period period) {
         List<String> selectedCategories = new ArrayList<>();
