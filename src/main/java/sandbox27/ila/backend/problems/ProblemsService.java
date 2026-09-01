@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import sandbox27.ila.backend.assignments.CourseQuota;
 import sandbox27.ila.backend.assignments.CourseUserAssignmentRepository;
 import sandbox27.ila.backend.period.Period;
 import sandbox27.ila.backend.period.PeriodRepository;
@@ -33,10 +34,15 @@ public class ProblemsService {
 
         List<ProblemDto> problems = new ArrayList<>();
 
-        // Problem 1: Schüler mit weniger als 3 zugewiesenen Kursen
+        // Problem 1: Schüler mit zu wenigen zugewiesenen Kursen (Oberstufe: zwei statt drei)
         // Nur prüfen, wenn die Einschreibung abgeschlossen ist (Startdatum erreicht)
         if (period.getEndDate() != null && period.getEndDate().isBefore(LocalDate.now())) {
-            courseUserAssignmentRepository.findStudentsWithLessThanInPeriod(Role.STUDENT, period.getId(), 3)
+            courseUserAssignmentRepository.findStudentsWithLessThanInPeriod(
+                            Role.STUDENT,
+                            period.getId(),
+                            CourseQuota.COURSES_PER_STUDENT,
+                            CourseQuota.MIN_UPPER_SECONDARY_GRADE,
+                            CourseQuota.COURSES_PER_UPPER_SECONDARY_STUDENT)
                     .stream()
                     .map(s -> ProblemDto.builder()
                             .description("Schüler:in hat nur " + s.assignedCount() + " Kurse")

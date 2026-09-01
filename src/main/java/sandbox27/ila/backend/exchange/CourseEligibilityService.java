@@ -3,6 +3,7 @@ package sandbox27.ila.backend.exchange;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import sandbox27.ila.backend.assignments.CourseQuota;
 import sandbox27.ila.backend.assignments.CourseUserAssignment;
 import sandbox27.ila.backend.assignments.CourseUserAssignmentRepository;
 import sandbox27.ila.backend.block.Block;
@@ -25,9 +26,6 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 @Slf4j
 public class CourseEligibilityService {
-
-    private static final int COURSES_PER_STUDENT = 3;
-    private static final int MIN_CATEGORIES = 2;
 
     private final CourseUserAssignmentRepository assignmentRepository;
     private final CourseBlockAssignmentRepository courseBlockAssignmentRepository;
@@ -115,7 +113,7 @@ public class CourseEligibilityService {
         // 7. Kategorien-Regel: Nach Zuweisung mind. 2 Kategorien möglich?
         //    Nur bei der Batch-Auflösung prüfen - bei der Anzeige ignorieren,
         //    da andere Wechselwünsche des Schülers die Regel erfüllen könnten.
-        if (forResolution) {
+        if (forResolution && CourseQuota.requiresCategoryMix(student)) {
             Set<CourseCategory> currentCategories = currentAssignments.stream()
                     .flatMap(a -> a.getCourse().getCourseCategories().stream())
                     .collect(Collectors.toSet());
@@ -124,18 +122,18 @@ public class CourseEligibilityService {
             newCategories.addAll(course.getCourseCategories());
 
             int assignmentsAfter = currentAssignments.size() + 1;
-            int remainingSlots = COURSES_PER_STUDENT - assignmentsAfter;
+            int remainingSlots = CourseQuota.coursesFor(student) - assignmentsAfter;
 
             // Wenn das der letzte Kurs wäre und wir nicht genug Kategorien haben
-            if (remainingSlots == 0 && newCategories.size() < MIN_CATEGORIES) {
-                return EligibilityResult.ineligible("Mindestens " + MIN_CATEGORIES +
+            if (remainingSlots == 0 && newCategories.size() < CourseQuota.MIN_CATEGORIES) {
+                return EligibilityResult.ineligible("Mindestens " + CourseQuota.MIN_CATEGORIES +
                         " verschiedene Kategorien erforderlich");
             }
         }
 
         // 8. Schüler hat bereits max. Kurse? (Bei Wechsel irrelevant, da abzugebender Kurs simuliert entfernt wird)
-        if (currentAssignments.size() >= COURSES_PER_STUDENT) {
-            return EligibilityResult.ineligible("Schüler hat bereits " + COURSES_PER_STUDENT + " Kurse");
+        if (currentAssignments.size() >= CourseQuota.coursesFor(student)) {
+            return EligibilityResult.ineligible("Schüler hat bereits " + CourseQuota.coursesFor(student) + " Kurse");
         }
 
         // 9. Kurs voll?

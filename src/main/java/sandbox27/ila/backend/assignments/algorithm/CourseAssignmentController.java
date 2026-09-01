@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import sandbox27.ila.backend.assignments.Feedback;
 import sandbox27.ila.backend.user.Role;
 import sandbox27.infrastructure.security.RequiredRole;
 import sandbox27.infrastructure.error.ServiceException;
@@ -39,6 +40,23 @@ public class CourseAssignmentController {
             log.error("Unexpected error during course assignment", e);
             throw e; // Let the global exception handler deal with it
         }
+    }
+
+    /**
+     * Verwirft die vom Algorithmus erzeugten Zuweisungen der Phase – Gegenstück zu
+     * {@link #assignCourses(Long)}. Manuell gesetzte Zuweisungen bleiben erhalten.
+     * Die Einträge in der Lauf-Historie bleiben ebenfalls stehen; die löscht man bei Bedarf
+     * einzeln über die Historie.
+     */
+    @DeleteMapping
+    @RequiredRole(Role.ADMIN_ROLE_NAME)
+    public Feedback deleteAlgorithmicAssignments(@PathVariable Long periodId) {
+        log.info("Deleting algorithmic assignments for period {}", periodId);
+        int deleted = courseAssignmentService.deleteAlgorithmicAssignments(periodId);
+        return Feedback.builder()
+                .info(List.of(deleted + " automatisch erzeugte Zuweisungen gelöscht. "
+                        + "Manuell gesetzte Zuweisungen bleiben bestehen."))
+                .build();
     }
 
 }

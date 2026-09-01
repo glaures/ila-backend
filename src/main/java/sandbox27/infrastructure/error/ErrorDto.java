@@ -22,6 +22,9 @@ public class ErrorDto {
             case ErrorCode.Unauthorized -> HttpStatus.UNAUTHORIZED;
             case ErrorCode.RoleRequired, ErrorCode.AccessDenied -> HttpStatus.FORBIDDEN;
             case ErrorCode.NotFound, ErrorCode.UserNotFound -> HttpStatus.NOT_FOUND;
+            // Regelverstoß, kein Serverfehler: das Frontend soll die Meldung anzeigen können,
+            // ohne den generischen Absturz-Dialog zu öffnen.
+            case ErrorCode.AssignmentsAlreadyFinalized -> HttpStatus.CONFLICT;
             default -> HttpStatus.INTERNAL_SERVER_ERROR;
         };
     }

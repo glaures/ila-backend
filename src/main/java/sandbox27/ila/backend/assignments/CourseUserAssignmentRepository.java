@@ -32,6 +32,12 @@ public interface CourseUserAssignmentRepository extends JpaRepository<CourseUser
 
     List<CourseUserAssignment> findByUser_userName(String userName);
 
+    /**
+     * Schüler, denen in der Phase Kurse fehlen. Das Soll hängt an der Klassenstufe: ab
+     * {@code upperSecondaryGrade} gilt {@code upperSecondaryMinCount}, darunter {@code minCount}.
+     * Ohne diese Unterscheidung stünde jeder Oberstufenschüler mit vollständigen zwei Kursen
+     * dauerhaft in der Problemliste.
+     */
     @Query("""
             select new sandbox27.ila.backend.assignments.StudentAssignmentSummary(
                           u.userName,
@@ -39,7 +45,8 @@ public interface CourseUserAssignmentRepository extends JpaRepository<CourseUser
                              where a.user = u
                                and a.block.period.id = :periodId
                           ),
-                          (:minCount - (select count(a2) from CourseUserAssignment a2
+                          (case when u.grade >= :upperSecondaryGrade then :upperSecondaryMinCount else :minCount end
+                           - (select count(a2) from CourseUserAssignment a2
                              where a2.user = u
                                and a2.block.period.id = :periodId
                           ))
@@ -49,14 +56,16 @@ public interface CourseUserAssignmentRepository extends JpaRepository<CourseUser
                           and (select count(a3) from CourseUserAssignment a3
                                  where a3.user = u
                                    and a3.block.period.id = :periodId
-                              ) < :minCount
+                              ) < (case when u.grade >= :upperSecondaryGrade then :upperSecondaryMinCount else :minCount end)
                           and u.grade > 0
                         order by u.userName asc
             """)
     List<StudentAssignmentSummary> findStudentsWithLessThanInPeriod(
             @Param("role") Role role,
             @Param("periodId") Long periodId,
-            @Param("minCount") long minCount
+            @Param("minCount") long minCount,
+            @Param("upperSecondaryGrade") int upperSecondaryGrade,
+            @Param("upperSecondaryMinCount") long upperSecondaryMinCount
     );
 
     /**

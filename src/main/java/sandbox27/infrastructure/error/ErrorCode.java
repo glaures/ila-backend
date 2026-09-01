@@ -26,7 +26,8 @@ public enum ErrorCode {
     ExchangeRequestAlreadyExists,
     ExchangeRequestNotPending,
     PresetCourseNotExchangeable,
-    ImpersonationNotAllowed
+    ImpersonationNotAllowed,
+    AssignmentsAlreadyFinalized
 
 
 }

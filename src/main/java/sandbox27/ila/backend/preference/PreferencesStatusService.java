@@ -4,6 +4,7 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import sandbox27.ila.backend.assignments.CourseQuota;
 import sandbox27.ila.backend.assignments.CourseUserAssignmentRepository;
 import sandbox27.ila.backend.block.Block;
 import sandbox27.ila.backend.block.BlockRepository;
@@ -31,12 +32,6 @@ import java.util.stream.Collectors;
 public class PreferencesStatusService {
 
     private final static int MIN_DIFFERENT_CATEGORIES = 3;
-
-    /**
-     * Ab dieser Klassenstufe entfällt die Kategorienvorgabe: Die Oberstufe wählt nach eigenen
-     * Schwerpunkten, eine erzwungene Streuung über drei Kategorien ergibt dort keinen Sinn.
-     */
-    private final static int MIN_GRADE_WITHOUT_CATEGORY_RULE = 11;
 
     public record PreferencesStatus(
             Double progress,
@@ -159,10 +154,10 @@ public class PreferencesStatusService {
 
     /**
      * Ob die Vorgabe, mehrere verschiedene Kategorien auf Platz 1 zu setzen, für diesen Nutzer
-     * gilt. Ab der Oberstufe entfällt sie.
+     * gilt. Ab der Oberstufe entfällt sie – dieselbe Grenze wie bei der Kurszahl.
      */
     boolean isCategoryRuleApplicable(User user) {
-        return user.getGrade() < MIN_GRADE_WITHOUT_CATEGORY_RULE;
+        return !CourseQuota.isUpperSecondary(user);
     }
 
     private List<String> getSelectedCategories(User user, Period period) {

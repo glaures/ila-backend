@@ -2,6 +2,7 @@ package sandbox27.ila.backend.assignments.algorithm;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import sandbox27.ila.backend.block.Block;
@@ -11,8 +12,10 @@ import sandbox27.ila.backend.course.CourseCategory;
 import sandbox27.ila.backend.course.CourseRepository;
 import sandbox27.ila.backend.course.CourseBlockAssignment;
 import sandbox27.ila.backend.course.CourseBlockAssignmentRepository;
+import sandbox27.ila.backend.assignments.CourseQuota;
 import sandbox27.ila.backend.assignments.CourseUserAssignment;
 import sandbox27.ila.backend.assignments.CourseUserAssignmentRepository;
+import sandbox27.ila.backend.assignments.events.CourseAssignmentDeleteEvent;
 import sandbox27.ila.backend.period.Period;
 import sandbox27.ila.backend.period.PeriodRepository;
 import sandbox27.ila.backend.preference.Preference;
@@ -42,9 +45,8 @@ public class CourseAssignmentService {
     private final CourseBlockAssignmentRepository courseBlockAssignmentRepository;
     private final UserBlockExclusionService userBlockExclusionService;
     private final AssignmentResultRepository assignmentResultRepository;
+    private final ApplicationEventPublisher applicationEventPublisher;
 
-    private static final int COURSES_PER_STUDENT = 3;
-    private static final int MIN_CATEGORIES = 2;
     private static final int MAX_ITERATIONS = 50;
     private static final int SWAP_ATTEMPTS = 1000;
 
@@ -163,6 +165,47 @@ public class CourseAssignmentService {
     }
 
     /**
+     * Verwirft die vom Algorithmus erzeugten Zuweisungen einer Phase.
+     * <p>
+     * Manuell gesetzte Zuweisungen ({@code preset = true}) bleiben unangetastet – gelöscht wird
+     * genau die Menge, die ein erneuter Lauf ohnehin ersetzen würde. Wechselwünsche, die auf eine
+     * gelöschte Zuweisung zeigen, werden über {@link CourseAssignmentDeleteEvent} mit entfernt;
+     * ohne das scheitert das Löschen am Fremdschlüssel {@code exchange_request.current_assignment_id}.
+     * <p>
+     * Bereits finalisierte Phasen werden abgelehnt: dort haben die Schüler ihre Kurse schon per
+     * Mail bekommen, ein stilles Entfernen wäre nicht nachvollziehbar.
+     *
+     * @return Zahl der gelöschten Zuweisungen
+     */
+    @Transactional
+    public int deleteAlgorithmicAssignments(Long periodId) {
+        Period period = periodRepository.findById(periodId)
+                .orElseThrow(() -> new ServiceException(ErrorCode.NotFound, "Period", periodId));
+
+        if (assignmentResultRepository.existsByPeriodAndFinalizedTrue(period))
+            throw new ServiceException(ErrorCode.AssignmentsAlreadyFinalized, period.getName());
+
+        List<CourseUserAssignment> allAssignments = courseUserAssignmentRepository.findByCourse_Period(period);
+        List<CourseUserAssignment> toDelete = allAssignments.stream()
+                .filter(a -> !a.isPreset())
+                .collect(Collectors.toList());
+
+        if (toDelete.isEmpty()) {
+            log.info("Keine algorithmischen Zuweisungen in Phase {} vorhanden", period.getName());
+            return 0;
+        }
+
+        // Erst die abhängigen Wechselwünsche abräumen, dann die Zuweisungen selbst
+        toDelete.forEach(a -> applicationEventPublisher.publishEvent(new CourseAssignmentDeleteEvent(a.getId())));
+        courseUserAssignmentRepository.deleteAll(toDelete);
+
+        log.info("{} algorithmische Zuweisungen in Phase {} gelöscht, {} manuelle Zuweisungen behalten",
+                toDelete.size(), period.getName(), allAssignments.size() - toDelete.size());
+
+        return toDelete.size();
+    }
+
+    /**
      * Loggt Schüler mit Einschränkungen (Block-Exclusions oder Presets) zur Transparenz.
      */
     private void logStudentsWithConstraints(AssignmentState state) {
@@ -203,7 +246,7 @@ public class CourseAssignmentService {
             boolean anyAssignment = false;
 
             for (User student : sortedStudents) {
-                if (state.getAssignmentCount(student) >= COURSES_PER_STUDENT) {
+                if (state.getAssignmentCount(student) >= CourseQuota.coursesFor(student)) {
                     continue;
                 }
 
@@ -219,7 +262,7 @@ public class CourseAssignmentService {
                                 bestAssignment.course.getName(),
                                 bestAssignment.priority,
                                 state.getAssignmentCount(student),
-                                COURSES_PER_STUDENT);
+                                CourseQuota.coursesFor(student));
                     }
                 }
             }
@@ -286,14 +329,14 @@ public class CourseAssignmentService {
             return false;
         }
 
-        if (strictCategoryCheck) {
+        if (strictCategoryCheck && CourseQuota.requiresCategoryMix(student)) {
             Set<CourseCategory> currentCategories = state.getAssignedCategories(student);
             Set<CourseCategory> newCategories = new HashSet<>(currentCategories);
             newCategories.addAll(course.getCourseCategories());
 
-            int remainingSlots = COURSES_PER_STUDENT - state.getAssignmentCount(student) - 1;
+            int remainingSlots = CourseQuota.coursesFor(student) - state.getAssignmentCount(student) - 1;
 
-            if (remainingSlots == 0 && newCategories.size() < MIN_CATEGORIES) {
+            if (remainingSlots == 0 && newCategories.size() < CourseQuota.MIN_CATEGORIES) {
                 return false;
             }
         }
@@ -306,7 +349,7 @@ public class CourseAssignmentService {
 
         for (int attempt = 0; attempt < SWAP_ATTEMPTS; attempt++) {
             List<User> completeStudents = state.students.stream()
-                    .filter(s -> state.getAssignmentCount(s) == COURSES_PER_STUDENT)
+                    .filter(s -> state.getAssignmentCount(s) == CourseQuota.coursesFor(s))
                     .collect(Collectors.toList());
 
             if (completeStudents.size() < 2) {
@@ -388,7 +431,7 @@ public class CourseAssignmentService {
             List<Block> availableBlocks = state.getAvailableBlocks(student);
 
             for (Block block : availableBlocks) {
-                if (state.getAssignmentCount(student) >= COURSES_PER_STUDENT) {
+                if (state.getAssignmentCount(student) >= CourseQuota.coursesFor(student)) {
                     break;
                 }
 
@@ -401,7 +444,7 @@ public class CourseAssignmentService {
                 }
             }
 
-            if (state.getAssignmentCount(student) < COURSES_PER_STUDENT) {
+            if (state.getAssignmentCount(student) < CourseQuota.coursesFor(student)) {
                 log.warn("Student {} without preferences could only be assigned {} courses",
                         student.getUserName(), state.getAssignmentCount(student));
             }
@@ -416,7 +459,7 @@ public class CourseAssignmentService {
         List<User> incompleteStudents = state.students.stream()
                 .filter(s -> {
                     int count = state.getAssignmentCount(s);
-                    return count > 0 && count < COURSES_PER_STUDENT;
+                    return count > 0 && count < CourseQuota.coursesFor(s);
                 })
                 .collect(Collectors.toList());
 
@@ -428,7 +471,7 @@ public class CourseAssignmentService {
         );
 
         for (User student : incompleteStudents) {
-            while (state.getAssignmentCount(student) < COURSES_PER_STUDENT) {
+            while (state.getAssignmentCount(student) < CourseQuota.coursesFor(student)) {
                 Assignment bestAssignment = findBestAssignmentRelaxed(student, state);
 
                 if (bestAssignment == null) {
@@ -437,7 +480,7 @@ public class CourseAssignmentService {
                             student.getUserName(),
                             student.getGrade(),
                             state.getAssignmentCount(student),
-                            COURSES_PER_STUDENT,
+                            CourseQuota.coursesFor(student),
                             state.getAvailableBlocks(student).stream()
                                     .map(b -> b.getDayOfWeek().toString() + " " + b.getStartTime().format(DateTimeFormatter.ofPattern("HH:mm")))
                                     .collect(Collectors.joining(", ")),
@@ -641,13 +684,13 @@ public class CourseAssignmentService {
         int totalStudents = state.students.size();
 
         int assignedStudents = (int) state.students.stream()
-                .filter(s -> state.getAssignmentCount(s) == COURSES_PER_STUDENT)
+                .filter(s -> state.getAssignmentCount(s) == CourseQuota.coursesFor(s))
                 .count();
 
         int partiallyAssigned = (int) state.students.stream()
                 .filter(s -> {
                     int count = state.getAssignmentCount(s);
-                    return count > 0 && count < COURSES_PER_STUDENT;
+                    return count > 0 && count < CourseQuota.coursesFor(s);
                 })
                 .count();
 
@@ -681,7 +724,7 @@ public class CourseAssignmentService {
         List<Double> fairnessScores = studentsWithPreferences.stream()
                 .filter(s -> state.getAssignments(s).stream()
                         .filter(a -> a.priority >= 0 && a.priority < 999)
-                        .count() == COURSES_PER_STUDENT)
+                        .count() == CourseQuota.coursesFor(s))
                 .map(s -> {
                     double score = state.getAssignments(s).stream()
                             .filter(a -> a.priority >= 0 && a.priority < 999)
@@ -839,7 +882,7 @@ public class CourseAssignmentService {
         }
 
         int getRemainingSlots(User student) {
-            return COURSES_PER_STUDENT - getAssignmentCount(student);
+            return CourseQuota.coursesFor(student) - getAssignmentCount(student);
         }
 
         int getInitialAvailableBlockCount(User student) {
