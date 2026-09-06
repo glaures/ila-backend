@@ -30,9 +30,14 @@ public interface CourseBlockAssignmentRepository extends JpaRepository<CourseBlo
      * Platzzahlen je Kurs und Klassenstufe für die Übersicht der freien Plätze.
      * <p>
      * Der Join über {@code c.grades} klappt jeden Kurs auf die Stufen auf, die er zulässt – ein
-     * Kurs für 5–7 liefert drei Zeilen. Kurse ohne Klassenstufe tauchen deshalb nicht auf, ebenso
-     * wenig Platzhalter-Kurse. Gezählt werden die Zuweisungen zu genau diesem Kurs in genau
-     * diesem Block, damit ein Kurs in zwei Blöcken nicht seine Belegung doppelt meldet.
+     * Kurs für 5–7 liefert drei Zeilen. Kurse ohne Klassenstufe tauchen deshalb nicht auf.
+     * Gezählt werden die Zuweisungen zu genau diesem Kurs in genau diesem Block, damit ein Kurs
+     * in zwei Blöcken nicht seine Belegung doppelt meldet.
+     * <p>
+     * Berücksichtigt werden nur Kurse, die der Vergabealgorithmus auch tatsächlich belegen kann –
+     * also weder Platzhalter noch Kurse mit {@code manualAssignmentOnly}. Dieselbe Auswahl trifft
+     * {@code CourseAssignmentService.assignCourses}; ohne den zweiten Filter meldet die Übersicht
+     * freie Plätze, die dem Algorithmus gar nicht zur Verfügung stehen.
      */
     @Query("""
             select new sandbox27.ila.backend.freeseats.CourseGradeSeats(
@@ -46,6 +51,7 @@ public interface CourseBlockAssignmentRepository extends JpaRepository<CourseBlo
             join c.grades g
             where cba.block.period.id = :periodId
               and c.placeholder = false
+              and c.manualAssignmentOnly = false
             """)
     List<CourseGradeSeats> findCourseGradeSeatsInPeriod(@Param("periodId") Long periodId);
 

@@ -3,6 +3,7 @@ package sandbox27.ila.backend.assignments.algorithm;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
+import sandbox27.ila.backend.assignments.AssignmentDeletionService;
 import sandbox27.ila.backend.assignments.CourseUserAssignment;
 import sandbox27.ila.backend.assignments.CourseUserAssignmentRepository;
 import sandbox27.ila.backend.block.Block;
@@ -33,6 +34,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -52,11 +54,12 @@ class UpperSecondaryCourseCountTest {
     private final CourseBlockAssignmentRepository courseBlockAssignmentRepository = mock(CourseBlockAssignmentRepository.class);
     private final UserBlockExclusionService userBlockExclusionService = mock(UserBlockExclusionService.class);
     private final AssignmentResultRepository assignmentResultRepository = mock(AssignmentResultRepository.class);
+    private final AssignmentDeletionService assignmentDeletionService = mock(AssignmentDeletionService.class);
 
     private final CourseAssignmentService service = new CourseAssignmentService(
             periodRepository, userRepository, courseRepository, blockRepository, preferenceRepository,
             courseUserAssignmentRepository, courseBlockAssignmentRepository, userBlockExclusionService,
-            assignmentResultRepository, mock(org.springframework.context.ApplicationEventPublisher.class));
+            assignmentResultRepository, assignmentDeletionService);
 
     private final Period period = Period.builder().id(PERIOD_ID).name("Testphase").current(true).build();
     private final User middleSchooler = student("mia.mittelstufe", 7);
@@ -123,6 +126,26 @@ class UpperSecondaryCourseCountTest {
         assertEquals(2, result.getAssignedStudents());
         assertEquals(0, result.getPartiallyAssigned());
         assertEquals(0, result.getUnassigned());
+    }
+
+    @Test
+    void aRerunDiscardsThePreviousAutomaticAssignmentsIncludingTheirExchangeRequests() {
+        CourseUserAssignment previousRun = CourseUserAssignment.builder()
+                .id(500L).user(middleSchooler).course(courses.get(0)).block(blocks.get(0)).preset(false).build();
+        CourseUserAssignment byHand = CourseUserAssignment.builder()
+                .id(501L).user(upperSecondary).course(courses.get(1)).block(blocks.get(1)).preset(true).build();
+        when(courseUserAssignmentRepository.findByCourse_Period(period))
+                .thenReturn(List.of(previousRun, byHand));
+
+        service.assignCourses(PERIOD_ID);
+
+        // Über den Deletion-Service, weil nur der die Wechselwünsche zu den verworfenen
+        // Zuweisungen mit abräumt. Die Handzuweisung bleibt unangetastet.
+        @SuppressWarnings("unchecked")
+        ArgumentCaptor<List<CourseUserAssignment>> captor = ArgumentCaptor.forClass(List.class);
+        verify(assignmentDeletionService).delete(captor.capture());
+        assertEquals(List.of(previousRun), captor.getValue());
+        verify(courseUserAssignmentRepository, never()).deleteAll(any());
     }
 
     @SuppressWarnings("unchecked")

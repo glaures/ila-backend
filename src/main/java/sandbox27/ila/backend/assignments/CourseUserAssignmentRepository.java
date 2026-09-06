@@ -105,5 +105,4 @@ public interface CourseUserAssignmentRepository extends JpaRepository<CourseUser
 
     int countByCourseAndBlock(Course course, Block block);
 
-    void deleteByPresetFalseAndBlock_Period(Period period);
 }

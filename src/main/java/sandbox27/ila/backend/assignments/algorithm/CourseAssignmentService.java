@@ -2,7 +2,6 @@ package sandbox27.ila.backend.assignments.algorithm;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import sandbox27.ila.backend.block.Block;
@@ -14,8 +13,8 @@ import sandbox27.ila.backend.course.CourseBlockAssignment;
 import sandbox27.ila.backend.course.CourseBlockAssignmentRepository;
 import sandbox27.ila.backend.assignments.CourseQuota;
 import sandbox27.ila.backend.assignments.CourseUserAssignment;
+import sandbox27.ila.backend.assignments.AssignmentDeletionService;
 import sandbox27.ila.backend.assignments.CourseUserAssignmentRepository;
-import sandbox27.ila.backend.assignments.events.CourseAssignmentDeleteEvent;
 import sandbox27.ila.backend.period.Period;
 import sandbox27.ila.backend.period.PeriodRepository;
 import sandbox27.ila.backend.preference.Preference;
@@ -45,7 +44,7 @@ public class CourseAssignmentService {
     private final CourseBlockAssignmentRepository courseBlockAssignmentRepository;
     private final UserBlockExclusionService userBlockExclusionService;
     private final AssignmentResultRepository assignmentResultRepository;
-    private final ApplicationEventPublisher applicationEventPublisher;
+    private final AssignmentDeletionService assignmentDeletionService;
 
     private static final int MAX_ITERATIONS = 50;
     private static final int SWAP_ATTEMPTS = 1000;
@@ -108,10 +107,12 @@ public class CourseAssignmentService {
                 .filter(CourseUserAssignment::isPreset)
                 .collect(Collectors.toList());
 
+        // Über den Deletion-Service, damit die Wechselwünsche zu den verworfenen Zuweisungen
+        // mit abgeräumt werden – sonst bricht der Lauf am Fremdschlüssel ab.
         List<CourseUserAssignment> toDelete = existingAssignments.stream()
                 .filter(a -> !a.isPreset())
                 .collect(Collectors.toList());
-        courseUserAssignmentRepository.deleteAll(toDelete);
+        assignmentDeletionService.delete(toDelete);
 
         // Initialize assignment state - jetzt mit courseToBlock Map!
         AssignmentState state = new AssignmentState(students, courses, blocks, userPreferences, userBlockExclusions, courseToBlock);
@@ -185,24 +186,7 @@ public class CourseAssignmentService {
         if (assignmentResultRepository.existsByPeriodAndFinalizedTrue(period))
             throw new ServiceException(ErrorCode.AssignmentsAlreadyFinalized, period.getName());
 
-        List<CourseUserAssignment> allAssignments = courseUserAssignmentRepository.findByCourse_Period(period);
-        List<CourseUserAssignment> toDelete = allAssignments.stream()
-                .filter(a -> !a.isPreset())
-                .collect(Collectors.toList());
-
-        if (toDelete.isEmpty()) {
-            log.info("Keine algorithmischen Zuweisungen in Phase {} vorhanden", period.getName());
-            return 0;
-        }
-
-        // Erst die abhängigen Wechselwünsche abräumen, dann die Zuweisungen selbst
-        toDelete.forEach(a -> applicationEventPublisher.publishEvent(new CourseAssignmentDeleteEvent(a.getId())));
-        courseUserAssignmentRepository.deleteAll(toDelete);
-
-        log.info("{} algorithmische Zuweisungen in Phase {} gelöscht, {} manuelle Zuweisungen behalten",
-                toDelete.size(), period.getName(), allAssignments.size() - toDelete.size());
-
-        return toDelete.size();
+        return assignmentDeletionService.deleteAlgorithmicAssignments(period);
     }
 
     /**

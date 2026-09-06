@@ -22,7 +22,7 @@ public class AssignmentResultService {
     final ApplicationEventPublisher applicationEventPublisher;
     final AssignmentResultRepository assignmentResultRepository;
     final PeriodRepository periodRepository;
-    final CourseUserAssignmentRepository courseUserAssignmentRepository;
+    final AssignmentDeletionService assignmentDeletionService;
 
     @Transactional
     public List<AssignmentResult> markCourseAssignmentProcessFinal(@PathVariable long assignmentResultId) throws ServiceException {
@@ -56,9 +56,10 @@ public class AssignmentResultService {
 
         assignmentResultRepository.delete(assignmentResult);
 
-        // Nur beim letzten Durchlauf auch die algorithmischen Zuweisungen löschen
+        // Nur beim letzten Durchlauf auch die algorithmischen Zuweisungen löschen –
+        // über den Deletion-Service, damit die daran hängenden Wechselwünsche mit verschwinden.
         if (isLatest) {
-            courseUserAssignmentRepository.deleteByPresetFalseAndBlock_Period(period);
+            assignmentDeletionService.deleteAlgorithmicAssignments(period);
         }
     }
 }
