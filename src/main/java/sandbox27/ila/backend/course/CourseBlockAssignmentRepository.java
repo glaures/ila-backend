@@ -27,7 +27,7 @@ public interface CourseBlockAssignmentRepository extends JpaRepository<CourseBlo
     List<CourseBlockAssignment> findAllByBlock(Block block);
 
     /**
-     * Platzzahlen je Kurs und Klassenstufe für die Übersicht der freien Plätze.
+     * Platzzahlen je Kurs, Block und Klassenstufe für die Übersicht der freien Plätze.
      * <p>
      * Der Join über {@code c.grades} klappt jeden Kurs auf die Stufen auf, die er zulässt – ein
      * Kurs für 5–7 liefert drei Zeilen. Kurse ohne Klassenstufe tauchen deshalb nicht auf.
@@ -42,7 +42,10 @@ public interface CourseBlockAssignmentRepository extends JpaRepository<CourseBlo
     @Query("""
             select new sandbox27.ila.backend.freeseats.CourseGradeSeats(
                        g,
+                       cba.block.id,
                        cba.block.dayOfWeek,
+                       cba.block.startTime,
+                       cba.block.endTime,
                        c.maxAttendees,
                        (select count(a) from CourseUserAssignment a
                           where a.course = c and a.block = cba.block))
