@@ -11,6 +11,7 @@ import sandbox27.ila.backend.course.Course;
 import sandbox27.ila.backend.course.CourseBlockAssignment;
 import sandbox27.ila.backend.course.CourseBlockAssignmentRepository;
 import sandbox27.ila.backend.course.CourseCategory;
+import sandbox27.ila.backend.courseexclusions.CourseExclusionRepository;
 import sandbox27.ila.backend.exclusion.UserBlockExclusionService;
 import sandbox27.ila.backend.user.User;
 import sandbox27.infrastructure.error.ErrorCode;
@@ -30,6 +31,7 @@ public class CourseEligibilityService {
     private final CourseUserAssignmentRepository assignmentRepository;
     private final CourseBlockAssignmentRepository courseBlockAssignmentRepository;
     private final UserBlockExclusionService userBlockExclusionService;
+    private final CourseExclusionRepository courseExclusionRepository;
 
     /**
      * Ermittelt den Block eines Kurses über CourseBlockAssignment
@@ -67,13 +69,44 @@ public class CourseEligibilityService {
             Long periodId,
             boolean forResolution) {
 
+        return checkEligibilityWithAssignments(student, course, currentAssignments, periodId, forResolution, false);
+    }
+
+    /**
+     * Prüft die Berechtigung für eine manuelle Zuweisung durch die Verwaltung.
+     * <p>
+     * Einziger Unterschied zur Schüleransicht: Kurse mit {@code manualAssignmentOnly} sind hier
+     * nicht ausgeschlossen, sondern gerade der Anwendungsfall. Alle übrigen Regeln gelten
+     * unverändert – die manuelle Zuweisung soll dieselben Grenzen einhalten wie der Algorithmus.
+     */
+    public EligibilityResult checkManualAssignmentEligibility(
+            User student,
+            Course course,
+            List<CourseUserAssignment> currentAssignments,
+            Long periodId) {
+
+        return checkEligibilityWithAssignments(student, course, currentAssignments, periodId, false, true);
+    }
+
+    /**
+     * @param allowManualAssignmentOnly wenn true, sind Kurse mit {@code manualAssignmentOnly}
+     *                                  zugelassen (manuelle Zuweisung durch die Verwaltung).
+     */
+    private EligibilityResult checkEligibilityWithAssignments(
+            User student,
+            Course course,
+            List<CourseUserAssignment> currentAssignments,
+            Long periodId,
+            boolean forResolution,
+            boolean allowManualAssignmentOnly) {
+
         // Block über CourseBlockAssignment ermitteln
         Block targetBlock = getBlockForCourse(course);
 
         // === HARTE AUSSCHLÜSSE (Kurs wird nicht in der Liste angezeigt) ===
 
         // 1. Kurs ist nur für manuelle Zuweisung
-        if (course.isManualAssignmentOnly()) {
+        if (course.isManualAssignmentOnly() && !allowManualAssignmentOnly) {
             return EligibilityResult.excluded("Kurs ist nur für manuelle Zuweisung vorgesehen");
         }
 
@@ -97,6 +130,13 @@ public class CourseEligibilityService {
         // 5. Geschlecht nicht ausgeschlossen?
         if (course.getExcludedGenders().contains(student.getGender())) {
             return EligibilityResult.excluded("Geschlecht ist für diesen Kurs ausgeschlossen");
+        }
+
+        // 5b. Schüler ist persönlich von diesem Kurs ausgeschlossen?
+        //     Dieselbe Regel lehnt in CourseUserAssignmentService die Zuweisung ab – ohne die
+        //     Prüfung stünde der Kurs in der Liste und ließe sich trotzdem nie vergeben.
+        if (courseExclusionRepository.existsByCourseAndUser(course, student)) {
+            return EligibilityResult.excluded("Schüler ist von diesem Kurs ausgeschlossen");
         }
 
         // === WEICHE EINSCHRÄNKUNGEN ===
