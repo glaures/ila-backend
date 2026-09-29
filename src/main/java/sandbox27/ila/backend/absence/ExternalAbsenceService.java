@@ -14,10 +14,16 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.*;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 /**
  * Service für die Verwaltung externer Abwesenheiten aus Beste.Schule.
+ *
+ * Die Zuordnung einer Abwesenheit zu einem iLA-Benutzer läuft über die numerische
+ * Beste.Schule-Schüler-ID (student.id aus der API ⇄ User.besteSchuleId). Die früher
+ * genutzte SaxSVS-UUID (student.local_id) liefert die API nicht mehr aus.
+ * User.besteSchuleId wird vom BesteSchuleStudentSyncService gepflegt.
  */
 @Service
 @RequiredArgsConstructor
@@ -51,7 +57,7 @@ public class ExternalAbsenceService {
         
         if (allAbsences.isEmpty()) {
             log.warn("Keine Abwesenheiten von Beste.Schule abgerufen");
-            return new SyncResult(0, 0, 0, "Keine Daten von API");
+            return new SyncResult(0, 0, 0, 0, "Keine Daten von API");
         }
 
         // Filtere nur Abwesenheiten, die das angegebene Datum betreffen
@@ -62,18 +68,31 @@ public class ExternalAbsenceService {
         log.info("Von {} Abwesenheiten sind {} für {} relevant", 
                 allAbsences.size(), relevantAbsences.size(), date);
 
+        Map<Long, User> usersByBesteSchuleId = loadUsersByBesteSchuleId();
+
         // Alte Einträge für dieses Datum löschen
         absenceRepository.deleteByDate(date);
 
         // Neue Einträge speichern
         int created = 0;
+        int skipped = 0;
         int errors = 0;
         LocalDateTime now = LocalDateTime.now();
 
         for (AbsenceResponse absence : relevantAbsences) {
             try {
-                ExternalAbsence entity = mapToEntity(absence, date, now);
-                absenceRepository.save(entity);
+                Long studentId = absence.student() != null ? absence.student().id() : null;
+                User user = studentId != null ? usersByBesteSchuleId.get(studentId) : null;
+
+                if (user == null) {
+                    // Schüler ist in iLA nicht (mehr) bekannt – für die Anwesenheitserfassung irrelevant
+                    skipped++;
+                    log.debug("Abwesenheit {} übersprungen: kein iLA-Benutzer zu Beste.Schule-Schüler {}",
+                            absence.id(), studentId);
+                    continue;
+                }
+
+                absenceRepository.save(mapToEntity(absence, user, date, now));
                 created++;
             } catch (Exception e) {
                 log.warn("Fehler beim Importieren der Abwesenheit {}: {}", 
@@ -82,8 +101,23 @@ public class ExternalAbsenceService {
             }
         }
 
-        log.info("Sync abgeschlossen: {} erstellt, {} Fehler", created, errors);
-        return new SyncResult(relevantAbsences.size(), created, errors, null);
+        log.info("Sync abgeschlossen: {} erstellt, {} ohne iLA-Benutzer übersprungen, {} Fehler",
+                created, skipped, errors);
+        return new SyncResult(relevantAbsences.size(), created, skipped, errors, null);
+    }
+
+    /**
+     * Lädt alle Benutzer, denen eine Beste.Schule-Schüler-ID zugeordnet ist, als Map.
+     */
+    private Map<Long, User> loadUsersByBesteSchuleId() {
+        Map<Long, User> users = userRepository.findByBesteSchuleIdNotNull().stream()
+                .collect(Collectors.toMap(User::getBesteSchuleId, Function.identity(), (a, b) -> a));
+
+        if (users.isEmpty()) {
+            log.warn("Kein Benutzer hat eine Beste.Schule-ID – bitte den Student-ID-Sync prüfen. " +
+                    "Ohne diese Zuordnung können keine Abwesenheiten importiert werden.");
+        }
+        return users;
     }
 
     /**
@@ -94,12 +128,12 @@ public class ExternalAbsenceService {
      * @return Optional mit der Abwesenheit, falls vorhanden
      */
     public Optional<ExternalAbsence> getActiveAbsence(User user, LocalDateTime dateTime) {
-        if (user.getInternalId() == null || user.getInternalId().isBlank()) {
+        if (user.getBesteSchuleId() == null) {
             return Optional.empty();
         }
 
         List<ExternalAbsence> absences = absenceRepository.findActiveAbsences(
-                user.getInternalId(), 
+                user.getBesteSchuleId(),
                 dateTime
         );
 
@@ -139,7 +173,7 @@ public class ExternalAbsenceService {
             List<String> userNames, 
             LocalDateTime dateTime
     ) {
-        // Lade alle Users mit ihren internalIds
+        // Lade alle Users mit ihren Beste.Schule-IDs
         List<User> users = userRepository.findAllById(userNames);
         
         Map<String, Optional<ExternalAbsence>> result = new HashMap<>();
@@ -154,22 +188,6 @@ public class ExternalAbsenceService {
         }
         
         return result;
-    }
-
-    /**
-     * Ermittelt die Beste.Schule Student-ID für einen Schüler anhand seiner internalId (SaxSVS UUID).
-     * Sucht in den gespeicherten Abwesenheitsdaten nach einem Eintrag mit passender studentLocalId.
-     *
-     * @param internalId die SaxSVS UUID des Schülers (User.internalId)
-     * @return Optional mit der numerischen Beste.Schule Student-ID
-     */
-    public Optional<Long> findBesteSchuleStudentId(String internalId) {
-        if (internalId == null || internalId.isBlank()) {
-            return Optional.empty();
-        }
-        return absenceRepository.findFirstByStudentLocalId(internalId)
-                .map(ExternalAbsence::getBesteSchuleStudentId)
-                .filter(Objects::nonNull);
     }
 
     /**
@@ -204,23 +222,19 @@ public class ExternalAbsenceService {
 
     /**
      * Mappt eine API-Response zu einer Entity.
+     *
+     * @param user der bereits über die Beste.Schule-Schüler-ID aufgelöste iLA-Benutzer
      */
-    private ExternalAbsence mapToEntity(AbsenceResponse response, LocalDate date, LocalDateTime fetchedAt) {
+    private ExternalAbsence mapToEntity(AbsenceResponse response, User user, LocalDate date, LocalDateTime fetchedAt) {
         LocalDateTime from = parseDateTime(response.from());
         LocalDateTime to = parseDateTime(response.to());
         
         String absenceType = response.type() != null ? response.type().name() : "unbekannt";
-        String studentLocalId = response.student() != null ? response.student().localId() : null;
-        Long besteSchuleStudentId = response.student() != null ? response.student().id() : null;
-        
-        if (studentLocalId == null) {
-            throw new IllegalArgumentException("Keine student.local_id in Abwesenheit " + response.id());
-        }
 
         return ExternalAbsence.builder()
                 .externalId(response.id())
-                .studentLocalId(studentLocalId)
-                .besteSchuleStudentId(besteSchuleStudentId)
+                .studentLocalId(user.getInternalId() != null ? user.getInternalId() : user.getUserName())
+                .besteSchuleStudentId(user.getBesteSchuleId())
                 .fromDateTime(from)
                 .toDateTime(to)
                 .absenceType(absenceType)
@@ -239,6 +253,7 @@ public class ExternalAbsenceService {
     public record SyncResult(
             int totalRelevant,
             int created,
+            int skipped,
             int errors,
             String message
     ) {

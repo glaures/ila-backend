@@ -14,7 +14,8 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "external_absence", indexes = {
         @Index(name = "idx_external_absence_date", columnList = "date"),
-        @Index(name = "idx_external_absence_student", columnList = "student_local_id")
+        @Index(name = "idx_external_absence_student", columnList = "student_local_id"),
+        @Index(name = "idx_external_absence_bs_student", columnList = "beste_schule_student_id")
 })
 @Getter
 @Setter
@@ -34,14 +35,18 @@ public class ExternalAbsence {
     private Long externalId;
 
     /**
-     * UUID des Schülers aus SaxSVS (entspricht User.internalId)
+     * UUID des Schülers aus SaxSVS (entspricht User.internalId).
+     * Beste.Schule liefert die local_id nicht mehr über die API aus; der Wert wird
+     * deshalb beim Import aus dem lokal zugeordneten User übernommen und dient nur
+     * noch der Nachvollziehbarkeit. Gematcht wird über {@link #besteSchuleStudentId}.
      */
     @Column(name = "student_local_id", nullable = false)
     private String studentLocalId;
 
     /**
      * Numerische Schüler-ID in Beste.Schule (student.id aus der API).
-     * Wird benötigt, um Abwesenheiten über die API einzutragen.
+     * Schlüssel für die Zuordnung zum lokalen User (User.besteSchuleId) und
+     * für das Eintragen von Abwesenheiten über die API.
      */
     @Column(name = "beste_schule_student_id")
     private Long besteSchuleStudentId;

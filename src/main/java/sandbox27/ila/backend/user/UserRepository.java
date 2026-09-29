@@ -41,5 +41,10 @@ public interface UserRepository extends JpaRepository<User, String> {
 
     Optional<User> findFirstByInternalId(String internalId);
 
+    /**
+     * Alle Benutzer, denen eine Beste.Schule-Schüler-ID zugeordnet ist.
+     */
+    List<User> findByBesteSchuleIdNotNull();
+
     long countByInternalId(String internalId);
 }

@@ -36,7 +36,8 @@ public class BesteSchuleStudentDto {
     @JsonIgnoreProperties(ignoreUnknown = true)
     public record StudentResponse(
             Long id,
-            @JsonProperty("local_id") String localId,  // UUID aus SaxSVS
+            /** UUID aus SaxSVS – wird von der API seit 09/2026 nicht mehr geliefert (immer null). */
+            @JsonProperty("local_id") String localId,
             String forename,
             String name,
             String gender

@@ -36,10 +36,11 @@ public class ExternalAbsenceSyncScheduler {
             ExternalAbsenceService.SyncResult result = externalAbsenceService.syncAbsencesForToday();
             
             if (result.isSuccess()) {
-                log.info("Abwesenheits-Sync erfolgreich: {} Einträge synchronisiert", result.created());
+                log.info("Abwesenheits-Sync erfolgreich: {} Einträge synchronisiert, {} ohne iLA-Benutzer übersprungen",
+                        result.created(), result.skipped());
             } else {
-                log.warn("Abwesenheits-Sync mit Problemen: {} erstellt, {} Fehler, Nachricht: {}", 
-                        result.created(), result.errors(), result.message());
+                log.warn("Abwesenheits-Sync mit Problemen: {} erstellt, {} übersprungen, {} Fehler, Nachricht: {}",
+                        result.created(), result.skipped(), result.errors(), result.message());
             }
         } catch (Exception e) {
             log.error("Fehler beim Abwesenheits-Sync: {}", e.getMessage(), e);

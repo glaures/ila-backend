@@ -27,9 +27,9 @@ public interface ExternalAbsenceRepository extends JpaRepository<ExternalAbsence
     /**
      * Findet alle Abwesenheiten für einen Schüler an einem bestimmten Datum
      */
-    @Query("SELECT e FROM ExternalAbsence e WHERE e.studentLocalId = :studentLocalId AND e.date = :date")
+    @Query("SELECT e FROM ExternalAbsence e WHERE e.besteSchuleStudentId = :studentId AND e.date = :date")
     List<ExternalAbsence> findByStudentAndDate(
-            @Param("studentLocalId") String studentLocalId,
+            @Param("studentId") Long besteSchuleStudentId,
             @Param("date") LocalDate date
     );
 
@@ -37,10 +37,10 @@ public interface ExternalAbsenceRepository extends JpaRepository<ExternalAbsence
      * Prüft, ob ein Schüler zu einem bestimmten Zeitpunkt als abwesend gemeldet ist.
      * Berücksichtigt den genauen Zeitraum (from/to).
      */
-    @Query("SELECT e FROM ExternalAbsence e WHERE e.studentLocalId = :studentLocalId " +
+    @Query("SELECT e FROM ExternalAbsence e WHERE e.besteSchuleStudentId = :studentId " +
             "AND e.fromDateTime <= :dateTime AND e.toDateTime >= :dateTime")
     List<ExternalAbsence> findActiveAbsences(
-            @Param("studentLocalId") String studentLocalId,
+            @Param("studentId") Long besteSchuleStudentId,
             @Param("dateTime") LocalDateTime dateTime
     );
 
@@ -57,7 +57,5 @@ public interface ExternalAbsenceRepository extends JpaRepository<ExternalAbsence
     @Modifying
     @Query("DELETE FROM ExternalAbsence e WHERE e.date < :beforeDate")
     int deleteOlderThan(@Param("beforeDate") LocalDate beforeDate);
-
-    Optional<ExternalAbsence> findFirstByStudentLocalId(String studentLocalId);
 
 }

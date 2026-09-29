@@ -38,6 +38,7 @@ public class ExternalAbsenceController {
                 targetDate,
                 result.totalRelevant(),
                 result.created(),
+                result.skipped(),
                 result.errors(),
                 result.message(),
                 result.isSuccess()
@@ -91,6 +92,7 @@ public class ExternalAbsenceController {
             LocalDate date,
             int totalRelevant,
             int created,
+            int skipped,
             int errors,
             String message,
             boolean success
