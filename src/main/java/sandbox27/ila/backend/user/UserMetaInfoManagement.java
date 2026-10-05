@@ -202,7 +202,7 @@ public class UserMetaInfoManagement {
                 iservUser.lastname(),
                 iservUser.user() + "@jmoosdorf.de",
                 iservUser.importId(),
-                instructors ? Role.ADMIN.name() : Role.STUDENT.name(),
+                instructors ? Role.COURSE_INSTRUCTOR.name() : Role.STUDENT.name(),
                 false
         );
     }
