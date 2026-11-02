@@ -12,6 +12,7 @@ import sandbox27.ila.backend.imports.CourseSheetParser.ParsedSheet;
 import sandbox27.ila.backend.imports.CourseSheetParser.RawRow;
 import sandbox27.ila.backend.period.Period;
 import sandbox27.ila.backend.period.PeriodRepository;
+import sandbox27.ila.backend.user.Role;
 import sandbox27.ila.backend.user.User;
 import sandbox27.ila.backend.user.UserRepository;
 import sandbox27.infrastructure.error.ErrorCode;
@@ -330,10 +331,21 @@ public class CourseImportService {
             return null;
         }
 
-        Optional<User> found = userRepository.findByFirstNameAndLastName(firstName, lastName);
-        if (found.isPresent()) {
-            dto.setInstructorUserName(found.get().getUserName());
-            return found.get();
+        List<User> candidates = userRepository.findAllByFirstNameAndLastName(firstName, lastName);
+        if (candidates.size() > 1) {
+            // same name twice (e.g. a teacher and a student) - prefer the non-student accounts
+            List<User> nonStudents = candidates.stream().filter(u -> !u.getRoles().contains(Role.STUDENT)).toList();
+            if (!nonStudents.isEmpty()) candidates = nonStudents;
+        }
+        if (candidates.size() == 1) {
+            dto.setInstructorUserName(candidates.get(0).getUserName());
+            return candidates.get(0);
+        }
+        if (candidates.size() > 1) {
+            dto.addIssue(ImportIssue.error("instructor",
+                    "Kursleiter \"" + (firstName + " " + lastName).trim() + "\" ist nicht eindeutig (Nutzer: "
+                            + String.join(", ", candidates.stream().map(User::getUserName).toList()) + ")."));
+            return null;
         }
 
         dto.addIssue(ImportIssue.error("instructor",
